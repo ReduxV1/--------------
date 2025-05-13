@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Курсовая работа</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/slider.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <style>
+    * { 
+        margin: 0; 
+        padding: 0; 
+        box-sizing: border-box; 
+    }
+
+    .slider-container {
+        width: 100%;
+        height: 100vh;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: transform;
+    }
+
+    .slide:nth-child(n+2) {
+        transform: translateY(100%);
+    }
+
+    .slide-content {
+        position: relative;
+        z-index: 2;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        max-width: 900px;
+        margin: 0 auto;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <!-- Слайд 1 -->
+        <div class="slide" aria-hidden="false">
+            <div class="slide-bg"></div>
+            <div class="slide-content">
+                <div class="header-box">
+                    <h1>Разработка Web-страницы с описанием разделов системного программного обеспечения</h1>
+                </div>
+                <div class="project-info">
+                    <div class="decorative-line"></div>
+                    <p class="subject-name">Курсовой проект по дисциплине</p>
+                    <h2 class="discipline">«Системное администрирование»</h2>
+                    <div class="decorative-line"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Слайд 2 -->
+        <div class="slide" aria-hidden="true">
+            <div class="slide-bg"></div>
+            <div class="slide-content">
+                <div class="header-box">
+                    <h1>Всем здравствуйте</h1>
+                </div>
+                <div class="project-info">
+                    <div class="decorative-line"></div>
+                    <p class="subject-name">Сайт создан как курсовой проект по дисциплине «Системное администрирование» на тему:</p>
+                    <p class="subject-name">«Разработка Web-страницы с описанием разделов системного программного обеспечения»</p>
+                    <p class="subject-name">Далее по сайту будет меню с категориями которые вы можете выбрать.</p>
+                    <div class="decorative-line"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Слайд 3 -->
+        <div class="slide" aria-hidden="true">
+            <div class="slide-bg"></div>
+            <div class="slide-content">
+                <div class="interactive-menu">
+                    <h2 class="menu-title">Меню настройки системы</h2>
+                    <ul class="menu-list">
+                        <li class="menu-item" data-section="main">
+                            <label class="checkbox-menu">
+                                <input type="checkbox">
+                                <span class="checkbox-custom"></span>
+                                <span class="menu-text">Главная</span>
+                            </label>
+                        </li>
+                        <li class="menu-item" data-section="os">
+                            <label class="checkbox-menu">
+                                <input type="checkbox" checked>
+                                <span class="checkbox-custom"></span>
+                                <span class="menu-text">Выбор ОС</span>
+                            </label>
+                        </li>
+                        <li class="menu-item" data-section="fs">
+                            <label class="checkbox-menu">
+                                <input type="checkbox">
+                                <span class="checkbox-custom"></span>
+                                <span class="menu-text">Выбор ФС и разметка накопителя</span>
+                            </label>
+                        </li>
+                        <li class="menu-item" data-section="remote">
+                            <label class="checkbox-menu">
+                                <input type="checkbox">
+                                <span class="checkbox-custom"></span>
+                                <span class="menu-text">Удаленное управление</span>
+                            </label>
+                        </li>
+                        <li class="menu-item" data-section="diagnostics">
+                            <label class="checkbox-menu">
+                                <input type="checkbox" checked>
+                                <span class="checkbox-custom"></span>
+                                <span class="menu-text">Диагностика системы</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/init.js"></script>
+    <script>
+    class FullPageSlider {
+        constructor() {
+            this.slides = document.querySelectorAll('.slide');
+            this.currentSlide = 0;
+            this.init();
+        }
+
+        init() {
+            this.updateSlidesPosition();
+            window.addEventListener('wheel', this.handleScroll.bind(this));
+        }
+
+        handleScroll(e) {
+            const delta = Math.sign(e.deltaY);
+            if (delta > 0) this.next();
+            else this.prev();
+        }
+
+        next() {
+            if (this.currentSlide < this.slides.length - 1) {
+                this.currentSlide++;
+                this.updateSlidesPosition();
+            }
+        }
+
+        prev() {
+            if (this.currentSlide > 0) {
+                this.currentSlide--;
+                this.updateSlidesPosition();
+            }
+        }
+
+        updateSlidesPosition() {
+            this.slides.forEach((slide, index) => {
+                const offset = (index - this.currentSlide) * 100;
+                slide.style.transform = `translateY(${offset}%)`;
+            });
+        }
+    }
+
+    new FullPageSlider();
+    </script>
+</body>
+</html>
