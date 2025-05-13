@@ -6,6 +6,7 @@ export default class FullPageSlider {
         this.mouseX = window.innerWidth / 2;
         this.mouseY = window.innerHeight / 2;
         this.animationFrame = null;
+        
         this.init();
     }
 

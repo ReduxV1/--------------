@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Курсовая работа</title>
+    <title>Системное ПО - Курсовая работа</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/slider.css">
     <link rel="stylesheet" href="css/menu.css">
+
     <style>
-    * { 
-        margin: 0; 
-        padding: 0; 
-        box-sizing: border-box; 
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
     }
 
     .slider-container {
@@ -31,7 +32,8 @@
         will-change: transform;
     }
 
-    .slide:nth-child(n+2) {
+    /* Начальное позиционирование слайдов */
+    .slide:not(:first-child) {
         transform: translateY(100%);
     }
 
@@ -47,12 +49,17 @@
         transform: translateY(-50%);
     }
     </style>
+
 </head>
 <body>
     <div class="slider-container">
         <!-- Слайд 1 -->
         <div class="slide" aria-hidden="false">
             <div class="slide-bg"></div>
+            <div class="logo">
+                <div class="logo-main">K</div>
+                <div class="logo-sub">Kypcoba4<br>pabota</div>
+            </div>
             <div class="slide-content">
                 <div class="header-box">
                     <h1>Разработка Web-страницы с описанием разделов системного программного обеспечения</h1>
@@ -175,5 +182,6 @@
 
     new FullPageSlider();
     </script>
+    
 </body>
 </html>
