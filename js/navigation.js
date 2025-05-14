@@ -1,4 +1,4 @@
-export default class Navigation {
+class Navigation {
     constructor() {
         this.initNavigation();
         this.setActiveLink();
@@ -28,3 +28,4 @@ export default class Navigation {
         });
     }
 }
+window.Navigation = Navigation;

@@ -6,6 +6,131 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Выбор ОС</title>
     <link rel="stylesheet" href="css/main.css">
+    <script type="module" src="js/navigation.js"></script>
+    <link rel="stylesheet" href="css/slider.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Анимации */
+        .gold-frame {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateX(50px);
+            position: absolute;
+            width: 100%;
+        }
+
+        .gold-frame.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .gold-frame.hidden {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        .content-container {
+            position: relative;
+            min-height: 70vh;
+            overflow: hidden;
+        }
+
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 30px;
+        }
+
+        .gold-frame {
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+            transform: translateY(-20%); /* Корректировка по вертикали */
+            margin-top: 60px;
+        }
+
+        /* Заголовки */
+        h1 {
+            font-family: 'Arial', sans-serif;
+            color: #c5a47e;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        /* Подзаголовки */
+        h3 {
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            border-left: 3px solid #c5a47e;
+            padding-left: 1rem;
+        }
+
+        /* Основной текст */
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #e0e0e0;
+            margin: 1rem 0;
+        }
+
+        /* Списки */
+        .specs {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+
+        .specs li {
+            font-size: 1rem;
+            color: #b0b0b0;
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .specs li::before {
+            content: "•";
+            color: #c5a47e;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* Интерактивный блок */
+        .interactive-block {
+            background: rgba(197, 164, 126, 0.1);
+            border: 1px solid #c5a47e;
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            transition: all 0.3s;
+        }
+
+        .interactive-block h3 {
+            color: #c5a47e;
+            margin: 0;
+            border: none;
+            padding: 0;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h3 {
+                font-size: 1.4rem;
+            }
+            
+            .specs li {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="main-bg">
@@ -46,7 +171,7 @@
     </header>
 
     <div class="content-container adjusted-top">
-    <div class="gold-frame" id="slide1">
+    <div class="gold-frame active" id="slide1">
         <h1>Выбор операционной системы</h1>
         <div class="divider-gold"></div>
         
@@ -71,12 +196,13 @@
     </div>
 
     <!-- Второй слайд -->
-    <div class="gold-frame" id="slide2" style="display:none;">
+    <div class="gold-frame" id="slide2">
         <h1>Почему Windows 11?</h1>
         <div class="divider-gold"></div>
         <p>
             Windows 11 — современная операционная система с поддержкой новых технологий, улучшенным интерфейсом и высокой безопасностью.<br>
-            Она подходит для большинства пользователей и поддерживает широкий спектр оборудования.
+            Она комфортна для большинства пользователей и поддерживает широкий спектр оборудования.<br>
+            К тому же большинство программ поддерживается этой системой.
         </p>
         <div class="interactive-block" onclick="showSlide(1)">
             <h3>Назад</h3>
@@ -85,13 +211,19 @@
     </div>
 </div>
 
-<script>
-function showSlide(num) {
-    document.getElementById('slide1').style.display = num === 1 ? '' : 'none';
-    document.getElementById('slide2').style.display = num === 2 ? '' : 'none';
-}
-</script>
+ <script>
+        function showSlide(num) {
+            const current = document.querySelector('.gold-frame.active');
+            const next = document.getElementById(`slide${num}`);
 
-    
+            current.classList.add('hidden');
+            current.classList.remove('active');
+
+            setTimeout(() => {
+                next.classList.add('active');
+                next.classList.remove('hidden');
+            }, 300); // Совпадает с длительностью анимации
+        }
+    </script>
 </body>
 </html>
