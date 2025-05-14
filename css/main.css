@@ -529,4 +529,19 @@ body {
     min-height: 80vh; /* Фиксированная высота */
     padding: 20px;
     overflow: visible !important; /* Отключаем скрытие контента */
+    padding-top: 200px; 
+}
+
+/* Стили для карточек инструментов */
+.tool-card {
+    background: rgba(40, 40, 40, 0.9);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 10px;
+    border: 1px solid #c5a47e;
+}
+
+.tool-card h3 {
+    color: #c5a47e;
+    margin-top: 0;
 }

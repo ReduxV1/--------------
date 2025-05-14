@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Удаленное управление</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <style>
+        /* Стили сетки кнопок */
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 2rem;
+        }
+
+        /* Стили кнопок */
+        .tool-button {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            background: rgba(197, 164, 126, 0.1);
+            border: 1px solid #c5a47e;
+            border-radius: 8px;
+            color: #c5a47e;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .tool-button:hover {
+            background: rgba(197, 164, 126, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .tool-button img {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+        }
+
+        /* Дополнительный отступ для золотого окна */
+        .gold-frame {
+            margin-top: 300px;
+        }
+
+        h1 {
+            font-family: 'Arial', sans-serif;
+            color: #c5a47e;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .button-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tool-button {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Фоновый слой -->
+    <div class="main-bg">
+        <div class="slide-bg" style="background-image: url('izobr/1.gif')"></div>
+        <div class="overlay"></div>
+    </div>
+
+    <!-- Шапка сайта -->
+    <header class="main-header">
+        <div class="header-logo">
+            <img src="izobr/logo.svg" alt="Логотип" class="logo-img">
+        </div>
+        <nav class="header-menu">
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li class="dropdown">
+                    <a href="#sections">Разделы ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="os-selection.html">Выбор ОС</a></li>
+                        <li><a href="#files">Файловые системы</a></li>
+                        <li><a href="remote-management.html">Удаленное управление</a></li>
+                        <li><a href="#diagnost">Диагностика</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#ssilki">Ссылки ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#teamviewer">TeamViewer</a></li>
+                        <li><a href="#anydesk">AnyDesk</a></li>
+                    </ul>
+                </li>
+                <li><a href="author.html">Автор</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Основной контент -->
+    <div class="content-container adjusted-top">
+    <div class="gold-frame">
+        <h1>Средства удаленного управления компьютером</h1>
+        <div class="divider-gold"></div>
+        
+        <!-- Контейнер для кнопок -->
+        <div class="button-grid">
+            <a href="#teamviewer" class="tool-button">
+                <img src="izobr/teamviewer-icon.svg" alt="TeamViewer">
+                TeamViewer
+            </a>
+            
+            <a href="#anydesk" class="tool-button">
+                <img src="izobr/anydesk-icon.svg" alt="AnyDesk">
+                AnyDesk
+            </a>
+            
+            <a href="#aeroadmin" class="tool-button">
+                <img src="izobr/aeroadmin.png" alt="AeroAdmin">
+                AeroAdmin
+            </a>
+            
+            <a href="#faq" class="tool-button">
+                <img src="izobr/faq-icon.svg" alt="FAQ">
+                FAQ
+            </a>
+        </div>
+    </div>
+</div>
+
+    <script src="js/navigation.js"></script>
+</body>
+</html>
