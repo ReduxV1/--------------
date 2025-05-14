@@ -3,85 +3,99 @@ export default class FullPageSlider {
         this.slides = document.querySelectorAll('.slide');
         this.currentSlide = 0;
         this.isAnimating = false;
-        this.mouseX = window.innerWidth / 2;
-        this.mouseY = window.innerHeight / 2;
-        this.animationFrame = null;
-        
         this.init();
+        window.slider = this; // Делаем экземпляр глобально доступным
     }
 
     init() {
         this.addEventListeners();
-        this.updateSlidesPosition();
-        this.animateBackground();
+        this.updateSlidesPosition(true); // Инициализация без анимации
     }
 
     addEventListeners() {
-        window.addEventListener('wheel', this.handleScroll.bind(this));
-        window.addEventListener('keydown', this.handleKeydown.bind(this));
-        window.addEventListener('mousemove', this.handleMouseMove.bind(this));
-        window.addEventListener('resize', this.handleResize.bind(this));
+        this.handleScroll = this.handleScroll.bind(this);
+        this.handleKeydown = this.handleKeydown.bind(this);
+        
+        window.addEventListener('wheel', this.handleScroll);
+        window.addEventListener('keydown', this.handleKeydown);
     }
 
-    handleMouseMove(e) {
-        this.mouseX = e.clientX;
-        this.mouseY = e.clientY;
-    }
-
-    animateBackground() {
-        const animate = () => {
-            if (!this.isAnimating) {
-                const activeSlide = this.slides[this.currentSlide];
-                const bg = activeSlide.querySelector('.slide-bg');
-                const moveX = (this.mouseX - window.innerWidth/2) * 0.02;
-                const moveY = (this.mouseY - window.innerHeight/2) * 0.02;
-                bg.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.03)`;
-            }
-            this.animationFrame = requestAnimationFrame(animate);
-        };
-        animate();
+    removeEventListeners() {
+        window.removeEventListener('wheel', this.handleScroll);
+        window.removeEventListener('keydown', this.handleKeydown);
     }
 
     handleScroll(e) {
         if (this.isAnimating) return;
-        this.isAnimating = true;
         
+        e.preventDefault();
         const delta = Math.sign(e.deltaY);
-        delta > 0 ? this.nextSlide() : this.prevSlide();
-        
-        setTimeout(() => {
-            this.isAnimating = false;
-        }, 1000);
+        delta > 0 ? this.next() : this.prev();
     }
 
     handleKeydown(e) {
         if (this.isAnimating) return;
-        if (e.key === 'ArrowDown') this.nextSlide();
-        if (e.key === 'ArrowUp') this.prevSlide();
+
+        switch(e.key) {
+            case 'ArrowDown':
+            case 'PageDown':
+                this.next();
+                break;
+            case 'ArrowUp':
+            case 'PageUp':
+                this.prev();
+                break;
+        }
     }
 
-    handleResize() {
-        this.updateSlidesPosition();
-    }
-
-    nextSlide() {
+    next() {
         if (this.currentSlide < this.slides.length - 1) {
             this.currentSlide++;
             this.updateSlidesPosition();
         }
     }
 
-    prevSlide() {
+    prev() {
         if (this.currentSlide > 0) {
             this.currentSlide--;
             this.updateSlidesPosition();
         }
     }
 
-    updateSlidesPosition() {
+    goToSlide(index) {
+        if (index >= 0 && index < this.slides.length) {
+            this.currentSlide = index;
+            this.updateSlidesPosition();
+        }
+    }
+
+    updateSlidesPosition(initial = false) {
+        this.isAnimating = true;
+
         this.slides.forEach((slide, index) => {
             const translateY = (index - this.currentSlide) * 100;
+            slide.style.transition = initial ? 'none' : `transform ${this.settings.duration}ms ${this.settings.easing}`;
             slide.style.transform = `translateY(${translateY}%)`;
+        });
+
+        // Обработка завершения анимации
+        const handleTransitionEnd = () => {
+            this.isAnimating = false;
+            this.slides[0].removeEventListener('transitionend', handleTransitionEnd);
+        };
+
+        if (!initial) {
+            this.slides[0].addEventListener('transitionend', handleTransitionEnd);
+        } else {
+            this.isAnimating = false;
+        }
+    }
+
+    destroy() {
+        this.removeEventListeners();
+        this.slides.forEach(slide => {
+            slide.style.transition = '';
+            slide.style.transform = '';
         });
     }
 }

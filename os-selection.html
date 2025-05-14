@@ -1,3 +1,4 @@
+<!-- os-selection.html -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -5,10 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Выбор ОС</title>
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/menu.css">
 </head>
 <body>
-    <!-- Шапка (аналогичная главной странице) -->
+    <div class="main-bg">
+        <div class="slide-bg" style="background-image: url('izobr/1.gif')"></div>
+        <div class="overlay"></div>
+    </div>
+
     <header class="main-header">
         <div class="header-logo">
             <img src="izobr/logo.svg" alt="Логотип" class="logo-img">
@@ -19,7 +23,7 @@
                 <li class="dropdown">
                     <a href="#sections">Разделы ▾</a>
                     <ul class="dropdown-menu">
-                        <li><a href="os-selection.html">Выбор операционной системы</a></li>
+                        <li><a href="#os">Выбор операционной системы</a></li>
                         <li><a href="#files">Выбор ФС и разметка диска</a></li>
                         <li><a href="#utils">Средства удаленного управления компьютером</a></li>
                         <li><a href="#diagnost">Средства диагностики, контроля и мониторинга системы</a></li>
@@ -41,23 +45,33 @@
         </nav>
     </header>
 
-    <!-- Контент страницы -->
-    <div class="content-container">
+    <div class="content-container adjusted-top">
         <div class="gold-frame">
             <h1>Выбор операционной системы</h1>
             <div class="divider-gold"></div>
             
-            <div class="os-list">
-                <div class="os-card">
+            <div class="os-card">
+                <div class="os-image">
+                    <img src="izobr/windows11.png" alt="Windows 11">
+                </div>
+                <div class="os-details">
                     <h3>Windows 11</h3>
                     <p>Последняя версия ОС от Microsoft</p>
                     <ul class="specs">
                         <li>Требования: 4 ГБ ОЗУ</li>
                         <li>Архитектура: x64</li>
+                        <li>Версия: 24H2</li>
                     </ul>
                 </div>
             </div>
+
+            <div class="interactive-block" onclick="showSlide(2)">
+                <h3>Почему Windows 11?</h3>
+                <div class="arrow">▼</div>
+            </div>
         </div>
     </div>
+
+    
 </body>
 </html>
