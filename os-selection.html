@@ -46,31 +46,51 @@
     </header>
 
     <div class="content-container adjusted-top">
-        <div class="gold-frame">
-            <h1>Выбор операционной системы</h1>
-            <div class="divider-gold"></div>
-            
-            <div class="os-card">
-                <div class="os-image">
-                    <img src="izobr/windows11.png" alt="Windows 11">
-                </div>
-                <div class="os-details">
-                    <h3>Windows 11</h3>
-                    <p>Последняя версия ОС от Microsoft</p>
-                    <ul class="specs">
-                        <li>Требования: 4 ГБ ОЗУ</li>
-                        <li>Архитектура: x64</li>
-                        <li>Версия: 24H2</li>
-                    </ul>
-                </div>
+    <div class="gold-frame" id="slide1">
+        <h1>Выбор операционной системы</h1>
+        <div class="divider-gold"></div>
+        
+        <div class="os-card">
+            <div class="os-image">
+                <img src="izobr/windows11.png" alt="Windows 11">
             </div>
-
-            <div class="interactive-block" onclick="showSlide(2)">
-                <h3>Почему Windows 11?</h3>
-                <div class="arrow">▼</div>
+            <div class="os-details">
+                <h3>Windows 11</h3>
+                <p>Последняя версия ОС от Microsoft</p>
+                <ul class="specs">
+                    <li>Требования: 4 ГБ ОЗУ</li>
+                    <li>Архитектура: x64</li>
+                    <li>Версия: 24H2</li>
+                </ul>
             </div>
         </div>
+        <div class="interactive-block" onclick="showSlide(2)">
+            <h3>Почему Windows 11?</h3>
+            <div class="arrow">▼</div>
+        </div>
     </div>
+
+    <!-- Второй слайд -->
+    <div class="gold-frame" id="slide2" style="display:none;">
+        <h1>Почему Windows 11?</h1>
+        <div class="divider-gold"></div>
+        <p>
+            Windows 11 — современная операционная система с поддержкой новых технологий, улучшенным интерфейсом и высокой безопасностью.<br>
+            Она подходит для большинства пользователей и поддерживает широкий спектр оборудования.
+        </p>
+        <div class="interactive-block" onclick="showSlide(1)">
+            <h3>Назад</h3>
+            <div class="arrow">▲</div>
+        </div>
+    </div>
+</div>
+
+<script>
+function showSlide(num) {
+    document.getElementById('slide1').style.display = num === 1 ? '' : 'none';
+    document.getElementById('slide2').style.display = num === 2 ? '' : 'none';
+}
+</script>
 
     
 </body>
