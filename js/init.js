@@ -1,7 +1,9 @@
 import FullPageSlider from './slider.js';
-import InteractiveMenu from './menu.js';
+import Navigation from './navigation.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    new FullPageSlider();
-    new InteractiveMenu();
+    if (document.querySelector('.slider-container')) {
+        new FullPageSlider();
+    }
+    new Navigation();
 });

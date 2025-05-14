@@ -79,6 +79,17 @@ input[type="checkbox"]:checked + .checkbox-custom::after {
     flex-grow: 1;
 }
 
+.header-menu a {
+    transition: 
+        font-size 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.header-menu a:hover {
+    font-size: 23px; /* Увеличение при ховере */
+}
+
 @media (max-width: 768px) {
     .interactive-menu {
         padding: 1rem;
@@ -90,4 +101,9 @@ input[type="checkbox"]:checked + .checkbox-custom::after {
     .menu-title {
         font-size: 1.8rem;
     }
+}
+
+.header-menu a.active {
+    color: #fff !important;
+    border-bottom: 2px solid #c5a47e;
 }

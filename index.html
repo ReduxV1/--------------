@@ -8,92 +8,32 @@
     <link rel="stylesheet" href="css/slider.css">
     <link rel="stylesheet" href="css/menu.css">
 
-    <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    .slider-container {
-        width: 100%;
-        height: 100vh;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .slide {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
-        will-change: transform;
-    }
-
-    /* Начальное позиционирование слайдов */
-    .slide:not(:first-child) {
-        transform: translateY(100%);
-    }
-
-    .slide-content {
-        position: relative;
-        z-index: 2;
-        color: white;
-        text-align: center;
-        padding: 20px;
-        max-width: 900px;
-        margin: 0 auto;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-    </style>
-
-</head>
+    </head>
 <body>
+<header class="main-header">
+        <div class="header-logo">
+            <img src="izobr/logo.svg" alt="Логотип" class="logo-img">
+        </div>
+        <nav class="header-menu">
+            <ul>
+                <li><a href="#main">Главная</a></li>
+                <li><a href="#sections">Разделы</a></li>
+                <li><a href="#ssilki">Ссылки</a></li>
+                <li><a href="author.html">Автор</a></li>
+            </ul>
+        </nav>
+    </header>
     <div class="slider-container">
         <!-- Слайд 1 -->
         <div class="slide" aria-hidden="false">
             <div class="slide-bg"></div>
-            <div class="logo">
-                <img src="izobr/logo.svg" alt="Логотип курсовой работы" class="logo">
-            </div>
-
-            <div class="slide-content">
-                <h1>Курсовая работа</h1>
+            <div class="slide-content"> 
                 <div class="content-block">
-                    <p class="description">
-                        Разработка Web-страницы с описанием<br>
-                        разделов системного программного обеспечения
-                    </p>
-                    
                     <div class="divider-gold"></div>
-                    
                     <p class="discipline">
                         Курсовой проект по дисциплине<br>
                         «Системное администрирование»
                     </p>
-                </div>
-
-                <div class="menu-container">
-                    <div class="menu-header">
-                        <h2>СИСТЕМНОЕ ПРОГРАММНОЕ ОБЕСПЕЧЕНИЕ</h2>
-                        <div class="divider-gold"></div>
-                    </div>
-                    
-                    <ul class="system-menu">
-                        <li>Операционные системы</li>
-                        <li>Файловые системы</li>
-                        <li>Утилиты диагностики</li>
-                        <li>Средства мониторинга</li>
-                        <li>Управление памятью</li>
-                        <li>Безопасность</li>
-                    </ul>
-                    
-                    <div class="menu-footer">
-                        <div class="divider-gold"></div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -103,7 +43,7 @@
             <div class="slide-bg"></div>
             <div class="slide-content">
                 <div class="header-box">
-                    <h1>Всем здравствуйте</h1>
+                    <h1>Приветствую</h1>
                 </div>
                 <div class="project-info">
                     <div class="decorative-line"></div>
