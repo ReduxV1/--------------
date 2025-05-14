@@ -545,3 +545,29 @@ body {
     color: #c5a47e;
     margin-top: 0;
 }
+
+/* Стили для разделов контента */
+.content-section h2 {
+    color: #c5a47e;
+    font-size: 2rem;
+    margin: 2rem 0 1rem;
+}
+
+.content-section h3 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin: 1.5rem 0;
+    border-left: 3px solid #c5a47e;
+    padding-left: 1rem;
+}
+
+.content-section ul, 
+.content-section ol {
+    margin: 1rem 0;
+    padding-left: 2rem;
+    color: #e0e0e0;
+}
+
+.content-section li {
+    margin: 0.5rem 0;
+}

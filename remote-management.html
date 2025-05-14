@@ -60,6 +60,30 @@
                 padding: 1rem;
             }
         }
+
+        .content-section section {
+            transition: opacity 0.3s ease;
+            opacity: 1;
+        }
+
+        .content-section section[style*="display: none"] {
+            opacity: 0;
+            display: block !important;
+            position: absolute;
+            visibility: hidden;
+        }
+
+        .content-section section:not([style*="display: none"]) {
+            opacity: 1;
+            position: relative;
+            visibility: visible;
+        }
+
+        .nav-button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            border-color: #666;
+        }
     </style>
 </head>
 <body>
@@ -121,7 +145,7 @@
                 AeroAdmin
             </a>
             
-            <a href="#faq" class="tool-button">
+            <a href="faq.html" class="tool-button">
                 <img src="izobr/faq-icon.svg" alt="FAQ">
                 FAQ
             </a>
@@ -130,5 +154,6 @@
 </div>
 
     <script src="js/navigation.js"></script>
+    <script src="js/faq-navigation.js"></script>
 </body>
 </html>

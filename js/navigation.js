@@ -17,6 +17,7 @@ class Navigation {
                 }
             });
         });
+        
     }
 
     setActiveLink() {
@@ -27,5 +28,7 @@ class Navigation {
             }
         });
     }
+
+    
 }
 window.Navigation = Navigation;

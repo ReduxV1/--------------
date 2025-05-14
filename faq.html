@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Удаленное управление</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <style>
+
+        /* Стили для шапки */
+        .main-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+            border-bottom: 1px solid rgba(197, 164, 126, 0.2);
+        }
+
+        .main-header.hidden {
+            transform: translateY(-100%);
+        }
+
+        /* Контентное окно */
+        .content-section {
+            margin: 150px auto 2rem; /* Увеличен верхний отступ */
+            padding: 2rem;
+            margin-top: 200px;
+            background: rgba(40, 40, 40, 0.9);
+            border: 2px solid #c5a47e;
+            border-radius: 15px;
+            max-width: 800px;
+            color: #e2d5c4;
+            position: relative;
+        }
+
+        /* Стили секций */
+        section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        section.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Навигационные кнопки */
+        .nav-buttons {
+            position: fixed;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 999;
+        }
+
+        .nav-button {
+            background: rgba(197, 164, 126, 0.8);
+            border: 2px solid #c5a47e;
+            color: #fff;
+            padding: 15px 20px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 24px;
+            transition: all 0.3s;
+        }
+
+        .nav-button:hover {
+            transform: scale(1.1);
+        }
+
+        /* Стили изображений */
+        .content-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            border: 1px solid #c5a47e;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .content-section {
+                margin: 120px 1rem 2rem;
+                padding: 1.5rem;
+            }
+            
+            .nav-button {
+                padding: 12px 16px;
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Фоновый слой -->
+    <div class="main-bg">
+        <div class="slide-bg" style="background-image: url('izobr/1.gif')"></div>
+        <div class="overlay"></div>
+    </div>
+
+    <!-- Шапка сайта -->
+    <header class="main-header">
+        <div class="header-logo">
+            <img src="izobr/logo.svg" alt="Логотип" class="logo-img">
+        </div>
+        <nav class="header-menu">
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li class="dropdown">
+                    <a href="#sections">Разделы ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="os-selection.html">Выбор операционной системы</a></li>
+                        <li><a href="#files">Выбор ФС и разметка диска</a></li>
+                        <li><a href="remote-management.html">Средства удаленного управления компьютером</a></li>
+                        <li><a href="#diagnost">Средства диагностики, контроля и мониторинга системы</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#ssilki">Ссылки ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#teamviewer">TeamViewer</a></li>
+                        <li><a href="#anydesk">AnyDesk</a></li>
+                        <li><a href="#aeroadmin">AeroAdmin</a></li>
+                        <li><a href="#AIDA64">AIDA64</a></li>
+                        <li><a href="#HWiNFO">HWiNFO</a></li>
+                        <li><a href="#Sandra">SiSoftware Sandra</a></li>
+                    </ul>  
+                </li>
+                <li><a href="author.html">Автор</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Основной контент -->
+    <div class="content-section">
+        <!-- Добавленные кнопки навигации -->
+        <div class="nav-buttons">
+            <button class="nav-button prev" onclick="showPrevSection()">❮</button>
+            <button class="nav-button next" onclick="showNextSection()">❯</button>
+        </div>
+
+        <h1>Средства удаленного управления компьютером</h1>
+        <div class="divider-gold"></div>
+
+            <!-- Секция 1: Что такое удаленный доступ -->
+            <section class="active">
+                <h2>Что такое «удаленный доступ»</h2>
+                <img src="izobr/faq1.jpg" class="content-image" alt="Схема доступа">
+                <p>
+                    В IT под удаленным доступом (remote access) понимается технология для управления одним устройством с помощью другого по сети. 
+                    Это возможность работать с офисным компьютером со своего ноутбука как с локальным устройством: использовать те же файлы, 
+                    программы и функции. Достаточно подключения к интернету, чтобы контролировать ПК из любой точки мира. Технология популярна 
+                    среди корпораций, IT-специалистов и удаленных сотрудников, позволяя управлять несколькими компьютерами из одного места.
+                </p>
+            </section>
+
+            <!-- Секция 2: Преимущества -->
+            <section>
+                <h2>Преимущества удаленного доступа</h2>
+                <img src="izobr/faq2.png" class="content-image" alt="Преимущества">
+                <div class="advantages">
+                    <h3>Гибкость</h3>
+                    <ul>
+                        <li>Выбор устройств, места и времени работы</li>
+                        <li>Возможность использовать мощности удаленного ПК на слабом ноутбуке</li>
+                        <li>Работа над проектами любого масштаба через сервер</li>
+                    </ul>
+
+                    <h3>Скорость</h3>
+                    <ul>
+                        <li>Решение проблем сотрудников без перемещения по офису</li>
+                        <li>Запуск ресурсоемких задач на удаленном оборудовании</li>
+                    </ul>
+
+                    <h3>Экономия</h3>
+                    <ul>
+                        <li>Снижение затрат на дорогое оборудование</li>
+                        <li>Оптимизация расходов на обслуживание инфраструктуры</li>
+                    </ul>
+
+                    <h3>Удобство</h3>
+                    <p>
+                        Тренд на удаленную работу сохраняется: от корпораций до международных команд. 
+                        Приложения для remote access обеспечивают привычную рабочую среду с доступом ко всем ресурсам 
+                        и повышенной безопасностью.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Секция 3: Безопасность -->
+            <section>
+                <h2>Безопасен ли удаленный доступ?</h2>
+                <img src="izobr/faq3.png" class="content-image" alt="Безопасность">
+                <p>
+                    Да. Для защиты данных используются:
+                </p>
+                <ul>
+                    <li>256-битное шифрование передаваемой информации</li>
+                    <li>Двухфакторная аутентификация</li>
+                    <li>Защищенные шлюзы для подключения к корпоративным сетям</li>
+                </ul>
+                <p>
+                    Доступ возможен только через логин и пароль сотрудника. Система блокирует несанкционированные подключения, 
+                    минимизируя риски утечки данных.
+                </p>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Логика навигации
+        // Обновленная логика анимации кнопок
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttons = document.querySelectorAll('.nav-button');
+            
+            buttons.forEach(btn => {
+                // Анимация при клике
+                btn.addEventListener('mousedown', function() {
+                    this.style.transform = 'scale(0.95)';
+                });
+                
+                btn.addEventListener('mouseup', function() {
+                    this.style.transform = 'scale(1)';
+                });
+                
+                // Анимация при наведении
+                btn.addEventListener('mouseenter', function() {
+                    this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                });
+                
+                btn.addEventListener('mouseleave', function() {
+                    this.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                });
+            });
+        });
+
+        // Существующая логика навигации
+        let currentSection = 0;
+        const sections = document.querySelectorAll('.content-section section');
+
+        function updateSections() {
+            sections.forEach((section, index) => {
+                section.classList.toggle('active', index === currentSection);
+            });
+        }
+
+        function showPrevSection() {
+            if (currentSection > 0) {
+                currentSection--;
+                updateSections();
+            }
+        }
+
+        function showNextSection() {
+            if (currentSection < sections.length - 1) {
+                currentSection++;
+                updateSections();
+            }
+        }
+
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', () => {
+            sections[0].classList.add('active');
+        });
+
+        let lastScroll = 0;
+        const header = document.querySelector('.main-header');
+        const scrollThreshold = 100; // Порог прокрутки для скрытия (в пикселях)
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > lastScroll && currentScroll > scrollThreshold) {
+                // Прокрутка вниз
+                header.classList.add('hidden');
+            } else {
+                // Прокрутка вверх
+                header.classList.remove('hidden');
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // Показать меню при наведении
+        header.addEventListener('mouseenter', () => {
+            header.classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
