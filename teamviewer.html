@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeamViewer</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/slider.css">
+    <style>
+        .main-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .header-hidden {
+            transform: translateY(-100%);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+            
+        /* Добавляем новые стили */
+        .content-article {
+            background: rgba(40, 40, 40, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 1000px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        .article-text {
+            color: #fff;
+            line-height: 1.6;
+            text-align: justify;
+            font-size: 16px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .article-text p {
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .specs {
+            font-size: 1rem;
+            color: #b0b0b0;
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            margin: 0;
+            padding: 15px 0;
+        }
+
+        .image-container {
+             width: 100%;
+            max-height: 400px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .image-container img {
+             width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+        .back-to-top {
+            text-align: center;
+            margin-top: 30px;
+            position: relative;
+            z-index: 100;
+        }
+
+        .gold-button {
+            background: rgba(255,215,0,0.2);
+            color: #ffd700;
+            padding: 12px 35px;
+            border: 2px solid #ffd700;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            backdrop-filter: blur(5px);
+        }
+
+        .gold-button:hover {
+            background: rgba(255,215,0,0.4);
+            box-shadow: 0 0 15px rgba(255,215,0,0.3);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Шапка сайта -->
+    <header class="main-header">
+        <div class="header-logo">
+            <img src="izobr/logo.svg" alt="Логотип" class="logo-img">
+        </div>
+        <nav class="header-menu">
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li class="dropdown">
+                    <a href="#sections">Разделы ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="os-selection.html">Выбор операционной системы</a></li>
+                        <li><a href="#files">Выбор ФС и разметка диска</a></li>
+                        <li><a href="remote-management.html">Средства удаленного управления компьютером</a></li>
+                        <li><a href="#diagnost">Средства диагностики, контроля и мониторинга системы</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#ssilki">Ссылки ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#teamviewer">TeamViewer</a></li>
+                        <li><a href="#anydesk">AnyDesk</a></li>
+                        <li><a href="#aeroadmin">AeroAdmin</a></li>
+                        <li><a href="#AIDA64">AIDA64</a></li>
+                        <li><a href="#HWiNFO">HWiNFO</a></li>
+                        <li><a href="#Sandra">SiSoftware Sandra</a></li>
+                    </ul>  
+                </li>
+                <li><a href="author.html">Автор</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="slider-container">
+        <!--Слайд 1-->
+        <div class="slide" aria-hidden="false">
+            <div class="slide-bg"></div>
+            <div class="slide-content">
+                <div class="content-block">
+                    <div class="divider-gold"></div>
+                    <p class="discipline">
+                        Общие сведения <br>
+                        по программе TeamViewer
+                    </p>
+                </div>
+            </div>
+        </div>
+
+       <div class="slide" aria-hidden="true">
+            <div class="slide-bg"></div> <!-- Сохраняем оригинальный фон -->
+            <div class="slide-content">
+                    <div class="divider-gold"></div>
+                    <div class="content-article">
+                        <h2 class="discipline" style="color: #c5a47e; text-align: center; margin-bottom: 25px;">
+                            TeamViewer
+                        </h2>
+                        <div class="article-text">
+                            <p class="specs">TeamViewer — программное обеспечение для удаленного доступа, управления и обслуживания компьютеров, выпущенное в 2005 году. Функциональность постоянно расширяется, включая интеграцию с Modernog.</p>
+                            <div class="image-container">
+                                <img src="izobr/teamviewer-comp.jpg" alt="Компания">
+                            </div>
+                            <p class="specs">Программа не требует регистрации и предоставляется бесплатно для некоммерческого использования, что обеспечило ей высокую популярность. TeamViewer является основным продуктом одноименной компании из Германии.</p>
+
+                            <p class="specs">С 3 мая 2022 года TeamViewer прекратил работу в России и Беларуси. Действующие лицензии продолжают работать, но не продлеваются по истечении срока. Прямые соединения блокируются - подключение возможно только при использовании средств изменения IP-адреса (например, VPN).</p>
+                        </div>
+                        <div class="divider-gold" style="margin-top: 25px;"></div>
+
+                        <div class="back-to-top">
+                        <a href="#" class="gold-button" onclick="scrollToTop()">
+                            ↑ В начало
+                        </a>
+                    </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    class FullPageSlider {
+        constructor() {
+            this.slides = document.querySelectorAll('.slide');
+            this.currentSlide = 0;
+            this.header = document.querySelector('.main-header');
+            this.lastScrollTime = Date.now();
+            this.init();
+        }
+
+        init() {
+            this.updateSlidesPosition();
+            window.addEventListener('wheel', this.handleScroll.bind(this), { passive: false });
+        }
+
+        handleScroll(e) {
+            e.preventDefault();
+            const delta = Math.sign(e.deltaY);
+            const now = Date.now();
+
+            // Обработка скрытия меню
+            if (delta > 0) {
+                this.header.classList.add('header-hidden');
+            } else {
+                this.header.classList.remove('header-hidden');
+            }
+
+            // Обработка слайдера
+            if (now - this.lastScrollTime > 800) {
+                if (delta > 0) this.next();
+                else this.prev();
+                this.lastScrollTime = now;
+            }
+        }
+
+        next() {
+            if (this.currentSlide < this.slides.length - 1) {
+                this.currentSlide++;
+                this.updateSlidesPosition();
+            }
+        }
+
+        prev() {
+            if (this.currentSlide > 0) {
+                this.currentSlide--;
+                this.updateSlidesPosition();
+            }
+        }
+
+        updateSlidesPosition() {
+            this.slides.forEach((slide, index) => {
+                const offset = (index - this.currentSlide) * 100;
+                slide.style.transform = `translateY(${offset}%)`;
+            });
+        }
+    }
+
+    new FullPageSlider();
+    
+    let lastScroll = 0;
+    const header = document.querySelector('.main-header');
+    const scrollThreshold = 50; // Порог прокрутки для скрытия (в пикселях)
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll > lastScroll && currentScroll > scrollThreshold) {
+            // Скролл вниз
+            header.classList.add('header-hidden');
+        } else {
+            // Скролл вверх
+            header.classList.remove('header-hidden');
+        }
+        
+        lastScroll = currentScroll <= 0 ? 0 : currentScroll;
+    });
+
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        
+        // Для слайдера (если нужно вернуться к первому слайду)
+        const slider = new FullPageSlider();
+        slider.currentSlide = 0;
+        slider.updateSlidesPosition();
+        
+        return false;
+    }
+    </script>                                   
+
+</body>
+</html>

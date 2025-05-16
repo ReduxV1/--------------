@@ -66,8 +66,9 @@
 
 .slide:nth-child(2) .slide-bg {
     background-image: url('../izobr/2.jpg');
-    filter: contrast(1.2);
+    filter: brightness(0.7);
 }
+
 
 /* Адаптация для мобильных */
 @media (max-width: 768px) {

@@ -382,7 +382,7 @@ body {
     height: 100%;
     background-size: cover;
     background-position: center;
-    filter: brightness(0.7);
+    filter: brightness(0.5);
 }
 
 .overlay {
@@ -398,7 +398,6 @@ body {
     min-height: 100vh;
 }
 
-/* main.css */
 /* Смещение контента ниже */
 .adjusted-top {
     padding-top: 150px; /* Увеличиваем отступ сверху */
@@ -570,4 +569,19 @@ body {
 
 .content-section li {
     margin: 0.5rem 0;
+}
+
+.content-article {
+    transition: transform 0.3s ease;
+}
+
+.content-article:hover {
+    transform: translateY(-5px);
+}
+
+.article-text::first-letter {
+    font-size: 150%;
+    color: #c5a47e;
+    float: left;
+    margin-right: 5px;
 }
