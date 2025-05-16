@@ -1,4 +1,4 @@
-class FullPageSlider {
+    class FullPageSlider {
         constructor() {
             this.slides = document.querySelectorAll('.slide');
             this.currentSlide = 0;
@@ -9,7 +9,40 @@ class FullPageSlider {
 
         init() {
             this.updateSlidesPosition();
+            this.initNavigation();
+            this.updateHeaderVisibility();
             window.addEventListener('wheel', this.handleScroll.bind(this), { passive: false });
+        }
+
+        initNavigation() {
+            const navContainer = document.querySelector('.slide-nav');
+            this.slides.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'nav-dot';
+                dot.addEventListener('click', () => {
+                    this.currentSlide = index;
+                    this.updateSlidesPosition();
+                    this.updateNavigation();
+                    this.updateHeaderVisibility();
+                });
+                navContainer.appendChild(dot);
+            });
+            this.updateNavigation();
+        }
+
+         updateHeaderVisibility() {
+            if (this.currentSlide === 0) {
+                this.header.classList.remove('header-hidden');
+            } else {
+                this.header.classList.add('header-hidden');
+            }
+        }
+
+        updateNavigation() {
+            const dots = document.querySelectorAll('.nav-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === this.currentSlide);
+            });
         }
 
         handleScroll(e) {
@@ -17,14 +50,6 @@ class FullPageSlider {
             const delta = Math.sign(e.deltaY);
             const now = Date.now();
 
-            // Обработка скрытия меню
-            if (delta > 0) {
-                this.header.classList.add('header-hidden');
-            } else {
-                this.header.classList.remove('header-hidden');
-            }
-
-            // Обработка слайдера
             if (now - this.lastScrollTime > 800) {
                 if (delta > 0) this.next();
                 else this.prev();
@@ -36,6 +61,8 @@ class FullPageSlider {
             if (this.currentSlide < this.slides.length - 1) {
                 this.currentSlide++;
                 this.updateSlidesPosition();
+                this.updateNavigation();
+                this.updateHeaderVisibility();
             }
         }
 
@@ -43,54 +70,32 @@ class FullPageSlider {
             if (this.currentSlide > 0) {
                 this.currentSlide--;
                 this.updateSlidesPosition();
+                this.updateNavigation();
+                this.updateHeaderVisibility();
             }
         }
 
         updateSlidesPosition() {
             this.slides.forEach((slide, index) => {
                 const offset = (index - this.currentSlide) * 100;
+                slide.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
                 slide.style.transform = `translateY(${offset}%)`;
             });
         }
     }
 
-    new FullPageSlider();
-    
-    let lastScroll = 0;
-    const header = document.querySelector('.main-header');
-    const scrollThreshold = 50; // Порог прокрутки для скрытия (в пикселях)
-
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-
-        if (currentScroll > lastScroll && currentScroll > scrollThreshold) {
-            // Скролл вниз
-            header.classList.add('header-hidden');
-        } else {
-            // Скролл вверх
-            header.classList.remove('header-hidden');
-        }
-        
-        lastScroll = currentScroll <= 0 ? 0 : currentScroll;
-    });
+    const slider = new FullPageSlider();
 
     function scrollToTop() {
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
         });
-
-        // Показываем меню
-        const header = document.querySelector('.main-header');
-        header.classList.remove('header-hidden');
         
-        // Сбрасываем состояние скролла
-        lastScroll = 0;
-        
-        // Возврат к первому слайду
-        const slider = new FullPageSlider();
         slider.currentSlide = 0;
         slider.updateSlidesPosition();
+        slider.updateNavigation();
+        slider.updateHeaderVisibility();
         
         return false;
     }

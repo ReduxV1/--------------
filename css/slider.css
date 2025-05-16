@@ -69,7 +69,6 @@
     filter: brightness(0.7);
 }
 
-
 /* Адаптация для мобильных */
 @media (max-width: 768px) {
     .slide-bg {

@@ -7,96 +7,32 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/slider.css">
+    <link rel="stylesheet" href="css/teamviewerstyle.css">
     <style>
-        .main-header {
-            position: fixed;
+        .slide-bg {
+            position: absolute;
             top: 0;
+            left: 0;
             width: 100%;
-            transition: transform 0.3s ease;
-            z-index: 1000;
-            padding: 15px 0;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
         }
 
-        .header-hidden {
-            transform: translateY(-100%);
+        .slide:nth-child(3) .slide-bg{
+            background-image: url('izobr/3.jpg');
+            filter: brightness(0.7);
         }
 
-        body {
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
-            
-        /* Добавляем новые стили */
-        .content-article {
-            background: rgba(40, 40, 40, 0.9);
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 1000px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            overflow: hidden;
+        .slide:nth-child(4) .slide-bg{
+            background-image: url('izobr/4.jpg');
+            filter: brightness(0.7);  
         }
 
-        .article-text {
-            color: #fff;
-            line-height: 1.6;
-            text-align: justify;
-            font-size: 16px;
-            font-family: 'Arial', sans-serif;
-        }
-
-        .article-text p {
-            margin-bottom: 20px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-        }
-
-        .specs {
-            font-size: 1rem;
-            color: #b0b0b0;
-            padding: 0.5rem 0;
-            display: flex;
-            align-items: center;
-            margin: 0;
-            padding: 15px 0;
-        }
-
-        .image-container {
-             width: 100%;
-            max-height: 400px;
-            overflow: hidden;
-            margin: 10px 0;
-        }
-
-        .image-container img {
-             width: 100%;
-            height: auto;
-            object-fit: contain;
-        }
-        .back-to-top {
-            text-align: center;
-            margin-top: 30px;
-            position: relative;
-            z-index: 100;
-        }
-
-        .gold-button {
-            background: rgba(255,215,0,0.2);
-            color: #ffd700;
-            padding: 12px 35px;
-            border: 2px solid #ffd700;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-block;
-            backdrop-filter: blur(5px);
-        }
-
-        .gold-button:hover {
-            background: rgba(255,215,0,0.4);
-            box-shadow: 0 0 15px rgba(255,215,0,0.3);
-            transform: translateY(-2px);
+        .slide:nth-child(5) .slide-bg{
+            background-image: url('izobr/1.jpg');
+            filter: brightness(0.7);
         }
     </style>
 </head>
@@ -167,6 +103,32 @@
 
                             <p class="specs">С 3 мая 2022 года TeamViewer прекратил работу в России и Беларуси. Действующие лицензии продолжают работать, но не продлеваются по истечении срока. Прямые соединения блокируются - подключение возможно только при использовании средств изменения IP-адреса (например, VPN).</p>
                         </div>
+                        <div class="divider-gold" style="margin-top: 10px;"></div>
+
+                        <div class="back-to-top">
+                        <a href="#" class="gold-button" onclick="scrollToTop()" style="margin: -5px;">
+                            ↑ В начало
+                        </a>
+                    </div>
+                    </div>
+            </div>
+        </div>
+
+        <div class="slide" aria-hidden="true">
+            <div class="slide-bg"></div> <!-- Сохраняем оригинальный фон -->
+            <div class="slide-content">
+                    <div class="divider-gold"></div>
+                    <div class="content-article">
+                        <h2 class="discipline" style="color: #c5a47e; text-align: center; margin-bottom: 25px;">
+                            Разработка и функциональные возможности
+                        </h2>
+                        <div class="article-text">
+                            <p class="specs">Компания Rossmanith опубликовала первую версию программного обеспечения TeamViewer в 2005 г., тогда ещё на основе системы VNC. 
+                            Поставщик ИТ-услуг хотел избежать ненужных поездок к клиентам и выполнять такие задачи, как установка программного обеспечения, удаленно.
+                            Разработка была настолько успешной, что на её основе возникла компания, которая теперь работает под названием TeamViewer Germany и принадлежит к группе TeamViewer.</p>
+                            <div class="image-container">
+                                <img src="izobr/teamviewer3.jpg" alt="Компания">
+                            </div>
                         <div class="divider-gold" style="margin-top: 25px;"></div>
 
                         <div class="back-to-top">
@@ -178,6 +140,58 @@
             </div>
         </div>
     </div>
+
+    <div class="slide last-slide" aria-hidden="true">
+            <div class="slide-bg"></div> <!-- Сохраняем оригинальный фон -->
+            <div class="slide-content">
+                    <div class="divider-gold"></div>
+                    <div class="content-article">
+                        <h2 class="discipline" style="color: #c5a47e; text-align: center; margin-bottom: 25px;">
+                            Функциональные возможности
+                        </h2>
+                        <div class="article-text">
+                            <p class="specs">Функциональные возможности TeamViewer зависят от используемого устройства и варианта или версии программного обеспечения. 
+                            Основной функцией TeamViewer является удаленный доступ к компьютерам и другим конечным устройствам, а также управление ими и их обслуживание.
+                            После подключения удаленный экран будет отображаться для пользователя в другой конечной точке. 
+                            Обе конечные точки могут отправлять и получать файлы, а также иметь доступ к общему буферу обмена. 
+                            Кроме того, существуют функции, облегчающие командную работу, такие как передача аудио и видео по IP-телефонии.</p>
+                            <div class="image-container">
+                                <img src="izobr/teamviewer4.jpg" alt="Компания">
+                            </div>
+                            <p class="specs">В последние годы функции этого программного обеспечения были оптимизированы специально для использования в крупных компаниях.
+                                Для этой цели был разработан корпоративный вариант программы TeamViewer Tensor.
+                                Кроме того, компания TeamViewer разработала TeamViewer Pilot — программное обеспечение удаленной поддержки с элементами дополненной реальности.
+                                TeamViewer предоставляет интерфейсы для других приложений и служб, таких как Microsoft Teams, Salesforce и ServiceNow.</p>
+
+                        <div class="divider-gold" style="margin-top: 25px;"></div>
+
+                        <div class="back-to-top">
+                        <a href="#" class="gold-button" onclick="scrollToTop()">
+                            ↑ В начало
+                        </a>
+                    </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+        <div class="slide" aria-hidden="false">
+            <div class="slide-bg"></div>
+            <div class="slide-content">
+                <div class="content-block">
+                    <div class="divider-gold"></div>
+                    <p class="discipline">
+                        Общие возможности
+                        
+                    </p>
+                    <div class="back-to-top">
+                        <a href="#" class="gold-button" onclick="scrollToTop()">
+                            ↑ В начало
+                        </a>
+                </div>
+            </div>
+        </div> 
+    </div>
+    <div class="slide-nav"></div>
     <script src="js/teamviewerscripts.js"></script>                                 
 
 </body>
