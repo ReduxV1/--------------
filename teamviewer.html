@@ -261,8 +261,15 @@
             top: 0,
             behavior: 'smooth'
         });
+
+        // Показываем меню
+        const header = document.querySelector('.main-header');
+        header.classList.remove('header-hidden');
         
-        // Для слайдера (если нужно вернуться к первому слайду)
+        // Сбрасываем состояние скролла
+        lastScroll = 0;
+        
+        // Возврат к первому слайду
         const slider = new FullPageSlider();
         slider.currentSlide = 0;
         slider.updateSlidesPosition();
