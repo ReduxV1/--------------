@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnyDesk</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/slider.css">
+    <link rel="stylesheet" href="css/anydeskstyle.css">
+    <style>
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            filter: brightness(0.7);
+        }
+        .slide:nth-child(3) .slide-bg{
+            background-image: url('izobr/1.gif');
+        }
+    </style>
+</head>
+
+<body>
+<!-- Шапка сайта -->
+<header class="main-header">
+    <div class="header-logo">
+        <img src="izobr/logo.svg" alt="Логотип" class="logo-img">
+    </div>
+    <nav class="header-menu">
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li class="dropdown">
+                <a href="#sections">Разделы ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="os-selection.html">Выбор операционной системы</a></li>
+                    <li><a href="#files">Выбор ФС и разметка диска</a></li>
+                    <li><a href="remote-management.html">Средства удаленного управления компьютером</a></li>
+                    <li><a href="#diagnost">Средства диагностики, контроля и мониторинга системы</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#ssilki">Ссылки на официальные сайты ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="https://www.teamviewer.com" target="_blank">TeamViewer</a></li>
+                    <li><a href="https://anydesk.com" target="_blank">AnyDesk</a></li>
+                    <li><a href="https://www.aeroadmin.com" target="_blank">AeroAdmin</a></li>
+                    <li><a href="https://www.aida64.com" target="_blank">AIDA64</a></li>
+                    <li><a href="https://www.hwinfo.com" target="_blank">HWiNFO</a></li>
+                    <li><a href="https://www.sisoftware.net" target="_blank">SiSoftware Sandra</a></li>
+                </ul>  
+            </li>
+            <li><a href="author.html">Автор</a></li>
+        </ul>
+    </nav>
+</header>
+    
+<div class="slider-container">
+    <!--Слайд 1-->
+    <div class="slide" aria-hidden="false">
+        <div class="slide-bg"></div>
+        <div class="slide-content">
+            <div class="content-block">
+                <div class="divider-gold"></div>
+                <p class="discipline">
+                    Общие сведения <br>
+                    по программе AnyDesk
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide" aria-hidden="true">
+        <div class="slide-bg"></div> <!-- Сохраняем оригинальный фон -->
+        <div class="slide-content">
+            <div class="divider-gold"></div>
+            <div class="content-article">
+                <h2 class="discipline" style="color: #c5a47e; text-align: center; margin-bottom: 10px;">
+                    AnyDesk
+                </h2>
+                <div class="article-text">
+                    <p class="specs">AnyDesk — проприетарное программное обеспечение для удалённого доступа, удалённого управления и удалённого обслуживания компьютеров и других конечных устройств, выпущенное в 2015 году, разрабатываемое компанией AnyDesk Software GmbH. 
+                        Предлагает возможности удалённого управления, передачи файлов и VPN. 
+                        AnyDesk часто используется в мошеннических программах технической поддержки и других мошеннических схемах удаленного доступа.
+                    </p>
+                    <div class="image-container">
+                        <img src="izobr/anydesk-company.jpg" alt="Компания">
+                    </div>
+                    <p class="specs">
+                        Компания AnyDesk Software GmbH основана в 2014 году в Штутгарте, Германия, и в настоящее время имеет филиалы в США, Китае и Гонконге, а также Инновационный хаб в Грузии.
+                        В мае 2018 года AnyDesk получила 6,5 миллионов евро финансирования в рамках Series A под руководством EQT Ventures. 
+                        В январе 2020 года ещё один раунд инвестиций принёс сумму более двадцати миллионов долларов, что увеличило общий объём финансирования компании.
+                    </p>
+                    <div class="back-to-top">
+                        <a href="#" class="gold-button" onclick="scrollToTop()">
+                        В начало
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide" aria-hidden="false">
+        <div class="slide-bg"></div>
+        <div class="slide-content">
+            <div class="content-block">
+                <div class="divider-gold"></div>
+                <p class="discipline">
+                    Общие возможности
+                </p>
+                <div class="back-to-top">
+                    <a href="#" class="gold-button" onclick="scrollToTop()">
+                    В начало
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-nav"></div>
+
+<script src="js/anydeskscripts.js"></script>
+
+</body>
+</html>
