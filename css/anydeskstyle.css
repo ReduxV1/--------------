@@ -24,11 +24,13 @@
         /* Добавляем новые стили */
         .content-article {
             background: rgba(40, 40, 40, 0.9);
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 1000px;
+            padding: 12px;  
+            border-radius: 47px;
+            max-width: 1500px;  
             box-shadow: 0 0 20px rgba(0,0,0,0.5);
             overflow: hidden;
+            margin: 20px auto;
+            width: 95% !important;
         }
 
         .article-text {
@@ -37,6 +39,7 @@
             text-align: justify;
             font-size: 16px;
             font-family: 'Arial', sans-serif;
+            max-width: 1500px;
         }
 
         .article-text p {
@@ -47,11 +50,16 @@
         .specs {
             font-size: 1rem;
             color: #b0b0b0;
-            padding: 0.5rem 0;
+            padding: 0.5rem 0 !important;
             display: flex;
             align-items: center;
             margin: 0;
             padding: 15px 0;
+            max-width: 1000px;
+            position: relative;
+            max-width: 100% !important;
+            text-align: left !important;
+            padding: 0 20px !important;
         }
 
         .image-container {
@@ -186,4 +194,34 @@
             .slide-content {
                 padding: 15px;
             }
+        }
+
+        .specs-ul{
+            color: #b0b0b0;
+            list-style-type: none;
+            padding-left: 10px;
+            position: relative;
+            margin-top: 1px !important;
+        }
+
+        .specs-li {
+            padding: 8px 0;
+            position: relative;
+        }
+        .specs-li::before{
+            content: "✔";
+            color: #c5a47e;
+            position: absolute;
+            left: -20px;
+        }
+
+        .article-text h3{
+            margin-bottom: 5px !important;
+            color: #c5a47e;
+        }
+
+        .article-text {
+            max-width: none !important;
+            width: 95% !important;
+            margin: 0 auto !important;
         }

@@ -24,11 +24,40 @@
         /* Добавляем новые стили */
         .content-article {
             background: rgba(40, 40, 40, 0.9);
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 1000px;
+            padding: 22px;
+            border-radius: 47px;
+            max-width: 1000px;  
             box-shadow: 0 0 20px rgba(0,0,0,0.5);
             overflow: hidden;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            float: none !important;
+            clear: both !important;
+        }
+
+        .specs-ul{
+            color: #b0b0b0;
+            list-style-type: none;
+            padding-left: 10px;
+            position: relative;
+            margin-top: 1px !important;
+        }
+
+        .specs-li {
+            padding: 8px 0;
+            position: relative;
+        }
+        .specs-li::before{
+            content: "✔";
+            color: #c5a47e;
+            position: absolute;
+            left: -20px;
+        }
+        
+        .slide-content {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
         }
 
         .article-text {
@@ -37,6 +66,7 @@
             text-align: justify;
             font-size: 16px;
             font-family: 'Arial', sans-serif;
+            max-width: 1500px !important;
         }
 
         .article-text p {
@@ -52,6 +82,7 @@
             align-items: center;
             margin: 0;
             padding: 15px 0;
+            max-width: 1000px;
         }
 
         .image-container {
