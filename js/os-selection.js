@@ -9,7 +9,70 @@ document.addEventListener('DOMContentLoaded', function() {
     initFAQ();
     initScrollToTop();
     initVersionSelection();
+    initModalHandlers();
+    initHeaderScroll();
 });
+
+function initHeaderScroll() {
+    const header = document.querySelector('.main-header');
+    if (!header) {
+        console.warn('Header not found');
+        return;
+    }
+
+    let lastScrollTop = 0;
+    let isScrolling = false;
+
+    function handleScroll() {
+        if (!isScrolling) {
+            window.requestAnimationFrame(() => {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                // Показываем хедер в самом верху страницы
+                if (scrollTop <= 10) {
+                    header.style.transform = 'translateY(0)';
+                    header.classList.remove('header-hidden');
+                    header.classList.add('header-visible');
+                }
+                // Скрываем при скролле вниз (после 100px)
+                else if (scrollTop > lastScrollTop && scrollTop > 100) {
+                    header.style.transform = 'translateY(-100%)';
+                    header.classList.add('header-hidden');
+                    header.classList.remove('header-visible');
+                }
+                // Показываем при скролле вверх
+                else if (scrollTop < lastScrollTop) {
+                    header.style.transform = 'translateY(0)';
+                    header.classList.remove('header-hidden');
+                    header.classList.add('header-visible');
+                }
+                
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+                isScrolling = false;
+            });
+        }
+        isScrolling = true;
+    }
+
+    // Добавляем обработчик скролла
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Инициализируем начальное состояние
+    header.classList.add('header-visible');
+}
+function initModalHandlers() {
+    const modal = document.getElementById('modalOverlay');
+    if (!modal) return;
+
+    // Убеждаемся, что модальное окно изначально скрыто
+    modal.classList.remove('active');
+    
+    // Добавляем обработчик для кнопки закрытия
+    const closeButton = modal.querySelector('.modal-close');
+    if (closeButton) {
+        closeButton.addEventListener('click', closeModal);
+    }
+}
 
 // Прелоадер
 function initPreloader() {
@@ -154,19 +217,37 @@ function toggleFAQ(element) {
 }
 
 // Кнопка "Наверх"
+// Исправленная функция initScrollToTop
 function initScrollToTop() {
     const scrollButton = document.getElementById('scrollToTop');
+    
+    if (!scrollButton) {
+        console.error('Scroll to top button not found');
+        return;
+    }
 
-    window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 300) {
+    // Функция для обновления видимости кнопки
+    function updateButtonVisibility() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > 300) {
             scrollButton.classList.add('visible');
         } else {
             scrollButton.classList.remove('visible');
         }
-    });
+    }
+
+    // Добавляем обработчик скролла
+    window.addEventListener('scroll', updateButtonVisibility);
+    
+    // Проверяем начальное состояние
+    updateButtonVisibility();
+    
+    // Добавляем обработчик клика
+    scrollButton.addEventListener('click', scrollToTop);
 }
 
-// Глобальная функция для скролла наверх
+// Исправленная функция scrollToTop
 function scrollToTop() {
     window.scrollTo({
         top: 0,
@@ -308,32 +389,69 @@ function showDetails(version) {
     }
 }
 
-// Модальное окно
+// Глобальные переменные для отслеживания обработчиков
+let modalClickHandler = null;
+let escapeKeyHandler = null;
+
+// Исправленная функция showModal
 function showModal(title, content) {
     const modal = document.getElementById('modalOverlay');
     const modalTitle = document.getElementById('modalTitle');
     const modalBody = document.getElementById('modalBody');
 
+    if (!modal || !modalTitle || !modalBody) {
+        console.error('Modal elements not found');
+        return;
+    }
+
     modalTitle.textContent = title;
     modalBody.innerHTML = content;
     modal.classList.add('active');
 
-    // Закрытие по клику на overlay
-    modal.addEventListener('click', (e) => {
+    // Удаляем старые обработчики если они есть
+    if (modalClickHandler) {
+        modal.removeEventListener('click', modalClickHandler);
+    }
+    if (escapeKeyHandler) {
+        document.removeEventListener('keydown', escapeKeyHandler);
+    }
+
+    // Создаем новые обработчики
+    modalClickHandler = (e) => {
         if (e.target === modal) {
             closeModal();
         }
-    });
+    };
 
-    // Закрытие по Escape
-    document.addEventListener('keydown', handleEscapeKey);
+    escapeKeyHandler = (e) => {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    };
+
+    // Добавляем обработчики
+    modal.addEventListener('click', modalClickHandler);
+    document.addEventListener('keydown', escapeKeyHandler);
 }
 
+// Исправленная функция closeModal
 function closeModal() {
     const modal = document.getElementById('modalOverlay');
+    if (!modal) return;
+
     modal.classList.remove('active');
-    document.removeEventListener('keydown', handleEscapeKey);
+    
+    // Удаляем обработчики событий
+    if (modalClickHandler) {
+        modal.removeEventListener('click', modalClickHandler);
+        modalClickHandler = null;
+    }
+    if (escapeKeyHandler) {
+        document.removeEventListener('keydown', escapeKeyHandler);
+        escapeKeyHandler = null;
+    }
 }
+
 
 function handleEscapeKey(e) {
     if (e.key === 'Escape') {
@@ -349,9 +467,15 @@ function showNotification(message, type = 'info') {
     notification.innerHTML = `
         <div class="notification-content">
             <span class="notification-message">${message}</span>
-            <button class="notification-close" onclick="this.parentElement.parentElement.remove()">×</button>
+            <button class="notification-close" type="button">×</button>
         </div>
     `;
+
+    // Добавляем обработчик закрытия
+    const closeButton = notification.querySelector('.notification-close');
+    closeButton.addEventListener('click', () => {
+        notification.remove();
+    });
 
     // Добавляем стили для уведомлений если их еще нет
     if (!document.querySelector('#notification-styles')) {
@@ -391,7 +515,7 @@ function showNotification(message, type = 'info') {
                 font-size: 0.9rem;
             }
             
-                        .notification-close {
+            .notification-close {
                 background: none;
                 border: none;
                 color: #c5a47e;
@@ -431,7 +555,9 @@ function showNotification(message, type = 'info') {
         if (notification.parentElement) {
             notification.style.animation = 'slideInRight 0.3s ease reverse';
             setTimeout(() => {
-                notification.remove();
+                if (notification.parentElement) {
+                    notification.remove();
+                }
             }, 300);
         }
     }, 5000);
