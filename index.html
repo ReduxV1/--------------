@@ -8,47 +8,17 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/slider.css">
     <link rel="stylesheet" href="css/menu.css">
-
-    <style>
-        /* Добавляем новые стили */
-        .content-article {
-            background: rgba(40, 40, 40, 0.9);
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 800px;
-            margin: 0 auto;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-        }
-
-        .article-text {
-            color: #fff;
-            line-height: 1.6;
-            text-align: justify;
-            font-size: 16px;
-            font-family: 'Arial', sans-serif;
-        }
-
-        .article-text p {
-            margin-bottom: 20px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-        }
-
-        .specs {
-            font-size: 1.2rem;
-            color: #b0b0b0;
-            padding: 0.5rem 0;
-            display: flex;
-            align-items: center;
-        }
-
-    </style>
-
-    </head>
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/mobile.css">
+    <link rel="stylesheet" href="css/content.css">
+</head>
 <body>
 <header class="main-header">
         <div class="header-logo">
             <img src="izobr/logo.svg" alt="Логотип" class="logo-img">
         </div>
+        
+        <!-- Обычное меню для десктопа -->
         <nav class="header-menu">
             <ul>
                 <li><a href="index.html">Главная</a></li>
@@ -75,15 +45,53 @@
                 <li><a href="author.html">Автор</a></li>
             </ul>
         </nav>
+
+        <!-- Кнопка мобильного меню -->
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            ☰
+        </button>
     </header>
+
+    <!-- Оверлей для закрытия меню -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <!-- Боковое меню для мобильных устройств -->
+    <nav class="sidebar-menu" id="sidebarMenu">
+        <button class="close-menu" id="closeMenu">×</button>
+        <ul>
+            <li><a href="index.html" class="menu-item">Главная</a></li>
+            <li class="dropdown">
+                <a href="#sections" class="menu-item dropdown-toggle">Разделы</a>
+                <ul class="dropdown-menu">
+                    <li><a href="os-selection.html">Выбор операционной системы</a></li>
+                    <li><a href="#files">Выбор ФС и разметка диска</a></li>
+                    <li><a href="remote-management.html">Средства удаленного управления компьютером</a></li>
+                    <li><a href="diagnost-management.html">Средства диагностики, контроля и мониторинга системы</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#ssilki" class="menu-item dropdown-toggle">Ссылки на официальные сайты</a>
+                <ul class="dropdown-menu">
+                    <li><a href="https://www.teamviewer.com" target="_blank">TeamViewer</a></li>
+                    <li><a href="https://anydesk.com" target="_blank">AnyDesk</a></li>
+                    <li><a href="https://www.aeroadmin.com" target="_blank">AeroAdmin</a></li>
+                    <li><a href="https://www.aida64.com" target="_blank">AIDA64</a></li>
+                    <li><a href="https://www.hwinfo.com" target="_blank">HWiNFO</a></li>
+                    <li><a href="https://www.sisoftware.net" target="_blank">SiSoftware Sandra</a></li>
+                </ul>  
+            </li>
+            <li><a href="author.html" class="menu-item">Автор</a></li>
+        </ul>
+    </nav>
+
     <div class="slider-container">
         <!-- Слайд 1 -->
         <div class="slide" aria-hidden="false">
             <div class="slide-bg"></div>
             <div class="slide-content"> 
-                <div class="content-block">
-                    <div class="divider-gold"></div>
-                    <p class="discipline">
+                <div class="content-block" id="main-content-block">
+                    <div class="divider-gold" id="main-divider"></div>
+                    <p class="discipline" id="main-discipline">
                         Курсовой проект по дисциплине<br>
                         «Системное администрирование»
                     </p>
@@ -93,77 +101,30 @@
 
         <!-- Слайд 2 -->
         <div class="slide" aria-hidden="true">
-            <div class="slide-bg"></div> <!-- Сохраняем оригинальный фон -->
+            <div class="slide-bg"></div>
             <div class="slide-content">
-                    <div class="divider-gold"></div>
-                    <div class="content-article">
-                        <h2 class="discipline" style="color: #c5a47e; text-align: center; margin-bottom: 25px;">
+                    <div class="divider-gold" id="top-divider"></div>
+                    <div class="content-article" id="content-window">
+                        <h2 class="discipline animated-title" id="main-title" style="color: #c5a47e; text-align: center; margin-bottom: 25px;">
                             Приветствую
                         </h2>
-                        <div class="article-text">
+                        <div class="article-text" id="article-content">
                             <p class="specs">Сайт создан как курсовой проект по дисциплине «Системное администрирование» на тему:</p>
                             <p class="specs">«Разработка Web-страницы с описанием разделов системного программного обеспечения»</p>
                             <p class="specs">Далее по сайту будет меню с категориями которые вы можете выбрать.</p>
                         </div>
-                        <div class="divider-gold" style="margin-top: 25px;"></div>
+                        <div class="divider-gold" id="bottom-divider" style="margin-top: 25px;"></div>
                     </div>
             </div>
         </div>
     </div>
     
-    <script type="module" src = "js/menu.js"></script>
-    <script>
-        class FullPageSlider {
-            constructor() {
-                this.slides = document.querySelectorAll('.slide');
-                this.currentSlide = 0;
-                this.init();
-            }
-
-            init() {
-                this.updateSlidesPosition();
-                window.addEventListener('wheel', this.handleScroll.bind(this));
-                
-                // Добавляем обработчик кликов для игнорирования событий на ссылках
-                document.addEventListener('click', (e) => {
-                    if (e.target.closest('a')) {
-                        e.stopPropagation(); // Останавливаем всплытие события
-                        return;
-                    }
-                }, true);
-            }
-
-            // Остальной код без изменений
-            handleScroll(e) {
-                const delta = Math.sign(e.deltaY);
-                if (delta > 0) this.next();
-                else this.prev();
-            }
-
-            next() {
-                if (this.currentSlide < this.slides.length - 1) {
-                    this.currentSlide++;
-                    this.updateSlidesPosition();
-                }
-            }
-
-            prev() {
-                if (this.currentSlide > 0) {
-                    this.currentSlide--;
-                    this.updateSlidesPosition();
-                }
-            }
-
-            updateSlidesPosition() {
-                this.slides.forEach((slide, index) => {
-                    const offset = (index - this.currentSlide) * 100;
-                    slide.style.transform = `translateY(${offset}%)`;
-                });
-            }
-        }
-
-        new FullPageSlider();
-    </script>
+    <script type="module" src="js/menu.js"></script>
+    <script type="module" src="js/slider.js"></script>
+    <script type="module" src="js/mobile-menu.js"></script>
+    <script type="module" src="js/animations.js"></script>
+    <script type="module" src="js/utils.js"></script>
+    <script type="module" src="js/main.js"></script>
 
 </body>
 </html>

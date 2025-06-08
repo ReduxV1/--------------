@@ -1,57 +1,40 @@
-export default class FullPageSlider {
+// Класс для управления слайдером
+export class FullPageSlider {
     constructor() {
         this.slides = document.querySelectorAll('.slide');
         this.currentSlide = 0;
-        this.isAnimating = false;
         this.init();
-        window.slider = this; // Делаем экземпляр глобально доступным
     }
 
     init() {
-        this.addEventListeners();
-        this.updateSlidesPosition(true); // Инициализация без анимации
-    }
-
-    addEventListeners() {
-        this.handleScroll = this.handleScroll.bind(this);
-        this.handleKeydown = this.handleKeydown.bind(this);
+        this.updateSlidesPosition();
+        window.addEventListener('wheel', this.handleScroll.bind(this));
         
-        window.addEventListener('wheel', this.handleScroll);
-        window.addEventListener('keydown', this.handleKeydown);
-    }
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('a')) {
+                e.stopPropagation();
+                return;
+            }
+        }, true);
 
-    removeEventListeners() {
-        window.removeEventListener('wheel', this.handleScroll);
-        window.removeEventListener('keydown', this.handleKeydown);
+        setTimeout(() => {
+            this.triggerAnimations();
+        }, 500);
     }
 
     handleScroll(e) {
-        if (this.isAnimating) return;
-        
-        e.preventDefault();
         const delta = Math.sign(e.deltaY);
-        delta > 0 ? this.next() : this.prev();
-    }
-
-    handleKeydown(e) {
-        if (this.isAnimating) return;
-
-        switch(e.key) {
-            case 'ArrowDown':
-            case 'PageDown':
-                this.next();
-                break;
-            case 'ArrowUp':
-            case 'PageUp':
-                this.prev();
-                break;
-        }
+        if (delta > 0) this.next();
+        else this.prev();
     }
 
     next() {
         if (this.currentSlide < this.slides.length - 1) {
             this.currentSlide++;
             this.updateSlidesPosition();
+            setTimeout(() => {
+                this.triggerAnimations();
+            }, 300);
         }
     }
 
@@ -59,43 +42,53 @@ export default class FullPageSlider {
         if (this.currentSlide > 0) {
             this.currentSlide--;
             this.updateSlidesPosition();
+            setTimeout(() => {
+                this.triggerAnimations();
+            }, 300);
         }
     }
 
-    goToSlide(index) {
-        if (index >= 0 && index < this.slides.length) {
-            this.currentSlide = index;
-            this.updateSlidesPosition();
-        }
-    }
-
-    updateSlidesPosition(initial = false) {
-        this.isAnimating = true;
-
+    updateSlidesPosition() {
         this.slides.forEach((slide, index) => {
-            const translateY = (index - this.currentSlide) * 100;
-            slide.style.transition = initial ? 'none' : `transform ${this.settings.duration}ms ${this.settings.easing}`;
-            slide.style.transform = `translateY(${translateY}%)`;
+            const offset = (index - this.currentSlide) * 100;
+            slide.style.transform = `translateY(${offset}%)`;
         });
-
-        // Обработка завершения анимации
-        const handleTransitionEnd = () => {
-            this.isAnimating = false;
-            this.slides[0].removeEventListener('transitionend', handleTransitionEnd);
-        };
-
-        if (!initial) {
-            this.slides[0].addEventListener('transitionend', handleTransitionEnd);
-        } else {
-            this.isAnimating = false;
-        }
     }
 
-    destroy() {
-        this.removeEventListeners();
-        this.slides.forEach(slide => {
-            slide.style.transition = '';
-            slide.style.transform = '';
+    triggerAnimations() {
+        const allAnimatedElements = document.querySelectorAll('.animate');
+        allAnimatedElements.forEach(el => {
+            el.classList.remove('animate');
         });
+
+        if (this.currentSlide === 0) {
+            setTimeout(() => {
+                const contentBlock = document.getElementById('main-content-block');
+                const divider = document.getElementById('main-divider');
+                const discipline = document.getElementById('main-discipline');
+
+                if (contentBlock) contentBlock.classList.add('animate');
+                if (divider) divider.classList.add('animate');
+                
+                setTimeout(() => {
+                    if (discipline) discipline.classList.add('animate');
+                }, 800);
+            }, 100);
+
+        } else if (this.currentSlide === 1) {
+            setTimeout(() => {
+                const contentWindow = document.getElementById('content-window');
+                const title = document.getElementById('main-title');
+                const articleContent = document.getElementById('article-content');
+                const topDivider = document.getElementById('top-divider');
+                const bottomDivider = document.getElementById('bottom-divider');
+
+                if (contentWindow) contentWindow.classList.add('animate');
+                if (title) title.classList.add('animate');
+                if (articleContent) articleContent.classList.add('animate');
+                if (topDivider) topDivider.classList.add('animate');
+                if (bottomDivider) bottomDivider.classList.add('animate');
+            }, 100);
+        }
     }
 }

@@ -1,0 +1,80 @@
+/* Стили для контента статей */
+.content-article {
+    background: rgba(40, 40, 40, 0.9);
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.article-text {
+    color: #fff;
+    line-height: 1.6;
+    text-align: justify;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+}
+
+.article-text p {
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.specs {
+    font-size: 1.2rem;
+    color: #b0b0b0;
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Стили для заголовков */
+.discipline {
+    color: #c5a47e;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Стили для разделителей */
+.divider-gold {
+    position: relative;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #c5a47e, transparent);
+    margin: 20px 0;
+    border-radius: 2px;
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+    .content-article {
+        padding: 20px;
+        margin: 0 15px;
+    }
+    
+    .specs {
+        font-size: 1rem;
+    }
+    
+    .discipline {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-article {
+        padding: 15px;
+        margin: 0 10px;
+    }
+    
+    .specs {
+        font-size: 0.9rem;
+    }
+    
+    .discipline {
+        font-size: 1.1rem;
+    }
+}

@@ -1,292 +1,635 @@
-export default class InteractiveMenu {
+// Обновленный файл меню
+export class MenuManager {
     constructor() {
-        this.menuItems = document.querySelectorAll('.menu-item');
-        this.dropdownItems = document.querySelectorAll('.dropdown');
-        this.isMobile = this.detectMobile();
-        this.activeDropdown = null;
-        this.touchStartTime = 0;
+        this.currentPage = this.getCurrentPage();
         this.init();
     }
 
-    // Определение мобильного устройства
-    detectMobile() {
-        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-        const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
-        const isMobileScreen = window.innerWidth <= 768;
-        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-        
-        return isMobileUA || isMobileScreen || isTouchDevice;
-    }
-
     init() {
-        console.log('InteractiveMenu initialized, isMobile:', this.isMobile);
-        this.initMenuItems();
-        this.initDropdownMenu();
-        this.initOutsideClick();
-        this.initResizeHandler();
+        this.setupMenuHighlight();
+        this.setupDropdownMenus();
+        this.setupMobileMenu();
+        this.setupSmoothScrolling();
     }
 
-    initMenuItems() {
-        this.menuItems.forEach(item => {
-            item.addEventListener('click', this.handleClick.bind(this));
-            
-            // Добавляем поддержку клавиатуры
-            item.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    this.handleClick(e);
+        getCurrentPage() {
+        const path = window.location.pathname;
+        const page = path.split('/').pop() || 'index.html';
+        return page.replace('.html', '');
+    }
+
+    setupMenuHighlight() {
+        const menuItems = document.querySelectorAll('.header-menu a');
+        menuItems.forEach(item => {
+            const href = item.getAttribute('href');
+            if (href && href.includes(this.currentPage)) {
+                item.classList.add('active');
+                // Подсвечиваем родительский dropdown если нужно
+                const dropdown = item.closest('.dropdown');
+                if (dropdown) {
+                    dropdown.querySelector('a').classList.add('active');
                 }
-            });
-            
-            // Делаем элементы фокусируемыми
-            if (!item.hasAttribute('tabindex')) {
-                item.setAttribute('tabindex', '0');
             }
         });
     }
 
-    initDropdownMenu() {
-        this.dropdownItems.forEach((dropdown, index) => {
-            const dropdownLink = dropdown.querySelector('a');
-            
-            if (dropdownLink) {
-                console.log(`Initializing dropdown ${index}:`, dropdownLink);
-                
-                // Основной обработчик клика
-                dropdownLink.addEventListener('click', (e) => {
-                    console.log('Click event triggered on dropdown:', index);
-                    this.handleDropdownClick(e, dropdown);
-                });
-
-                // Для мобильных устройств добавляем touch события
-                if (this.isMobile) {
-                    dropdownLink.addEventListener('touchstart', (e) => {
-                        this.touchStartTime = Date.now();
-                        console.log('Touch start on dropdown:', index);
-                    }, { passive: true });
-
-                    dropdownLink.addEventListener('touchend', (e) => {
-                        const touchDuration = Date.now() - this.touchStartTime;
-                        
-                        // Если это быстрый тап (не скролл)
-                        if (touchDuration < 200) {
-                            console.log('Touch end - quick tap on dropdown:', index);
-                            e.preventDefault();
-                            this.handleDropdownClick(e, dropdown);
-                        }
-                    }, { passive: false });
-                }
-
-                // Поддержка клавиатуры
-                dropdownLink.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        this.handleDropdownClick(e, dropdown);
-                    } else if (e.key === 'Escape') {
-                        this.closeAllDropdowns();
-                    }
-                });
-
-                // Предотвращаем стандартное поведение ссылки
-                dropdownLink.addEventListener('mousedown', (e) => {
-                    e.preventDefault();
-                });
-            }
-        });
-    }
-
-    handleDropdownClick(e, dropdown) {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        console.log('handleDropdownClick called for:', dropdown);
-        
-        const isCurrentlyActive = dropdown.classList.contains('active');
-        console.log('Currently active:', isCurrentlyActive);
-        
-        // Закрываем все меню
-        this.closeAllDropdowns();
-        
-        // Если меню не было активным, открываем его
-        if (!isCurrentlyActive) {
-            dropdown.classList.add('active');
-            this.activeDropdown = dropdown;
-            console.log('Menu opened');
-            
-            // Добавляем небольшую задержку для CSS анимации
-            setTimeout(() => {
-                const menu = dropdown.querySelector('.dropdown-menu');
-                if (menu) {
-                    menu.style.display = 'block';
-                }
-            }, 10);
-        } else {
-            this.activeDropdown = null;
-            console.log('Menu closed');
-        }
-    }
-
-    handleClick(e) {
-        const checkbox = e.currentTarget.querySelector('input[type="checkbox"]');
-        
-        if (!checkbox) return;
-        
-        checkbox.checked = !checkbox.checked;
-        e.currentTarget.classList.toggle('active', checkbox.checked);
-        
-        const section = e.currentTarget.dataset.section;
-        console.log(`Секция "${section}": ${checkbox.checked ? 'активна' : 'отключена'}`);
-        
-        // Анимация только для десктопа
-        if (!this.isMobile) {
-            e.currentTarget.style.transform = checkbox.checked
-                ? 'translateX(10px)'
-                : 'translateX(0)';
-        }
-    }
-
-    initOutsideClick() {
-        const handleOutsideInteraction = (e) => {
-            // Проверяем, что клик не по dropdown элементу
-            if (!e.target.closest('.dropdown')) {
-                console.log('Outside click detected');
-                this.closeAllDropdowns();
-            }
-        };
-        
-        // Обработчики для разных типов событий
-        document.addEventListener('click', handleOutsideInteraction, true);
-        
-        if (this.isMobile) {
-            document.addEventListener('touchstart', handleOutsideInteraction, { passive: true });
-        }
-        
-        // Закрытие по Escape
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                this.closeAllDropdowns();
-            }
-        });
-    }
-
-    initResizeHandler() {
-        let resizeTimeout;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                const wasMobile = this.isMobile;
-                this.isMobile = this.detectMobile();
-                
-                if (wasMobile !== this.isMobile) {
-                    console.log('Device type changed, reinitializing...');
-                    this.closeAllDropdowns();
-                }
-            }, 250);
-        });
-    }
-
-    closeAllDropdowns() {
-        console.log('Closing all dropdowns');
-        this.dropdownItems.forEach(dropdown => {
-            dropdown.classList.remove('active');
+    setupDropdownMenus() {
+        const dropdowns = document.querySelectorAll('.dropdown');
+        dropdowns.forEach(dropdown => {
+            const trigger = dropdown.querySelector('a');
             const menu = dropdown.querySelector('.dropdown-menu');
-            if (menu) {
-                // Небольшая задержка для плавного закрытия
+            
+            if (!trigger || !menu) return;
+
+            // Показать меню при наведении
+            dropdown.addEventListener('mouseenter', () => {
+                menu.style.display = 'block';
+                menu.style.opacity = '0';
+                menu.style.transform = 'translateY(-10px)';
+                
+                requestAnimationFrame(() => {
+                    menu.style.transition = 'all 0.3s ease';
+                    menu.style.opacity = '1';
+                    menu.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Скрыть меню при уходе курсора
+            dropdown.addEventListener('mouseleave', () => {
+                menu.style.transition = 'all 0.3s ease';
+                menu.style.opacity = '0';
+                menu.style.transform = 'translateY(-10px)';
+                
                 setTimeout(() => {
-                    if (!dropdown.classList.contains('active')) {
-                        menu.style.display = 'none';
-                    }
+                    menu.style.display = 'none';
                 }, 300);
-            }
-        });
-        this.activeDropdown = null;
-    }
+            });
 
-    // Публичные методы для программного управления
-    toggleDropdown(index) {
-        if (this.dropdownItems[index]) {
-            const dropdown = this.dropdownItems[index];
-            const isActive = dropdown.classList.contains('active');
-            
-            this.closeAllDropdowns();
-            
-            if (!isActive) {
-                dropdown.classList.add('active');
-                this.activeDropdown = dropdown;
-            }
-        }
-    }
-
-    openDropdown(index) {
-        if (this.dropdownItems[index]) {
-            this.closeAllDropdowns();
-            this.dropdownItems[index].classList.add('active');
-            this.activeDropdown = this.dropdownItems[index];
-        }
-    }
-
-    closeDropdown(index) {
-        if (this.dropdownItems[index]) {
-            this.dropdownItems[index].classList.remove('active');
-            if (this.activeDropdown === this.dropdownItems[index]) {
-                this.activeDropdown = null;
-            }
-        }
-    }
-
-    // Получение состояния меню
-    getActiveDropdown() {
-        return this.activeDropdown;
-    }
-
-    isDropdownOpen(index) {
-        return this.dropdownItems[index] && this.dropdownItems[index].classList.contains('active');
-    }
-
-    // Метод для отладки
-    debug() {
-        console.log('InteractiveMenu Debug Info:');
-        console.log('isMobile:', this.isMobile);
-        console.log('dropdownItems count:', this.dropdownItems.length);
-        console.log('menuItems count:', this.menuItems.length);
-        console.log('activeDropdown:', this.activeDropdown);
-        
-        this.dropdownItems.forEach((dropdown, index) => {
-            console.log(`Dropdown ${index}:`, {
-                element: dropdown,
-                isActive: dropdown.classList.contains('active'),
-                hasLink: !!dropdown.querySelector('a'),
-                hasMenu: !!dropdown.querySelector('.dropdown-menu')
+            // Обработка клика для мобильных устройств
+            trigger.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    const isVisible = menu.style.display === 'block';
+                    
+                    // Закрываем все другие меню
+                    document.querySelectorAll('.dropdown-menu').forEach(m => {
+                        if (m !== menu) {
+                            m.style.display = 'none';
+                        }
+                    });
+                    
+                    // Переключаем текущее меню
+                    menu.style.display = isVisible ? 'none' : 'block';
+                }
             });
         });
     }
 
-    // Очистка обработчиков событий (для случая, если нужно удалить экземпляр)
-    destroy() {
-        // Удаляем все обработчики событий
-        this.dropdownItems.forEach(dropdown => {
-            const dropdownLink = dropdown.querySelector('a');
-            if (dropdownLink) {
-                dropdownLink.replaceWith(dropdownLink.cloneNode(true));
+    setupMobileMenu() {
+        // Создаем кнопку мобильного меню если её нет
+        if (!document.querySelector('.mobile-menu-toggle')) {
+            this.createMobileMenuToggle();
+        }
+
+        const toggle = document.querySelector('.mobile-menu-toggle');
+        const menu = document.querySelector('.header-menu');
+        
+        if (toggle && menu) {
+            toggle.addEventListener('click', () => {
+                const isOpen = menu.classList.contains('mobile-open');
+                
+                if (isOpen) {
+                    this.closeMobileMenu();
+                } else {
+                    this.openMobileMenu();
+                }
+            });
+
+            // Закрытие меню при клике вне его
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.header-menu') && !e.target.closest('.mobile-menu-toggle')) {
+                    this.closeMobileMenu();
+                }
+            });
+
+            // Закрытие меню при изменении размера окна
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    this.closeMobileMenu();
+                }
+            });
+        }
+    }
+
+    createMobileMenuToggle() {
+        const toggle = document.createElement('button');
+        toggle.className = 'mobile-menu-toggle';
+        toggle.innerHTML = `
+            <span></span>
+            <span></span>
+            <span></span>
+        `;
+        toggle.setAttribute('aria-label', 'Открыть меню');
+        
+        const header = document.querySelector('.main-header');
+        if (header) {
+            header.appendChild(toggle);
+        }
+    }
+
+    openMobileMenu() {
+        const menu = document.querySelector('.header-menu');
+        const toggle = document.querySelector('.mobile-menu-toggle');
+        
+        if (menu) {
+            menu.classList.add('mobile-open');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        if (toggle) {
+            toggle.classList.add('active');
+            toggle.setAttribute('aria-label', 'Закрыть меню');
+        }
+    }
+
+    closeMobileMenu() {
+        const menu = document.querySelector('.header-menu');
+        const toggle = document.querySelector('.mobile-menu-toggle');
+        
+        if (menu) {
+            menu.classList.remove('mobile-open');
+            document.body.style.overflow = '';
+        }
+        
+        if (toggle) {
+            toggle.classList.remove('active');
+            toggle.setAttribute('aria-label', 'Открыть меню');
+        }
+
+        // Закрываем все dropdown меню
+        document.querySelectorAll('.dropdown-menu').forEach(menu => {
+            menu.style.display = 'none';
+        });
+    }
+
+    setupSmoothScrolling() {
+        const anchors = document.querySelectorAll('a[href^="#"]');
+        anchors.forEach(anchor => {
+            anchor.addEventListener('click', (e) => {
+                const href = anchor.getAttribute('href');
+                if (href === '#' || href.length <= 1) return;
+                
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    
+                    const headerHeight = document.querySelector('.main-header')?.offsetHeight || 0;
+                    const targetPosition = target.offsetTop - headerHeight - 20;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Закрываем мобильное меню если открыто
+                    this.closeMobileMenu();
+                }
+            });
+        });
+    }
+
+    // Добавление активного состояния при скролле
+    setupScrollSpy() {
+        const sections = document.querySelectorAll('section[id]');
+        const menuLinks = document.querySelectorAll('.header-menu a[href^="#"]');
+        
+        if (sections.length === 0) return;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    
+                    // Убираем активный класс со всех ссылок
+                    menuLinks.forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    
+                    // Добавляем активный класс к соответствующей ссылке
+                    const activeLink = document.querySelector(`.header-menu a[href="#${id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                }
+            });
+        }, {
+            threshold: 0.3,
+            rootMargin: '-100px 0px -100px 0px'
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    }
+
+    // Обновление меню для разных страниц
+    updateMenuForPage() {
+        const pageSpecificMenus = {
+            'author': this.setupAuthorPageMenu,
+            'os-selection': this.setupOSSelectionMenu,
+            'remote-management': this.setupRemoteManagementMenu,
+            'diagnost-management': this.setupDiagnostManagementMenu
+        };
+
+        const setupFunction = pageSpecificMenus[this.currentPage];
+        if (setupFunction) {
+            setupFunction.call(this);
+        }
+    }
+
+    setupAuthorPageMenu() {
+        // Добавляем дополнительные пункты меню для страницы автора
+        const menu = document.querySelector('.header-menu ul');
+        if (menu && !document.querySelector('.author-menu-items')) {
+            const authorMenuItems = document.createElement('div');
+            authorMenuItems.className = 'author-menu-items';
+            authorMenuItems.innerHTML = `
+                <li><a href="#profile">Профиль</a></li>
+                <li><a href="#projects">Проекты</a></li>
+                <li><a href="#skills">Навыки</a></li>
+                <li><a href="#contacts">Контакты</a></li>
+            `;
+            
+            // Вставляем перед последним элементом (Автор)
+            const lastItem = menu.lastElementChild;
+            menu.insertBefore(authorMenuItems, lastItem);
+        }
+
+        // Настраиваем scroll spy для страницы автора
+        this.setupScrollSpy();
+    }
+
+    setupOSSelectionMenu() {
+        // Специфичные настройки для страницы выбора ОС
+        console.log('Setting up OS Selection page menu');
+    }
+
+    setupRemoteManagementMenu() {
+        // Специфичные настройки для страницы удаленного управления
+        console.log('Setting up Remote Management page menu');
+    }
+
+    setupDiagnostManagementMenu() {
+        // Специфичные настройки для страницы диагностики
+        console.log('Setting up Diagnostic Management page menu');
+    }
+
+    // Добавление breadcrumbs
+    addBreadcrumbs() {
+        const breadcrumbsContainer = document.querySelector('.breadcrumbs');
+        if (!breadcrumbsContainer) return;
+
+        const breadcrumbs = this.generateBreadcrumbs();
+        breadcrumbsContainer.innerHTML = breadcrumbs.map(crumb => 
+            crumb.url ? 
+                `<a href="${crumb.url}">${crumb.title}</a>` : 
+                `<span>${crumb.title}</span>`
+        ).join(' / ');
+    }
+
+    generateBreadcrumbs() {
+        const breadcrumbs = [
+            { title: 'Главная', url: 'index.html' }
+        ];
+
+        const pageTitles = {
+            'author': 'Автор',
+            'os-selection': 'Выбор операционной системы',
+            'remote-management': 'Средства удаленного управления',
+            'diagnost-management': 'Средства диагностики'
+        };
+
+        if (this.currentPage !== 'index') {
+            breadcrumbs.push({
+                title: pageTitles[this.currentPage] || 'Страница',
+                url: null
+            });
+        }
+
+        return breadcrumbs;
+    }
+
+    // Поиск по сайту
+    setupSearch() {
+        const searchInput = document.querySelector('.search-input');
+        const searchResults = document.querySelector('.search-results');
+        
+        if (!searchInput) return;
+
+        let searchTimeout;
+        searchInput.addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            const query = e.target.value.trim();
+            
+            if (query.length < 2) {
+                this.hideSearchResults();
+                return;
+            }
+
+            searchTimeout = setTimeout(() => {
+                this.performSearch(query);
+            }, 300);
+        });
+
+        // Закрытие результатов поиска при клике вне
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-container')) {
+                this.hideSearchResults();
             }
         });
+    }
 
-        this.menuItems.forEach(item => {
-            item.replaceWith(item.cloneNode(true));
-        });
+    performSearch(query) {
+        // Простой поиск по содержимому страниц
+        const searchableContent = [
+            { title: 'Главная страница', url: 'index.html', content: 'системное администрирование курсовой проект' },
+            { title: 'Автор', url: 'author.html', content: 'студент университет контакты профиль' },
+            { title: 'Выбор ОС', url: 'os-selection.html', content: 'операционная система windows linux' },
+            { title: 'Удаленное управление', url: 'remote-management.html', content: 'teamviewer anydesk удаленный доступ' },
+            { title: 'Диагностика', url: 'diagnost-management.html', content: 'мониторинг система диагностика' }
+        ];
 
-        // Очищаем ссылки
-        this.menuItems = null;
-        this.dropdownItems = null;
-        this.activeDropdown = null;
+        const results = searchableContent.filter(item => 
+            item.title.toLowerCase().includes(query.toLowerCase()) ||
+            item.content.toLowerCase().includes(query.toLowerCase())
+        );
+
+        this.showSearchResults(results, query);
+    }
+
+    showSearchResults(results, query) {
+        const searchResults = document.querySelector('.search-results');
+        if (!searchResults) return;
+
+        if (results.length === 0) {
+            searchResults.innerHTML = `
+                <div class="search-no-results">
+                    Ничего не найдено по запросу "${query}"
+                </div>
+            `;
+        } else {
+            searchResults.innerHTML = results.map(result => `
+                <div class="search-result-item">
+                    <a href="${result.url}">
+                        <h4>${result.title}</h4>
+                        <p>${result.content}</p>
+                    </a>
+                </div>
+            `).join('');
+        }
+
+        searchResults.style.display = 'block';
+    }
+
+    hideSearchResults() {
+        const searchResults = document.querySelector('.search-results');
+        if (searchResults) {
+            searchResults.style.display = 'none';
+        }
     }
 }
 
-// Инициализация при загрузке DOM
-document.addEventListener('DOMContentLoaded', function() {
-    // Создаем глобальный экземпляр для возможности отладки
-    window.interactiveMenu = new InteractiveMenu();
+// CSS стили для меню
+const menuStyles = `
+    .mobile-menu-toggle {
+        display: none;
+        flex-direction: column;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 5px;
+        z-index: 1001;
+    }
     
-    // Добавляем команду для отладки в консоль
-    console.log('InteractiveMenu loaded. Use window.interactiveMenu.debug() for debugging info.');
-});
+    .mobile-menu-toggle span {
+        width: 25px;
+        height: 3px;
+        background: #c5a47e;
+        margin: 3px 0;
+        transition: all 0.3s ease;
+        border-radius: 2px;
+    }
+    
+    .mobile-menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px);
+    }
+    
+    .mobile-menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .mobile-menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+    }
+    
+    .header-menu a.active {
+        color: #c5a47e;
+        position: relative;
+    }
+    
+    .header-menu a.active::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: #c5a47e;
+        border-radius: 1px;
+    }
+    
+        .breadcrumbs {
+        padding: 10px 0;
+        color: #b0b0b0;
+        font-size: 0.9rem;
+    }
+    
+    .breadcrumbs a {
+        color: #c5a47e;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    
+    .breadcrumbs a:hover {
+        color: #fff;
+    }
+    
+    .search-container {
+        position: relative;
+        margin: 0 20px;
+    }
+    
+    .search-input {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(197, 164, 126, 0.3);
+        border-radius: 20px;
+        padding: 8px 15px;
+        color: #fff;
+        font-size: 0.9rem;
+        width: 200px;
+        transition: all 0.3s ease;
+    }
+    
+    .search-input:focus {
+        outline: none;
+        border-color: #c5a47e;
+        box-shadow: 0 0 10px rgba(197, 164, 126, 0.3);
+        width: 250px;
+    }
+    
+    .search-input::placeholder {
+        color: #b0b0b0;
+    }
+    
+    .search-results {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(40, 40, 40, 0.95);
+        border: 1px solid rgba(197, 164, 126, 0.3);
+        border-radius: 10px;
+        max-height: 300px;
+        overflow-y: auto;
+        z-index: 1000;
+        display: none;
+        backdrop-filter: blur(10px);
+    }
+    
+    .search-result-item {
+        padding: 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .search-result-item:last-child {
+        border-bottom: none;
+    }
+    
+    .search-result-item a {
+        color: #fff;
+        text-decoration: none;
+        display: block;
+    }
+    
+    .search-result-item h4 {
+        color: #c5a47e;
+        margin: 0 0 5px 0;
+        font-size: 1rem;
+    }
+    
+    .search-result-item p {
+        color: #b0b0b0;
+        margin: 0;
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+    
+    .search-result-item:hover {
+        background: rgba(197, 164, 126, 0.1);
+    }
+    
+    .search-no-results {
+        padding: 20px;
+        text-align: center;
+        color: #b0b0b0;
+        font-style: italic;
+    }
+    
+    @media (max-width: 768px) {
+        .mobile-menu-toggle {
+            display: flex;
+        }
+        
+        .header-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            height: 100vh;
+            background: rgba(20, 20, 20, 0.98);
+            backdrop-filter: blur(20px);
+            transition: left 0.3s ease;
+            z-index: 1000;
+            padding-top: 80px;
+        }
+        
+        .header-menu.mobile-open {
+            left: 0;
+        }
+        
+        .header-menu ul {
+            flex-direction: column;
+            padding: 20px;
+        }
+        
+        .header-menu li {
+            margin: 10px 0;
+        }
+        
+        .header-menu a {
+            font-size: 1.2rem;
+            padding: 15px 0;
+            display: block;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .dropdown-menu {
+            position: static;
+            background: rgba(0, 0, 0, 0.3);
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        
+        .dropdown-menu li {
+            margin: 5px 0;
+        }
+        
+        .dropdown-menu a {
+            padding: 10px 15px;
+            font-size: 1rem;
+            border-bottom: none;
+        }
+        
+        .search-container {
+            margin: 20px;
+        }
+        
+        .search-input {
+            width: 100%;
+        }
+        
+        .search-input:focus {
+            width: 100%;
+        }
+    }
+`;
+
+// Добавляем стили в документ
+const styleSheet = document.createElement('style');
+styleSheet.textContent = menuStyles;
+document.head.appendChild(styleSheet);
+
+// Инициализация меню
+const menuManager = new MenuManager();
+
+// Обновляем меню для текущей страницы
+menuManager.updateMenuForPage();
+
+// Настраиваем поиск
+menuManager.setupSearch();
+
+// Добавляем breadcrumbs
+menuManager.addBreadcrumbs();
+
+// Экспорт для использования в других модулях
+export default MenuManager;
