@@ -424,7 +424,7 @@ export class MenuManager {
             { title: 'Главная страница', url: 'index.html', content: 'системное администрирование курсовой проект' },
             { title: 'Автор', url: 'author.html', content: 'студент университет контакты профиль' },
             { title: 'Выбор ОС', url: 'os-selection.html', content: 'операционная система windows linux' },
-                        { title: 'Удаленное управление', url: 'remote-management.html', content: 'teamviewer anydesk удаленный доступ' },
+            { title: 'Удаленное управление', url: 'remote-management.html', content: 'teamviewer anydesk удаленный доступ' },
             { title: 'Диагностика системы', url: 'diagnost-management.html', content: 'мониторинг диагностика контроль системы' }
         ];
 
