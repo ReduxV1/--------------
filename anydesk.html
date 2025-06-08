@@ -4,374 +4,743 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
-    <title>AnyDesk</title>
+    <!-- Добавить эти мета-теги -->
+    <meta name="description" content="AnyDesk - быстрое, безопасное и простое решение для удаленного доступа к компьютерам. Скачать бесплатно.">
+    <meta name="keywords" content="AnyDesk, удаленный доступ, удаленное управление, TeamViewer альтернатива">
+    <meta name="author" content="Ваше имя">
+    <meta property="og:title" content="AnyDesk - Удаленное управление">
+    <meta property="og:description" content="Быстрое, безопасное и простое решение для удаленного доступа к компьютерам">
+    <meta property="og:type" content="website">
+    <title>AnyDesk - Удаленное управление</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/menu.css">
-    <link rel="stylesheet" href="css/slider.css">
-    <link rel="stylesheet" href="css/anydeskstyle.css">
-    <style>
-        .article-text h3{
-            margin-bottom: 5px !important;
-            color: #c5a47e;
-        }
-        .slide-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            z-index: -1;
-            filter: brightness(0.7);
-        }
-        .slide:nth-child(3) .slide-bg{
-            background-image: url('izobr/3.jpg');
-        }
-
-        .slide:nth-child(4) .slide-bg{
-            background-image: url('izobr/1.gif');
-        }
-
-        .slide:nth-child(5) .slide-bg{
-            background-image: url('izobr/4.jpg');
-        }
-
-        .slide:nth-child(6) .slide-bg{
-            background-image: url('izobr/5.jpg');
-        }
-
-        .slide:nth-child(7) .slide-bg{
-            background-image: url('izobr/6.jpg');
-        }
-
-        .slide:nth-child(8) .slide-bg{
-            background-image: url('izobr/7.jpg');
-        }
-
-        .slide:nth-child(9) .slide-bg{
-            background-image: url('izobr/8.jpg');
-        }
-        .specs-ul{
-            color: #b0b0b0;
-            list-style-type: none;
-            padding-left: 10px;
-            margin-top: 2px !important;
-        }
-
-        .specs-li {
-            padding: 8px 0;
-            position: relative;
-        }
-        .specs-li::before{
-            content: "✔";
-            color: #c5a47e;
-            position: absolute;
-            left: -20px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/anydesk.css">
 </head>
 
 <body>
-<!-- Шапка сайта -->
-<header class="main-header">
-    <div class="header-logo">
-        <img src="izobr/logo.svg" alt="Логотип" class="logo-img">
-    </div>
-    <nav class="header-menu">
-        <ul>
-            <li><a href="index.html">Главная</a></li>
-            <li class="dropdown">
-                <a href="#sections">Разделы ▾</a>
-                <ul class="dropdown-menu">
-                    <li><a href="os-selection.html">Выбор операционной системы</a></li>
-                    <li><a href="#files">Выбор ФС и разметка диска</a></li>
-                    <li><a href="remote-management.html">Средства удаленного управления компьютером</a></li>
-                    <li><a href="diagnost-management.html">Средства диагностики, контроля и мониторинга системы</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a href="#ssilki">Ссылки на официальные сайты ▾</a>
-                <ul class="dropdown-menu">
-                    <li><a href="https://www.teamviewer.com" target="_blank">TeamViewer</a></li>
-                    <li><a href="https://anydesk.com" target="_blank">AnyDesk</a></li>
-                    <li><a href="https://www.aeroadmin.com" target="_blank">AeroAdmin</a></li>
-                    <li><a href="https://www.aida64.com" target="_blank">AIDA64</a></li>
-                    <li><a href="https://www.hwinfo.com" target="_blank">HWiNFO</a></li>
-                    <li><a href="https://www.sisoftware.net" target="_blank">SiSoftware Sandra</a></li>
-                </ul>  
-            </li>
-            <li><a href="author.html">Автор</a></li>
-        </ul>
-    </nav>
-</header>
-    
-<div class="slider-container">
-    <!--Слайд 1-->
-    <div class="slide" aria-hidden="false">
-        <div class="slide-bg"></div>
-        <div class="slide-content">
-            <div class="content-block">
-                <div class="divider-gold"></div>
-                <p class="discipline">
-                    Общие сведения <br>
-                    по программе AnyDesk
-                </p>
+    <!-- Прелоадер -->
+    <div class="preloader" id="preloader">
+        <div class="anydesk-loader">
+            <div class="loader-icon">
+                <svg width="80" height="80" viewBox="0 0 100 100" fill="none">
+                    <circle cx="50" cy="50" r="45" stroke="#c5a47e" stroke-width="2" fill="none" opacity="0.3"/>
+                    <path d="M50 5 A45 45 0 0 1 95 50" stroke="#c5a47e" stroke-width="3" fill="none">
+                        <animateTransform attributeName="transform" type="rotate" dur="1s" repeatCount="indefinite" values="0 50 50;360 50 50"/>
+                    </path>
+                </svg>
+            </div>
+            <div class="loader-text">Загрузка AnyDesk...</div>
+            <div class="loader-progress">
+                <div class="progress-bar"></div>
             </div>
         </div>
     </div>
 
-    <div class="slide" aria-hidden="true">
-        <div class="slide-bg"></div> <!-- Сохраняем оригинальный фон -->
-        <div class="slide-content">
-            <div class="divider-gold"></div>
-            <div class="content-article">
-                <h2 class="discipline" style="color: #c5a47e; text-align: center; margin-bottom: 10px;">
-                    AnyDesk
-                </h2>
-                <div class="article-text">
-                    <p class="specs">AnyDesk — проприетарное программное обеспечение для удалённого доступа, удалённого управления и удалённого обслуживания компьютеров и других конечных устройств, выпущенное в 2015 году, разрабатываемое компанией AnyDesk Software GmbH. 
-                        Предлагает возможности удалённого управления, передачи файлов и VPN. 
-                        AnyDesk часто используется в мошеннических программах технической поддержки и других мошеннических схемах удаленного доступа.
-                    </p>
-                    <div class="image-container">
-                        <img src="izobr/anydesk-company.jpg" alt="Компания">
-                    </div>
-                    <p class="specs">
-                        Компания AnyDesk Software GmbH основана в 2014 году в Штутгарте, Германия, и в настоящее время имеет филиалы в США, Китае и Гонконге, а также Инновационный хаб в Грузии.
-                        В мае 2018 года AnyDesk получила 6,5 миллионов евро финансирования в рамках Series A под руководством EQT Ventures. 
-                        В январе 2020 года ещё один раунд инвестиций принёс сумму более двадцати миллионов долларов, что увеличило общий объём финансирования компании.
-                    </p>
-                    <div class="back-to-top">
-                        <a href="#" class="gold-button" onclick="scrollToTop()">
-                        В начало
-                        </a>
-                    </div>
-                </div>
-            </div>
+    <!-- Фоновые эффекты -->
+    <div class="main-bg">
+        <div class="slide-bg" style="background-image: url('izobr/1.gif')"></div>
+        <div class="overlay"></div>
+        <div class="remote-animation">
+            <div class="connection-line"></div>
+            <div class="data-flow"></div>
         </div>
     </div>
 
-    <div class="slide" aria-hidden="false">
-        <div class="slide-bg"></div>
-        <div class="slide-content">
-            <div class="divider-gold"></div>
-            <div class="content-article">
-                <h2 class="discipline" style="color: #c5a47e; text-align: center; margin-bottom: 10px;">
-                    Функциональные возможности
-                </h2>
-                <div class="article-text">
-                    <p class="specs">
-                        Удаленный доступ - это ключевая функция AnyDesk, позволяющая пользователям подключаться к удаленным компьютерам и работать с ними, будто они находятся перед ними.
-                        Это удобно для дистанционного обучения, проведения встреч и совместной работы с коллегами из разных географических местоположений.<br>
-
-                        Простота использования - еще одно преимущество AnyDesk. Программа имеет интуитивно понятный интерфейс, который даже новички смогут освоить без труда. 
-                        Все операции выполняются в несколько кликов, что делает работу с AnyDesk максимально удобной и эффективной.<br>
-                            
-                        Рабочий десктоп - функция, которая позволяет пользователю полноценно использовать удаленный компьютер, включая доступ к файлам, программам и настройкам.
-                        AnyDesk обеспечивает высокую степень стабильности соединения и позволяет работать на удаленном компьютере без задержек и сбоев. 
-                    </p>
-                <div class="image-container">
-                    <img src="izobr/anydesk.jpg" alt="Anydesk">
-                </div>
-                <div class="divider-gold" style="margin-top: 10px;"></div>
-                <div class="back-to-top">
-                    <a href="#" class="gold-button" onclick="scrollToTop()">
-                    В начало
-                    </a>
-                </div>
-                </div>
-            </div>
+    <!-- Шапка сайта -->
+    <header class="main-header">
+        <div class="header-logo">
+            <img src="izobr/logo.svg" alt="Логотип" class="logo-img">
         </div>
-    </div>
-
-    <div class="slide" aria-hidden="false">
-        <div class="slide-bg"></div>
-        <div class="slide-content">
-            <div class="content-block">
-                <div class="divider-gold"></div>
-                    <p class="discipline">
-                        Общие возможности 
-                    </p>
-                <div class="back-to-top">
-                    <a href="#" class="gold-button" onclick="scrollToTop()">
-                        В начало
-                    </a>
-                </div>  
-            </div>
-        </div> 
-    </div>
-
-    <div class="slide" aria-hidden="false">
-        <div class="slide-bg"></div>
-        <div class="slide-content">
-            <div class="divider-gold"></div>
-            <div class="content-article">
-                <h2 class="discipline" style="color: #c5a47e; text-align: center; margin-bottom: 10px;">
-                    Удаленный доступ к компьютеру 
-                </h2>
-            <div class="article-text">
-                <p class="specs">
-                    Современные технологии позволяют удобно и безопасно получать доступ к удаленному компьютеру или управлять им, не выходя из дома или офиса.
-                    Специальная программа позволяет дистанционно подключиться к компьютеру в другом месте и осуществлять различные операции с ним.<br> 
-
-                    Процесс доступа к удаленному компьютеру с помощью программы осуществляется посредством специального кода или пароля. 
-                    При установке данного программного обеспечения на оба компьютера – ваш и удаленный, вы можете получить полный контроль и управлять ими.<br>
-                    
-                    Программа, предназначенная для удаленного доступа, отличается простотой использования и интуитивно понятным интерфейсом. 
-                    Она позволяет быстро и без лишних сложностей удаленно управлять компьютером, выполнять такие функции, как копирование, удаление, перемещение файлов и папок.<br>
-                    
-                    Благодаря удаленному доступу к компьютеру вы сможете получить доступ к важным данным и программам, сохраненным на удаленном компьютере, не тратя время и силы на серьезные переносы или передачу информации через другие каналы связи. 
-                    Помимо упрощения многих операций, удаленный доступ позволяет облегчить обслуживание удаленных компьютеров, быстро решать проблемы и помогать пользователям на расстоянии.<br> 
-                </p>
-                <div class="image-container">
-                    <img src="izobr/remotecontrol.png" alt="Remote" style="height: 300px;">
-                </div>
-                <div class="divider-gold" style="margin-top: 10px;"></div>
-                <div class="back-to-top">
-                    <a href="#" class="gold-button" onclick="scrollToTop()">
-                        В начало
-                    </a>
-                </div>
-            </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="slide" aria-hidden="false">
-        <div class="slide-bg"></div>
-        <div class="slide-content">
-            <div class="divider-gold"></div>
-            <div class="content-article">
-                <h2 class="discipline" style="color: #c5a47e; text-align: center; margin-bottom: 10px;">
-                    Передача файлов через AnyDesk 
-                </h2>
-            
-            <div class="article-text">
-                <p class="specs">
-                    AnyDesk позволяет без особых сложностей передавать файлы между компьютерами с помощью удаленного рабочего стола. 
-                    Эта программа обеспечивает безопасную и шифрованную передачу данных, что обеспечивает надежность и конфиденциальность при работе с файлами. 
-                    Благодаря простому и интуитивно понятному интерфейсу, пользователю легконайти функцию передачи файлов и выполнить данное действие всего за несколько кликов. 
-                </p>
-                <h3 >Преимущества передачи файлов через AnyDesk</h3>
-                <p>
-                    <ul class="specs-ul" style="margin-top: 2px;">
-                        <li class="specs-li">Быстрое и удобное распределение файлов между компьютерами</li>
-                        <li class="specs-li">Автоматическое шифрование данных для обеспечения безопасности</li>
-                        <li class="specs-li">Простой и интуитивно понятный интерфейс</li>
-                        <li class="specs-li">Возможность передачи на больших расстояниях</li>
-                        <li class="specs-li">Поддержка различных операционных систем</li>
+        <nav class="header-menu">
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li class="dropdown">
+                    <a href="#sections">Разделы ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="os-selection.html">Выбор операционной системы</a></li>
+                        <li><a href="#files">Выбор ФС и разметка диска</a></li>
+                        <li><a href="remote-management.html">Средства удаленного управления компьютером</a></li>
+                        <li><a href="diagnost-management.html">Средства диагностики, контроля и мониторинга системы</a></li>
                     </ul>
-                </p>
-                <div class="divider-gold" style="margin-top: 10px;"></div>
-                <div class="back-to-top">
-                    <a href="#" class="gold-button" onclick="scrollToTop()">
-                        В начало
-                     </a>
+                </li>
+                <li class="dropdown">
+                    <a href="#ssilki">Ссылки на официальные сайты ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://www.teamviewer.com" target="_blank">TeamViewer</a></li>
+                        <li><a href="https://anydesk.com" target="_blank">AnyDesk</a></li>
+                        <li><a href="https://www.aeroadmin.com" target="_blank">AeroAdmin</a></li>
+                        <li><a href="https://www.aida64.com" target="_blank">AIDA64</a></li>
+                        <li><a href="https://www.hwinfo.com" target="_blank">HWiNFO</a></li>
+                        <li><a href="https://www.sisoftware.net" target="_blank">SiSoftware Sandra</a></li>
+                    </ul>  
+                </li>
+                <li><a href="author.html">Автор</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="main-content">
+        <!-- Героическая секция -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="breadcrumb animate-fade-up">
+                    <a href="index.html">Главная</a> / 
+                    <a href="remote-management.html">Удаленное управление</a> / 
+                    <span>AnyDesk</span>
                 </div>
-            </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="slide" aria-hidden="false">
-        <div class="slide-bg"></div>
-        <div class="slide-content">
-            <div class="divider-gold"></div>
-            <div class="content-article">
-                <h2 class="discipline" style="color: #c5a47e; text-align: center; margin-bottom: 10px;">
-                    Возможности чата и видеозвонков
-                </h2>
-                <div class="article-text">
-                    <p class="specs">
-                        В рамках использования AnyDesk, пользователи могут наслаждаться удобством доступа к рабочему окружению из любой точки мира, но возможности этой программы не ограничиваются только рабочим столом.<br>
-
-                        AnyDesk также предоставляет удобный встроенный чат, который позволяет пользователям обмениваться сообщениями и устанавливать контакт с другими участниками. Благодаря этой функции, пользователи могут без проблем обсуждать рабочие вопросы, задавать вопросы или делиться полезной информацией.<br>
-
-                        Но AnyDesk не ограничивается только обменом сообщениями - он также предоставляет возможность проводить видеозвонки. Эта функция позволяет пользователям встречаться "лицом к лицу" через интернет, делать презентации, обучать или консультировать других пользователей в режиме реального времени. Такой подход упрощает процессы коммуникации и сотрудничества, особенно в случаях, когда встреча вживую невозможна из-за географического разделения.<br>
-
-                        Коммуникация с применением чата и видеозвонков AnyDesk становится максимально доступной и простой, благодаря интуитивно понятному интерфейсу. Пользователям не требуется особых технических навыков для его использования, что делает процесс общения удобным и эффективным. Более того, все подключения и переговоры защищены передовыми технологиями шифрования, обеспечивающими безопасность и конфиденциальность.<br>
-
-                        Таким образом, благодаря возможностям чата и видеозвонков в AnyDesk, пользователи могут эффективно взаимодействовать с коллегами и деловыми партнерами, обмениваться идеями, решать проблемы и достигать результатов в режиме реального времени, независимо от расположения друг друга. Это нередко становится ключевым фактором успеха и повышения эффективности работы компаний и проектов. <br>
+                
+                <div class="hero-content">
+                    <div class="hero-icon animate-fade-up delay-200">
+                        <img src="izobr/anydesk-icon.svg" alt="AnyDesk" class="anydesk-hero-logo">
+                    </div>
+                    
+                    <h1 class="hero-title animate-fade-up delay-400">
+                        <span class="title-highlight">AnyDesk</span><br>
+                        Удаленное управление
+                    </h1>
+                    
+                    <p class="hero-subtitle animate-fade-up delay-600">
+                        Быстрое, безопасное и простое решение для удаленного доступа к компьютерам
                     </p>
-                    <div class="divider-gold" style="margin-top: 10px;"></div>
-                    <div class="back-to-top">
-                        <a href="#" class="gold-button" onclick="scrollToTop()">
-                            В начало
-                        </a>
+                    
+                    <div class="hero-stats animate-fade-up delay-800">
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="600">0</span>
+                            <span class="stat-label">Миллионов пользователей</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="190">0</span>
+                            <span class="stat-label">Стран мира</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="99.9">0</span>
+                            <span class="stat-label">% Надежности</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <div class="slide" aria-hidden="false">
-        <div class="slide-bg"></div>
-        <div class="slide-content">
-            <div class="divider-gold"></div>
-            <div class="content-article">
-                <h2 class="discipline" style="color: #c5a47e; text-align: center; margin-bottom: 10px;">
-                    Преимущества использования программы AnyDesk
-                </h2>
-                <div class="article-text">
-                    <p class="specs">
-                        AnyDesk - инновационная программа, которая предоставляет доступ к рабочему столу удаленного компьютера. 
-                        Это мощный инструмент, позволяющий успешно взаимодействовать и работать на расстоянии без необходимости физического присутствия. 
-                        Вместе с удобством использования и множеством полезных функций, AnyDesk имеет свои преимущества и недостатки, которые стоит рассмотреть перед его использованием. 
-                    </p>
-                    <h3 >Преимущества использования программы AnyDesk</h3>
-                    <p>
-                        <ul class="specs-ul" style="margin-top: 2px;">
-                            <li class="specs-li">Высокая скорость и стабильность соединения. AnyDesk обеспечивает быстрый доступ к удаленному рабочему столу, что позволяет передавать данные и управлять программами практически без задержек. Это особенно важно при работе с графическими приложениями и играми. </li>
-                            <li class="specs-li">Простота использования. Программа имеет интуитивно понятный интерфейс, который позволяет даже непрофессионалам быстро освоить основные функции. Нет необходимости в длительном обучении или сложной установке, чтобы начать использовать AnyDesk. </li>
-                            <li class="specs-li">Безопасность данных. AnyDesk обеспечивает защищенное соединение с помощью шифрования, что гарантирует конфиденциальность передаваемой информации и защиту от несанкционированного доступа третьих лиц. </li>
-                            <li class="specs-li">Возможность удаленного администрирования. AnyDesk позволяет удалять рабочий стол удаленного компьютера, что позволяет выполнять различные операции и настройки даже без физического присутствия на месте. </li>
+        <!-- Секция обзора -->
+        <section class="overview-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>О программе AnyDesk</h2>
+                    <p>Профессиональное решение для удаленного доступа</p>
+                </div>
+                
+                <div class="overview-content">
+                    <div class="overview-text scroll-animate">
+                        <h3>Что такое AnyDesk?</h3>
+                        <p>AnyDesk — проприетарное программное обеспечение для удалённого доступа, удалённого управления и удалённого обслуживания компьютеров и других конечных устройств, выпущенное в 2015 году, разрабатываемое компанией AnyDesk Software GmbH.</p>
+                        
+                        <p>Предлагает возможности удалённого управления, передачи файлов и VPN. AnyDesk отличается высокой скоростью работы, простотой использования и надежной защитой данных.</p>
+                        
+                        <div class="company-info">
+                            <h4>О компании</h4>
+                            <p>Компания AnyDesk Software GmbH основана в 2014 году в Штутгарте, Германия, и в настоящее время имеет филиалы в США, Китае и Гонконге, а также Инновационный хаб в Грузии.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="overview-image scroll-animate">
+                        <img src="izobr/anydesk-company.jpg" alt="AnyDesk Company" class="company-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция возможностей -->
+        <section class="features-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Основные возможности</h2>
+                    <p>Все необходимые инструменты для удаленной работы</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card scroll-animate">
+                        <div class="feature-icon">
+                            <svg width="60" height="60" viewBox="0 0 24 24" fill="#c5a47e">
+                                <path d="M20 3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h3l-1 1v2h12v-2l-1-1h3c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 13H4V5h16v11z"/>
+                            </svg>
+                        </div>
+                        <h3>Удаленный доступ</h3>
+                        <p>Полный контроль над удаленным компьютером с высокой скоростью и стабильностью соединения</p>
+                        <ul class="feature-list">
+                            <li>Высокая скорость передачи данных</li>
+                            <li>Стабильное соединение</li>
+                            <li>Поддержка высокого разрешения</li>
                         </ul>
-                    </p>
-                    <div class="divider-gold" style="margin-top: 10px;"></div>
-                    <div class="back-to-top">
-                        <a href="#" class="gold-button" onclick="scrollToTop()">
-                            В начало
-                        </a>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="slide" aria-hidden="false">
-        <div class="slide-bg"></div>
-        <div class="slide-content">
-            <div class="divider-gold"></div>
-            <div class="content-article">
-                <h2 class="discipline" style="color: #c5a47e; text-align: center; margin-bottom: 10px;">
-                    Недостатки использования программы AnyDesk
-                </h2>
-                <div class="article-text">
-                    <p>
-                        <ul class="specs-ul" style="margin-top: 2px;">
-                            <li class="specs-li">Зависимость от скорости интернет-соединения. Успешное использование AnyDesk требует стабильного и достаточно быстрого интернет-соединения. При низкой скорости или перебоях в работе сети, может возникать задержка в передаче данных, что может негативно сказаться на работе программы.</li>
-                            <li class="specs-li">Возможные проблемы совместимости. Иногда AnyDesk может иметь проблемы совместимости с определенными операционными системами или программами. Важно убедиться, что программа будет корректно работать на вашем компьютере перед ее использованием.</li>
-                            <li class="specs-li">Ограниченный функционал бесплатной версии. AnyDesk предлагает платную и бесплатную версии программы. Бесплатная версия может иметь некоторые ограничения в функционале, поэтому для полного использования всех возможностей, потребуется приобретение платной версии.</li>
-                            <li class="specs-li">Опасность несанкционированного доступа. В случае если учетные данные для доступа к AnyDesk попадут в руки злоумышленников, они смогут получить удаленный доступ к вашему компьютеру и украсть конфиденциальные данные. Поэтому необходимо уделять должное внимание безопасности и надежности пароля.</li>
+                    
+                    <div class="feature-card scroll-animate">
+                        <div class="feature-icon">
+                            <svg width="60" height="60" viewBox="0 0 24 24" fill="#c5a47e">
+                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                            </svg>
+                        </div>
+                        <h3>Передача файлов</h3>
+                        <p>Безопасная и быстрая передача файлов между компьютерами с шифрованием данных</p>
+                        <ul class="feature-list">
+                            <li>Drag & Drop интерфейс</li>
+                            <li>Шифрование передачи</li>
+                            <li>Поддержка больших файлов</li>
                         </ul>
-                    </p>
-                    <div class="divider-gold" style="margin-top: 10px;"></div>
-                    <div class="back-to-top">
-                        <a href="#" class="gold-button" onclick="scrollToTop()">
-                            В начало
-                        </a>
+                    </div>
+                    
+                    <div class="feature-card scroll-animate">
+                        <div class="feature-icon">
+                            <svg width="60" height="60" viewBox="0 0 24 24" fill="#c5a47e">
+                                <path d="M17,12V3A1,1 0 0,0 16,2H3A1,1 0 0,0 2,3V16L6,12H16A1,1 0 0,0 17,12M21,6H19V15H6V17A1,1 0 0,0 7,18H18L22,22V7A1,1 0 0,0 21,6Z"/>
+                            </svg>
+                        </div>
+                        <h3>Чат и видеозвонки</h3>
+                        <p>Встроенные средства коммуникации для эффективного взаимодействия</p>
+                        <ul class="feature-list">
+                            <li>Текстовый чат</li>
+                            <li>Голосовая связь</li>
+                            <li>Видеозвонки HD качества</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card scroll-animate">
+                        <div class="feature-icon">
+                            <svg width="60" height="60" viewBox="0 0 24 24" fill="#c5a47e">
+                                <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.5 16,12.4 16,13V16C16,17.4 15.4,18 14.8,18H9.2C8.6,18 8,17.4 8,16V13C8,12.4 8.6,11.5 9.2,11.5V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,10V11.5H13.5V10C13.5,8.7 12.8,8.2 12,8.2Z"/>
+                            </svg>
+                        </div>
+                        <h3>Безопасность</h3>
+                        <p>Надежная защита данных с использованием современных технологий шифрования</p>
+                        <ul class="feature-list">
+                            <li>TLS 1.2 шифрование</li>
+                            <li>RSA 2048 ключи</li>
+                            <li>Двухфакторная аутентификация</li>
+                        </ul>
                     </div>
                 </div>
             </div>
+        </section>
+
+        <!-- Секция преимуществ и недостатков -->
+        <section class="pros-cons-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Преимущества и недостатки</h2>
+                    <p>Объективная оценка программы AnyDesk</p>
+                </div>
+                
+                <div class="pros-cons-grid">
+                    <div class="pros-card scroll-animate">
+                        <div class="card-header">
+                            <div class="card-icon pros-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="#4CAF50">
+                                    <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+                                </svg>
+                            </div>
+                            <h3>Преимущества</h3>
+                        </div>
+                        <ul class="pros-cons-list">
+                            <li>Высокая скорость и стабильность соединения</li>
+                                                        <li>Простота установки и использования</li>
+                            <li>Кроссплатформенность (Windows, Mac, Linux, Android, iOS)</li>
+                            <li>Бесплатная версия для личного использования</li>
+                            <li>Низкая задержка и высокое качество изображения</li>
+                            <li>Надежная система безопасности</li>
+                            <li>Поддержка неограниченного количества устройств</li>
+                            <li>Работа через NAT и брандмауэры</li>
+                            <li>Автономный режим работы</li>
+                            <li>Техническая поддержка 24/7</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="cons-card scroll-animate">
+                        <div class="card-header">
+                            <div class="card-icon cons-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="#f44336">
+                                    <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/>
+                                </svg>
+                            </div>
+                            <h3>Недостатки</h3>
+                        </div>
+                        <ul class="pros-cons-list">
+                            <li>Ограничения в бесплатной версии</li>
+                            <li>Высокая стоимость коммерческих лицензий</li>
+                            <li>Требует стабильного интернет-соединения</li>
+                            <li>Может потреблять много трафика</li>
+                            <li>Ограниченные возможности настройки в бесплатной версии</li>
+                            <li>Зависимость от серверов компании</li>
+                            <li>Возможные проблемы с антивирусами</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция версий и цен -->
+        <section class="pricing-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Версии и цены</h2>
+                    <p>Выберите подходящий план для ваших потребностей</p>
+                </div>
+                
+                <div class="pricing-grid">
+                    <div class="pricing-card scroll-animate">
+                        <div class="pricing-header">
+                            <h3>AnyDesk Free</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">0</span>
+                                <span class="period">/месяц</span>
+                            </div>
+                            <p class="plan-description">Для личного использования</p>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li>Удаленный доступ к 3 устройствам</li>
+                                <li>Базовые функции управления</li>
+                                <li>Передача файлов</li>
+                                <li>Чат</li>
+                                <li>Только для некоммерческого использования</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-action">
+                            <a href="https://anydesk.com/download" class="btn-secondary" target="_blank">Скачать бесплатно</a>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-card featured scroll-animate">
+                        <div class="featured-badge">Популярный</div>
+                        <div class="pricing-header">
+                            <h3>AnyDesk Solo</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">10.90</span>
+                                <span class="period">/месяц</span>
+                            </div>
+                            <p class="plan-description">Для индивидуальных пользователей</p>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li>Неограниченное количество устройств</li>
+                                <li>Коммерческое использование</li>
+                                <li>Приоритетная поддержка</li>
+                                <li>Расширенные настройки безопасности</li>
+                                <li>Персональная адресная книга</li>
+                                <li>Автономный доступ</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-action">
+                            <a href="https://anydesk.com/pricing" class="btn-primary" target="_blank">Выбрать план</a>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-card scroll-animate">
+                        <div class="pricing-header">
+                            <h3>AnyDesk Professional</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">20.90</span>
+                                <span class="period">/месяц</span>
+                            </div>
+                            <p class="plan-description">Для малого бизнеса</p>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li>Все функции Solo</li>
+                                <li>Групповые лицензии</li>
+                                <li>Централизованное управление</li>
+                                <li>Расширенная отчетность</li>
+                                <li>Кастомизация интерфейса</li>
+                                <li>API интеграция</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-action">
+                            <a href="https://anydesk.com/pricing" class="btn-secondary" target="_blank">Выбрать план</a>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-card scroll-animate">
+                        <div class="pricing-header">
+                            <h3>AnyDesk Enterprise</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">52.90</span>
+                                <span class="period">/месяц</span>
+                            </div>
+                            <p class="plan-description">Для крупных организаций</p>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li>Все функции Professional</li>
+                                <li>On-Premises решения</li>
+                                <li>Белый лейбл</li>
+                                <li>Расширенная безопасность</li>
+                                <li>Приоритетная поддержка 24/7</li>
+                                <li>Индивидуальные настройки</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-action">
+                            <a href="https://anydesk.com/contact" class="btn-secondary" target="_blank">Связаться с нами</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция системных требований -->
+        <section class="requirements-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Системные требования</h2>
+                    <p>Минимальные требования для работы AnyDesk</p>
+                </div>
+                
+                <div class="requirements-grid">
+                    <div class="requirement-card scroll-animate">
+                        <div class="req-icon">
+                            <svg width="50" height="50" viewBox="0 0 24 24" fill="#c5a47e">
+                                <path d="M4,6H20V16H4M20,18A2,2 0 0,0 22,16V6C22,4.89 21.1,4 20,4H4C2.89,4 2,4.89 2,6V16A2,2 0 0,0 4,18H0V20H24V18H20Z"/>
+                            </svg>
+                        </div>
+                        <h3>Windows</h3>
+                        <ul class="req-list">
+                            <li>Windows 7 или новее</li>
+                            <li>512 МБ ОЗУ</li>
+                            <li>50 МБ свободного места</li>
+                            <li>Интернет-соединение</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="requirement-card scroll-animate">
+                        <div class="req-icon">
+                            <svg width="50" height="50" viewBox="0 0 24 24" fill="#c5a47e">
+                                <path d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.47C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.09,16.67C20.06,16.74 19.67,18.11 18.71,19.5M13,3.5C13.73,2.67 14.94,2.04 15.94,2C16.07,3.17 15.6,4.35 14.9,5.19C14.21,6.04 13.07,6.7 11.95,6.61C11.8,5.46 12.36,4.26 13,3.5Z"/>
+                            </svg>
+                        </div>
+                        <h3>macOS</h3>
+                        <ul class="req-list">
+                            <li>macOS 10.10 или новее</li>
+                            <li>512 МБ ОЗУ</li>
+                            <li>50 МБ свободного места</li>
+                            <li>Интернет-соединение</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="requirement-card scroll-animate">
+                        <div class="req-icon">
+                            <svg width="50" height="50" viewBox="0 0 24 24" fill="#c5a47e">
+                                <path d="M14.62,8.35C15.78,8.79 16.06,9.69 16.06,10.79C16.06,12.65 14.63,13.69 12.38,13.69H9.5V17.9H7.13V6.9H12.38C14.5,6.9 15.87,7.88 15.87,9.54C15.87,10.38 15.5,11.15 14.62,8.35M9.5,8.65V10.79H12.13C12.88,10.79 13.38,10.5 13.38,9.72C13.38,8.94 12.88,8.65 12.13,8.65H9.5M9.5,12.54V15.15H12.38C13.25,15.15 13.81,14.79 13.81,13.85C13.81,12.9 13.25,12.54 12.38,12.54H9.5Z"/>
+                            </svg>
+                        </div>
+                        <h3>Linux</h3>
+                        <ul class="req-list">
+                            <li>Ubuntu 16.04+ / CentOS 7+</li>
+                            <li>512 МБ ОЗУ</li>
+                            <li>50 МБ свободного места</li>
+                            <li>X11 или Wayland</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="requirement-card scroll-animate">
+                        <div class="req-icon">
+                            <svg width="50" height="50" viewBox="0 0 24 24" fill="#c5a47e">
+                                <path d="M17.5,15C18.88,15 20,16.12 20,17.5C20,18.88 18.88,20 17.5,20C16.12,20 15,18.88 15,17.5C15,16.12 16.12,15 17.5,15M5,16C5.55,16 6,16.45 6,17C6,17.55 5.55,18 5,18C4.45,18 4,17.55 4,17C4,16.45 4.45,16 5,16M12,16C12.55,16 13,16.45 13,17C13,17.55 12.55,18 12,18C11.45,18 11,17.55 11,17C11,16.45 11.45,16 12,16M7.5,14C8.88,14 10,15.12 10,16.5C10,17.88 8.88,19 7.5,19C6.12,19 5,17.88 5,16.5C5,15.12 6.12,14 7.5,14M2.5,12C3.88,12 5,13.12 5,14.5C5,15.88 3.88,17 2.5,17C1.12,17 0,15.88 0,14.5C0,13.12 1.12,12 2.5,12Z"/>
+                            </svg>
+                        </div>
+                        <h3>Мобильные</h3>
+                        <ul class="req-list">
+                            <li>Android 5.0+ / iOS 11+</li>
+                            <li>1 ГБ ОЗУ</li>
+                            <li>100 МБ свободного места</li>
+                            <li>Wi-Fi или мобильный интернет</li>
+                        </ul>
+                    </div>
+                                    </div>
+            </div>
+        </section>
+
+        <!-- Секция сравнения с конкурентами -->
+        <section class="comparison-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Сравнение с конкурентами</h2>
+                    <p>AnyDesk в сравнении с другими решениями</p>
+                </div>
+                
+                <div class="comparison-table-container scroll-animate">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th class="feature-column">Функции</th>
+                                <th class="competitor-column featured-column">
+                                    <div class="competitor-header">
+                                        <img src="izobr/anydesk-icon.svg" alt="AnyDesk">
+                                        <span>AnyDesk</span>
+                                        <div class="recommended-badge">Рекомендуется</div>
+                                    </div>
+                                </th>
+                                <th class="competitor-column">
+                                    <div class="competitor-header">
+                                        <img src="izobr/teamviewer-icon.svg" alt="TeamViewer">
+                                        <span>TeamViewer</span>
+                                    </div>
+                                </th>
+                                <th class="competitor-column">
+                                    <div class="competitor-header">
+                                        <img src="izobr/aeroadmin.png" alt="AeroAdmin">
+                                        <span>AeroAdmin</span>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="feature-name">Бесплатная версия</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-check">✓</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Скорость соединения</td>
+                                <td class="feature-excellent">Отличная</td>
+                                <td class="feature-good">Хорошая</td>
+                                <td class="feature-good">Хорошая</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Качество изображения</td>
+                                <td class="feature-excellent">Высокое</td>
+                                <td class="feature-good">Среднее</td>
+                                <td class="feature-good">Среднее</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Мобильные приложения</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-cross">✗</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Передача файлов</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-check">✓</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Чат и голос</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-cross">✗</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Цена (месяц)</td>
+                                <td class="price-cell featured-price">$10.90</td>
+                                <td class="price-cell">$14.90</td>
+                                <td class="price-cell">Бесплатно</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция инструкции по установке -->
+        <section class="installation-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Установка и настройка</h2>
+                    <p>Пошаговое руководство по установке AnyDesk</p>
+                </div>
+                
+                <div class="installation-steps">
+                    <div class="step-card scroll-animate">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Скачивание</h3>
+                            <p>Перейдите на официальный сайт AnyDesk и скачайте версию для вашей операционной системы</p>
+                            <a href="https://anydesk.com/download" class="step-link" target="_blank">Скачать AnyDesk</a>
+                        </div>
+                    </div>
+                    
+                    <div class="step-card scroll-animate">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Установка</h3>
+                            <p>Запустите скачанный файл и следуйте инструкциям мастера установки. Процесс займет несколько минут</p>
+                            <div class="step-note">Примечание: Для Windows может потребоваться права администратора</div>
+                        </div>
+                    </div>
+                    
+                    <div class="step-card scroll-animate">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Первый запуск</h3>
+                            <p>После установки запустите AnyDesk. Программа автоматически сгенерирует уникальный ID для вашего компьютера</p>
+                            <div class="step-tip">Совет: Запишите ваш ID в безопасном месте</div>
+                        </div>
+                    </div>
+                    
+                    <div class="step-card scroll-animate">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Настройка безопасности</h3>
+                            <p>Установите пароль для неконтролируемого доступа и настройте права доступа по вашему усмотрению</p>
+                            <div class="step-warning">Важно: Используйте надежный пароль для защиты</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция FAQ -->
+        <section class="faq-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Часто задаваемые вопросы</h2>
+                    <p>Ответы на популярные вопросы об AnyDesk</p>
+                </div>
+                
+                <div class="faq-container">
+                    <div class="faq-item scroll-animate">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Безопасен ли AnyDesk для использования?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Да, AnyDesk использует банковский уровень шифрования TLS 1.2 с RSA 2048 ключами. Все соединения защищены от перехвата, а данные передаются в зашифрованном виде.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item scroll-animate">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Можно ли использовать AnyDesk бесплатно?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Да, AnyDesk предлагает бесплатную версию для личного некоммерческого использования с ограничением до 3 устройств. Для коммерческого использования требуется платная лицензия.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item scroll-animate">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Какая скорость интернета нужна для работы?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Минимальная скорость - 100 Кбит/с, но для комфортной работы рекомендуется от 1 Мбит/с. AnyDesk автоматически адаптируется к скорости соединения.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item scroll-animate">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Работает ли AnyDesk через брандмауэр?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Да, AnyDesk работает через NAT и большинство брандмауэров без дополнительной настройки. Программа использует исходящие соединения через порт 80 или 443.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item scroll-animate">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Можно ли передавать файлы через AnyDesk?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Да, AnyDesk поддерживает передачу файлов с помощью простого перетаскивания (drag & drop). Все файлы передаются в зашифрованном виде.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item scroll-animate">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Поддерживает ли AnyDesk мобильные устройства?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Да, доступны приложения для Android и iOS. Вы можете управлять компьютером с мобильного устройства или наоборот.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция действий -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content scroll-animate">
+                    <h2>Готовы начать работу с AnyDesk?</h2>
+                    <p>Скачайте AnyDesk прямо сейчас и получите быстрый и безопасный удаленный доступ</p>
+                    <div class="cta-buttons">
+                        <a href="https://anydesk.com/download" class="btn-primary" target="_blank">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
+                            </svg>
+                            Скачать бесплатно
+                        </a>
+                        <a href="https://anydesk.com/pricing" class="btn-secondary" target="_blank">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z"/>
+                            </svg>
+                            Выбрать план
+                        </a>
+                    </div>
+                    <div class="cta-features">
+                        <div class="cta-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#4CAF50">
+                                <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+                            </svg>
+                            <span>Бесплатная версия</span>
+                        </div>
+                        <div class="cta-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#4CAF50">
+                                <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+                            </svg>
+                            <span>Быстрая установка</span>
+                        </div>
+                        <div class="cta-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#4CAF50">
+                                <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+                            </svg>
+                            <span>Техподдержка 24/7</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Кнопка "Наверх" -->
+    <button class="scroll-to-top" id="scrollToTop" onclick="scrollToTop()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 19V5M5 12L12 5L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <!-- Кнопка возврата к списку инструментов -->
+    <button class="back-to-tools" onclick="goBackToTools()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M19 12H5M12 19L5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>К списку инструментов</span>
+    </button>
+
+    <!-- Модальное окно -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Заголовок</h3>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Контент будет добавлен через JavaScript -->
+            </div>
         </div>
     </div>
-</div>
 
-<div class="slide-nav"></div>
-<script type="module" src = "js/menu.js"></script>
-
-<script src="js/anydeskscripts.js"></script>
-
+    <!-- Подключение скриптов -->
+    <script type="module" src="js/menu.js"></script>
+    <script type="module" src="js/anydesk.js"></script>
 </body>
 </html>
+
+
