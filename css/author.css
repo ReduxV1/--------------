@@ -1,0 +1,721 @@
+/* Основные стили для страницы автора */
+.author-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    position: relative;
+    overflow-x: hidden;
+}
+
+.author-page::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../izobr/bg-pattern.png') repeat;
+    opacity: 0.05;
+    z-index: -1;
+}
+
+/* Анимации появления */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* Анимированные элементы */
+.animate-fade-up {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.animate-fade-left {
+    animation: fadeInLeft 0.8s ease forwards;
+}
+
+.animate-fade-right {
+    animation: fadeInRight 0.8s ease forwards;
+}
+
+.animate-scale {
+    animation: scaleIn 0.6s ease forwards;
+}
+
+.animate-slide-down {
+    animation: slideInDown 0.6s ease forwards;
+}
+
+/* Задержки для последовательной анимации */
+.delay-1 { animation-delay: 0.2s; opacity: 0; }
+.delay-3 { animation-delay: 0.6s; opacity: 0; }
+.delay-4 { animation-delay: 0.8s; opacity: 0; }
+.delay-5 { animation-delay: 1.0s; opacity: 0; }
+
+/* Специальная задержка для заголовка - БЕЗ opacity: 0 */
+.delay-2 { 
+    animation-delay: 0.4s; 
+}
+
+/* Контейнер */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Секция профиля */
+.author-hero {
+    padding: 100px 0 80px;
+    text-align: center;
+    position: relative;
+}
+
+.profile-card {
+    background: rgba(40, 40, 40, 0.9);
+    padding: 50px;
+    border-radius: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(197, 164, 126, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(197, 164, 126, 0.1), transparent);
+    transition: left 0.8s ease;
+}
+
+.profile-card:hover::before {
+    left: 100%;
+}
+
+.profile-image-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 30px;
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 4px solid #c5a47e;
+    object-fit: cover;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(197, 164, 126, 0.3);
+    filter: grayscale(20%);
+}
+
+.profile-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(197, 164, 126, 0.5);
+    filter: grayscale(0%);
+}
+
+/* Стили для заголовка */
+.profile-name {
+    font-size: 2.5rem !important;
+    font-weight: bold !important;
+    background: linear-gradient(135deg, #c5a47e, #8b7355) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    margin-bottom: 15px !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    text-align: center !important;
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+/* Эффект печатной машинки */
+.typewriter-effect {
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: 0.1em;
+    border-right: 2px solid #c5a47e;
+    animation: blink-caret 0.75s step-end infinite;
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: #c5a47e; }
+}
+
+.profile-title {
+    font-size: 1.3rem;
+    color: #b0b0b0;
+    margin-bottom: 10px;
+}
+
+.profile-subtitle {
+    font-size: 1.1rem;
+    color: #888;
+    margin-bottom: 20px;
+}
+
+.profile-description {
+    font-size: 1rem;
+    color: #ccc;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Секция навыков */
+.skills-section {
+    padding: 80px 0;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    color: #c5a47e;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, #c5a47e, #8b7355);
+    border-radius: 2px;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+}
+
+.skill-category {
+    background: rgba(40, 40, 40, 0.8);
+    padding: 30px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(197, 164, 126, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-category::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(197, 164, 126, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.skill-category:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    border-color: rgba(197, 164, 126, 0.3);
+}
+
+.skill-category:hover::before {
+    opacity: 1;
+}
+
+.skill-category h3 {
+    color: #c5a47e;
+    margin-bottom: 25px;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.skill-item {
+    margin-bottom: 20px;
+}
+
+.skill-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.skill-name {
+    color: #fff;
+    font-weight: 500;
+}
+
+.skill-percent {
+    color: #c5a47e;
+    font-weight: bold;
+}
+
+.progress-container {
+    background: rgba(20, 20, 20, 0.8);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #c5a47e, #8b7355);
+    border-radius: 4px;
+    width: 0;
+    transition: width 1.5s ease;
+    position: relative;
+}
+
+.progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Секция контактов */
+.contacts-section {
+    padding: 80px 0;
+    background: rgba(30, 30, 30, 0.8);
+}
+
+.contacts-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-top: 60px;
+}
+
+.contact-info h3 {
+    color: #c5a47e;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.contact-info p {
+    color: #b0b0b0;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.contact-methods {
+    display: grid;
+    gap: 20px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background: rgba(40, 40, 40, 0.8);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(197, 164, 126, 0.1);
+    cursor: pointer;
+}
+
+.contact-item:hover {
+    transform: translateX(10px);
+    border-color: rgba(197, 164, 126, 0.3);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.contact-icon {
+    font-size: 1.5rem;
+    margin-right: 15px;
+    color: #c5a47e;
+    width: 40px;
+    text-align: center;
+}
+
+.contact-details h4 {
+    color: #c5a47e;
+    margin-bottom: 5px;
+    font-size: 1rem;
+}
+
+.contact-details a {
+    color: #b0b0b0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-details a:hover {
+    color: #c5a47e;
+}
+
+/* Форма обратной связи */
+.contact-form h3 {
+    color: #c5a47e;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.form-input {
+    width: 100%;
+    padding: 15px;
+    background: rgba(40, 40, 40, 0.8);
+    border: 1px solid rgba(197, 164, 126, 0.3);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #c5a47e;
+    box-shadow: 0 0 15px rgba(197, 164, 126, 0.2);
+    background: rgba(40, 40, 40, 0.9);
+}
+
+.form-input::placeholder {
+    color: #888;
+}
+
+.form-input.error {
+    border-color: #ff6b6b !important;
+    box-shadow: 0 0 10px rgba(255, 107, 107, 0.3) !important;
+}
+
+.btn {
+    padding: 15px 30px;
+    background: linear-gradient(135deg, #c5a47e, #8b7355);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(197, 164, 126, 0.4);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* Эффект волны для кнопок */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(0);
+    animation: ripple-animation 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Подвал */
+.main-footer {
+    background: rgba(20, 20, 20, 0.95);
+    padding: 40px 0 20px;
+    border-top: 1px solid rgba(197, 164, 126, 0.2);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-section h4 {
+    color: #c5a47e;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.footer-section p,
+.footer-section li {
+    color: #b0b0b0;
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section a {
+    color: #b0b0b0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: #c5a47e;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(197, 164, 126, 0.1);
+    color: #888;
+}
+
+/* Стили для прелоадера */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    transition: opacity 0.5s ease;
+}
+
+.preloader.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(197, 164, 126, 0.3);
+    border-top: 3px solid #c5a47e;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Анимации для элементов при скролле */
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.scroll-animate.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Дополнительные анимации */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.pulse-animation {
+    animation: pulse 2s infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.float-animation {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .contacts-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .profile-card {
+        padding: 30px 20px;
+    }
+
+        .profile-name {
+        font-size: 2rem !important;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .author-hero {
+        padding: 80px 0 60px;
+    }
+
+    .skills-section,
+    .contacts-section {
+        padding: 60px 0;
+    }
+
+    .contact-item:hover {
+        transform: none;
+    }
+    
+    .skill-category:hover {
+        transform: none;
+    }
+    
+    .profile-image:hover {
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    .profile-card {
+        padding: 25px 15px;
+    }
+
+    .profile-name {
+        font-size: 1.8rem !important;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+}
+
+/* Стили для уведомлений */
+.field-error {
+    color: #ff6b6b;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    animation: fadeInUp 0.3s ease;
+}

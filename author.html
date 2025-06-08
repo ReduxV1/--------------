@@ -1,16 +1,23 @@
-<!-- author.html -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
-    <title>Об авторе</title>
+    <title>Автор - Системное ПО</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/author.css">
+    <link rel="stylesheet" href="css/animations.css">
 </head>
-<body>
-    <!-- Шапка меню (такая же, как в index.html) -->
+
+<body class="author-page">
+    <!-- Прелоадер -->
+    <div class="preloader" id="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Хедер с меню -->
     <header class="main-header">
         <div class="header-logo">
             <img src="izobr/logo.svg" alt="Логотип" class="logo-img">
@@ -36,36 +43,185 @@
                         <li><a href="https://www.aida64.com" target="_blank">AIDA64</a></li>
                         <li><a href="https://www.hwinfo.com" target="_blank">HWiNFO</a></li>
                         <li><a href="https://www.sisoftware.net" target="_blank">SiSoftware Sandra</a></li>
-                    </ul>  
+                    </ul>
                 </li>
-                <li><a href="author.html">Автор</a></li>
+                <li><a href="author.html" class="active">Автор</a></li>
             </ul>
         </nav>
     </header>
 
-    <div class="author-page">
-    <!-- Добавляем фон как в первом слайде -->
-        <div class="author-bg">
-            <div class="slide-bg" style="background-image: url('izobr/1.gif')"></div>
-            <!-- Добавляем слой затенения -->
-            <div class="overlay"></div>
-        </div>
-    <!-- Контент страницы автора -->
-    <div class="author-content">
-        <h1>Об авторе</h1>
-        <div class="author-info">
-            <img src="izobr/author.png" alt="Фото автора">
-            <div class="author-details">    
-                <h2>Харитонов Валентин Константинович</h2>
-                <p>Студент группы ИЦТМС 3-2</p>
-                <p>Университет: МГСУ</p>
+    <main>
+        <!-- Секция профиля -->
+        <section class="author-hero">
+            <div class="container">
+                <div class="profile-card animate-scale">
+                    <div class="profile-image-container animate-fade-up delay-1">
+                        <img src="izobr/author.png" alt="Фото автора" class="profile-image pulse-animation">
+                    </div>
+                    <h1 class="profile-name animate-fade-up delay-2">Харитонов Валентин</h1>
+                    <p class="profile-title animate-fade-up delay-3">Студент группы ИЦТМС 3-2</p>
+                    <p class="profile-subtitle animate-fade-up delay-4">Специальность: Информационные системы и технологии</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция навыков -->
+        <section class="skills-section">
+            <div class="container">
+                <h2 class="section-title scroll-animate">Навыки и технологии</h2>
+                <div class="skills-grid">
+                    <div class="skill-category scroll-animate">
+                        <h3>Программирование</h3>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">HTML/CSS</span>
+                                <span class="skill-percent">85%</span>
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-bar" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">JavaScript</span>
+                                <span class="skill-percent">75%</span>
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-bar" data-width="75"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Python</span>
+                                <span class="skill-percent">70%</span>
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-bar" data-width="70"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-category scroll-animate">
+                        <h3>Инструменты и технологии</h3>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Git</span>
+                                <span class="skill-percent">85%</span>
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-bar" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">PowerShell</span>
+                                <span class="skill-percent">80%</span>
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-bar" data-width="80"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция контактов -->
+        <section class="contacts-section">
+            <div class="container">
+                <h2 class="section-title scroll-animate">Контакты</h2>
+                <div class="contacts-content">
+                    <div class="contact-info scroll-animate">
+                        <h3>Свяжитесь со мной</h3>
+                        <p>
+                            Если у вас есть вопросы по курсовому проекту или предложения по сотрудничеству,
+                            буду рад ответить! Вы можете связаться со мной любым удобным способом.
+                        </p>
+                        <div class="contact-methods">
+                            <div class="contact-item">
+                                <div class="contact-icon">📧</div>
+                                <div class="contact-details">
+                                    <h4>Email</h4>
+                                    <a href="mailto:KhValentin745@gmail.com">KhValentin745@gmail.com</a>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon">📱</div>
+                                <div class="contact-details">
+                                    <h4>Телефон</h4>
+                                    <a href="tel:+79157942060">+7 (915) 794-20-60</a>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon">💬</div>
+                                <div class="contact-details">
+                                    <h4>Telegram</h4>
+                                    <a href="https://t.me/Redux4one" target="_blank">@Redux4one</a>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon">🔗</div>
+                                <div class="contact-details">
+                                    <h4>GitHub</h4>
+                                    <a href="https://github.com/ReduxV1" target="_blank">https://github.com/ReduxV1</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-form scroll-animate">
+                        <h3>Отправить сообщение</h3>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <input type="text" class="form-input" placeholder="Ваше имя" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-input" placeholder="Ваш email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-input" placeholder="Тема сообщения" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-input" rows="5" placeholder="Ваше сообщение" required></textarea>
+                            </div>
+                            <button type="submit" class="btn">Отправить сообщение</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>О проекте</h4>
+                    <p>Курсовой проект по системному администрированию, посвященный изучению основных разделов системного программного обеспечения.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Разделы</h4>
+                    <ul>
+                        <li><a href="os-selection.html">Выбор операционной системы</a></li>
+                        <li><a href="remote-management.html">Средства удаленного управления компьютером</a></li>
+                        <li><a href="diagnost-management.html">Средства диагностики, контроля и мониторинга системы</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Контакты</h4>
+                    <p>Email: KhValentin745@gmail.com</p>
+                    <p>Телефон: +7 (915) 794-20-60</p>
+                    <p>Telegram: @Redux4one</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Харитонов Валентин. Курсовой проект по системному администрированию.</p>
             </div>
         </div>
-    </div>
-    </div>
-    
-    <script type="module" src = "js/menu.js"></script>
+    </footer>
 
-    <script src="js/navigation.js"></script>
+    <!-- Подключение скриптов -->
+    <script type="module" src="js/menu.js"></script>
+    <script type="module" src="js/author.js"></script>
 </body>
 </html>
