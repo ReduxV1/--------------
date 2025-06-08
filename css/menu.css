@@ -1,3 +1,8 @@
+/* Скрываем стандартные checkbox */
+input[type="checkbox"] {
+    display: none;
+}
+
 .interactive-menu {
     max-width: 800px;
     margin: 0 auto;
@@ -5,6 +10,7 @@
     padding: 2rem;
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
 }
 
 .menu-title {
@@ -13,6 +19,7 @@
     margin-bottom: 1.5rem;
     font-size: 2.2rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    transition: font-size 0.3s ease;
 }
 
 .menu-list {
@@ -29,11 +36,15 @@
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
+    outline: none;
+    border: 2px solid transparent;
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
-.menu-item:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateX(10px);
+.menu-item:focus {
+    border-color: #2196F3;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.3);
 }
 
 .checkbox-menu {
@@ -51,6 +62,7 @@
     position: relative;
     transition: all 0.3s ease;
     flex-shrink: 0;
+    transform: translateZ(0);
 }
 
 .checkbox-custom::after {
@@ -67,43 +79,685 @@
 input[type="checkbox"]:checked + .checkbox-custom {
     background: #2196F3;
     border-color: #2196F3;
+    animation: checkboxPulse 0.4s ease;
 }
 
 input[type="checkbox"]:checked + .checkbox-custom::after {
     opacity: 1;
+    animation: checkmarkAppear 0.3s ease 0.1s both;
 }
 
 .menu-text {
     color: #fff;
     font-size: 1.1rem;
     flex-grow: 1;
+    transition: color 0.3s ease;
 }
 
+/* Параллакс анимации */
+@keyframes parallaxDropdownDesktop {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px) translateZ(-50px) rotateX(-15deg) scale(0.9);
+        filter: blur(3px);
+    }
+    30% {
+        opacity: 0.3;
+        transform: translateY(-15px) translateZ(-25px) rotateX(-8deg) scale(0.95);
+        filter: blur(1px);
+    }
+    60% {
+        opacity: 0.7;
+        transform: translateY(-5px) translateZ(-10px) rotateX(-3deg) scale(0.98);
+        filter: blur(0.5px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) translateZ(0) rotateX(0deg) scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes parallaxDropdownMobile {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-50%) translateY(-40px) translateZ(-30px) scale(0.85) rotateY(-10deg);
+        filter: blur(4px);
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+    25% {
+        opacity: 0.2;
+        transform: translateX(-50%) translateY(-50%) translateY(-25px) translateZ(-20px) scale(0.9) rotateY(-6deg);
+        filter: blur(2px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateX(-50%) translateY(-50%) translateY(-10px) translateZ(-10px) scale(0.95) rotateY(-3deg);
+        filter: blur(1px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+    75% {
+        opacity: 0.8;
+        transform: translateX(-50%) translateY(-50%) translateY(-3px) translateZ(-3px) scale(0.98) rotateY(-1deg);
+        filter: blur(0.5px);
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-50%) scale(1) rotateY(0deg);
+        filter: blur(0);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+}
+
+@keyframes parallaxItemsStagger {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px) translateZ(-20px) rotateY(-5deg);
+        filter: blur(2px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) translateZ(0) rotateY(0deg);
+        filter: blur(0);
+    }
+}
+
+@keyframes parallaxBackdrop {
+    0% {
+        opacity: 0;
+        backdrop-filter: blur(0px);
+    }
+    100% {
+        opacity: 1;
+        backdrop-filter: blur(10px);
+    }
+}
+
+@keyframes checkboxPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes checkmarkAppear {
+    0% { 
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+    100% { 
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes slideInFromTop {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInFromBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes mobileTapFeedback {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.98); }
+    100% { transform: scale(1); }
+}
+
+@keyframes textGlow {
+    0% { text-shadow: none; }
+    100% { text-shadow: 0 0 8px rgba(255, 255, 255, 0.6); }
+}
+
+@keyframes itemHoverGlow {
+    0% { box-shadow: none; }
+    100% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.2); }
+}
+
+@keyframes activeMenuGlow {
+    0% { text-shadow: 0 0 5px rgba(197, 164, 126, 0.5); }
+    100% { text-shadow: 0 0 10px rgba(197, 164, 126, 0.8); }
+}
+
+@keyframes mobileItemSelect {
+    0% { 
+        transform: scale(1);
+        background: rgba(255, 255, 255, 0.1);
+    }
+    50% { 
+        transform: scale(1.02);
+        background: rgba(255, 255, 255, 0.2);
+    }
+    100% { 
+        transform: scale(1);
+        background: rgba(255, 255, 255, 0.15);
+    }
+}
+
+/* Заголовки и навигация */
 .header-menu a {
     transition: 
         font-size 0.3s ease,
         color 0.3s ease,
         transform 0.3s ease;
+    will-change: font-size, color, transform;
 }
 
-.header-menu a:hover {
-    font-size: 23px; /* Увеличение при ховере */
-}
-
-@media (max-width: 768px) {
-    .interactive-menu {
-        padding: 1rem;
-    }
-    .menu-item {
-        padding: 1rem;
-        font-size: 0.9rem;
-    }
-    .menu-title {
-        font-size: 1.8rem;
-    }
+.header-menu a:not(:hover) {
+    will-change: auto;
 }
 
 .header-menu a.active {
     color: #fff !important;
     border-bottom: 2px solid #c5a47e;
+    animation: activeMenuGlow 2s ease-in-out infinite alternate;
+}
+
+/* Выпадающие меню с параллакс эффектами */
+.dropdown {
+    position: relative;
+    perspective: 1000px;
+}
+
+.dropdown-menu {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: absolute;
+    z-index: 1000;
+    background: rgba(40, 40, 40, 0.95);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transform-style: preserve-3d;
+}
+
+.dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.dropdown.active .dropdown-menu::before {
+    opacity: 1;
+}
+
+.dropdown-menu li {
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+}
+
+.dropdown-menu li a {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+}
+
+.dropdown-menu li a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.4s ease;
+    z-index: 1;
+}
+
+.dropdown-menu li a::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+}
+
+/* Активное состояние с параллакс анимацией */
+.dropdown.active .dropdown-menu {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+}
+
+/* Параллакс анимации для десктопа */
+@media (hover: hover) and (pointer: fine) {
+    .dropdown.active .dropdown-menu {
+        animation: parallaxDropdownDesktop 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .dropdown.active .dropdown-menu::before {
+        animation: parallaxBackdrop 0.6s ease;
+    }
+    
+    .dropdown.active .dropdown-menu li:nth-child(1) {
+        animation: parallaxItemsStagger 0.4s ease 0.1s both;
+    }
+    
+    .dropdown.active .dropdown-menu li:nth-child(2) {
+        animation: parallaxItemsStagger 0.4s ease 0.15s both;
+    }
+    
+    .dropdown.active .dropdown-menu li:nth-child(3) {
+        animation: parallaxItemsStagger 0.4s ease 0.2s both;
+    }
+    
+    .dropdown.active .dropdown-menu li:nth-child(4) {
+        animation: parallaxItemsStagger 0.4s ease 0.25s both;
+    }
+    
+    .dropdown.active .dropdown-menu li:nth-child(5) {
+        animation: parallaxItemsStagger 0.4s ease 0.3s both;
+    }
+    
+    .dropdown.active .dropdown-menu li:nth-child(6) {
+        animation: parallaxItemsStagger 0.4s ease 0.35s both;
+    }
+    
+    .dropdown:hover .dropdown-menu {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        animation: parallaxDropdownDesktop 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .dropdown:hover .dropdown-menu li:nth-child(1) {
+        animation: parallaxItemsStagger 0.4s ease 0.1s both;
+    }
+    
+    .dropdown:hover .dropdown-menu li:nth-child(2) {
+        animation: parallaxItemsStagger 0.4s ease 0.15s both;
+    }
+    
+    .dropdown:hover .dropdown-menu li:nth-child(3) {
+        animation: parallaxItemsStagger 0.4s ease 0.2s both;
+    }
+    
+    .dropdown:hover .dropdown-menu li:nth-child(4) {
+        animation: parallaxItemsStagger 0.4s ease 0.25s both;
+    }
+    
+    .dropdown:hover .dropdown-menu li:nth-child(5) {
+        animation: parallaxItemsStagger 0.4s ease 0.3s both;
+    }
+    
+    .dropdown:hover .dropdown-menu li:nth-child(6) {
+        animation: parallaxItemsStagger 0.4s ease 0.35s both;
+    }
+    
+    .header-menu a:hover {
+        font-size: 23px;
+        animation: textGlow 0.3s ease;
+    }
+    
+        .menu-item:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateX(10px);
+        animation: itemHoverGlow 0.3s ease;
+    }
+    
+    .dropdown-menu li a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: translateX(5px);
+    }
+    
+    .dropdown-menu li a:hover::before {
+        left: 100%;
+    }
+    
+    .dropdown-menu li a:hover::after {
+        opacity: 1;
+    }
+}
+
+/* Стили для touch устройств с параллакс анимациями */
+@media (hover: none) and (pointer: coarse) {
+    .dropdown > a {
+        padding: 1rem 1.2rem;
+        display: flex;
+        touch-action: manipulation;
+        transition: all 0.2s ease;
+        border-radius: 6px;
+        min-height: 48px;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+    
+    /* Убираем hover эффекты на мобильных */
+    .header-menu a:hover {
+        font-size: inherit;
+    }
+    
+    .menu-item:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: none;
+    }
+    
+    /* Параллакс анимации для мобильных устройств */
+    .dropdown.active .dropdown-menu {
+        animation: parallaxDropdownMobile 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .dropdown.active .dropdown-menu::before {
+        animation: parallaxBackdrop 0.7s ease;
+    }
+    
+    .dropdown.active .dropdown-menu li:nth-child(1) {
+        animation: parallaxItemsStagger 0.5s ease 0.15s both;
+    }
+    
+    .dropdown.active .dropdown-menu li:nth-child(2) {
+        animation: parallaxItemsStagger 0.5s ease 0.2s both;
+    }
+    
+    .dropdown.active .dropdown-menu li:nth-child(3) {
+        animation: parallaxItemsStagger 0.5s ease 0.25s both;
+    }
+    
+    .dropdown.active .dropdown-menu li:nth-child(4) {
+        animation: parallaxItemsStagger 0.5s ease 0.3s both;
+    }
+    
+    .dropdown.active .dropdown-menu li:nth-child(5) {
+        animation: parallaxItemsStagger 0.5s ease 0.35s both;
+    }
+    
+    .dropdown.active .dropdown-menu li:nth-child(6) {
+        animation: parallaxItemsStagger 0.5s ease 0.4s both;
+    }
+    
+    /* Добавляем активное состояние для touch */
+    .dropdown > a:active {
+        background: rgba(255, 255, 255, 0.15);
+        animation: mobileTapFeedback 0.2s ease;
+    }
+    
+    .menu-item:active {
+        animation: mobileTapFeedback 0.2s ease;
+        background: rgba(255, 255, 255, 0.15);
+    }
+    
+    /* Анимации для мобильных взаимодействий */
+    .menu-item.mobile-active {
+        animation: mobileItemSelect 0.3s ease;
+        background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .dropdown.mobile-opening .dropdown-menu {
+        animation: parallaxDropdownMobile 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+}
+
+/* Адаптивность для планшетов */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .interactive-menu {
+        max-width: 90%;
+        padding: 1.8rem;
+    }
+    
+    .menu-title {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+    
+    .menu-text {
+        font-size: 1.05rem;
+        line-height: 1.4;
+    }
+    
+    .dropdown > a {
+        font-size: 1.05rem;
+        padding: 0.9rem 1.1rem;
+    }
+    
+    .menu-item {
+        padding: 1.1rem;
+        min-height: 56px;
+    }
+    
+    .checkbox-custom {
+        width: 21px;
+        height: 21px;
+    }
+    
+    /* Параллакс анимации для планшетов */
+    .dropdown.active .dropdown-menu {
+        animation: parallaxDropdownDesktop 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .dropdown:hover .dropdown-menu {
+        animation: parallaxDropdownDesktop 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .interactive-menu {
+        padding: 1.5rem 1rem;
+        margin: 0.5rem;
+        border-radius: 12px;
+        animation: fadeInScale 0.5s ease;
+    }
+    
+    .menu-item {
+        padding: 1.2rem 1rem;
+        font-size: 1rem;
+        margin: 0.6rem 0;
+        border-radius: 10px;
+        min-height: 60px;
+    }
+    
+    .menu-title {
+        font-size: 1.9rem;
+        margin-bottom: 1.2rem;
+        line-height: 1.3;
+    }
+    
+    .menu-text {
+        font-size: 1.05rem;
+        line-height: 1.4;
+    }
+    
+    .checkbox-custom {
+        width: 22px;
+        height: 22px;
+        margin-right: 12px;
+    }
+    
+    .dropdown-menu {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%) translateY(-10px);
+        width: 85%;
+        max-width: 320px;
+        max-height: 70vh;
+        overflow-y: auto;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        perspective: 1000px;
+    }
+    
+    .dropdown.active .dropdown-menu {
+        transform: translateX(-50%) translateY(-50%) !important;
+        animation: parallaxDropdownMobile 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .dropdown-menu li {
+        padding: 0.3rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transform-style: preserve-3d;
+    }
+    
+    .dropdown-menu li:last-child {
+        border-bottom: none;
+    }
+    
+    .dropdown-menu a {
+        padding: 1rem 1.2rem;
+        display: flex;
+        font-size: 1rem;
+        line-height: 1.4;
+        min-height: 48px;
+        align-items: center;
+        border-radius: 8px;
+        margin: 0.2rem;
+        text-align: left;
+        transform-style: preserve-3d;
+    }
+    
+    .dropdown-menu a:active {
+        background-color: rgba(255, 255, 255, 0.2);
+        animation: mobileTapFeedback 0.2s ease;
+    }
+    
+    /* Увеличиваем область клика */
+    .dropdown > a {
+        min-height: 52px;
+        font-size: 1.1rem;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    
+    /* Добавляем overlay для закрытия меню */
+    .dropdown-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(2px);
+    }
+    
+    .dropdown.active .dropdown-overlay {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+/* Дополнительные стили для очень маленьких экранов */
+@media (max-width: 480px) {
+    .interactive-menu {
+        padding: 1.2rem 0.8rem;
+        margin: 0.3rem;
+    }
+    
+    .menu-title {
+        font-size: 1.7rem;
+        margin-bottom: 1rem;
+    }
+    
+    .menu-item {
+        padding: 1rem 0.8rem;
+        margin: 0.5rem 0;
+        min-height: 56px;
+    }
+    
+    .menu-text {
+        font-size: 1rem;
+    }
+    
+    .dropdown-menu {
+        width: 90%;
+        max-width: 280px;
+    }
+    
+    .dropdown-menu a {
+        padding: 0.9rem 1rem;
+        font-size: 0.95rem;
+        min-height: 44px;
+    }
+    
+    .checkbox-custom {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+    }
+}
+
+/* Улучшенная производительность анимаций */
+.dropdown-menu,
+.dropdown-menu li,
+.dropdown-menu a {
+    will-change: transform, opacity;
+}
+
+.dropdown.active .dropdown-menu,
+.dropdown.active .dropdown-menu li,
+.dropdown.active .dropdown-menu a {
+    will-change: transform, opacity, filter;
+}
+
+.dropdown:not(.active) .dropdown-menu,
+.dropdown:not(.active) .dropdown-menu li,
+.dropdown:not(.active) .dropdown-menu a {
+    will-change: auto;
+}
+
+/* Поддержка reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .dropdown-menu,
+    .dropdown-menu li,
+    .dropdown-menu a,
+    .menu-item {
+        animation: none !important;
+        transition: opacity 0.2s ease, visibility 0.2s ease !important;
+    }
+    
+    .dropdown.active .dropdown-menu {
+        animation: fadeInScale 0.3s ease !important;
+    }
 }
