@@ -1,144 +1,34 @@
-<!-- os-selection.html -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
-    <title>Выбор ОС</title>
+    <title>Windows - Выбор операционной системы</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/menu.css">
-    <link rel="stylesheet" href="css/slider.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>
-        /* Анимации */
-        .gold-frame {
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 0;
-            transform: translateX(50px);
-            position: absolute;
-            width: 100%;
-        }
-
-        .gold-frame.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .gold-frame.hidden {
-            opacity: 0;
-            transform: translateX(-50px);
-        }
-
-        .content-container {
-            position: relative;
-            min-height: 70vh;
-            overflow: hidden;
-        }
-
-        .content-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 30px;
-        }
-
-        .gold-frame {
-            width: 90%;
-            max-width: 800px;
-            margin: 0 auto;
-            transform: translateY(-20%); /* Корректировка по вертикали */
-            margin-top: 60px;
-        }
-
-        /* Заголовки */
-        h1 {
-            font-family: 'Arial', sans-serif;
-            color: #c5a47e;
-            text-align: center;
-            text-transform: uppercase;
-        }
-
-        /* Подзаголовки */
-        h3 {
-            font-size: 1.8rem;
-            color: #fff;
-            margin-bottom: 1.5rem;
-            border-left: 3px solid #c5a47e;
-            padding-left: 1rem;
-        }
-
-        /* Основной текст */
-        p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: #e0e0e0;
-            margin: 1rem 0;
-        }
-
-        /* Списки */
-        .specs {
-            list-style: none;
-            padding: 0;
-            margin: 1.5rem 0;
-        }
-
-        .specs li {
-            font-size: 1rem;
-            color: #b0b0b0;
-            padding: 0.5rem 0;
-            display: flex;
-            align-items: center;
-        }
-
-        .specs li::before {
-            content: "•";
-            color: #c5a47e;
-            margin-right: 10px;
-            font-size: 1.2rem;
-        }
-
-        /* Интерактивный блок */
-        .interactive-block {
-            background: rgba(197, 164, 126, 0.1);
-            border: 1px solid #c5a47e;
-            padding: 1.2rem;
-            border-radius: 8px;
-            margin-top: 2rem;
-            transition: all 0.3s;
-        }
-
-        .interactive-block h3 {
-            color: #c5a47e;
-            margin: 0;
-            border: none;
-            padding: 0;
-        }
-
-        /* Адаптивность */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            
-            h3 {
-                font-size: 1.4rem;
-            }
-            
-            .specs li {
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/os-selection.css">
+    <link rel="stylesheet" href="css/animations.css">
 </head>
-<body>
-    <div class="main-bg">
-        <div class="slide-bg" style="background-image: url('izobr/1.gif')"></div>
-        <div class="overlay"></div>
+
+<body class="windows-page">
+    <!-- Прелоадер -->
+    <div class="preloader" id="preloader">
+        <div class="loader-container">
+            <div class="windows-loader">
+                <div class="loader-dots">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="loader-text">Загрузка Windows...</div>
+            </div>
+        </div>
     </div>
 
+    <!-- Хедер с меню -->
     <header class="main-header">
         <div class="header-logo">
             <img src="izobr/logo.svg" alt="Логотип" class="logo-img">
@@ -147,9 +37,9 @@
             <ul>
                 <li><a href="index.html">Главная</a></li>
                 <li class="dropdown">
-                    <a href="#sections">Разделы ▾</a>
+                    <a href="#sections" class="active">Разделы ▾</a>
                     <ul class="dropdown-menu">
-                        <li><a href="os-selection.html">Выбор операционной системы</a></li>
+                        <li><a href="os-selection.html" class="active">Выбор операционной системы</a></li>
                         <li><a href="#files">Выбор ФС и разметка диска</a></li>
                         <li><a href="remote-management.html">Средства удаленного управления компьютером</a></li>
                         <li><a href="diagnost-management.html">Средства диагностики, контроля и мониторинга системы</a></li>
@@ -164,71 +54,780 @@
                         <li><a href="https://www.aida64.com" target="_blank">AIDA64</a></li>
                         <li><a href="https://www.hwinfo.com" target="_blank">HWiNFO</a></li>
                         <li><a href="https://www.sisoftware.net" target="_blank">SiSoftware Sandra</a></li>
-                    </ul>  
+                    </ul>
                 </li>
                 <li><a href="author.html">Автор</a></li>
             </ul>
         </nav>
     </header>
 
-    <div class="content-container adjusted-top">
-    <div class="gold-frame active" id="slide1">
-        <h1>Выбор операционной системы</h1>
-        <div class="divider-gold"></div>
-        
-        <div class="os-card">
-            <div class="os-image">
-                <img src="izobr/windows11.png" alt="Windows 11">
+    <main>
+        <!-- Героическая секция -->
+        <section class="hero-section">
+            <div class="hero-background">
+                <div class="windows-particles"></div>
+                <div class="hero-gradient"></div>
             </div>
-            <div class="os-details">
-                <h3>Windows 11</h3>
-                <p>Последняя версия ОС от Microsoft</p>
-                <ul class="specs">
-                    <li>Требования: 4 ГБ ОЗУ</li>
-                    <li>Архитектура: x64</li>
-                    <li>Версия: 24H2</li>
-                </ul>
+            <div class="container">
+                <div class="hero-content">
+                    <div class="windows-logo-container animate-fade-up">
+                        <img src="izobr/windows11.png" alt="Windows" class="windows-hero-logo">
+                    </div>
+                    <h1 class="hero-title animate-fade-up delay-200">
+                        Операционная система <span class="title-highlight">Windows</span>
+                    </h1>
+                    <p class="hero-subtitle animate-fade-up delay-400">
+                        Самая популярная операционная система в мире для персональных компьютеров и рабочих станций
+                    </p>
+                    <div class="hero-stats animate-fade-up delay-600">
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="75">0</div>
+                            <div class="stat-label">% рынка ПК</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="1.4">0</div>
+                            <div class="stat-label">млрд устройств</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="38">0</div>
+                            <div class="stat-label">лет развития</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="interactive-block" onclick="showSlide(2)">
-            <h3>Почему Windows 11?</h3>
-            <div class="arrow">▼</div>
+        </section>
+
+        <!-- Версии Windows -->
+        <section class="versions-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Версии Windows</h2>
+                    <p>Выберите подходящую версию для ваших задач</p>
+                </div>
+                
+                <div class="versions-grid">
+                    <!-- Windows 11 Home -->
+                    <div class="version-card scroll-animate" data-version="home">
+                        <div class="version-header">
+                            <div class="version-icon">
+                                <img src="izobr/windows11.png" alt="Windows 11 Home">
+                            </div>
+                            <div class="version-info">
+                                <h3>Windows 11 Home</h3>
+                                <div class="version-subtitle">Для домашнего использования</div>
+                                <div class="version-price">От 139$</div>
+                            </div>
+                        </div>
+                        
+                        <div class="version-description">
+                            <p>Идеальный выбор для домашних пользователей. Включает все необходимые функции для повседневных задач, развлечений и творчества.</p>
+                        </div>
+
+                        <div class="version-features">
+                            <h4>Основные возможности:</h4>
+                            <ul class="features-list">
+                                <li><span class="feature-icon">✓</span> Новый дизайн интерфейса</li>
+                                <li><span class="feature-icon">✓</span> Microsoft Store</li>
+                                <li><span class="feature-icon">✓</span> Microsoft Edge</li>
+                                <li><span class="feature-icon">✓</span> Windows Hello</li>
+                                <li><span class="feature-icon">✓</span> Cortana</li>
+                                <li><span class="feature-icon">✓</span> Xbox Game Pass</li>
+                            </ul>
+                        </div>
+
+                        <div class="version-specs">
+                            <div class="spec-row">
+                                <span class="spec-label">Процессор:</span>
+                                <span class="spec-value">1 ГГц, 64-бит</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">ОЗУ:</span>
+                                <span class="spec-value">4 ГБ</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">Хранилище:</span>
+                                <span class="spec-value">64 ГБ</span>
+                            </div>
+                        </div>
+
+                        <div class="version-actions">
+                            <button class="btn-primary" onclick="selectVersion('home')">Выбрать</button>
+                            <button class="btn-secondary" onclick="showDetails('home')">Подробнее</button>
+                        </div>
+                    </div>
+
+                    <!-- Windows 11 Pro -->
+                    <div class="version-card featured scroll-animate" data-version="pro">
+                        <div class="featured-badge">Рекомендуется</div>
+                        <div class="version-header">
+                            <div class="version-icon">
+                                <img src="izobr/windows11_pro.png" alt="Windows 11 Pro">
+                            </div>
+                            <div class="version-info">
+                                <h3>Windows 11 Pro</h3>
+                                <div class="version-subtitle">Для бизнеса и профессионалов</div>
+                                <div class="version-price">От 199$</div>
+                            </div>
+                        </div>
+                        
+                        <div class="version-description">
+                            <p>Расширенная версия с дополнительными функциями безопасности, управления и продуктивности для бизнеса и профессиональных пользователей.</p>
+                        </div>
+
+                        <div class="version-features">
+                            <h4>Все функции Home плюс:</h4>
+                            <ul class="features-list">
+                                <li><span class="feature-icon">✓</span> BitLocker шифрование</li>
+                                <li><span class="feature-icon">✓</span> Windows Information Protection</li>
+                                <li><span class="feature-icon">✓</span> Удаленный рабочий стол</li>
+                                <li><span class="feature-icon">✓</span> Hyper-V виртуализация</li>
+                                <li><span class="feature-icon">✓</span> Групповые политики</li>
+                                <li><span class="feature-icon">✓</span> Azure Active Directory</li>
+                            </ul>
+                        </div>
+
+                        <div class="version-specs">
+                            <div class="spec-row">
+                                <span class="spec-label">Процессор:</span>
+                                <span class="spec-value">1 ГГц, 64-бит</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">ОЗУ:</span>
+                                <span class="spec-value">4 ГБ</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">Хранилище:</span>
+                                <span class="spec-value">64 ГБ</span>
+                            </div>
+                        </div>
+
+                        <div class="version-actions">
+                            <button class="btn-primary" onclick="selectVersion('pro')">Выбрать</button>
+                            <button class="btn-secondary" onclick="showDetails('pro')">Подробнее</button>
+                        </div>
+                    </div>
+
+                    <!-- Windows 11 Enterprise -->
+                    <div class="version-card scroll-animate" data-version="enterprise">
+                        <div class="version-header">
+                            <div class="version-icon">
+                                <img src="izobr/windows11-ent.jpg" alt="Windows 11 Enterprise">
+                            </div>
+                            <div class="version-info">
+                                <h3>Windows 11 Enterprise</h3>
+                                <div class="version-subtitle">Для крупных организаций</div>
+                                <div class="version-price">По подписке</div>
+                            </div>
+                        </div>
+                        
+                        <div class="version-description">
+                            <p>Максимально функциональная версия с расширенными возможностями безопасности, управления и развертывания для крупных предприятий.</p>
+                        </div>
+
+                        <div class="version-features">
+                            <h4>Все функции Pro плюс:</h4>
+                            <ul class="features-list">
+                                <li><span class="feature-icon">✓</span> Windows Defender Advanced Threat Protection</li>
+                                <li><span class="feature-icon">✓</span> AppLocker</li>
+                                <li><span class="feature-icon">✓</span> BranchCache</li>
+                                <li><span class="feature-icon">✓</span> DirectAccess</li>
+                                <li><span class="feature-icon">✓</span> Windows To Go</li>
+                                <li><span class="feature-icon">✓</span> Credential Guard</li>
+                            </ul>
+                        </div>
+
+                        <div class="version-specs">
+                            <div class="spec-row">
+                                <span class="spec-label">Процессор:</span>
+                                <span class="spec-value">1 ГГц, 64-бит</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">ОЗУ:</span>
+                                <span class="spec-value">4 ГБ</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">Хранилище:</span>
+                                <span class="spec-value">64 ГБ</span>
+                            </div>
+                        </div>
+
+                        <div class="version-actions">
+                            <button class="btn-primary" onclick="selectVersion('enterprise')">Выбрать</button>
+                            <button class="btn-secondary" onclick="showDetails('enterprise')">Подробнее</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Системные требования -->
+        <section class="requirements-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Системные требования</h2>
+                    <p>Убедитесь, что ваш компьютер соответствует минимальным требованиям</p>
+                </div>
+
+                <div class="requirements-container">
+                    <div class="requirements-tabs scroll-animate">
+                        <button class="tab-btn active" data-tab="minimum">Минимальные</button>
+                        <button class="tab-btn" data-tab="recommended">Рекомендуемые</button>
+                        <button class="tab-btn" data-tab="optimal">Оптимальные</button>
+                    </div>
+
+                    <div class="requirements-content">
+                        <!-- Минимальные требования -->
+                        <div class="tab-content active" id="minimum">
+                            <div class="requirements-grid">
+                                <div class="requirement-item scroll-animate">
+                                    <div class="req-icon">
+                                        <img src="izobr/processor.png" alt="Процессор">
+                                    </div>
+                                    <div class="req-info">
+                                        <h4>Процессор</h4>
+                                        <p>1 ГГц или быстрее, совместимый с 64-разрядной архитектурой или System on a Chip (SoC)</p>
+                                        <div class="req-examples">
+                                                                                        <span class="example-chip">Intel Core i3</span>
+                                            <span class="example-chip">AMD Ryzen 3</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="requirement-item scroll-animate">
+                                    <div class="req-icon">
+                                        <img src="izobr/ram.png" alt="Оперативная память">
+                                    </div>
+                                    <div class="req-info">
+                                        <h4>Оперативная память</h4>
+                                        <p>4 ГБ ОЗУ для 64-разрядной версии</p>
+                                        <div class="req-note">Минимум для базовой работы системы</div>
+                                    </div>
+                                </div>
+
+                                <div class="requirement-item scroll-animate">
+                                    <div class="req-icon">
+                                        <img src="izobr/ssd.png" alt="Хранилище">
+                                    </div>
+                                    <div class="req-info">
+                                        <h4>Хранилище</h4>
+                                        <p>64 ГБ свободного места на диске</p>
+                                        <div class="req-note">Рекомендуется SSD для лучшей производительности</div>
+                                    </div>
+                                </div>
+
+                                <div class="requirement-item scroll-animate">
+                                    <div class="req-icon">
+                                        <img src="izobr/videocard.png" alt="Графика">
+                                    </div>
+                                    <div class="req-info">
+                                        <h4>Графический адаптер</h4>
+                                        <p>Совместимый с DirectX 12 или более поздней версии с драйвером WDDM 2.0</p>
+                                        <div class="req-examples">
+                                            <span class="example-chip">Intel UHD</span>
+                                            <span class="example-chip">AMD Radeon</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="requirement-item scroll-animate">
+                                    <div class="req-icon">
+                                        <img src="izobr/Monitor.png" alt="Дисплей">
+                                    </div>
+                                    <div class="req-info">
+                                        <h4>Дисплей</h4>
+                                        <p>Диагональ более 9 дюймов с разрешением HD (720p)</p>
+                                        <div class="req-note">Минимальное разрешение: 1366x768</div>
+                                    </div>
+                                </div>
+
+                                <div class="requirement-item scroll-animate">
+                                    <div class="req-icon">
+                                        <img src="izobr/secure.png" alt="Безопасность">
+                                    </div>
+                                    <div class="req-info">
+                                        <h4>Безопасность</h4>
+                                        <p>TPM версии 2.0, поддержка UEFI и Secure Boot</p>
+                                        <div class="req-note">Обязательно для Windows 11</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Рекомендуемые требования -->
+                        <div class="tab-content" id="recommended">
+                            <div class="requirements-grid">
+                                <div class="requirement-item scroll-animate">
+                                    <div class="req-icon">
+                                        <img src="izobr/processor.png" alt="Процессор">
+                                    </div>
+                                    <div class="req-info">
+                                        <h4>Процессор</h4>
+                                        <p>Многоядерный процессор 2.5 ГГц или быстрее</p>
+                                        <div class="req-examples">
+                                            <span class="example-chip">Intel Core i5</span>
+                                            <span class="example-chip">AMD Ryzen 5</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="requirement-item scroll-animate">
+                                    <div class="req-icon">
+                                        <img src="izobr/ram.png" alt="Оперативная память">
+                                    </div>
+                                    <div class="req-info">
+                                        <h4>Оперативная память</h4>
+                                        <p>8 ГБ ОЗУ DDR4 или выше</p>
+                                        <div class="req-note">Для комфортной многозадачности</div>
+                                    </div>
+                                </div>
+
+                                <div class="requirement-item scroll-animate">
+                                    <div class="req-icon">
+                                        <img src="izobr/ssd.png" alt="Хранилище">
+                                    </div>
+                                    <div class="req-info">
+                                        <h4>Хранилище</h4>
+                                        <p>256 ГБ SSD NVMe</p>
+                                        <div class="req-note">Быстрая загрузка и отзывчивость системы</div>
+                                    </div>
+                                </div>
+
+                                <div class="requirement-item scroll-animate">
+                                    <div class="req-icon">
+                                        <img src="izobr/videocard.png" alt="Графика">
+                                    </div>
+                                    <div class="req-info">
+                                        <h4>Графический адаптер</h4>
+                                        <p>Дискретная видеокарта с 4 ГБ видеопамяти</p>
+                                        <div class="req-examples">
+                                            <span class="example-chip">NVIDIA GTX 1650</span>
+                                            <span class="example-chip">AMD RX 5500</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="requirement-item scroll-animate">
+                                    <div class="req-icon">
+                                        <img src="izobr/Monitor.png" alt="Дисплей">
+                                    </div>
+                                    <div class="req-info">
+                                        <h4>Дисплей</h4>
+                                        <p>Full HD (1920x1080) или выше</p>
+                                        <div class="req-note">Для лучшего качества изображения</div>
+                                    </div>
+                                </div>
+
+                                <div class="requirement-item scroll-animate">
+                                    <div class="req-icon">
+                                        <img src="izobr/network.png" alt="Сеть">
+                                    </div>
+                                    <div class="req-info">
+                                        <h4>Сетевое подключение</h4>
+                                        <p>Wi-Fi 6 или Ethernet 1 Гбит/с</p>
+                                        <div class="req-note">Для быстрых обновлений и облачных сервисов</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Оптимальные требования -->
+                        <div class="tab-content" id="optimal">
+                            <div class="requirements-grid">
+                                <div class="requirement-item scroll-animate">
+                                    <div class="req-icon">
+                                        <img src="izobr/processor.png" alt="Процессор">
+                                    </div>
+                                    <div class="req-info">
+                                        <h4>Процессор</h4>
+                                        <p>8-ядерный процессор 3.0 ГГц или быстрее</p>
+                                        <div class="req-examples">
+                                            <span class="example-chip">Intel Core i7/i9</span>
+                                            <span class="example-chip">AMD Ryzen 7/9</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="requirement-item scroll-animate">
+                                    <div class="req-icon">
+                                        <img src="izobr/ram.png" alt="Оперативная память">
+                                    </div>
+                                    <div class="req-info">
+                                        <h4>Оперативная память</h4>
+                                        <p>16-32 ГБ ОЗУ DDR4/DDR5</p>
+                                        <div class="req-note">Для профессиональных задач и игр</div>
+                                    </div>
+                                </div>
+
+                                <div class="requirement-item scroll-animate">
+                                    <div class="req-icon">
+                                        <img src="izobr/ssd.png" alt="Хранилище">
+                                    </div>
+                                    <div class="req-info">
+                                        <h4>Хранилище</h4>
+                                        <p>1 ТБ SSD NVMe PCIe 4.0</p>
+                                        <div class="req-note">Максимальная скорость работы</div>
+                                    </div>
+                                </div>
+
+                                <div class="requirement-item scroll-animate">
+                                    <div class="req-icon">
+                                        <img src="izobr/videocard.png" alt="Графика">
+                                    </div>
+                                    <div class="req-info">
+                                        <h4>Графический адаптер</h4>
+                                        <p>Высокопроизводительная видеокарта 8+ ГБ</p>
+                                        <div class="req-examples">
+                                            <span class="example-chip">NVIDIA RTX 4070</span>
+                                            <span class="example-chip">AMD RX 7800</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="requirement-item scroll-animate">
+                                    <div class="req-icon">
+                                        <img src="izobr/Monitor.png" alt="Дисплей">
+                                    </div>
+                                    <div class="req-info">
+                                        <h4>Дисплей</h4>
+                                        <p>4K (3840x2160) с поддержкой HDR</p>
+                                        <div class="req-note">Для максимального качества изображения</div>
+                                    </div>
+                                </div>
+
+                                <div class="requirement-item scroll-animate">
+                                    <div class="req-icon">
+                                        <img src="izobr/audio.png" alt="Аудио">
+                                    </div>
+                                    <div class="req-info">
+                                        <h4>Аудио</h4>
+                                        <p>Высококачественная звуковая карта или DAC</p>
+                                        <div class="req-note">Для профессиональной работы со звуком</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Преимущества Windows -->
+        <section class="advantages-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Преимущества Windows</h2>
+                    <p>Почему миллионы пользователей выбирают Windows</p>
+                </div>
+
+                <div class="advantages-grid">
+                    <div class="advantage-card scroll-animate">
+                        <div class="advantage-icon">
+                            <img src="izobr/connection.png" alt="Совместимость">
+                        </div>
+                        <h3>Широкая совместимость</h3>
+                        <p>Поддержка огромного количества программ и игр. Совместимость с различным оборудованием от множества производителей.</p>
+                        <div class="advantage-stats">
+                            <span class="stat">95%</span>
+                            <span class="stat-label">программ поддерживают Windows</span>
+                        </div>
+                    </div>
+
+                    <div class="advantage-card scroll-animate">
+                        <div class="advantage-icon">
+                            <img src="izobr/easyused.png" alt="Простота использования">
+                        </div>
+                        <h3>Простота использования</h3>
+                        <p>Интуитивно понятный интерфейс, знакомый миллионам пользователей. Легкая настройка и управление системой.</p>
+                        <div class="advantage-stats">
+                            <span class="stat">4.2/5</span>
+                            <span class="stat-label">оценка удобства</span>
+                        </div>
+                    </div>
+
+                    <div class="advantage-card scroll-animate">
+                        <div class="advantage-icon">
+                            <img src="izobr/game.png" alt="Игры">
+                        </div>
+                        <h3>Лучшая платформа для игр</h3>
+                        <p>DirectX 12, поддержка всех современных игр, Xbox Game Pass, совместимость с игровыми контроллерами.</p>
+                        <div class="advantage-stats">
+                            <span class="stat">90%</span>
+                            <span class="stat-label">игр выходят на Windows</span>
+                        </div>
+                    </div>
+
+                    <div class="advantage-card scroll-animate">
+                        <div class="advantage-icon">
+                            <img src="izobr/business.png" alt="Бизнес">
+                        </div>
+                        <h3>Бизнес-решения</h3>
+                        <p>Интеграция с Microsoft Office, Active Directory, облачными сервисами Azure. Корпоративная безопасность.</p>
+                        <div class="advantage-stats">
+                            <span class="stat">80%</span>
+                            <span class="stat-label">предприятий используют Windows</span>
+                        </div>
+                    </div>
+
+                    <div class="advantage-card scroll-animate">
+                        <div class="advantage-icon">
+                            <img src="izobr/update.png" alt="Обновления">
+                        </div>
+                        <h3>Регулярные обновления</h3>
+                        <p>Постоянные улучшения безопасности, новые функции, исправления ошибок. Автоматические обновления драйверов.</p>
+                                                <div class="advantage-stats">
+                            <span class="stat">2x</span>
+                            <span class="stat-label">в месяц обновления</span>
+                        </div>
+                    </div>
+
+                    <div class="advantage-card scroll-animate">
+                        <div class="advantage-icon">
+                            <img src="izobr/support.png" alt="Поддержка">
+                        </div>
+                        <h3>Техническая поддержка</h3>
+                        <p>Круглосуточная поддержка Microsoft, обширная документация, активное сообщество пользователей и разработчиков.</p>
+                        <div class="advantage-stats">
+                            <span class="stat">24/7</span>
+                            <span class="stat-label">техническая поддержка</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Сравнение версий -->
+        <section class="comparison-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Сравнение версий Windows 11</h2>
+                    <p>Выберите версию, которая лучше всего подходит для ваших потребностей</p>
+                </div>
+
+                <div class="comparison-table-container scroll-animate">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th class="feature-column">Функции</th>
+                                <th class="version-column">
+                                    <div class="version-header-cell">
+                                        <img src="izobr/windows11home.jpg" alt="Home">
+                                        <span>Home</span>
+                                    </div>
+                                </th>
+                                <th class="version-column featured-column">
+                                    <div class="version-header-cell">
+                                        <img src="izobr/windows11_pro.png" alt="Pro">
+                                        <span>Pro</span>
+                                        <div class="recommended-badge">Рекомендуется</div>
+                                    </div>
+                                </th>
+                                <th class="version-column">
+                                    <div class="version-header-cell">
+                                        <img src="izobr/windows11-ent.jpg" alt="Enterprise">
+                                        <span>Enterprise</span>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="feature-name">Новый дизайн Start Menu</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-check">✓</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Microsoft Edge</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-check">✓</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Windows Hello</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-check">✓</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Microsoft Store</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-check">✓</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Xbox Game Pass</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-check">✓</td>
+                            </tr>
+                            <tr class="separator-row">
+                                <td colspan="4" class="separator">Дополнительные функции Pro</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">BitLocker шифрование</td>
+                                <td class="feature-cross">✗</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-check">✓</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Удаленный рабочий стол</td>
+                                <td class="feature-cross">✗</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-check">✓</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Hyper-V</td>
+                                <td class="feature-cross">✗</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-check">✓</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Групповые политики</td>
+                                <td class="feature-cross">✗</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-check">✓</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Windows Information Protection</td>
+                                <td class="feature-cross">✗</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-check">✓</td>
+                            </tr>
+                            <tr class="separator-row">
+                                <td colspan="4" class="separator">Корпоративные функции</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Windows Defender ATP</td>
+                                <td class="feature-cross">✗</td>
+                                <td class="feature-cross">✗</td>
+                                <td class="feature-check">✓</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">AppLocker</td>
+                                <td class="feature-cross">✗</td>
+                                <td class="feature-cross">✗</td>
+                                <td class="feature-check">✓</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">BranchCache</td>
+                                <td class="feature-cross">✗</td>
+                                <td class="feature-cross">✗</td>
+                                <td class="feature-check">✓</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">DirectAccess</td>
+                                <td class="feature-cross">✗</td>
+                                <td class="feature-cross">✗</td>
+                                <td class="feature-check">✓</td>
+                            </tr>
+                            <tr class="price-row">
+                                <td class="feature-name"><strong>Цена</strong></td>
+                                <td class="price-cell">$139</td>
+                                <td class="price-cell featured-price">$199</td>
+                                <td class="price-cell">По подписке</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ секция -->
+        <section class="faq-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Часто задаваемые вопросы</h2>
+                    <p>Ответы на популярные вопросы о Windows</p>
+                </div>
+
+                <div class="faq-container">
+                    <div class="faq-item scroll-animate">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Можно ли обновиться с Windows 10 до Windows 11 бесплатно?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Да, Microsoft предоставляет бесплатное обновление с Windows 10 до Windows 11 для совместимых устройств. Обновление доступно через Windows Update или с помощью инструмента обновления Windows 11.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item scroll-animate">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Какие основные отличия между Windows 11 Home и Pro?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Windows 11 Pro включает дополнительные функции безопасности (BitLocker), возможности удаленного доступа, Hyper-V для виртуализации, групповые политики и интеграцию с Azure Active Directory. Эти функции особенно полезны для бизнеса и профессиональных пользователей.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item scroll-animate">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Обязательно ли иметь TPM 2.0 для Windows 11?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Да, TPM 2.0 является обязательным требованием для Windows 11. Это модуль безопасности, который обеспечивает аппаратную защиту системы. Большинство современных компьютеров уже имеют TPM 2.0, но его может потребоваться активировать в BIOS/UEFI.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item scroll-animate">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Поддерживает ли Windows 11 старые программы?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Да, Windows 11 обладает отличной обратной совместимостью. Большинство программ, работающих в Windows 10, будут работать и в Windows 11. Для очень старых программ доступен режим совместимости.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item scroll-animate">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Как часто выходят обновления Windows 11?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Microsoft выпускает обновления безопасности ежемесячно (обычно во второй вторник месяца), а крупные функциональные обновления - один раз в год. Также могут выходить внеплановые обновления для исправления критических проблем.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item scroll-animate">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Можно ли вернуться к Windows 10 после установки Windows 11?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Да, в течение 10 дней после обновления можно вернуться к Windows 10 через настройки системы. После этого периода потребуется чистая установка Windows 10.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Кнопка "Наверх" -->
+        <button class="scroll-to-top" id="scrollToTop" onclick="scrollToTop()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M12 19V5M5 12L12 5L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+    </main>
+
+    <!-- Модальное окно с деталями -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Детали версии</h3>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Контент будет добавлен через JavaScript -->
+            </div>
         </div>
     </div>
 
-    <!-- Второй слайд -->
-    <div class="gold-frame" id="slide2">
-        <h1>Почему Windows 11?</h1>
-        <div class="divider-gold"></div>
-        <p>
-            Windows 11 — современная операционная система с поддержкой новых технологий, улучшенным интерфейсом и высокой безопасностью.<br>
-            Она комфортна для большинства пользователей и поддерживает широкий спектр оборудования.<br>
-            К тому же большинство программ поддерживается этой системой.
-        </p>
-        <div class="interactive-block" onclick="showSlide(1)">
-            <h3>Назад</h3>
-            <div class="arrow">▲</div>
-        </div>
-    </div>
-</div>
-
-    <script type="module" src = "js/menu.js"></script>
-
- <script>
-        function showSlide(num) {
-            const current = document.querySelector('.gold-frame.active');
-            const next = document.getElementById(`slide${num}`);
-
-            current.classList.add('hidden');
-            current.classList.remove('active');
-
-            setTimeout(() => {
-                next.classList.add('active');
-                next.classList.remove('hidden');
-            }, 300); // Совпадает с длительностью анимации
-        }
-    </script>
-
-    <script type="module" src="js/navigation.js"></script>
+    <!-- Подключение скриптов -->
+    <script type="module" src="js/menu.js"></script>
+    <script type="module" src="js/os-selection.js"></script>
 </body>
 </html>
+
