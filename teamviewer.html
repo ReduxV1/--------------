@@ -4,82 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
-    <title>TeamViewer</title>
+    <meta name="description" content="TeamViewer - ведущее решение для удаленного доступа и управления компьютерами. Обзор функций, возможностей и установки.">
+    <meta name="keywords" content="TeamViewer, удаленный доступ, удаленное управление, техническая поддержка">
+    <meta name="author" content="Ваше имя">
+    <meta property="og:title" content="TeamViewer - Удаленное управление">
+    <meta property="og:description" content="Профессиональное решение для удаленного доступа и управления компьютерами">
+    <meta property="og:type" content="website">
+    <title>TeamViewer - Удаленное управление</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/menu.css">
-    <link rel="stylesheet" href="css/slider.css">
-    <link rel="stylesheet" href="css/teamviewerstyle.css">
-    <style>
-        .slide-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            z-index: -1;
-            filter: brightness(0.7);
-        }
-
-        .slide:nth-child(3) .slide-bg {
-            background-image: url('izobr/3.jpg');
-        }
-
-        .slide:nth-child(4) .slide-bg {
-            background-image: url('izobr/4.jpg');
-        }
-
-        .slide:nth-child(5) .slide-bg {
-            background-image: url('izobr/1.jpg');
-        }
-
-        .slide:nth-child(6) .slide-bg {
-            background-image: url('izobr/5.jpg');
-        }
-
-        .slide:nth-child(7) .slide-bg {
-            background-image: url('izobr/6.jpg');
-        }
-
-        .slide:nth-child(8) .slide-bg {
-            background-image: url('izobr/7.jpg');
-        }
-
-        .slide:nth-child(9) .slide-bg {
-            background-image: url('izobr/1.jpg');
-        }
-
-        .slide:nth-child(10) .slide-bg {
-            background-image: url('izobr/8.jpg');
-        }
-
-        .slide:nth-child(11) .slide-bg {
-            background-image: url('izobr/1.jpg');   
-        }
-
-        .slide:nth-child(12) .slide-bg {
-            background-image: url('izobr/9.jpg');
-        }
-        
-        .slide:nth-child(13) .slide-bg {
-            background-image: url('izobr/10.jpg');
-        }
-
-        .content-article h2.discipline {
-        margin-bottom: 10px !important; /* Уменьшаем отступ после заголовка */
-        }
-
-        .article-text {
-        margin-top: 10px !important; /* Уменьшаем отступ перед текстом */
-        }
-        
-
-        
-    </style>
+    <link rel="stylesheet" href="css/teamviewer.css">
 </head>
 
 <body>
+    <!-- Прелоадер -->
+    <div class="preloader" id="preloader">
+        <div class="teamviewer-loader">
+            <div class="loader-icon">
+                <svg width="80" height="80" viewBox="0 0 100 100" fill="none">
+                    <circle cx="50" cy="50" r="45" stroke="#c5a47e" stroke-width="2" fill="none" opacity="0.3"/>
+                    <path d="M50 5 A45 45 0 0 1 95 50" stroke="#c5a47e" stroke-width="3" fill="none">
+                        <animateTransform attributeName="transform" type="rotate" dur="1s" repeatCount="indefinite" values="0 50 50;360 50 50"/>
+                    </path>
+                </svg>
+            </div>
+            <div class="loader-text">Загрузка TeamViewer...</div>
+            <div class="loader-progress">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Фоновые эффекты -->
+    <div class="main-bg">
+        <div class="slide-bg" style="background-image: url('izobr/3.jpg')"></div>
+        <div class="overlay"></div>
+        <div class="remote-animation">
+            <div class="connection-line"></div>
+            <div class="data-flow"></div>
+        </div>
+    </div>
+
     <!-- Шапка сайта -->
     <header class="main-header">
         <div class="header-logo">
@@ -112,393 +77,773 @@
             </ul>
         </nav>
     </header>
-    
-    <div class="slider-container">
-            <!--Слайд 1-->
-            <div class="slide" aria-hidden="false">
-                <div class="slide-bg"></div>
-                <div class="slide-content">
-                    <div class="content-block">
-                        <div class="divider-gold"></div>
-                        <p class="discipline">
-                            Общие сведения <br>
-                            по программе TeamViewer
-                        </p>
+
+    <!-- Основной контент -->
+    <main class="main-content">
+        <!-- Героическая секция -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="breadcrumb animate-fade-up">
+                    <a href="index.html">Главная</a> / 
+                    <a href="remote-management.html">Удаленное управление</a> / 
+                    <span>TeamViewer</span>
+                </div>
+                
+                <div class="hero-content">
+                    <div class="hero-icon animate-fade-up delay-200">
+                        <img src="izobr/teamviewer-icon.svg" alt="TeamViewer" class="teamviewer-hero-logo">
                     </div>
-                </div>
-            </div>
-
-        <div class="slide" aria-hidden="true">
-                <div class="slide-bg"></div> <!-- Сохраняем оригинальный фон -->
-                <div class="slide-content">
-                        <div class="divider-gold"></div>
-                        <div class="content-article">
-                            <h2 class="discipline" style="color: #c5a47e; text-align: center; margin-bottom: 10px;">
-                                TeamViewer
-                            </h2>
-                            <div class="article-text">
-                                <p class="specs">TeamViewer — программное обеспечение для удаленного доступа, управления и обслуживания компьютеров, выпущенное в 2005 году. Функциональность постоянно расширяется, включая интеграцию с Modernog.</p>
-                                <div class="image-container">
-                                    <img src="izobr/teamviewer-comp.jpg" alt="Компания">
-                                </div>
-                                <p class="specs">Программа не требует регистрации и предоставляется бесплатно для некоммерческого использования, что обеспечило ей высокую популярность. TeamViewer является основным продуктом одноименной компании из Германии.</p>
-
-                                <p class="specs">С 3 мая 2022 года TeamViewer прекратил работу в России и Беларуси. Действующие лицензии продолжают работать, но не продлеваются по истечении срока. Прямые соединения блокируются - подключение возможно только при использовании средств изменения IP-адреса (например, VPN).</p>
-                            </div>
-                            <div class="divider-gold" style="margin-top: 10px;"></div>
-                            <div class="back-to-top">
-                            <a href="#" class="gold-button" onclick="scrollToTop()" style="margin: -5px;">
-                                В начало
-                            </a>
-                            </div>
-                        </div>
-                </div>
-        </div>
-
-            <div class="slide" aria-hidden="true">
-                <div class="slide-bg"></div> <!-- Сохраняем оригинальный фон -->
-                <div class="slide-content">
-                        <div class="divider-gold"></div>
-                        <div class="content-article">
-                            <h2 class="discipline" style="color: #c5a47e; text-align: center; margin-bottom: 10px;">
-                                Разработка
-                            </h2>
-                            <div class="article-text">
-                                <p class="specs">Компания Rossmanith опубликовала первую версию программного обеспечения TeamViewer в 2005 г., тогда ещё на основе системы VNC. 
-                                Поставщик ИТ-услуг хотел избежать ненужных поездок к клиентам и выполнять такие задачи, как установка программного обеспечения, удаленно.
-                                Разработка была настолько успешной, что на её основе возникла компания, которая теперь работает под названием TeamViewer Germany и принадлежит к группе TeamViewer.</p>
-                                <div class="image-container">
-                                    <img src="izobr/teamviewer3.jpg" alt="Компания">
-                                </div>
-                            <div class="divider-gold" style="margin-top: 10px;"></div>
-                                <div class="back-to-top">
-                                    <a href="#" class="gold-button" onclick="scrollToTop()">
-                                     В начало
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-            </div>
-
-        <div class="slide last-slide" aria-hidden="true">
-                <div class="slide-bg"></div> <!-- Сохраняем оригинальный фон -->
-                <div class="slide-content">
-                        <div class="divider-gold"></div>
-                        <div class="content-article">
-                            <h2 class="discipline" style="color: #c5a47e; text-align: center; margin-bottom: 10px;">
-                                Функциональные возможности
-                            </h2>
-                            <div class="article-text">
-                                <p class="specs">Функциональные возможности TeamViewer зависят от используемого устройства и варианта или версии программного обеспечения. 
-                                Основной функцией TeamViewer является удаленный доступ к компьютерам и другим конечным устройствам, а также управление ими и их обслуживание.
-                                После подключения удаленный экран будет отображаться для пользователя в другой конечной точке. 
-                                Обе конечные точки могут отправлять и получать файлы, а также иметь доступ к общему буферу обмена. 
-                                Кроме того, существуют функции, облегчающие командную работу, такие как передача аудио и видео по IP-телефонии.</p>
-                                <div class="image-container">
-                                    <img src="izobr/teamviewer4.jpg" alt="Компания">
-                                </div>
-                                <p class="specs">В последние годы функции этого программного обеспечения были оптимизированы специально для использования в крупных компаниях.
-                                    Для этой цели был разработан корпоративный вариант программы TeamViewer Tensor.
-                                    Кроме того, компания TeamViewer разработала TeamViewer Pilot — программное обеспечение удаленной поддержки с элементами дополненной реальности.
-                                    TeamViewer предоставляет интерфейсы для других приложений и служб, таких как Microsoft Teams, Salesforce и ServiceNow.</p>
-                                <div class="divider-gold" style="margin-top: 10px;"></div>
-                                <div class="back-to-top">
-                                    <a href="#" class="gold-button" onclick="scrollToTop()">
-                                         В начало
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-        </div>
-            <div class="slide" aria-hidden="false">
-                <div class="slide-bg"></div>
-                <div class="slide-content">
-                    <div class="content-block">
-                        <div class="divider-gold"></div>
-                        <p class="discipline">
-                            Общие возможности 
-                        </p>
-                        <div class="back-to-top">
-                            <a href="#" class="gold-button" onclick="scrollToTop()">
-                                 В начало
-                            </a>
-                    </div>
-                </div>
-            </div> 
-        </div>
-
-        <div class="slide" aria-hidden="true">
-                <div class="slide-bg"></div> <!-- Сохраняем оригинальный фон -->
-                <div class="slide-content">
-                        <div class="divider-gold"></div>
-                        <div class="content-article">
-                            <div class="article-text">
-                                <p class="specs">
-                                    TeamViewer – это многофункциональная программа для удалённого доступа, управления компьютерами и устройствами, онлайн-совещаний и совместной работы. 
-                                    Вот её основные возможности:
-                                </p>
-                                <h2 class="discipline" style="color: #c5a47e; text-align: center;margin-bottom: 10px;">
-                                    Удалённое управление и поддержка
-                                </h2>
-                                <p>
-                                    <ul class="specs-ul">
-                                    <li class="specs-li">Подключение к компьютерам, серверам, мобильным устройствам (Windows, macOS, Linux, Android, iOS).</li>
-                                    <li class="specs-li">Полный контроль над удалённым устройством (мышь, клавиатура, файлы).</li>
-                                    <li class="specs-li">Фоновый доступ (без вмешательства пользователя).</li>
-                                    <li class="specs-li">Мультиплатформенная поддержка.</li>
-                                    </ul>
-                                </p>
-                                <div class="image-container">
-                                    <img src="izobr/TeamViewer_3_softmagazin_1.jpg" alt="TeamViewer2">
-                                </div>
-                                <div class="back-to-top">
-                                    <a href="#" class="gold-button" onclick="scrollToTop()">
-                                         В начало
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-        </div>
-
-        <div class="slide" aria-hidden="true">
-                <div class="slide-bg"></div> <!-- Сохраняем оригинальный фон -->
-                <div class="slide-content">
-                        <div class="divider-gold"></div>
-                        <div class="content-article">
-                            <h2 class="discipline" style="color: #c5a47e; text-align: center; margin-bottom: 10px;">
-                                Передача файлов
-                            </h2>
-                        <div class="article-text">
-                        <p>
-                            <ul class="specs-ul">
-                            <li class="specs-li">Копирование файлов между локальным и удалённым устройством.</li>
-                            <li class="specs-li">Перетаскивание (Drag & Drop) для удобной передачи данных.</li>
-                            </ul>
-                        </p>
-                        <h2 class="discipline" style="color: #c5a47e; text-align: center; margin-bottom: 10px;">
-                            Видео- и аудиосвязь
-                        </h2>
-                        <p>
-                            <ul class="specs-ul">
-                            <li class="specs-li">VoIP-звонки и чат в реальном времени.</li>
-                            <li class="specs-li">Поддержка видеосвязи (например, для удалённой поддержки).</li>
-                            </ul>
-                        </p>
-                        <div class="image-container">
-                            <img src="izobr/Screen-13.png" alt="TeamViewer6">
-                        </div>
-                        </div>
-                        <div class="back-to-top">
-                                    <a href="#" class="gold-button" onclick="scrollToTop()">
-                                         В начало
-                                    </a> 
-                        </div>
-                    </div>
-                </div>
-        </div>
-        
-        <div class="slide" aria-hidden="true">
-                <div class="slide-bg"></div> <!-- Сохраняем оригинальный фон -->
-                <div class="slide-content">
-                        <div class="divider-gold"></div>
-                        <div class="content-article">
-                            <h2 class="discipline" style="color: #c5a47e; text-align: center; margin-bottom: 10px;">
-                                Автоматизация и массовое управление
-                            </h2>
-                        <div class="article-text">
-                        <p>
-                            <ul class="specs-ul">
-                                <li class="specs-li">Развёртывание TeamViewer на множестве устройств.</li>
-                                <li class="specs-li">Интеграция с IT-инструментами (например, через API).</li>
-                                <li class="specs-li">Настройка пакетных сценариев.</li>
-                            </ul>
-                        </p>
-                        <h2 class="discipline" style="color: #c5a47e; text-align: center; margin-bottom: 10px;">
-                            Дополнительные функции
-                        </h2>
-                        <p>
-                            <ul class="specs-ul">
-                                <li class="specs-li">Пробуждение по LAN (Wake-on-LAN).</li>
-                                <li class="specs-li">Запись сеансов.</li>
-                                <li class="specs-li">Интеграция с CRM (Salesforce, Zendesk и др.).</li>
-                            </ul>
-                        </p>
-                        </div>
-                        <div class="back-to-top">
-                                    <a href="#" class="gold-button" onclick="scrollToTop()">
-                                         В начало
-                                    </a> 
-                        </div>
-                    </div>
-                </div>
-        </div>
-
-        <div class="slide" aria-hidden="false">
-            <div class="slide-bg"></div>
-            <div class="slide-content">
-                <div class="content-block">
-                    <div class="divider-gold"></div>
-                    <p class="discipline">
-                        Как работает программа TeamViewer
+                    
+                    <h1 class="hero-title animate-fade-up delay-400">
+                        <span class="title-highlight">TeamViewer</span><br>
+                        Лидер удаленного управления
+                    </h1>
+                    
+                    <p class="hero-subtitle animate-fade-up delay-600">
+                        Первопроходец в области удаленного доступа с 2005 года
                     </p>
+                    
+                    <div class="hero-stats animate-fade-up delay-800">
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="2005">0</span>
+                            <span class="stat-label">Год основания</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="2.5">0</span>
+                            <span class="stat-label">Миллиардов устройств</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="99.5">0</span>
+                            <span class="stat-label">% Времени работы</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="back-to-top">
-                    <a href="#" class="gold-button" onclick="scrollToTop()">
-                         В начало
-                    </a>
-                </div> 
             </div>
-        </div>
+        </section>
 
-        <div class="slide" aria-hidden="true">
-                <div class="slide-bg"></div> <!-- Сохраняем оригинальный фон -->
-                <div class="slide-content">
-                        <div class="divider-gold"></div>
-                        <div class="content-article">
-                            <div class="article-text">
-                                <p class="specs">
-                                    TeamViewer — одна из самых популярных программ для удаленного доступа (это и сервер, и клиент одновременно). 
-                                    Она использует для подключения к удаленному устройству сервера-посредники, тип VPN-подключения TeamViewer выбирает сам. 
-                                    Большей частью функционала программы можно пользоваться бесплатно, благодаря кроссплатформенности запускается она на всех операционных системах, а коммерческая версия способна работать еще и на серверных.<br><br>
-
-                                    Скачать TeamViewer — оптимальное решение для бизнеса, испытывающего потребность в обеспечении удаленного доступа. TeamViewer — это приложение, выдерживающее редкий баланс между функциональностью, безопасностью и удобством в использовании. Нет необходимости пробрасывать порты, разбираться в маршрутизации между сетями, настраивать файерволы. 
-                                    Программа позволяет записывать сеансы удаленного доступа на видео, общаться в текстовом и/или голосовом чатах, а также открывать доступ только к определенным приложениям. Здесь нужно оговориться, что список доступных функций программы зависит от платформы, на которой она используется. 
-                                    Кроме того, есть возможность установить полную ее версию или же использовать портативный вариант — QuickSupport. 
-                                    Он поддерживает не все возможности TeamViewer, однако не требует инсталляции.<br><br>
-
-                                    Расхожая фразы вроде «интуитивно понятный интерфейс» – как раз про TeamViewer. 
-                                    Освоить программу легко благодаря подсказкам, даже если вы никогда не использовали подобное ПО, а для того, чтобы начать работу, то есть удаленно подключить одно устройство к другому, нужно всего лишь ввести сгенерированные на сервере ID и пароль.
-                                </p>
-                            </div>
-                              <div class="back-to-top">
-                                <a href="#" class="gold-button" onclick="scrollToTop()">
-                                     В начало
-                                </a>
-                            </div>
-                        </div>                                              
+        <!-- Секция обзора -->
+        <section class="overview-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>О программе TeamViewer</h2>
+                    <p>Ведущее решение для удаленного доступа в мире</p>
                 </div>
-        </div>
-
-        <div class="slide" aria-hidden="false">
-            <div class="slide-bg"></div>
-            <div class="slide-content">
-                <div class="content-block">
-                    <div class="divider-gold"></div>
-                    <p class="discipline">
-                        Выводы о функциональности
-                    </p>
-                </div>
-                <div class="back-to-top">
-                    <a href="#" class="gold-button" onclick="scrollToTop()">
-                         В начало
-                    </a>
-                </div> 
-            </div>
-        </div>
-
-        <div class="slide" aria-hidden="true">
-                <div class="slide-bg"></div> <!-- Сохраняем оригинальный фон -->
-                <div class="slide-content">
-                        <div class="divider-gold"></div>
-                        <div class="content-article">
-                            <h2 class="discipline" style="color: #c5a47e; text-align: center; margin-bottom: 10px;">
-                                Плюсы
-                            </h2>
-                            <div class="article-text">
-                                <p>
-                                    <ol >
-                                        <li>Кроссплатформенность</li>
-                                        <ul>
-                                            <li>Работает на Windows, macOS, Linux, Android, iOS. Поддерживает подключения между разными ОС.</li>
-                                        </ul>
-                                        <li>Многофункциональность</li>
-                                        <ul>
-                                            <li>Удалённый доступ, передача файлов (drag-and-drop), удалённая печать, аудио- и видеосвязь, чат.</li>
-                                            <li>Поддержка Wake-on-LAN и мультимониторных систем</li>
-                                        </ul>
-                                        <li>Безопасность</li>
-                                        <ul>
-                                            <li>Шифрование данных (AES-256, RSA-2048), двухфакторная аутентификация (2FA), гибкие настройки доступа.</li>
-                                        </ul>
-                                        <li>Интеграция с облачными сервисами</li>
-                                        <ul>
-                                        <li>Совместимость с Google Drive, Dropbox, OneDrive.</li>
-                                        </ul>
-                                        <li>Автоматизация</li>
-                                        <ul>
-                                        <li>CLI-управление, массовое развёртывание, настройка через групповые политики.</li>
-                                        </ul>
-                                        <li>Гибкие лицензии</li>
-                                        <ul>
-                                        <li>Бесплатная версия для некоммерческого использования. Платные тарифы с расширенными функциями для бизнеса.</li>
-                                        </ul>
-                                        <li>Простота использования</li>
-                                        <ul>
-                                        <li>Интуитивный интерфейс, быстрая настройка подключения.</li>
-                                        </ul>
-                                    </ol>
-                                </p>
-                            </div>
-                            <div class="divider-gold" style="margin-top: 10px;"></div>
-                            <div class="back-to-top">
-                                <a href="#" class="gold-button" onclick="scrollToTop()" style="margin: -5px;">
-                                     В начало
-                                </a>
+                
+                <div class="overview-content">
+                    <div class="overview-text scroll-animate">
+                        <h3>Что такое TeamViewer?</h3>
+                        <p>TeamViewer — программное обеспечение для удаленного доступа, управления и обслуживания компьютеров, выпущенное в 2005 году. Функциональность постоянно расширяется, включая интеграцию с современными технологиями.</p>
+                        
+                        <p>Программа не требует регистрации и предоставляется бесплатно для некоммерческого использования, что обеспечило ей высокую популярность. TeamViewer является основным продуктом одноименной компании из Германии.</p>
+                        
+                        <div class="company-info">
+                            <h4>Разработка</h4>
+                            <p>Компания Rossmanith опубликовала первую версию программного обеспечения TeamViewer в 2005 г., тогда ещё на основе системы VNC. Поставщик ИТ-услуг хотел избежать ненужных поездок к клиентам и выполнять такие задачи, как установка программного обеспечения, удаленно.</p>
+                            
+                            <div class="warning-note">
+                                <strong>Важно:</strong> С 3 мая 2022 года TeamViewer прекратил работу в России и Беларуси. Действующие лицензии продолжают работать, но не продлеваются по истечении срока. Прямые соединения блокируются - подключение возможно только при использовании средств изменения IP-адреса (например, VPN).
                             </div>
                         </div>
+                    </div>
+                    
+                    <div class="overview-image scroll-animate">
+                        <img src="izobr/teamviewer-comp.jpg" alt="TeamViewer Company" class="company-image">
+                    </div>
                 </div>
-        </div>
+            </div>
+        </section>
 
-        <div class="slide" aria-hidden="true">
-                <div class="slide-bg"></div> <!-- Сохраняем оригинальный фон -->
-                <div class="slide-content">
-                        <div class="divider-gold"></div>
-                        <div class="content-article">
-                            <h2 class="discipline" style="color: #c5a47e; text-align: center; margin-bottom: 10px;">
-                                Минусы
-                            </h2>
-                            <div class="article-text">
-                                <p>
-                                    <ol>
-                                    <li>Ограничения бесплатной версии</li>
-                                    <ul>
-                                    <li>При частом использовании возможна блокировка сессий (подозрение на коммерческое применение)</li>
-                                    </ul>
-                                    <li>Зависимость от интернет-соединения</li>
-                                    <ul>
-                                    <li>Качество работы напрямую зависит от скорости и стабильности интернета.</li>
-                                    </ul>
-                                    <li>Стоимость для бизнеса</li>
-                                    <ul>
-                                    <li>Платные тарифы могут быть дорогими для малых компаний.</li>
-                                    </ul>
-                                    <li>Риск уязвимостей</li>
-                                    <ul>
-                                    <li>Редко, но возникают сообщения о возможных утечках данных (хотя TeamViewer оперативно их устраняет).</li>
-                                    </ul>
-                                    <li>Ограниченная функциональность на мобильных устройствах</li>
-                                    <ul>
-                                    <li>Управление с мобильных устройств менее удобно, чем с ПК.</li>
-                                    </ul>
-                                    </ol>
-                                </p>
-                            </div>
-                            <div class="divider-gold" style="margin-top: 10px;"></div>
-                            <div class="back-to-top">
-                                <a href="#" class="gold-button" onclick="scrollToTop()" style="margin: -5px;">
-                                     В начало
-                                </a>
-                            </div>
-                        </div>
+        <!-- Секция возможностей -->
+        <section class="features-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Функциональные возможности</h2>
+                    <p>Все необходимые инструменты для удаленной работы и поддержки</p>
                 </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card scroll-animate">
+                        <div class="feature-icon">
+                            <svg width="60" height="60" viewBox="0 0 24 24" fill="#c5a47e">
+                                <path d="M20 3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h3l-1 1v2h12v-2l-1-1h3c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 13H4V5h16v11z"/>
+                            </svg>
+                        </div>
+                        <h3>Удаленное управление и поддержка</h3>
+                        <p>Полный контроль над удаленным устройством с высокой производительностью</p>
+                        <ul class="feature-list">
+                            <li>Подключение к компьютерам, серверам, мобильным устройствам</li>
+                            <li>Полный контроль над удалённым устройством (мышь, клавиатура, файлы)</li>
+                            <li>Фоновый доступ (без вмешательства пользователя)</li>
+                            <li>Мультиплатформенная поддержка</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card scroll-animate">
+                        <div class="feature-icon">
+                            <svg width="60" height="60" viewBox="0 0 24 24" fill="#c5a47e">
+                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                            </svg>
+                        </div>
+                        <h3>Передача файлов</h3>
+                        <p>Безопасная передача данных между устройствами</p>
+                        <ul class="feature-list">
+                            <li>Копирование файлов между локальным и удалённым устройством</li>
+                            <li>Перетаскивание (Drag & Drop) для удобной передачи данных</li>
+                            <li>Поддержка больших файлов</li>
+                            <li>Шифрование передачи данных</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card scroll-animate">
+                        <div class="feature-icon">
+                            <svg width="60" height="60" viewBox="0 0 24 24" fill="#c5a47e">
+                                <path d="M17,12V3A1,1 0 0,0 16,2H3A1,1 0 0,0 2,3V16L6,12H16A1,1 0 0,0 17,12M21,6H19V15H6V17A1,1 0 0,0 7,18H18L22,22V7A1,1 0 0,0 21,6Z"/>
+                            </svg>
+                        </div>
+                        <h3>Видео- и аудиосвязь</h3>
+                        <p>Встроенные средства коммуникации для командной работы</p>
+                        <ul class="feature-list">
+                            <li>VoIP-звонки и чат в реальном времени</li>
+                            <li>Поддержка видеосвязи (например, для удалённой поддержки)</li>
+                            <li>Передача аудио и видео по IP-телефонии</li>
+                            <li>Общий буфер обмена</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card scroll-animate">
+                                                <div class="feature-icon">
+                            <svg width="60" height="60" viewBox="0 0 24 24" fill="#c5a47e">
+                                <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.5 16,12.4 16,13V16C16,17.4 15.4,18 14.8,18H9.2C8.6,18 8,17.4 8,16V13C8,12.4 8.6,11.5 9.2,11.5V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,10V11.5H13.5V10C13.5,8.7 12.8,8.2 12,8.2Z"/>
+                            </svg>
+                        </div>
+                        <h3>Автоматизация и массовое управление</h3>
+                        <p>Корпоративные функции для управления множеством устройств</p>
+                        <ul class="feature-list">
+                            <li>Развёртывание TeamViewer на множестве устройств</li>
+                            <li>Интеграция с IT-инструментами (например, через API)</li>
+                            <li>Настройка пакетных сценариев</li>
+                            <li>TeamViewer Tensor для крупных компаний</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card scroll-animate">
+                        <div class="feature-icon">
+                            <svg width="60" height="60" viewBox="0 0 24 24" fill="#c5a47e">
+                                <path d="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z"/>
+                            </svg>
+                        </div>
+                        <h3>Дополнительные функции</h3>
+                        <p>Расширенные возможности для профессионального использования</p>
+                        <ul class="feature-list">
+                            <li>Пробуждение по LAN (Wake-on-LAN)</li>
+                            <li>Запись сеансов</li>
+                            <li>Интеграция с CRM (Salesforce, Zendesk и др.)</li>
+                            <li>TeamViewer Pilot с элементами дополненной реальности</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card scroll-animate">
+                        <div class="feature-icon">
+                            <svg width="60" height="60" viewBox="0 0 24 24" fill="#c5a47e">
+                                <path d="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z"/>
+                            </svg>
+                        </div>
+                        <h3>Интеграции и совместимость</h3>
+                        <p>Работа с современными платформами и сервисами</p>
+                        <ul class="feature-list">
+                            <li>Интеграция с Microsoft Teams</li>
+                            <li>Совместимость с Salesforce и ServiceNow</li>
+                            <li>Поддержка облачных решений</li>
+                            <li>API для собственных разработок</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="additional-info scroll-animate">
+                    <div class="info-card">
+                        <img src="izobr/teamviewer3.jpg" alt="TeamViewer Interface" class="info-image">
+                        <div class="info-text">
+                            <h4>Простота использования</h4>
+                            <p>TeamViewer — одна из самых популярных программ для удаленного доступа (это и сервер, и клиент одновременно). Она использует для подключения к удаленному устройству сервера-посредники, тип VPN-подключения TeamViewer выбирает сам.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <img src="izobr/teamviewer4.jpg" alt="TeamViewer Features" class="info-image">
+                        <div class="info-text">
+                            <h4>Интуитивный интерфейс</h4>
+                            <p>Расхожая фраза "интуитивно понятный интерфейс" – как раз про TeamViewer. Освоить программу легко благодаря подсказкам, даже если вы никогда не использовали подобное ПО, а для того, чтобы начать работу, нужно всего лишь ввести сгенерированные на сервере ID и пароль.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция преимуществ и недостатков -->
+        <section class="pros-cons-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Преимущества и недостатки</h2>
+                    <p>Объективная оценка программы TeamViewer</p>
+                </div>
+                
+                <div class="pros-cons-grid">
+                    <div class="pros-card scroll-animate">
+                        <div class="card-header">
+                            <div class="card-icon pros-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="#4CAF50">
+                                    <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+                                </svg>
+                            </div>
+                            <h3>Преимущества</h3>
+                        </div>
+                        <ul class="pros-cons-list">
+                            <li>Кроссплатформенность - работает на Windows, macOS, Linux, Android, iOS</li>
+                            <li>Многофункциональность - удалённый доступ, передача файлов, аудио- и видеосвязь</li>
+                            <li>Высокий уровень безопасности - шифрование AES-256, RSA-2048</li>
+                            <li>Двухфакторная аутентификация (2FA) и гибкие настройки доступа</li>
+                            <li>Интеграция с облачными сервисами (Google Drive, Dropbox, OneDrive)</li>
+                            <li>Автоматизация - CLI-управление, массовое развёртывание</li>
+                            <li>Гибкие лицензии - бесплатная версия для некоммерческого использования</li>
+                            <li>Простота использования и интуитивный интерфейс</li>
+                            <li>Поддержка Wake-on-LAN и мультимониторных систем</li>
+                            <li>Возможность записи сеансов для документирования</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="cons-card scroll-animate">
+                        <div class="card-header">
+                            <div class="card-icon cons-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="#f44336">
+                                    <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/>
+                                </svg>
+                            </div>
+                            <h3>Недостатки</h3>
+                        </div>
+                        <ul class="pros-cons-list">
+                            <li>Ограничения бесплатной версии - блокировка при подозрении на коммерческое использование</li>
+                            <li>Зависимость от интернет-соединения - качество работы зависит от скорости и стабильности</li>
+                            <li>Высокая стоимость для бизнеса - платные тарифы могут быть дорогими для малых компаний</li>
+                            <li>Риск уязвимостей - редко, но возникают сообщения о возможных утечках данных</li>
+                            <li>Ограниченная функциональность на мобильных устройствах</li>
+                            <li>Блокировка в России и Беларуси с мая 2022 года</li>
+                            <li>Необходимость VPN для обхода региональных ограничений</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция версий и цен -->
+        <section class="pricing-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Версии и цены</h2>
+                    <p>Выберите подходящий план для ваших потребностей</p>
+                </div>
+                
+                <div class="pricing-grid">
+                    <div class="pricing-card scroll-animate">
+                        <div class="pricing-header">
+                            <h3>TeamViewer (Personal)</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">0</span>
+                                <span class="period">/месяц</span>
+                            </div>
+                            <p class="plan-description">Для личного использования</p>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li>Удаленный доступ для некоммерческого использования</li>
+                                <li>Базовые функции управления</li>
+                                <li>Передача файлов</li>
+                                <li>Чат и VoIP</li>
+                                <li>Только для частного использования</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-action">
+                            <a href="https://www.teamviewer.com/download" class="btn-secondary" target="_blank">Скачать бесплатно</a>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-card featured scroll-animate">
+                        <div class="featured-badge">Популярный</div>
+                        <div class="pricing-header">
+                            <h3>TeamViewer Business</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">14.90</span>
+                                <span class="period">/месяц</span>
+                            </div>
+                            <p class="plan-description">Для малого бизнеса</p>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li>До 3 одновременных сеансов</li>
+                                <li>Коммерческое использование</li>
+                                <li>Приоритетная поддержка</li>
+                                <li>Расширенные настройки безопасности</li>
+                                <li>Управление устройствами</li>
+                                <li>Отчеты о подключениях</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-action">
+                            <a href="https://www.teamviewer.com/pricing" class="btn-primary" target="_blank">Выбрать план</a>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-card scroll-animate">
+                        <div class="pricing-header">
+                            <h3>TeamViewer Premium</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">28.90</span>
+                                <span class="period">/месяц</span>
+                            </div>
+                            <p class="plan-description">Для растущих команд</p>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li>До 10 одновременных сеансов</li>
+                                <li>Все функции Business</li>
+                                <li>Групповые лицензии</li>
+                                <li>Центральное управление пользователями</li>
+                                <li>Расширенная отчетность</li>
+                                <li>Wake-on-LAN</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-action">
+                            <a href="https://www.teamviewer.com/pricing" class="btn-secondary" target="_blank">Выбрать план</a>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-card scroll-animate">
+                        <div class="pricing-header">
+                            <h3>TeamViewer Corporate</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">50.90</span>
+                                <span class="period">/месяц</span>
+                            </div>
+                            <p class="plan-description">Для крупных организаций</p>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li>Неограниченные одновременные сеансы</li>
+                                <li>Все функции Premium</li>
+                                <li>Корпоративные интеграции</li>
+                                <li>Белый лейбл</li>
+                                <li>Расширенная безопасность</li>
+                                <li>Приоритетная поддержка 24/7</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-action">
+                            <a href="https://www.teamviewer.com/contact" class="btn-secondary" target="_blank">Связаться с нами</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция системных требований -->
+        <section class="requirements-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Системные требования</h2>
+                    <p>Минимальные требования для работы TeamViewer</p>
+                </div>
+                
+                <div class="requirements-grid">
+                    <div class="requirement-card scroll-animate">
+                        <div class="req-icon">
+                            <svg width="50" height="50" viewBox="0 0 24 24" fill="#c5a47e">
+                                <path d="M4,6H20V16H4M20,18A2,2 0 0,0 22,16V6C22,4.89 21.1,4 20,4H4C2.89,4 2,4.89 2,6V16A2,2 0 0,0 4,18H0V20H24V18H20Z"/>
+                            </svg>
+                        </div>
+                        <h3>Windows</h3>
+                        <ul class="req-list">
+                            <li>Windows 10 или новее</li>
+                            <li>1 ГБ ОЗУ</li>
+                            <li>200 МБ свободного места</li>
+                            <li>Интернет-соединение</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="requirement-card scroll-animate">
+                        <div class="req-icon">
+                            <svg width="50" height="50" viewBox="0 0 24 24" fill="#c5a47e">
+                                <path d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.47C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.09,16.67C20.06,16.74 19.67,18.11 18.71,19.5M13,3.5C13.73,2.67 14.94,2.04 15.94,2C16.07,3.17 15.6,4.35 14.9,5.19C14.21,6.04 13.07,6.7 11.95,6.61C11.8,5.46 12.36,4.26 13,3.5Z"/>
+                            </svg>
+                        </div>
+                        <h3>macOS</h3>
+                        <ul class="req-list">
+                            <li>macOS 10.14 или новее</li>
+                            <li>1 ГБ ОЗУ</li>
+                            <li>200 МБ свободного места</li>
+                            <li>Интернет-соединение</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="requirement-card scroll-animate">
+                        <div class="req-icon">
+                            <svg width="50" height="50" viewBox="0 0 24 24" fill="#c5a47e">
+                                <path d="M14.62,8.35C15.78,8.79 16.06,9.69 16.06,10.79C16.06,12.65 14.63,13.69 12.38,13.69H9.5V17.9H7.13V6.9H12.38C14.5,6.9 15.87,7.88 15.87,9.54C15.87,10.38 15.5,11.15 14.62,8.35M9.5,8.65V10.79H12.13C12.88,10.79 13.38,10.5 13.38,9.72C13.38,8.94 12.88,8.65 12.13,8.65H9.5M9.5,12.54V15.15H12.38C13.25,15.15 13.81,14.79 13.81,13.85C13.81,12.9 13.25,12.54 12.38,12.54H9.5Z"/>
+                            </svg>
+                        </div>
+                        <h3>Linux</h3>
+                        <ul class="req-list">
+                            <li>Ubuntu 18.04+ / CentOS 8+</li>
+                            <li>1 ГБ ОЗУ</li>
+                            <li>200 МБ свободного места</li>
+                            <li>X11 окружение</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="requirement-card scroll-animate">
+                        <div class="req-icon">
+                            <svg width="50" height="50" viewBox="0 0 24 24" fill="#c5a47e">
+                                <path d="M17.5,15C18.88,15 20,16.12 20,17.5C20,18.88 18.88,20 17.5,20C16.12,20 15,18.88 15,17.5C15,16.12 16.12,15 17.5,15M5,16C5.55,16 6,16.45 6,17C6,17.55 5.55,18 5,18C4.45,18 4,17.55 4,17C4,16.45 4.45,16 5,16M12,16C12.55,16 13,16.45 13,17C13,17.55 12.55,18 12,18C11.45,18 11,17.55 11,17C11,16.45 11.45,16 12,16M7.5,14C8.88,14 10,15.12 10,16.5C10,17.88 8.88,19 7.5,19C6.12,19 5,17.88 5,16.5C5,15.12 6.12,14 7.5,14M2.5,12C3.88,12 5,13.12 5,14.5C5,15.88 3.88,17 2.5,17C1.12,17 0,15.88 0,14.5C0,13.12 1.12,12 2.5,12Z"/>
+                            </svg>
+                        </div>
+                        <h3>Мобильные</h3>
+                        <ul class="req-list">
+                            <li>Android 6.0+ / iOS 12+</li>
+                            <li>2 ГБ ОЗУ</li>
+                            <li>150 МБ свободного места</li>
+                            <li>Wi-Fi или мобильный интернет</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция сравнения с конкурентами -->
+        <section class="comparison-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Сравнение с конкурентами</h2>
+                    <p>TeamViewer в сравнении с другими решениями</p>
+                </div>
+                
+                <div class="comparison-table-container scroll-animate">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th class="feature-column">Функции</th>
+                                <th class="competitor-column featured-column">
+                                    <div class="competitor-header">
+                                        <img src="izobr/teamviewer-icon.svg" alt="TeamViewer">
+                                        <span>TeamViewer</span>
+                                        <div class="recommended-badge">Лидер рынка</div>
+                                    </div>
+                                </th>
+                                <th class="competitor-column">
+                                    <div class="competitor-header">
+                                        <img src="izobr/anydesk-icon.svg" alt="AnyDesk">
+                                        <span>AnyDesk</span>
+                                    </div>
+                                </th>
+                                <th class="competitor-column">
+                                    <div class="competitor-header">
+                                        <img src="izobr/aeroadmin.png" alt="AeroAdmin">
+                                        <span>AeroAdmin</span>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="feature-name">Год основания</td>
+                                <td class="feature-excellent">2005</td>
+                                <td class="feature-good">2014</td>
+                                <td class="feature-good">2010</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Бесплатная версия</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-check">✓</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Популярность</td>
+                                <td class="feature-excellent">Очень высокая</td>
+                                <td class="feature-good">Высокая</td>
+                                <td class="feature-good">Средняя</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Мобильные приложения</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-cross">✗</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Запись сеансов</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-cross">✗</td>
+                                <td class="feature-cross">✗</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Интеграции</td>
+                                <td class="feature-excellent">Обширные</td>
+                                <td class="feature-good">Ограниченные</td>
+                                <td class="feature-cross">Нет</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Цена (месяц)</td>
+                                <td class="price-cell featured-price">$14.90</td>
+                                <td class="price-cell">$10.90</td>
+                                <td class="price-cell">Бесплатно</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция инструкции по установке -->
+        <section class="installation-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Установка и настройка</h2>
+                    <p>Пошаговое руководство по установке TeamViewer</p>
+                </div>
+                
+                <div class="installation-steps">
+                    <div class="step-card scroll-animate">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Скачивание</h3>
+                            <p>Перейдите на официальный сайт TeamViewer и скачайте версию для вашей операционной системы</p>
+                            <a href="https://www.teamviewer.com/download" class="step-link" target="_blank">Скачать TeamViewer</a>
+                        </div>
+                    </div>
+                    
+                    <div class="step-card scroll-animate">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Установка</h3>
+                            <p>Запустите скачанный файл. TeamViewer предложит установку или портативный режим. Выберите подходящий вариант</p>
+                            <div class="step-note">Примечание: Портативная версия QuickSupport не требует установки</div>
+                        </div>
+                    </div>
+                    
+                    <div class="step-card scroll-animate">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Первый запуск</h3>
+                            <p>После установки TeamViewer автоматически сгенерирует ID и временный пароль для вашего компьютера</p>
+                            <div class="step-tip">Совет: ID остается постоянным, пароль меняется при каждом запуске</div>
+                        </div>
+                    </div>
+                    
+                    <div class="step-card scroll-animate">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Настройка безопасности</h3>
+                            <p>Установите постоянный пароль для неконтролируемого доступа и настройте параметры безопасности</p>
+                            <div class="step-warning">Важно: Используйте сложный пароль и включите двухфакторную аутентификацию</div>
+                        </div>
+                    </div>
+                    
+                    <div class="step-card scroll-animate">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h3>Дополнительные настройки</h3>
+                            <p>Настройте качество соединения, звук, права доступа и другие параметры в соответствии с вашими потребностями</p>
+                            <div class="step-tip">Совет: Для России и Беларуси может потребоваться VPN</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция FAQ -->
+        <section class="faq-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Часто задаваемые вопросы</h2>
+                    <p>Ответы на популярные вопросы о TeamViewer</p>
+                </div>
+                
+                <div class="faq-container">
+                    <div class="faq-item scroll-animate">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Безопасен ли TeamViewer для использования?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Да, TeamViewer использует шифрование банковского уровня с технологиями AES-256 и RSA-2048. Все соединения полностью зашифрованы, поддерживается двухфакторная аутентификация и гибкие настройки доступа.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item scroll-animate">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Можно ли использовать TeamViewer бесплатно?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Да, TeamViewer предоставляется бесплатно для некоммерческого использования. Однако при частом использовании система может заподозрить коммерческое применение и ограничить доступ. Для бизнеса требуется платная лицензия.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item scroll-animate">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Работает ли TeamViewer в России?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>С 3 мая 2022 года TeamViewer прекратил работу в России и Беларуси. Существующие лицензии продолжают функционировать, но прямые соединения блокируются. Для подключения необходимо использовать VPN или другие средства изменения IP-адреса.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item scroll-animate">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>В чем отличие TeamViewer от конкурентов?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>TeamViewer является пионером в области удаленного доступа (с 2005 года), обладает самой большой пользовательской базой, обширными интеграциями с корпоративными системами, функцией записи сеансов и наиболее развитой экосистемой продуктов.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item scroll-animate">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Что такое TeamViewer QuickSupport?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>QuickSupport - это портативная версия TeamViewer, которая не требует установки. Она поддерживает основные функции удаленного доступа, но имеет ограниченную функциональность по сравнению с полной версией программы.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item scroll-animate">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Поддерживает ли TeamViewer мобильные устройства?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Да, TeamViewer имеет приложения для Android и iOS. Вы можете управлять компьютером с мобильного устройства или предоставлять доступ к мобильному устройству с компьютера. Функциональность зависит от платформы.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция действий -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content scroll-animate">
+                    <h2>Готовы начать работу с TeamViewer?</h2>
+                    <p>Скачайте TeamViewer и получите доступ к проверенному решению для удаленного управления</p>
+                    <div class="cta-buttons">
+                        <a href="https://www.teamviewer.com/download" class="btn-primary" target="_blank">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
+                            </svg>
+                            Скачать TeamViewer
+                        </a>
+                        <a href="https://www.teamviewer.com/pricing" class="btn-secondary" target="_blank">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z"/>
+                            </svg>
+                            Выбрать план
+                        </a>
+                    </div>
+                    <div class="cta-features">
+                        <div class="cta-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#4CAF50">
+                                <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+                            </svg>
+                            <span>Лидер рынка с 2005 года</span>
+                        </div>
+                        <div class="cta-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#4CAF50">
+                                <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+                            </svg>
+                            <span>2.5 млрд устройств</span>
+                        </div>
+                        <div class="cta-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#4CAF50">
+                                <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+                            </svg>
+                            <span>Поддержка 24/7</span>
+                        </div>
+                    </div>
+                    
+                    <div class="regional-warning scroll-animate">
+                        <div class="warning-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="#ff9800">
+                                <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+                            </svg>
+                        </div>
+                        <div class="warning-content">
+                            <h4>Важная информация для пользователей из России и Беларуси</h4>
+                            <p>С мая 2022 года для использования TeamViewer в этих регионах требуется VPN-подключение для обхода региональных ограничений.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Секция экспериментов -->
+    <section class="experiments-section">
+        <div class="container">
+            <div class="experiments-content scroll-animate">
+                <div class="experiments-icon">
+                    <svg width="80" height="80" viewBox="0 0 24 24" fill="#c5a47e">
+                        <path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"/>
+                    </svg>
+                </div>
+                
+                <h2>Хотите узнать больше?</h2>
+                <p>Изучите практические эксперименты с TeamViewer, тестирование функций и детальный анализ производительности</p>
+                
+                <div class="experiments-action">
+                    <a href="teamviewer-experiments.html" class="btn-experiments">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                        </svg>
+                        Перейти к экспериментам
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Кнопка "Наверх" -->
+    <button class="scroll-to-top" id="scrollToTop" onclick="scrollToTop()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 19V5M5 12L12 5L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+<!-- Кнопка возврата к списку инструментов -->
+<a href="remote-management.html" class="back-to-tools">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path d="M19 12H5M12 19L5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span>К списку инструментов</span>
+</a>
+
+    <!-- Модальное окно -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Заголовок</h3>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Контент будет добавлен через JavaScript -->
+            </div>
         </div>
     </div>
-    <div class="slide-nav"></div>
-    <script src="js/teamviewerscripts.js"></script>                                 
-    <script type="module" src = "js/menu.js"></script>
 
+    <!-- Подключение скриптов -->
+    <script type="module" src="js/menu.js"></script>
+    <script type="module" src="js/teamviewer.js"></script>
+    <script src="js/teamviewerscripts.js"></script>
 </body>
 </html>
+
