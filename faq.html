@@ -4,104 +4,600 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
-    <title>Удаленное управление</title>
+    <meta name="description" content="FAQ по средствам удаленного управления компьютером. Ответы на популярные вопросы о remote access технологиях.">
+    <meta name="keywords" content="FAQ, удаленный доступ, remote access, удаленное управление, вопросы и ответы">
+    <title>FAQ - Удаленное управление</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-
-        /* Стили для шапки */
-        .main-header {
+        /* Прелоадер */
+        .preloader {
             position: fixed;
             top: 0;
+            left: 0;
             width: 100%;
-            z-index: 1000;
-            transition: transform 0.3s ease;
-            border-bottom: 1px solid rgba(197, 164, 126, 0.2);
-        }
-
-        .main-header.hidden {
-            transform: translateY(-100%);
-        }
-
-        /* Контентное окно */
-        .content-section {
-            margin: 150px auto 2rem; /* Увеличен верхний отступ */
-            padding: 2rem;
-            margin-top: 200px;
-            background: rgba(40, 40, 40, 0.9);
-            border: 2px solid #c5a47e;
-            border-radius: 15px;
-            max-width: 800px;
-            color: #e2d5c4;
-            position: relative;
-        }
-
-        /* Стили секций */
-        section {
-            display: none;
-            opacity: 0;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
             transition: opacity 0.5s ease;
         }
 
-        section.active {
-            display: block;
+        .preloader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .faq-loader {
+            text-align: center;
+        }
+
+        .loader-icon {
+            margin-bottom: 20px;
+        }
+
+        .loader-icon svg {
+            width: 80px;
+            height: 80px;
+        }
+
+        .loader-text {
+            color: #c5a47e;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .loader-progress {
+            width: 200px;
+            height: 4px;
+            background: rgba(197, 164, 126, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #c5a47e, #d4b896);
+            border-radius: 2px;
+            animation: loadingProgress 3s ease-in-out;
+        }
+
+        @keyframes loadingProgress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* Основные стили */
+        body {
+            overflow-x: hidden;
+        }
+
+        .main-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .slide-bg {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%);
+        }
+
+        /* Анимация появления */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease-out;
+        }
+
+        .scroll-animate.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Главная секция */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 100px 0 50px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .title-highlight {
+            color: #c5a47e;
+            position: relative;
+        }
+
+        .title-highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #c5a47e, transparent);
+            animation: shimmer 2s ease-in-out infinite;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #b8b8b8;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        .breadcrumb {
+            position: fixed;
+            top: 120px;
+            left: 2rem;
+            color: #b8b8b8;
+            font-size: 0.9rem;
+            z-index: 100;
+        }
+
+        .breadcrumb a {
+            color: #c5a47e;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: #d4b896;
+        }
+
+        /* Секции контента */
+        .content-section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #c5a47e;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: #b8b8b8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* FAQ карточки */
+        .faq-grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .faq-card {
+            background: linear-gradient(135deg, rgba(40, 40, 40, 0.95) 0%, rgba(30, 30, 30, 0.95) 100%);
+            border: 2px solid rgba(197, 164, 126, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .faq-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #c5a47e, transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .faq-card:hover {
+            transform: translateY(-10px);
+            border-color: #c5a47e;
+            box-shadow: 0 20px 40px rgba(197, 164, 126, 0.2);
+        }
+
+        .faq-card:hover::before {
             opacity: 1;
         }
 
-        /* Навигационные кнопки */
-        .nav-buttons {
-            position: fixed;
-            top: 50%;
-            left: 0;
-            right: 0;
-            transform: translateY(-50%);
-            display: flex;
-            justify-content: space-between;
-            padding: 0 20px;
-            z-index: 999;
-        }
-
-        .nav-button {
-            background: rgba(197, 164, 126, 0.8);
-            border: 2px solid #c5a47e;
-            color: #fff;
-            padding: 15px 20px;
-            cursor: pointer;
+        .faq-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(197, 164, 126, 0.2), rgba(197, 164, 126, 0.1));
+            border: 2px solid rgba(197, 164, 126, 0.3);
             border-radius: 50%;
-            font-size: 24px;
-            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
         }
 
-        .nav-button:hover {
+        .faq-card:hover .faq-icon {
+            background: linear-gradient(135deg, rgba(197, 164, 126, 0.3), rgba(197, 164, 126, 0.2));
+            border-color: #c5a47e;
             transform: scale(1.1);
         }
 
-        /* Стили изображений */
+        .faq-icon i {
+            font-size: 2rem;
+            color: #c5a47e;
+        }
+
+        .faq-title {
+            font-size: 1.8rem;
+            color: #c5a47e;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .faq-description {
+            color: #e2d5c4;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .faq-content {
+            margin-top: 1.5rem;
+        }
+
+        .faq-list {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+
+        .faq-list li {
+            position: relative;
+            padding: 0.8rem 0 0.8rem 2rem;
+            margin: 0.5rem 0;
+            transition: all 0.3s ease;
+            border-left: 2px solid transparent;
+            border-radius: 5px;
+        }
+
+        .faq-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #c5a47e;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-list li:hover {
+            padding-left: 2.5rem;
+            border-left-color: #c5a47e;
+            background: rgba(197, 164, 126, 0.1);
+        }
+
+        .faq-list li:hover::before {
+            transform: scale(1.2);
+        }
+
+        /* Advantage карточки */
+        .advantage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .advantage-item {
+            background: rgba(197, 164, 126, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid #c5a47e;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .advantage-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(197, 164, 126, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .advantage-item:hover {
+            transform: translateX(10px);
+            background: rgba(197, 164, 126, 0.15);
+            box-shadow: 0 10px 30px rgba(197, 164, 126, 0.2);
+        }
+
+        .advantage-item:hover::before {
+            left: 100%;
+        }
+
+        .advantage-item h3 {
+            color: #c5a47e;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Изображения */
         .content-image {
             width: 100%;
-            max-width: 600px;
+            max-width: 700px;
             height: auto;
-            margin: 1.5rem 0;
-            border-radius: 8px;
-            border: 1px solid #c5a47e;
+            margin: 2rem auto;
+            border-radius: 20px;
+            border: 2px solid rgba(197, 164, 126, 0.3);
+            transition: all 0.4s ease;
+            display: block;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .content-image:hover {
+            transform: scale(1.02);
+            border-color: #c5a47e;
+            box-shadow: 0 25px 50px rgba(197, 164, 126, 0.2);
+        }
+
+        /* Навигация */
+        .faq-navigation {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+
+        .nav-dots {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(197, 164, 126, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-dot.active {
+            background: #c5a47e;
+            transform: scale(1.5);
+            box-shadow: 0 0 20px rgba(197, 164, 126, 0.6);
+        }
+
+        .nav-dot::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            right: 150%;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+                        transition: opacity 0.3s ease;
+        }
+
+        .nav-dot:hover::after {
+            opacity: 1;
+        }
+
+        /* Кнопки действий */
+        .btn-primary, .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #c5a47e, #d4b896);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(197, 164, 126, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border-color: #c5a47e;
+            color: #c5a47e;
+        }
+
+        .btn-secondary:hover {
+            background: #c5a47e;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* Кнопка "Наверх" */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #c5a47e, #d4b896);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(100px);
+            z-index: 1000;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(197, 164, 126, 0.4);
         }
 
         /* Адаптивность */
         @media (max-width: 768px) {
-            .content-section {
-                margin: 120px 1rem 2rem;
-                padding: 1.5rem;
+            .hero-title {
+                font-size: 2.5rem;
             }
-            
-            .nav-button {
-                padding: 12px 16px;
-                font-size: 22px;
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .faq-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .advantage-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .breadcrumb {
+                position: static;
+                margin-bottom: 2rem;
+            }
+
+            .faq-navigation {
+                display: none;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        /* Анимации */
+        @keyframes shimmer {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .animate-fade-up {
+            animation: fadeUp 0.8s ease-out forwards;
+        }
+
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-600 { animation-delay: 0.6s; }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
     </style>
 </head>
 <body>
-    <!-- Фоновый слой -->
+    <!-- Прелоадер -->
+    <div class="preloader" id="preloader">
+        <div class="faq-loader">
+            <div class="loader-icon">
+                <svg width="80" height="80" viewBox="0 0 100 100" fill="none">
+                    <circle cx="50" cy="50" r="45" stroke="#c5a47e" stroke-width="2" fill="none" opacity="0.3"/>
+                    <path d="M50 5 A45 45 0 0 1 95 50" stroke="#c5a47e" stroke-width="3" fill="none">
+                        <animateTransform attributeName="transform" type="rotate" dur="1s" repeatCount="indefinite" values="0 50 50;360 50 50"/>
+                    </path>
+                </svg>
+            </div>
+            <div class="loader-text">Загрузка FAQ...</div>
+            <div class="loader-progress">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Фоновые эффекты -->
     <div class="main-bg">
         <div class="slide-bg" style="background-image: url('izobr/1.gif')"></div>
         <div class="overlay"></div>
@@ -141,161 +637,437 @@
     </header>
 
     <!-- Основной контент -->
-    <div class="content-section">
-        <!-- Добавленные кнопки навигации -->
-        <div class="nav-buttons">
-            <button class="nav-button prev" onclick="showPrevSection()">❮</button>
-            <button class="nav-button next" onclick="showNextSection()">❯</button>
-        </div>
-
-        <h1>Средства удаленного управления компьютером</h1>
-        <div class="divider-gold"></div>
-
-            <!-- Секция 1: Что такое удаленный доступ -->
-            <section class="active">
-                <h2>Что такое «удаленный доступ»</h2>
-                <img src="izobr/faq1.jpg" class="content-image" alt="Схема доступа">
-                <p>
-                    В IT под удаленным доступом (remote access) понимается технология для управления одним устройством с помощью другого по сети. 
-                    Это возможность работать с офисным компьютером со своего ноутбука как с локальным устройством: использовать те же файлы, 
-                    программы и функции. Достаточно подключения к интернету, чтобы контролировать ПК из любой точки мира. Технология популярна 
-                    среди корпораций, IT-специалистов и удаленных сотрудников, позволяя управлять несколькими компьютерами из одного места.
-                </p>
-            </section>
-
-            <!-- Секция 2: Преимущества -->
-            <section>
-                <h2>Преимущества удаленного доступа</h2>
-                <img src="izobr/faq2.png" class="content-image" alt="Преимущества">
-                <div class="advantages">
-                    <h3>Гибкость</h3>
-                    <ul>
-                        <li>Выбор устройств, места и времени работы</li>
-                        <li>Возможность использовать мощности удаленного ПК на слабом ноутбуке</li>
-                        <li>Работа над проектами любого масштаба через сервер</li>
-                    </ul>
-
-                    <h3>Скорость</h3>
-                    <ul>
-                        <li>Решение проблем сотрудников без перемещения по офису</li>
-                        <li>Запуск ресурсоемких задач на удаленном оборудовании</li>
-                    </ul>
-
-                    <h3>Экономия</h3>
-                    <ul>
-                        <li>Снижение затрат на дорогое оборудование</li>
-                        <li>Оптимизация расходов на обслуживание инфраструктуры</li>
-                    </ul>
-
-                    <h3>Удобство</h3>
-                    <p>
-                        Тренд на удаленную работу сохраняется: от корпораций до международных команд. 
-                        Приложения для remote access обеспечивают привычную рабочую среду с доступом ко всем ресурсам 
-                        и повышенной безопасностью.
+    <main class="main-content">
+        <!-- Героическая секция -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="breadcrumb animate-fade-up">
+                    <a href="index.html">Главная</a> / 
+                    <a href="remote-management.html">Удаленное управление</a> / 
+                    <span>FAQ</span>
+                </div>
+                
+                <div class="hero-content">
+                    <h1 class="hero-title animate-fade-up delay-200">
+                        <span class="title-highlight">FAQ</span><br>
+                        Удаленное управление
+                    </h1>
+                    
+                    <p class="hero-subtitle animate-fade-up delay-400">
+                        Ответы на часто задаваемые вопросы о технологиях удаленного доступа, 
+                        их преимуществах, безопасности и практическом применении
                     </p>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Секция 3: Безопасность -->
-            <section>
-                <h2>Безопасен ли удаленный доступ?</h2>
-                <img src="izobr/faq3.png" class="content-image" alt="Безопасность">
-                <p>
-                    Да. Для защиты данных используются:
-                </p>
-                <ul>
-                    <li>256-битное шифрование передаваемой информации</li>
-                    <li>Двухфакторная аутентификация</li>
-                    <li>Защищенные шлюзы для подключения к корпоративным сетям</li>
-                </ul>
-                <p>
-                    Доступ возможен только через логин и пароль сотрудника. Система блокирует несанкционированные подключения, 
-                    минимизируя риски утечки данных.
-                </p>
-            </section>
+        <!-- Навигация по секциям -->
+        <div class="faq-navigation">
+            <div class="nav-dots">
+                <div class="nav-dot active" data-tooltip="Что такое удаленный доступ" onclick="scrollToSection('definition')"></div>
+                <div class="nav-dot" data-tooltip="Преимущества" onclick="scrollToSection('advantages')"></div>
+                <div class="nav-dot" data-tooltip="Безопасность" onclick="scrollToSection('security')"></div>
+            </div>
         </div>
-    </div>
 
-        <script type="module" src = "js/menu.js"></script>
+        <!-- Секция: Что такое удаленный доступ -->
+        <section class="content-section" id="definition">
+            <div class="container">
+                <div class="faq-grid">
+                    <div class="faq-card scroll-animate">
+                        <div class="faq-icon">
+                            <i class="fas fa-desktop"></i>
+                        </div>
+                        <h2 class="faq-title">Что такое «удаленный доступ»?</h2>
+                        <div class="faq-content">
+                            <img src="izobr/faq1.jpg" class="content-image" alt="Схема удаленного доступа">
+                            <p class="faq-description">
+                                В IT под удаленным доступом (remote access) понимается технология для управления одним устройством с помощью другого по сети. 
+                                Это возможность работать с офисным компьютером со своего ноутбука как с локальным устройством: использовать те же файлы, 
+                                программы и функции.
+                            </p>
+                            <p class="faq-description">
+                                Достаточно подключения к интернету, чтобы контролировать ПК из любой точки мира. Технология популярна 
+                                среди корпораций, IT-специалистов и удаленных сотрудников, позволяя управлять несколькими компьютерами из одного места.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция: Преимущества -->
+        <section class="content-section" id="advantages">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Преимущества удаленного доступа</h2>
+                    <p>Почему удаленное управление становится стандартом современного бизнеса</p>
+                </div>
+                
+                <div class="faq-card scroll-animate">
+                    <img src="izobr/faq2.png" class="content-image" alt="Преимущества удаленного доступа">
+                    
+                    <div class="advantage-grid">
+                        <div class="advantage-item">
+                            <h3><i class="fas fa-arrows-alt"></i> Гибкость</h3>
+                            <ul class="faq-list">
+                                <li>Выбор устройств, места и времени работы</li>
+                                <li>Возможность использовать мощности удаленного ПК на слабом ноутбуке</li>
+                                <li>Работа над проектами любого масштаба через сервер</li>
+                            </ul>
+                        </div>
+
+                        <div class="advantage-item">
+                            <h3><i class="fas fa-tachometer-alt"></i> Скорость</h3>
+                            <ul class="faq-list">
+                                <li>Решение проблем сотрудников без перемещения по офису</li>
+                                <li>Запуск ресурсоемких задач на удаленном оборудовании</li>
+                                <li>Мгновенное подключение к любому устройству в сети</li>
+                            </ul>
+                        </div>
+
+                        <div class="advantage-item">
+                            <h3><i class="fas fa-coins"></i> Экономия</h3>
+                            <ul class="faq-list">
+                                <li>Снижение затрат на дорогое оборудование</li>
+                                <li>Оптимизация расходов на обслуживание инфраструктуры</li>
+                                <li>Сокращение командировочных расходов</li>
+                            </ul>
+                        </div>
+
+                        <div class="advantage-item">
+                            <h3><i class="fas fa-hand-holding-heart"></i> Удобство</h3>
+                            <p class="faq-description">
+                                Тренд на удаленную работу сохраняется: от корпораций до международных команд. 
+                                Приложения для remote access обеспечивают привычную рабочую среду с доступом ко всем ресурсам 
+                                и повышенной безопасностью.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция: Безопасность -->
+        <section class="content-section" id="security">
+            <div class="container">
+                <div class="faq-grid">
+                    <div class="faq-card scroll-animate">
+                        <div class="faq-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h2 class="faq-title">Безопасен ли удаленный доступ?</h2>
+                        <div class="faq-content">
+                            <img src="izobr/faq3.png" class="content-image" alt="Безопасность удаленного доступа">
+                            <p class="faq-description">
+                                <strong style="color: #c5a47e;">Да, современные решения удаленного доступа безопасны.</strong> 
+                                Для защиты данных используются передовые технологии шифрования и аутентификации.
+                            </p>
+                            
+                            <div class="advantage-grid">
+                                <div class="advantage-item">
+                                    <h3><i class="fas fa-lock"></i> Шифрование данных</h3>
+                                    <p>256-битное шифрование передаваемой информации обеспечивает защиту на уровне банковских систем</p>
+                                </div>
+
+                                                                <div class="advantage-item">
+                                    <h3><i class="fas fa-key"></i> Двухфакторная аутентификация</h3>
+                                    <p>Дополнительный уровень защиты через SMS, приложения или аппаратные токены</p>
+                                </div>
+
+                                <div class="advantage-item">
+                                    <h3><i class="fas fa-shield-virus"></i> Защищенные шлюзы</h3>
+                                    <p>Специальные шлюзы для безопасного подключения к корпоративным сетям</p>
+                                </div>
+
+                                <div class="advantage-item">
+                                    <h3><i class="fas fa-user-shield"></i> Контроль доступа</h3>
+                                    <p>Система прав пользователей и журналирование всех действий для полного контроля</p>
+                                </div>
+                            </div>
+
+                            <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(76, 175, 80, 0.1); border-left: 4px solid #4CAF50; border-radius: 8px;">
+                                <p class="faq-description" style="margin: 0;">
+                                    <i class="fas fa-check-circle" style="color: #4CAF50; margin-right: 0.5rem;"></i>
+                                    <strong>Заключение:</strong> Доступ возможен только через логин и пароль сотрудника. 
+                                    Система блокирует несанкционированные подключения, минимизируя риски утечки данных.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Дополнительная секция FAQ */
+        <section class="content-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Дополнительные вопросы</h2>
+                    <p>Еще несколько важных моментов о удаленном доступе</p>
+                </div>
+
+                <div class="faq-grid">
+                    <div class="faq-card scroll-animate">
+                        <div class="faq-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <h3 class="faq-title">Какие программы лучше использовать?</h3>
+                        <p class="faq-description">
+                            Популярные решения включают TeamViewer, AnyDesk, Chrome Remote Desktop, и Microsoft Remote Desktop. 
+                            Выбор зависит от ваших потребностей в безопасности, производительности и бюджете.
+                        </p>
+                        <div style="margin-top: 1rem;">
+                            <a href="remote-management.html" class="btn-secondary">
+                                <i class="fas fa-tools"></i>
+                                Обзор программ
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="faq-card scroll-animate">
+                        <div class="faq-icon">
+                            <i class="fas fa-wifi"></i>
+                        </div>
+                        <h3 class="faq-title">Какая скорость интернета нужна?</h3>
+                        <p class="faq-description">
+                            Минимальная скорость для базового управления - 1 Мбит/с. Для комфортной работы с графическими приложениями 
+                            рекомендуется от 5 Мбит/с. Современные решения автоматически адаптируются к скорости соединения.
+                        </p>
+                    </div>
+
+                    <div class="faq-card scroll-animate">
+                        <div class="faq-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3 class="faq-title">Можно ли управлять с мобильного?</h3>
+                        <p class="faq-description">
+                            Да! Большинство современных решений имеют мобильные приложения для Android и iOS. 
+                            Это позволяет управлять компьютером даже находясь в дороге.
+                        </p>
+                    </div>
+
+                    <div class="faq-card scroll-animate">
+                        <div class="faq-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <h3 class="faq-title">Есть ли бесплатные варианты?</h3>
+                        <p class="faq-description">
+                            Многие решения предлагают бесплатные версии для личного использования. 
+                            Для коммерческого использования обычно требуется платная лицензия с расширенными возможностями.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция призыва к действию -->
+        <section class="content-section">
+            <div class="container">
+                <div class="faq-card scroll-animate" style="text-align: center; background: linear-gradient(135deg, rgba(197, 164, 126, 0.1), rgba(197, 164, 126, 0.05));">
+                    <div class="faq-icon" style="margin: 0 auto 1.5rem;">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h2 class="faq-title">Готовы начать работу с удаленным доступом?</h2>
+                    <p class="faq-description" style="margin-bottom: 2rem;">
+                        Изучите наши подробные обзоры популярных программ удаленного управления 
+                        и выберите подходящее решение для ваших задач.
+                    </p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="remote-management.html" class="btn-primary">
+                            <i class="fas fa-tools"></i>
+                            Обзор программ
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Кнопка "Наверх" -->
+    <button class="scroll-to-top" id="scrollToTop" onclick="scrollToTop()">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Подключение скриптов -->
+    <script type="module" src="js/menu.js"></script>
 
     <script>
-        // Логика навигации
-        // Обновленная логика анимации кнопок
+        // Прелоадер
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hidden');
+            }, 3000);
+        });
+
+        // Анимация элементов при скролле
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        // Наблюдение за элементами
         document.addEventListener('DOMContentLoaded', () => {
-            const buttons = document.querySelectorAll('.nav-button');
+            const scrollElements = document.querySelectorAll('.scroll-animate');
+            scrollElements.forEach(el => observer.observe(el));
+
+            // Анимация элементов hero секции
+            const heroElements = document.querySelectorAll('.animate-fade-up');
+            heroElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+            });
+
+            setTimeout(() => {
+                heroElements.forEach((el, index) => {
+                    setTimeout(() => {
+                        el.style.transition = 'all 0.8s ease-out';
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }, index * 200);
+                });
+            }, 500);
+        });
+
+        // Навигация по секциям
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Обновление активной точки навигации
+                updateActiveNavDot(sectionId);
+            }
+        }
+
+        function updateActiveNavDot(sectionId) {
+            const navDots = document.querySelectorAll('.nav-dot');
+            const sections = ['definition', 'advantages', 'security'];
+            const activeIndex = sections.indexOf(sectionId);
             
-            buttons.forEach(btn => {
-                // Анимация при клике
-                btn.addEventListener('mousedown', function() {
-                    this.style.transform = 'scale(0.95)';
-                });
-                
-                btn.addEventListener('mouseup', function() {
-                    this.style.transform = 'scale(1)';
-                });
-                
-                // Анимация при наведении
-                btn.addEventListener('mouseenter', function() {
-                    this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
-                });
-                
-                btn.addEventListener('mouseleave', function() {
-                    this.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
-                });
-            });
-        });
-
-        // Существующая логика навигации
-        let currentSection = 0;
-        const sections = document.querySelectorAll('.content-section section');
-
-        function updateSections() {
-            sections.forEach((section, index) => {
-                section.classList.toggle('active', index === currentSection);
+            navDots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === activeIndex);
             });
         }
 
-        function showPrevSection() {
-            if (currentSection > 0) {
-                currentSection--;
-                updateSections();
+        // Автоматическое обновление навигации при скролле
+        function handleScroll() {
+            const sections = ['definition', 'advantages', 'security'];
+            const scrollPosition = window.scrollY + 200;
+            
+            for (let i = sections.length - 1; i >= 0; i--) {
+                const section = document.getElementById(sections[i]);
+                if (section && section.offsetTop <= scrollPosition) {
+                    updateActiveNavDot(sections[i]);
+                    break;
+                }
+            }
+
+            // Показ/скрытие кнопки "наверх"
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
             }
         }
 
-        function showNextSection() {
-            if (currentSection < sections.length - 1) {
-                currentSection++;
-                updateSections();
-            }
+        window.addEventListener('scroll', handleScroll);
+
+        // Плавная прокрутка наверх
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         }
 
-        // Инициализация
-        document.addEventListener('DOMContentLoaded', () => {
-            sections[0].classList.add('active');
-        });
-
+        // Обработка навигации в шапке
         let lastScroll = 0;
         const header = document.querySelector('.main-header');
-        const scrollThreshold = 100; // Порог прокрутки для скрытия (в пикселях)
 
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
-
-            if (currentScroll > lastScroll && currentScroll > scrollThreshold) {
-                // Прокрутка вниз
-                header.classList.add('hidden');
+            
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                header.style.transform = 'translateY(-100%)';
             } else {
-                // Прокрутка вверх
-                header.classList.remove('hidden');
+                header.style.transform = 'translateY(0)';
             }
-
+            
             lastScroll = currentScroll;
         });
 
-        // Показать меню при наведении
+        // Показ меню при наведении
         header.addEventListener('mouseenter', () => {
-            header.classList.remove('hidden');
+            header.style.transform = 'translateY(0)';
+        });
+
+        // Параллакс эффект для изображений
+        window.addEventListener('scroll', () => {
+            const images = document.querySelectorAll('.content-image');
+            images.forEach(img => {
+                const rect = img.getBoundingClientRect();
+                const speed = 0.5;
+                const yPos = -(rect.top * speed);
+                img.style.transform = `translateY(${yPos}px)`;
+            });
+        });
+
+        // Добавление интерактивности для карточек
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqCards = document.querySelectorAll('.faq-card');
+            
+            faqCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(-10px) scale(1)';
+                });
+            });
+
+            // Анимация для advantage items
+            const advantageItems = document.querySelectorAll('.advantage-item');
+            
+            advantageItems.forEach((item, index) => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateX(15px) scale(1.02)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateX(10px) scale(1)';
+                });
+            });
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const sections = ['definition', 'advantages', 'security'];
+            const currentActive = document.querySelector('.nav-dot.active');
+            const currentIndex = Array.from(document.querySelectorAll('.nav-dot')).indexOf(currentActive);
+            
+            if (e.key === 'ArrowDown' && currentIndex < sections.length - 1) {
+                scrollToSection(sections[currentIndex + 1]);
+            } else if (e.key === 'ArrowUp' && currentIndex > 0) {
+                scrollToSection(sections[currentIndex - 1]);
+            } else if (e.key === 'Home') {
+                scrollToTop();
+            }
         });
     </script>
 </body>
 </html>
+

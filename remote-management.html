@@ -8,12 +8,42 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/remote-management.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- Прелоадер -->
+    <div class="preloader" id="preloader">
+        <div class="remote-loader">
+            <div class="loader-icon">
+                <svg width="80" height="80" viewBox="0 0 100 100" fill="none">
+                    <circle cx="50" cy="50" r="45" stroke="#c5a47e" stroke-width="2" fill="none" opacity="0.3"/>
+                    <path d="M50 5 A45 45 0 0 1 95 50" stroke="#c5a47e" stroke-width="3" fill="none">
+                        <animateTransform attributeName="transform" type="rotate" dur="1s" repeatCount="indefinite" values="0 50 50;360 50 50"/>
+                    </path>
+                </svg>
+            </div>
+            <div class="loader-text">Загрузка удаленного управления...</div>
+            <div class="loader-progress">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Анимированные частицы -->
+    <div class="particles-container" id="particles"></div>
+
     <!-- Фоновый слой -->
     <div class="main-bg">
         <div class="slide-bg" style="background-image: url('izobr/1.gif')"></div>
         <div class="overlay"></div>
+        <div class="network-animation">
+            <div class="network-line line-1"></div>
+            <div class="network-line line-2"></div>
+            <div class="network-line line-3"></div>
+            <div class="network-node node-1"></div>
+            <div class="network-node node-2"></div>
+            <div class="network-node node-3"></div>
+        </div>
     </div>
 
     <!-- Шапка сайта -->
@@ -51,30 +81,80 @@
 
     <!-- Основной контент -->
     <div class="content-container">
-        <div class="gold-frame">
-            <h1>Средства удаленного управления компьютером</h1>
-            <div class="divider-gold"></div>
+        <div class="gold-frame animate-fade-in">
+            <div class="title-animation">
+                <h1 class="typing-title">Средства удаленного управления компьютером</h1>
+                <div class="title-glow"></div>
+            </div>
+            <div class="divider-gold animated-divider"></div>
             
-            <!-- Контейнер для кнопок -->
-            <div class="button-grid">
-                <a href="teamviewer.html" class="tool-button">
-                    <img src="izobr/teamviewer-icon.svg" alt="TeamViewer">
-                    <span>TeamViewer</span>
-                </a>
+            <!-- Счетчик статистики -->
+            <div class="stats-counter animate-slide-up">
+                <div class="stat-item">
+                    <div class="stat-number" data-target="3">0</div>
+                    <div class="stat-label">Программы</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="100">0</div>
+                    <div class="stat-label">% Надежность</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="24">0</div>
+                    <div class="stat-label">7 Поддержка</div>
+                </div>
+            </div>
+            
+            <!-- Контейнер для треугольных кнопок -->
+            <div class="triangle-buttons-container animate-slide-up">
+                <div class="triangle-button-wrapper" data-delay="0.1">
+                    <a href="teamviewer.html" class="triangle-button teamviewer-triangle">
+                        <div class="triangle-content">
+                            <img src="izobr/teamviewer-icon.svg" alt="TeamViewer" class="triangle-icon">
+                            <span class="triangle-text">TeamViewer</span>
+                            <div class="triangle-description">Профессиональное решение</div>
+                        </div>
+                        <div class="triangle-glow"></div>
+                    </a>
+                </div>
                 
-                <a href="anydesk.html" class="tool-button">
-                    <img src="izobr/anydesk-icon.svg" alt="AnyDesk">
-                    <span>AnyDesk</span>
-                </a>
+                <div class="triangle-button-wrapper" data-delay="0.2">
+                    <a href="anydesk.html" class="triangle-button anydesk-triangle">
+                        <div class="triangle-content">
+                            <img src="izobr/anydesk-icon.svg" alt="AnyDesk" class="triangle-icon">
+                            <span class="triangle-text">AnyDesk</span>
+                            <div class="triangle-description">Быстрое подключение</div>
+                        </div>
+                        <div class="triangle-glow"></div>
+                    </a>
+                </div>
                 
-                <a href="aeroadmin.html" class="tool-button">
-                    <img src="izobr/aeroadmin.png" alt="AeroAdmin">
-                    <span>AeroAdmin</span>
-                </a>
-                
-                <a href="faq.html" class="tool-button">
-                    <img src="izobr/faq-icon.svg" alt="FAQ">
-                    <span>FAQ</span>
+                <div class="triangle-button-wrapper" data-delay="0.3">
+                    <a href="aeroadmin.html" class="triangle-button aeroadmin-triangle">
+                        <div class="triangle-content">
+                            <img src="izobr/aeroadmin.png" alt="AeroAdmin" class="triangle-icon">
+                            <span class="triangle-text">AeroAdmin</span>
+                            <div class="triangle-description">Бесплатное решение</div>
+                        </div>
+                        <div class="triangle-glow"></div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Отдельная секция для FAQ -->
+            <div class="faq-section animate-fade-in-up">
+                <div class="divider-gold animated-divider"></div>
+                <div class="faq-header">
+                    <i class="fas fa-question-circle faq-icon-header"></i>
+                    <h2>Нужна дополнительная информация?</h2>
+                </div>
+                <p>Изучите часто задаваемые вопросы об удаленном управлении</p>
+                <a href="faq.html" class="faq-button">
+                    <div class="faq-button-content">
+                        <img src="izobr/faq-icon.svg" alt="FAQ">
+                        <span>Часто задаваемые вопросы</span>
+                    </div>
+                    <i class="arrow">→</i>
+                    <div class="button-ripple"></div>
                 </a>
             </div>
         </div>
@@ -82,12 +162,200 @@
 
     <!-- Кнопка "Наверх" -->
     <button class="scroll-to-top" id="scrollToTop" onclick="scrollToTop()">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M12 19V5M5 12L12 5L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        <i class="fas fa-chevron-up"></i>
+        <div class="scroll-ripple"></div>
     </button>
 
     <script type="module" src="js/menu.js"></script>
     <script type="module" src="js/remote-management.js"></script>
+    
+    <script>
+        // Прелоадер
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hidden');
+                initAnimations();
+            }, 2500);
+        });
+
+        // Инициализация анимаций
+        function initAnimations() {
+            // Анимация печатания заголовка
+            typeWriter();
+            
+            // Анимация счетчиков
+            animateCounters();
+            
+            // Создание частиц
+            createParticles();
+            
+            // Запуск анимаций элементов
+            startElementAnimations();
+        }
+
+        // Эффект печатания
+        function typeWriter() {
+            const title = document.querySelector('.typing-title');
+            const text = title.textContent;
+            title.textContent = '';
+            title.style.opacity = '1';
+            
+            let i = 0;
+            const timer = setInterval(() => {
+                if (i < text.length) {
+                    title.textContent += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(timer);
+                    title.classList.add('typing-complete');
+                }
+            }, 50);
+        }
+
+        // Анимация счетчиков
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const increment = target / 50;
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        counter.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        counter.textContent = Math.floor(current);
+                    }
+                }, 30);
+            });
+        }
+
+        // Создание частиц
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                container.appendChild(particle);
+            }
+        }
+
+        // Запуск анимаций элементов с задержкой
+        function startElementAnimations() {
+            const elements = document.querySelectorAll('[data-delay]');
+            
+            elements.forEach(element => {
+                const delay = parseFloat(element.getAttribute('data-delay')) * 1000;
+                setTimeout(() => {
+                    element.classList.add('animate');
+                }, delay);
+            });
+        }
+
+        // Обработка кнопки "наверх"
+        window.addEventListener('scroll', () => {
+            const scrollBtn = document.getElementById('scrollToTop');
+            if (window.scrollY > 300) {
+                scrollBtn.classList.add('visible');
+            } else {
+                scrollBtn.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Интерактивность треугольных кнопок
+        document.addEventListener('DOMContentLoaded', () => {
+            const triangleButtons = document.querySelectorAll('.triangle-button');
+            
+            triangleButtons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.classList.add('hovered');
+                    this.querySelector('.triangle-glow').classList.add('active');
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.classList.remove('hovered');
+                    this.querySelector('.triangle-glow').classList.remove('active');
+                });
+                
+                // Эффект ripple при клике
+                button.addEventListener('click', function(e) {
+                    const ripple = document.createElement('div');
+                    ripple.className = 'click-ripple';
+                    
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+
+            // FAQ кнопка анимация
+            const faqButton = document.querySelector('.faq-button');
+            faqButton.addEventListener('click', function(e) {
+                const ripple = this.querySelector('.button-ripple');
+                ripple.classList.add('animate');
+                
+                setTimeout(() => {
+                    ripple.classList.remove('animate');
+                }, 600);
+            });
+        });
+
+        // Параллакс эффект
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.parallax-element');
+            
+            parallaxElements.forEach(element => {
+                const speed = element.dataset.speed || 0.5;
+                const yPos = -(scrolled * speed);
+                element.style.transform = `translateY(${yPos}px)`;
+            });
+        });
+
+        // Intersection Observer для анимаций
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                }
+            });
+        }, observerOptions);
+
+        // Наблюдение за элементами
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+            animatedElements.forEach(el => observer.observe(el));
+        });
+    </script>
 </body>
 </html>
