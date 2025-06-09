@@ -447,76 +447,82 @@
         </section>
 
         <!-- Секция системных требований -->
-        <section class="requirements-section">
-            <div class="container">
-                <div class="section-header scroll-animate">
-                    <h2>Системные требования</h2>
-                    <p>Минимальные требования для работы TeamViewer</p>
+<section class="requirements-section">
+    <div class="container">
+        <div class="section-header scroll-animate">
+            <h2>Системные требования</h2>
+            <p>Минимальные требования для работы TeamViewer</p>
+        </div>
+        
+        <div class="requirements-grid">
+            <div class="requirement-card scroll-animate">
+                <div class="req-icon">
+                    <!-- Windows иконка -->
+                    <svg width="50" height="50" viewBox="0 0 24 24" fill="#0078d4">
+                        <path d="M3,12V6.75L9,5.43V11.91L3,12M20,3V11.75L10,11.9V5.21L20,3M3,13L9,13.09V19.9L3,18.75V13M20,13.25V22L10,20.09V13.1L20,13.25Z"/>
+                    </svg>
                 </div>
-                
-                <div class="requirements-grid">
-                    <div class="requirement-card scroll-animate">
-                        <div class="req-icon">
-                            <svg width="50" height="50" viewBox="0 0 24 24" fill="#c5a47e">
-                                <path d="M4,6H20V16H4M20,18A2,2 0 0,0 22,16V6C22,4.89 21.1,4 20,4H4C2.89,4 2,4.89 2,6V16A2,2 0 0,0 4,18H0V20H24V18H20Z"/>
-                            </svg>
-                        </div>
-                        <h3>Windows</h3>
-                        <ul class="req-list">
-                            <li>Windows 10 или новее</li>
-                            <li>1 ГБ ОЗУ</li>
-                            <li>200 МБ свободного места</li>
-                            <li>Интернет-соединение</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="requirement-card scroll-animate">
-                        <div class="req-icon">
-                            <svg width="50" height="50" viewBox="0 0 24 24" fill="#c5a47e">
-                                <path d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.47C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.09,16.67C20.06,16.74 19.67,18.11 18.71,19.5M13,3.5C13.73,2.67 14.94,2.04 15.94,2C16.07,3.17 15.6,4.35 14.9,5.19C14.21,6.04 13.07,6.7 11.95,6.61C11.8,5.46 12.36,4.26 13,3.5Z"/>
-                            </svg>
-                        </div>
-                        <h3>macOS</h3>
-                        <ul class="req-list">
-                            <li>macOS 10.14 или новее</li>
-                            <li>1 ГБ ОЗУ</li>
-                            <li>200 МБ свободного места</li>
-                            <li>Интернет-соединение</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="requirement-card scroll-animate">
-                        <div class="req-icon">
-                            <svg width="50" height="50" viewBox="0 0 24 24" fill="#c5a47e">
-                                <path d="M14.62,8.35C15.78,8.79 16.06,9.69 16.06,10.79C16.06,12.65 14.63,13.69 12.38,13.69H9.5V17.9H7.13V6.9H12.38C14.5,6.9 15.87,7.88 15.87,9.54C15.87,10.38 15.5,11.15 14.62,8.35M9.5,8.65V10.79H12.13C12.88,10.79 13.38,10.5 13.38,9.72C13.38,8.94 12.88,8.65 12.13,8.65H9.5M9.5,12.54V15.15H12.38C13.25,15.15 13.81,14.79 13.81,13.85C13.81,12.9 13.25,12.54 12.38,12.54H9.5Z"/>
-                            </svg>
-                        </div>
-                        <h3>Linux</h3>
-                        <ul class="req-list">
-                            <li>Ubuntu 18.04+ / CentOS 8+</li>
-                            <li>1 ГБ ОЗУ</li>
-                            <li>200 МБ свободного места</li>
-                            <li>X11 окружение</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="requirement-card scroll-animate">
-                        <div class="req-icon">
-                            <svg width="50" height="50" viewBox="0 0 24 24" fill="#c5a47e">
-                                <path d="M17.5,15C18.88,15 20,16.12 20,17.5C20,18.88 18.88,20 17.5,20C16.12,20 15,18.88 15,17.5C15,16.12 16.12,15 17.5,15M5,16C5.55,16 6,16.45 6,17C6,17.55 5.55,18 5,18C4.45,18 4,17.55 4,17C4,16.45 4.45,16 5,16M12,16C12.55,16 13,16.45 13,17C13,17.55 12.55,18 12,18C11.45,18 11,17.55 11,17C11,16.45 11.45,16 12,16M7.5,14C8.88,14 10,15.12 10,16.5C10,17.88 8.88,19 7.5,19C6.12,19 5,17.88 5,16.5C5,15.12 6.12,14 7.5,14M2.5,12C3.88,12 5,13.12 5,14.5C5,15.88 3.88,17 2.5,17C1.12,17 0,15.88 0,14.5C0,13.12 1.12,12 2.5,12Z"/>
-                            </svg>
-                        </div>
-                        <h3>Мобильные</h3>
-                        <ul class="req-list">
-                            <li>Android 6.0+ / iOS 12+</li>
-                            <li>2 ГБ ОЗУ</li>
-                            <li>150 МБ свободного места</li>
-                            <li>Wi-Fi или мобильный интернет</li>
-                        </ul>
-                    </div>
-                </div>
+                <h3>Windows</h3>
+                <ul class="req-list">
+                    <li>Windows 10 или новее</li>
+                    <li>1 ГБ ОЗУ</li>
+                    <li>200 МБ свободного места</li>
+                    <li>Интернет-соединение</li>
+                </ul>
             </div>
-        </section>
+            
+            <div class="requirement-card scroll-animate">
+                <div class="req-icon">
+                    <!-- Apple иконка -->
+                    <svg width="50" height="50" viewBox="0 0 24 24" fill="#007AFF">
+                        <path d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.47C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.09,16.67C20.06,16.74 19.67,18.11 18.71,19.5M13,3.5C13.73,2.67 14.94,2.04 15.94,2C16.07,3.17 15.6,4.35 14.9,5.19C14.21,6.04 13.07,6.7 11.95,6.61C11.8,5.46 12.36,4.26 13,3.5Z"/>
+                    </svg>
+                </div>
+                <h3>macOS</h3>
+                <ul class="req-list">
+                    <li>macOS 10.14 или новее</li>
+                    <li>1 ГБ ОЗУ</li>
+                    <li>200 МБ свободного места</li>
+                    <li>Интернет-соединение</li>
+                </ul>
+            </div>
+            
+            <div class="requirement-card scroll-animate">
+                <div class="req-icon">
+                    <!-- Linux терминал -->
+                    <svg width="50" height="50" viewBox="0 0 24 24" fill="#FCC624">
+                        <path d="M2,3V21H22V3H2M20,19H4V5H20V19M6,7V9H8V7H6M10,7V9H18V7H10M6,11V13H8V11H6M10,11V13H18V11H10M6,15V17H8V15H6M10,15V17H14V15H10Z"/>
+                    </svg>
+                </div>
+                <h3>Linux</h3>
+                <ul class="req-list">
+                    <li>Ubuntu 18.04+ / CentOS 8+</li>
+                    <li>1 ГБ ОЗУ</li>
+                    <li>200 МБ свободного места</li>
+                    <li>X11 окружение</li>
+                </ul>
+            </div>
+            
+            <div class="requirement-card scroll-animate">
+                <div class="req-icon">
+                    <!-- Мобильная иконка -->
+                    <svg width="50" height="50" viewBox="0 0 24 24" fill="#34C759">
+                        <path d="M17,19H7V5H17M17,1H7C5.89,1 5,1.89 5,3V21A2,2 0 0,0 7,23H17A2,2 0 0,0 19,21V3C19,1.89 18.1,1 17,1Z"/>
+                        <circle cx="12" cy="20" r="1" fill="#34C759"/>
+                    </svg>
+                </div>
+                <h3>Мобильные</h3>
+                <ul class="req-list">
+                    <li>Android 6.0+ / iOS 12+</li>
+                    <li>2 ГБ ОЗУ</li>
+                    <li>150 МБ свободного места</li>
+                    <li>Wi-Fi или мобильный интернет</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
 
         <!-- Секция сравнения с конкурентами -->
         <section class="comparison-section">

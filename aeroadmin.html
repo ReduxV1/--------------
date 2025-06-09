@@ -1,435 +1,745 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <head>
-        <meta charset="UTF-8">
-       <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-     <meta name="format-detection" content="telephone=no">
-        <title>AeroAdmin</title>
-        <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="css/menu.css">
-        <link rel="stylesheet" href="css/slider.css">
-        <link rel="stylesheet" href="css/aeroadminstyle.css">
-        <style>
-            .article-text h3{
-            margin-bottom: 5px !important;
-            color: #c5a47e;
-        }
-        .slide-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            z-index: -1;
-            filter: brightness(0.7);
-        }
-        .slide:nth-child(3) .slide-bg{
-            background-image: url('izobr/3.jpg');
-        }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="description" content="AeroAdmin - простая и быстрая программа для удаленного управления компьютерами с акцентом на безопасность и минимализм.">
+    <meta name="keywords" content="AeroAdmin, удаленный доступ, удаленное управление, простота использования">
+    <meta name="author" content="Ваше имя">
+    <meta property="og:title" content="AeroAdmin - Удаленное управление">
+    <meta property="og:description" content="Простая и быстрая программа для удаленного управления компьютерами">
+    <meta property="og:type" content="website">
+    <title>AeroAdmin - Удаленное управление</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/aeroadminstyle.css">
+</head>
 
-        .slide:nth-child(4) .slide-bg{
-            background-image: url('izobr/4.jpg');
-        }
-
-        .slide:nth-child(5) .slide-bg{
-            background-image: url('izobr/1.gif');
-        }
-
-        .slide:nth-child(6) .slide-bg{  
-            background-image: url('izobr/5.jpg');
-        }
-
-        .slide:nth-child(7) .slide-bg{
-            background-image: url('izobr/6.jpg');
-        }
-
-        .slide:nth-child(8) .slide-bg{
-            background-image: url('izobr/7.jpg');
-        }
-
-        .slide:nth-child(9) .slide-bg{
-            background-image: url('izobr/1.gif');
-        }
-
-        .slide:nth-child(10) .slide-bg{
-            background-image: url('izobr/8.jpg');
-        }
-
-        .slide:nth-child(11) .slide-bg{
-            background-image: url('izobr/9.jpg');
-        }
-
-        .slide:nth-child(12) .slide-bg{
-            background-image: url('izobr/10.jpg');
-        }
-        </style>
-    </head>
-
-    <body>
-        <!--Шапка сайта-->
-        <header class="main-header">
-            <div class="header-logo">
-                <img src="izobr/logo.svg" alt="Логотип" class="logo-img">
+<body>
+    <!-- Прелоадер -->
+    <div class="preloader" id="preloader">
+        <div class="aeroadmin-loader">
+            <div class="loader-icon">
+                <svg width="80" height="80" viewBox="0 0 100 100" fill="none">
+                    <circle cx="50" cy="50" r="45" stroke="#c5a47e" stroke-width="2" fill="none" opacity="0.3"/>
+                    <path d="M50 5 A45 45 0 0 1 95 50" stroke="#c5a47e" stroke-width="3" fill="none">
+                        <animateTransform attributeName="transform" type="rotate" dur="1s" repeatCount="indefinite" values="0 50 50;360 50 50"/>
+                    </path>
+                </svg>
             </div>
-            <nav class="header-menu">
-                <ul>
-                    <li><a href="index.html">Главная</a></li>
-                    <li class="dropdown">
-                        <a href="#sections">Разделы ▾</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="os-selection.html">Выбор операционной системы</a></li>
-                            <li><a href="filesystem.html">Выбор ФС и разметка диска</a></li>
-                            <li><a href="remote-management.html">Средства удаленного управления компьютером</a></li>
-                            <li><a href="diagnost-management.html">Средства диагностики, контроля и мониторинга системы</a></li>
+            <div class="loader-text">Загрузка AeroAdmin...</div>
+            <div class="loader-progress">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Фоновые эффекты -->
+    <div class="main-bg">
+        <div class="slide-bg" style="background-image: url('izobr/1.gif')"></div>
+        <div class="overlay"></div>
+        <div class="remote-animation">
+            <div class="connection-line"></div>
+            <div class="data-flow"></div>
+        </div>
+    </div>
+
+    <!-- Шапка сайта -->
+    <header class="main-header">
+        <div class="header-logo">
+            <img src="izobr/logo.svg" alt="Логотип" class="logo-img">
+        </div>
+        <nav class="header-menu">
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li class="dropdown">
+                    <a href="#sections">Разделы ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="os-selection.html">Выбор операционной системы</a></li>
+                        <li><a href="filesystem.html">Выбор ФС и разметка диска</a></li>
+                        <li><a href="remote-management.html">Средства удаленного управления компьютером</a></li>
+                        <li><a href="diagnost-management.html">Средства диагностики, контроля и мониторинга системы</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#ssilki">Ссылки на официальные сайты ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://www.teamviewer.com" target="_blank">TeamViewer</a></li>
+                        <li><a href="https://anydesk.com" target="_blank">AnyDesk</a></li>
+                        <li><a href="https://www.aeroadmin.com" target="_blank">AeroAdmin</a></li>
+                        <li><a href="https://www.aida64.com" target="_blank">AIDA64</a></li>
+                        <li><a href="https://www.hwinfo.com" target="_blank">HWiNFO</a></li>
+                        <li><a href="https://www.sisoftware.net" target="_blank">SiSoftware Sandra</a></li>
+                    </ul>  
+                </li>
+                <li><a href="author.html">Автор</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="main-content">
+        <!-- Героическая секция -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="breadcrumb animate-fade-up">
+                    <a href="index.html">Главная</a> / 
+                    <a href="remote-management.html">Удаленное управление</a> / 
+                    <span>AeroAdmin</span>
+                </div>
+                
+                <div class="hero-content">
+                    <div class="hero-icon animate-fade-up delay-200">
+                        <img src="izobr/aeroadmin-icon.svg" alt="AeroAdmin" class="aeroadmin-hero-logo">
+                    </div>
+                    
+                    <h1 class="hero-title animate-fade-up delay-400">
+                        <span class="title-highlight">AeroAdmin</span><br>
+                        Удаленное управление
+                    </h1>
+                    
+                    <p class="hero-subtitle animate-fade-up delay-600">
+                        Простая и быстрая программа для удаленного управления компьютерами с акцентом на безопасность и минимализм
+                    </p>
+                    
+                    <div class="hero-stats animate-fade-up delay-800">
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="15">0</span>
+                            <span class="stat-label">Лет на рынке</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="256">0</span>
+                            <span class="stat-label">Бит шифрования</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-target="100">0</span>
+                            <span class="stat-label">% Бесплатно</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция обзора -->
+        <section class="overview-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>О программе AeroAdmin</h2>
+                    <p>Минималистичное решение для удаленного доступа</p>
+                </div>
+                
+                <div class="overview-content">
+                    <div class="overview-text scroll-animate">
+                        <h3>Что такое AeroAdmin?</h3>
+                        <p>AeroAdmin — программа для удаленного управления компьютерами, разработанная в 2010-х годах. Отличается простотой использования, минималистичным интерфейсом и высокой скоростью соединения. Основные функции включают удаленный доступ, передачу файлов, текстовый чат и поддержку многопользовательских сессий.</p>
+                        
+                        <p>Программа не требует установки (портативная версия), работает по протоколу UDP для снижения задержек и полностью бесплатна для некоммерческого использования, что способствует её популярности, особенно среди частных пользователей и малого бизнеса.</p>
+                        
+                        <div class="company-info">
+                            <h4>О разработке</h4>
+                            <p>AeroAdmin создан международной компанией, базирующейся в России. Разработка ориентирована на обеспечение безопасного и быстрого подключения даже при низкой скорости интернета. Программа изначально позиционировалась как альтернатива сложным решениям с упором на минимализм.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="overview-image scroll-animate">
+                        <img src="izobr/aeroadmin-for-windows.jpg" alt="AeroAdmin Interface" class="company-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция возможностей -->
+        <section class="features-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Основные возможности</h2>
+                    <p>Все необходимые инструменты для удаленной работы</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card scroll-animate">
+                        <div class="feature-icon">
+                            <svg width="60" height="60" viewBox="0 0 24 24" fill="#c5a47e">
+                                <path d="M20 3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h3l-1 1v2h12v-2l-1-1h3c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 13H4V5h16v11z"/>
+                            </svg>
+                        </div>
+                        <h3>Удаленное управление</h3>
+                        <p>Полный контроль над удаленным устройством с прямым P2P соединением для максимальной скорости</p>
+                        <ul class="feature-list">
+                            <li>Прямое соединение (P2P)</li>
+                            <li>Портативная версия</li>
+                            <li>Фоновый режим работы</li>
                         </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#ssilki">Ссылки на официальные сайты ▾</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="https://www.teamviewer.com" target="_blank">TeamViewer</a></li>
-                            <li><a href="https://anydesk.com" target="_blank">AnyDesk</a></li>
-                            <li><a href="https://www.aeroadmin.com" target="_blank">AeroAdmin</a></li>
-                            <li><a href="https://www.aida64.com" target="_blank">AIDA64</a></li>
-                            <li><a href="https://www.hwinfo.com" target="_blank">HWiNFO</a></li>
-                            <li><a href="https://www.sisoftware.net" target="_blank">SiSoftware Sandra</a></li>
-                        </ul>  
-                    </li>
-                    <li><a href="author.html">Автор</a></li>
-                </ul>
-            </nav>
-        </header>
-
-        <div class="slider-container">
-        <!--Слайд 1-->
-        <div class="slide" aria-hidden="false">
-            <div class="slide-bg"></div>
-            <div class="slide-content">
-                <div class="content-block">
-                    <div class="divider-gold"></div>
-                    <p class="discipline">
-                        Общие сведения <br>
-                        по программе AeroAdmin
-                    </p>
+                    </div>
+                    
+                    <div class="feature-card scroll-animate">
+                        <div class="feature-icon">
+                            <svg width="60" height="60" viewBox="0 0 24 24" fill="#c5a47e">
+                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                            </svg>
+                        </div>
+                        <h3>Передача файлов</h3>
+                        <p>Простая передача файлов через drag-and-drop с общим буфером обмена</p>
+                        <ul class="feature-list">
+                            <li>Drag & Drop интерфейс</li>
+                            <li>Общий буфер обмена</li>
+                            <li>Безопасная передача</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card scroll-animate">
+                        <div class="feature-icon">
+                            <svg width="60" height="60" viewBox="0 0 24 24" fill="#c5a47e">
+                                <path d="M17,12V3A1,1 0 0,0 16,2H3A1,1 0 0,0 2,3V16L6,12H16A1,1 0 0,0 17,12M21,6H19V15H6V17A1,1 0 0,0 7,18H18L22,22V7A1,1 0 0,0 21,6Z"/>
+                            </svg>
+                        </div>
+                        <h3>Текстовый чат</h3>
+                        <p>Встроенный чат для общения во время сессии удаленного управления</p>
+                        <ul class="feature-list">
+                            <li>Текстовые сообщения</li>
+                            <li>История чата</li>
+                            <li>Быстрая связь</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card scroll-animate">
+                        <div class="feature-icon">
+                            <svg width="60" height="60" viewBox="0 0 24 24" fill="#c5a47e">
+                                <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.5 16,12.4 16,13V16C16,17.4 15.4,18 14.8,18H9.2C8.6,18 8,17.4 8,16V13C8,12.4 8.6,11.5 9.2,11.5V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,10V11.5H13.5V10C13.5,8.7 12.8,8.2 12,8.2Z"/>
+                            </svg>
+                        </div>
+                        <h3>Безопасность</h3>
+                                                <p>Защищенное соединение с шифрованием данных AES-256 для надежной защиты информации</p>
+                        <ul class="feature-list">
+                            <li>AES-256 шифрование</li>
+                            <li>Многопользовательские сессии</li>
+                            <li>Доступность в СНГ</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="slide" aria-hidden="true">
-            <div class="slide-bg"></div>
-            <div class="slide-content">
-                <div class="divider-gold"></div>
-                <div class="content-article">
-                    <h2 class="discipline" style="color: #c5a47e; text-align: center;margin-bottom: 10px;">
-                        AeroAdmin
-                    </h2>
-                    <div class="article-text">
-                        <p class="specs">
-                            AeroAdmin — программа для удаленного управления компьютерами, разработанная в 2010-х годах. Отличается простотой использования, минималистичным интерфейсом и высокой скоростью соединения. 
-                            Основные функции включают удаленный доступ, передачу файлов, текстовый чат и поддержку многопользовательских сессий.
-                        </p>
-                        <div class="image-container">
-                            <img src="izobr/aeroadmin-for-windows.jpg" alt="Aero1">
+        <!-- Секция преимуществ и недостатков -->
+        <section class="pros-cons-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Преимущества и недостатки</h2>
+                    <p>Объективная оценка программы AeroAdmin</p>
+                </div>
+                
+                <div class="pros-cons-grid">
+                    <div class="pros-card scroll-animate">
+                        <div class="card-header">
+                            <div class="card-icon pros-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="#4CAF50">
+                                    <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+                                </svg>
+                            </div>
+                            <h3>Преимущества</h3>
                         </div>
-                        <p class="specs">
-                            Программа не требует установки (портативная версия), работает по протоколу UDP для снижения задержек и полностью бесплатна для некоммерческого использования, что способствует её популярности, особенно среди частных пользователей и малого бизнеса.
-                        </p>
-                        <div class="back-to-top">
-                            <a href="#" class="gold-button" onclick="scrollToTop()">
-                                В начало
-                            </a>
+                        <ul class="pros-cons-list">
+                            <li>Простота установки и использования</li>
+                            <li>Портативная версия (не требует установки)</li>
+                            <li>Прямое соединение P2P без промежуточных серверов</li>
+                            <li>Бесплатное использование для некоммерческих целей</li>
+                            <li>Доступность в СНГ — нет ограничений для России, Беларуси</li>
+                            <li>Многопользовательские сессии</li>
+                            <li>Совместимость с устаревшими ОС (Windows XP+)</li>
+                            <li>Минимальные системные требования</li>
+                            <li>Высокая скорость соединения благодаря UDP</li>
+                            <li>Шифрование данных AES-256</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="cons-card scroll-animate">
+                        <div class="card-header">
+                            <div class="card-icon cons-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="#f44336">
+                                    <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/>
+                                </svg>
+                            </div>
+                            <h3>Недостатки</h3>
+                        </div>
+                        <ul class="pros-cons-list">
+                            <li>Только для Windows — нет версий для macOS, Linux, iOS, Android</li>
+                            <li>Минимальная интеграция с внешними сервисами</li>
+                            <li>Слабые возможности для крупного бизнеса</li>
+                            <li>Нет облачных функций и синхронизации</li>
+                            <li>Ограниченная техподдержка для бесплатных пользователей</li>
+                            <li>Отсутствие VoIP и видеосвязи — только текстовый чат</li>
+                            <li>Простой интерфейс с минимумом настроек</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция версий и цен -->
+        <section class="pricing-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Версии и цены</h2>
+                    <p>Выберите подходящий план для ваших потребностей</p>
+                </div>
+                
+                <div class="pricing-grid">
+                    <div class="pricing-card featured scroll-animate">
+                        <div class="featured-badge">Рекомендуется</div>
+                        <div class="pricing-header">
+                            <h3>AeroAdmin Free</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">0</span>
+                                <span class="period">/всегда</span>
+                            </div>
+                            <p class="plan-description">Для некоммерческого использования</p>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li>Неограниченное количество подключений</li>
+                                <li>Полный функционал программы</li>
+                                <li>Передача файлов drag-and-drop</li>
+                                <li>Текстовый чат</li>
+                                <li>Шифрование AES-256</li>
+                                <li>Многопользовательские сессии</li>
+                                <li>Портативная версия</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-action">
+                            <a href="https://www.aeroadmin.com" class="btn-primary" target="_blank">Скачать бесплатно</a>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-card scroll-animate">
+                        <div class="pricing-header">
+                            <h3>AeroAdmin Business</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">19</span>
+                                <span class="period">/месяц</span>
+                            </div>
+                            <p class="plan-description">Для коммерческого использования</p>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li>Все функции бесплатной версии</li>
+                                <li>Коммерческое использование</li>
+                                <li>Техническая поддержка</li>
+                                <li>Доступ к журналам сессий</li>
+                                <li>Расширенные настройки безопасности</li>
+                                <li>Корпоративная лицензия</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-action">
+                            <a href="https://www.aeroadmin.com" class="btn-secondary" target="_blank">Выбрать план</a>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-card scroll-animate">
+                        <div class="pricing-header">
+                            <h3>AeroAdmin Enterprise</h3>
+                            <div class="price">
+                                <span class="currency">Цена</span>
+                                <span class="amount">по запросу</span>
+                                <span class="period"></span>
+                            </div>
+                            <p class="plan-description">Для крупных организаций</p>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li>Все функции Business</li>
+                                <li>Индивидуальные настройки</li>
+                                <li>Приоритетная поддержка</li>
+                                <li>Интеграция с корпоративными системами</li>
+                                <li>VPN совместимость</li>
+                                <li>Групповые лицензии</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-action">
+                            <a href="https://www.aeroadmin.com" class="btn-secondary" target="_blank">Связаться с нами</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="slide" aria-hidden="true">
-            <div class="slide-bg"></div>
-            <div class="slide-content">
-                <div class="divider-gold"></div>
-                <div class="content-article">
-                    <h2 class="discipline" style="color: #c5a47e; text-align: center;margin-bottom: 10px;">
-                        Разработка
-                    </h2>
-                    <div class="article-text">
-                        <p class="specs">
-                            AeroAdmin создан международной компанией, базирующейся в России. Разработка ориентирована на обеспечение безопасного и быстрого подключения даже при низкой скорости интернета. 
-                            Программа изначально позиционировалась как альтернатива сложным решениям вроде TeamViewer, с упором на минимализм и отсутствие лишних функций.
-                        </p>
-                        <div class="image-container">
-                            <img src="izobr/aeroadmin2.jpg" alt="Aero2">
+        <!-- Секция системных требований -->
+        <section class="requirements-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Системные требования</h2>
+                    <p>Минимальные требования для работы AeroAdmin</p>
+                </div>
+                
+                <div class="requirements-grid">
+                    <div class="requirement-card scroll-animate">
+                        <div class="req-icon">
+                            <!-- Windows иконка -->
+                            <svg width="50" height="50" viewBox="0 0 24 24" fill="#c5a47e">
+                                <path d="M3,12V6.75L9,5.43V11.91L3,12M20,3V11.75L10,11.9V5.21L20,3M3,13L9,13.09V19.9L3,18.75V13M20,13.25V22L10,20.09V13.1L20,13.25Z"/>
+                            </svg>
                         </div>
-                        <div class="back-to-top">
-                            <a href="#" class="gold-button" onclick="scrollToTop()">
-                                В начало
-                            </a>
+                        <h3>Windows</h3>
+                        <ul class="req-list">
+                            <li>Windows XP или новее</li>
+                            <li>256 МБ ОЗУ</li>
+                            <li>10 МБ свободного места</li>
+                            <li>Интернет-соединение</li>
+                            <li>Поддержка UDP протокола</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="requirement-card scroll-animate disabled">
+                        <div class="req-icon">
+                            <!-- Apple иконка -->
+                            <svg width="50" height="50" viewBox="0 0 24 24" fill="#666">
+                                <path d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.47C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.09,16.67C20.06,16.74 19.67,18.11 18.71,19.5M13,3.5C13.73,2.67 14.94,2.04 15.94,2C16.07,3.17 15.6,4.35 14.9,5.19C14.21,6.04 13.07,6.7 11.95,6.61C11.8,5.46 12.36,4.26 13,3.5Z"/>
+                            </svg>
+                        </div>
+                        <h3>macOS</h3>
+                        <ul class="req-list">
+                            <li class="unavailable">Не поддерживается</li>
+                            <li class="unavailable">Только Windows версия</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="requirement-card scroll-animate disabled">
+                        <div class="req-icon">
+                            <!-- Linux шестеренка -->
+                            <svg width="50" height="50" viewBox="0 0 24 24" fill="#666">
+                                <path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/>
+                            </svg>
+                        </div>
+                        <h3>Linux</h3>
+                        <ul class="req-list">
+                            <li class="unavailable">Не поддерживается</li>
+                            <li class="unavailable">Только Windows версия</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="requirement-card scroll-animate disabled">
+                        <div class="req-icon">
+                            <!-- Мобильная иконка -->
+                            <svg width="50" height="50" viewBox="0 0 24 24" fill="#666">
+                                <path d="M17,19H7V5H17M17,1H7C5.89,1 5,1.89 5,3V21A2,2 0 0,0 7,23H17A2,2 0 0,0 19,21V3C19,1.89 18.1,1 17,1Z"/>
+                                <circle cx="12" cy="20" r="1"/>
+                            </svg>
+                        </div>
+                        <h3>Мобильные</h3>
+                        <ul class="req-list">
+                            <li class="unavailable">Не поддерживается</li>
+                            <li class="unavailable">Только настольная версия</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция сравнения с конкурентами -->
+        <section class="comparison-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Сравнение с конкурентами</h2>
+                    <p>AeroAdmin в сравнении с другими решениями</p>
+                </div>
+                
+                <div class="comparison-table-container scroll-animate">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th class="feature-column">Функции</th>
+                                <th class="competitor-column featured-column">
+                                    <div class="competitor-header">
+                                        <img src="izobr/aeroadmin.png" alt="AeroAdmin">
+                                        <span>AeroAdmin</span>
+                                        <div class="recommended-badge">Простота</div>
+                                    </div>
+                                </th>
+                                <th class="competitor-column">
+                                    <div class="competitor-header">
+                                        <img src="izobr/teamviewer-icon.svg" alt="TeamViewer">
+                                        <span>TeamViewer</span>
+                                    </div>
+                                </th>
+                                <th class="competitor-column">
+                                    <div class="competitor-header">
+                                        <img src="izobr/anydesk-icon.svg" alt="AnyDesk">
+                                        <span>AnyDesk</span>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="feature-name">Бесплатная версия</td>
+                                <td class="feature-check">✓ Полная</td>
+                                <td class="feature-check">✓ Ограниченная</td>
+                                <td class="feature-check">✓ Ограниченная</td>
+                            </tr>
+                            <tr>
+                                                                <td class="feature-name">Простота использования</td>
+                                <td class="feature-excellent">Отличная</td>
+                                <td class="feature-good">Средняя</td>
+                                <td class="feature-good">Хорошая</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Портативность</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-cross">✗</td>
+                                <td class="feature-cross">✗</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Мобильные приложения</td>
+                                <td class="feature-cross">✗</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-check">✓</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Передача файлов</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-check">✓</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Доступность в РФ</td>
+                                <td class="feature-check">✓</td>
+                                <td class="feature-cross">✗</td>
+                                <td class="feature-good">Частично</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Цена (месяц)</td>
+                                <td class="price-cell featured-price">Бесплатно</td>
+                                <td class="price-cell">$14.90</td>
+                                <td class="price-cell">$10.90</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция инструкции по установке -->
+        <section class="installation-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Установка и настройка</h2>
+                    <p>Пошаговое руководство по установке AeroAdmin</p>
+                </div>
+                
+                <div class="installation-steps">
+                    <div class="step-card scroll-animate">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Скачивание</h3>
+                            <p>Перейдите на официальный сайт AeroAdmin и скачайте портативную версию программы</p>
+                            <a href="https://www.aeroadmin.com" class="step-link" target="_blank">Скачать AeroAdmin</a>
+                        </div>
+                    </div>
+                    
+                    <div class="step-card scroll-animate">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Запуск</h3>
+                            <p>Программа не требует установки - просто запустите скачанный файл и начните работу</p>
+                            <div class="step-note">Примечание: AeroAdmin — портативная программа</div>
+                        </div>
+                    </div>
+                    
+                    <div class="step-card scroll-animate">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Получение ID</h3>
+                            <p>После запуска программа автоматически сгенерирует уникальный ID для подключения</p>
+                            <div class="step-tip">Совет: ID генерируется автоматически при каждом запуске</div>
+                        </div>
+                    </div>
+                    
+                    <div class="step-card scroll-animate">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Подключение</h3>
+                            <p>Введите ID удаленного компьютера и установите соединение для управления</p>
+                            <div class="step-warning">Важно: Убедитесь в надежности подключения</div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="slide" aria-hidden="true">
-            <div class="slide-bg"></div>
-            <div class="slide-content">
-                <div class="divider-gold"></div>
-                <div class="content-article">
-                    <h2 class="discipline" style="color: #c5a47e; text-align: center;margin-bottom: 10px;">
-                        Функциональные возможности
-                    </h2>
-                    <div class="article-text">
-                        <p class="specs">
-                           AeroAdmin позволяет управлять удаленным ПК через интуитивный интерфейс, поддерживает передачу файлов через drag-and-drop, общий буфер обмена и защищенное соединение с шифрованием данных. 
-                           Особенность программы — возможность прямого подключения без использования промежуточных серверов, что повышает скорость и безопасность.
-                        </p>
-                        <div class="image-container">
-                            <img src="izobr/aeroadmin3.jpg" alt="Aero3">
+        <!-- Секция FAQ -->
+        <section class="faq-section">
+            <div class="container">
+                <div class="section-header scroll-animate">
+                    <h2>Часто задаваемые вопросы</h2>
+                    <p>Ответы на популярные вопросы об AeroAdmin</p>
+                </div>
+                
+                <div class="faq-container">
+                    <div class="faq-item scroll-animate">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Безопасен ли AeroAdmin для использования?</h3>
+                            <span class="faq-icon">+</span>
                         </div>
-                        <p class="specs">
-                           В отличие от TeamViewer, AeroAdmin сохраняет доступность в России и Беларуси, что сделало его популярным решением в этих регионах после ограничений других сервисов. 
-                           Поддерживаются ОС Windows, включая версии XP и новее. 
-                           Для корпоративных клиентов доступны платные лицензии с расширенным функционалом, например, доступ к логам сессий.
-                        </p>
-                        <div class="back-to-top">
-                            <a href="#" class="gold-button" onclick="scrollToTop()">
-                                В начало
-                            </a>
+                        <div class="faq-answer">
+                            <p>Да, AeroAdmin использует шифрование AES-256 для защиты данных. Все соединения устанавливаются напрямую (P2P) без промежуточных серверов, что повышает безопасность.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item scroll-animate">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Можно ли использовать AeroAdmin бесплатно?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Да, AeroAdmin полностью бесплатен для некоммерческого использования. Все функции доступны без ограничений по времени или количеству подключений.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item scroll-animate">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Нужно ли устанавливать AeroAdmin?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Нет, AeroAdmin — портативная программа, которая не требует установки. Просто скачайте и запустите exe-файл.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item scroll-animate">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Работает ли AeroAdmin через брандмауэр?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Да, AeroAdmin работает через большинство брандмауэров и NAT благодаря использованию UDP протокола и технологии прямого соединения.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item scroll-animate">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Поддерживает ли AeroAdmin передачу файлов?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Да, AeroAdmin поддерживает передачу файлов через drag-and-drop интерфейс и общий буфер обмена между компьютерами.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item scroll-animate">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Доступен ли AeroAdmin в России?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Да, AeroAdmin полностью доступен в России, Беларуси и других странах СНГ без каких-либо ограничений.</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="slide" aria-hidden="false">
-            <div class="slide-bg"></div>
-            <div class="slide-content">
-                <div class="content-block">
-                    <div class="divider-gold"></div>
-                    <p class="discipline">
-                        Общие возможности
-                    </p>
-                    <div class="back-to-top">
-                        <a href="#" class="gold-button" onclick="scrollToTop()">
-                            В начало
+        <!-- Секция действий -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content scroll-animate">
+                    <h2>Готовы начать работу с AeroAdmin?</h2>
+                    <p>Скачайте AeroAdmin прямо сейчас и получите простое и надежное решение для удаленного доступа</p>
+                    <div class="cta-buttons">
+                        <a href="https://www.aeroadmin.com" class="btn-primary" target="_blank">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
+                            </svg>
+                            Скачать бесплатно
                         </a>
-                    </div>  
-                </div>
-            </div>
-        </div>
-
-        <div class="slide" aria-hidden="false">
-            <div class="slide-bg"></div>
-            <div class="slide-content">
-                <div class="divider-gold"></div>
-                <div class="content-article">   
-                    <div class="article-text">
-                        <p class="specs">
-                            AeroAdmin — простая и быстрая программа для удалённого управления компьютерами с акцентом на безопасность и минимализм. 
-                            Основные возможности:
-                        </p>
-                        <h3 >Удалённое управление и поддержка</h3>
-                        <p>
-                            <ul class="specs-ul" style="margin-top: 2px;">
-                                <li class="specs-li">Подключение к компьютерам под управлением Windows (XP, 7, 8, 10, 11 и серверные версии).</li>
-                                <li class="specs-li">Полный контроль над удалённым устройством (мышь, клавиатура, доступ к файлам и папкам)</li>
-                                <li class="specs-li">Фоновый режим работы (без отображения сессии на экране удалённого пользователя).</li>
-                                <li class="specs-li">Прямое соединение (P2P) без использования промежуточных серверов для повышения скорости и безопасности.</li>
-                                <li class="specs-li">Портативная версия (не требует установки — работает сразу после запуска).</li>
-                            </ul>
-                        </p>
-                        <div class="image-container">
-                            <img src="izobr/aeroadmin4.png" alt="Aero4">
-                        </div>
-                        <div class="divider-gold" style="margin-top: 10px;"></div>
-                        <div class="back-to-top">
-                            <a href="#" class="gold-button" onclick="scrollToTop()">
-                                В начало
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide" aria-hidden="false">
-            <div class="slide-bg"></div>
-            <div class="slide-content">
-                <div class="divider-gold"></div>
-                <div class="content-article">
-                    <h2 class="discipline" style="color: #c5a47e; text-align: center;margin-bottom: 10px;">
-                        Дополнительные функции
-                    </h2>
-                    <div class="article-text">  
-                        <p>
-                            <ul class="specs-ul" style="margin-top: 2px;">
-                                <li class="specs-li">Передача файлов через drag-and-drop и общий буфер обмена.</li>
-                                <li class="specs-li">Текстовый чат для общения во время сессии.</li>
-                                <li class="specs-li">Шифрование данных (AES-256) для защиты от перехвата.</li>
-                                <li class="specs-li">Поддержка многопользовательских сессий (одновременный доступ нескольких операторов).</li>
-                                <li class="specs-li">Бесплатное использование для некоммерческих целей.</li>
-                            </ul>
-                        </p>
-                        <div class="image-container">
-                            <img src="izobr/aeroadmin5.png" alt="Aero5">
-                        </div>
-                        <div class="divider-gold" style="margin-top: 10px;"></div>
-                        <div class="back-to-top">
-                            <a href="#" class="gold-button" onclick="scrollToTop()">
-                                В начало
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide" aria-hidden="false">
-            <div class="slide-bg"></div>
-            <div class="slide-content">
-                <div class="divider-gold"></div>
-                <div class="content-article">
-                    <h2 class="discipline" style="color: #c5a47e; text-align: center;margin-bottom: 10px;">
-                        Особенности для корпоративных клиентов
-                    </h2>
-                    <div class="article-text">  
-                        <p>
-                            <ul class="specs-ul" style="margin-top: 2px;">
-                                <li class="specs-li">Платные лицензии с доступом к журналам сессий и расширенным настройкам безопасности.</li>
-                                <li class="specs-li">Совместимость с VPN и корпоративными сетями.</li>
-                                <li class="specs-li">Поддержка русского языка и доступность в России, Беларуси и других странах СНГ.</li>
-                            </ul>
-                        </p>
-                        <div class="divider-gold" style="margin-top: 10px;"></div>
-                        <div class="back-to-top">
-                            <a href="#" class="gold-button" onclick="scrollToTop()">
-                                В начало
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide" aria-hidden="false">
-            <div class="slide-bg"></div>
-            <div class="slide-content">
-                <div class="content-block">
-                    <div class="divider-gold"></div>
-                    <p class="discipline">
-                        Выводы о функциональности
-                    </p>
-                    <div class="back-to-top">
-                        <a href="#" class="gold-button" onclick="scrollToTop()">
-                            В начало
+                        <a href="https://www.aeroadmin.com" class="btn-secondary" target="_blank">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 22,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z"/>
+                            </svg>
+                            Узнать больше
                         </a>
-                    </div>  
-                </div>
-            </div>
-        </div>
-
-        <div class="slide" aria-hidden="false">
-            <div class="slide-bg"></div>
-            <div class="slide-content">
-                <div class="divider-gold"></div>
-                <div class="content-article">   
-                    <div class="article-text">
-                        <p class="specs">
-                            AeroAdmin — простая и быстрая программа для удалённого управления компьютерами с акцентом на безопасность и минимализм. 
-                            Основные возможности:
-                        </p>
-                        <h3 >Удалённое управление и поддержка</h3>
-                        <p>
-                            <ul class="specs-ul" style="margin-top: 2px;">
-                                <li class="specs-li">Подключение к компьютерам под управлением Windows (XP, 7, 8, 10, 11 и серверные версии).</li>
-                                <li class="specs-li">Полный контроль над удалённым устройством (мышь, клавиатура, доступ к файлам и папкам)</li>
-                                <li class="specs-li">Фоновый режим работы (без отображения сессии на экране удалённого пользователя).</li>
-                                <li class="specs-li">Прямое соединение (P2P) без использования промежуточных серверов для повышения скорости и безопасности.</li>
-                                <li class="specs-li">Портативная версия (не требует установки — работает сразу после запуска).</li>
-                            </ul>
-                        </p>
-                        <div class="image-container">
-                            <img src="izobr/aeroadmin4.png" alt="Aero4">
+                    </div>
+                    <div class="cta-features">
+                        <div class="cta-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#4CAF50">
+                                <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+                            </svg>
+                            <span>100% бесплатно</span>
                         </div>
-                        <div class="divider-gold" style="margin-top: 10px;"></div>
-                        <div class="back-to-top">
-                            <a href="#" class="gold-button" onclick="scrollToTop()">
-                                В начало
-                            </a>
+                        <div class="cta-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#4CAF50">
+                                <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+                            </svg>
+                            <span>Без установки</span>
+                        </div>
+                        <div class="cta-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#4CAF50">
+                                <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+                            </svg>
+                            <span>Доступен в РФ</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+    </main>
 
-        <div class="slide" aria-hidden="false">
-            <div class="slide-bg"></div>
-            <div class="slide-content">
-                <div class="divider-gold"></div>
-                <div class="content-article">
-                    <h2 class="discipline" style="color: #c5a47e; text-align: center;margin-bottom: 10px;">
-                        Плюсы:
-                    </h2>
-                    <div class="article-text">  
-                        <p>
-                            <ul class="specs-ul" style="margin-top: 2px;">
-                                <li class="specs-li">Передача файлов через drag-and-drop и общий буфер обмена.</li>
-                                <li class="specs-li">Текстовый чат для общения во время сессии.</li>
-                                <li class="specs-li">Шифрование данных (AES-256) для защиты от перехвата.</li>
-                                <li class="specs-li">Поддержка многопользовательских сессий (одновременный доступ нескольких операторов).</li>
-                                <li class="specs-li">Бесплатное использование для некоммерческих целей.</li>
-                                <li class="specs-li">Доступность в СНГ — нет ограничений для России, Беларуси и других стран региона.</li>
-                                <li class="specs-li">Многопользовательские сессии — возможность совместной работы нескольких операторов.</li>
-                                <li class="specs-li">Совместимость с устаревшими ОС — поддержка Windows XP и серверных версий.</li>
-                            </ul>
-                        </p>
-                        <div class="divider-gold" style="margin-top: 10px;"></div>
-                        <div class="back-to-top">
-                            <a href="#" class="gold-button" onclick="scrollToTop()">
-                                В начало
-                            </a>
-                        </div>
-                    </div>
+    <!-- Секция экспериментов -->
+    <section class="experiments-section">
+        <div class="container">
+            <div class="experiments-content scroll-animate">
+                <div class="experiments-icon">
+                    <svg width="80" height="80" viewBox="0 0 24 24" fill="#c5a47e">
+                        <path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"/>
+                    </svg>
+                </div>
+                
+                <h2>Хотите узнать больше?</h2>
+                <p>Изучите практические эксперименты с AeroAdmin, тестирование функций и детальный анализ возможностей</p>
+                
+                <div class="experiments-action">
+                    <a href="aeroadmin-experiments.html" class="btn-experiments">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                        </svg>
+                        Перейти к экспериментам
+                    </a>
                 </div>
             </div>
         </div>
-        
-        <div class="slide" aria-hidden="false">
-            <div class="slide-bg"></div>
-            <div class="slide-content">
-                <div class="divider-gold"></div>
-                <div class="content-article">
-                    <h2 class="discipline" style="color: #c5a47e; text-align: center;margin-bottom: 10px;">
-                        Минусы:
-                    </h2>
-                    <div class="article-text">  
-                        <p>
-                            <ul class="specs-ul" style="margin-top: 2px;">
-                                <li class="specs-li">Ограниченная поддержка платформ — работает только на Windows, нет версий для macOS, Linux, iOS и Android.</li>
-                                <li class="specs-li">Минимальная интеграция с внешними сервисами — отсутствие подключения к CRM, Microsoft Teams и другим корпоративным инструментам.</li>
-                                <li class="specs-li">Слабые возможности для крупного бизнеса — платные лицензии предлагают базовые дополнения (журналы сессий), но уступают конкурентам в масштабируемости.</li>
-                                <li class="specs-li">Нет облачных функций — резервное копирование, синхронизация настроек через облако не предусмотрены.</li>
-                                <li class="specs-li">Ограниченная техподдержка — для бесплатных пользователей доступна только база знаний и форум.</li>
-                                <li class="specs-li">Отсутствие VoIP и видеосвязи — общение возможно только через текстовый чат.</li>
-                            </ul>
-                        </p>
-                        <div class="divider-gold" style="margin-top: 10px;"></div>
-                        <div class="back-to-top">
-                            <a href="#" class="gold-button" onclick="scrollToTop()">
-                                В начало
-                            </a>
-                        </div>
-                    </div>
-                </div>
+    </section>
+
+        <!-- Кнопка "Наверх" -->
+<button class="scroll-to-top" id="scrollToTop">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M12 19V5M5 12L12 5L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+</button>
+
+<!-- Кнопка возврата к списку инструментов -->
+<button class="back-to-tools">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path d="M19 12H5M12 19L5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span>К списку инструментов</span>
+</button>
+
+    <!-- Модальное окно -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Заголовок</h3>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Контент будет добавлен через JavaScript -->
             </div>
         </div>
+    </div>
 
-        </div>
-
-        <div class="slide-nav"></div>
-
-        <script type="module" src = "js/menu.js"></script>
-        <script src="js/aeroadmin.js"></script>
-    </body>
+    <!-- Подключение скриптов -->
+    <script type="module" src="js/menu.js"></script>
+    <script type="module" src="js/aeroadmin.js"></script>
+</body>
 </html>
