@@ -9,6 +9,184 @@
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/remote-management.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Стили для овальных кнопок */
+        .oval-buttons-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 3rem;
+            padding: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .oval-button-wrapper {
+            opacity: 0;
+            transform: translateY(50px) scale(0.8);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .oval-button-wrapper.animate {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Специальный стиль для третьей кнопки (центрирование) */
+        .oval-button-wrapper:nth-child(3) {
+            grid-column: 1 / -1;
+            justify-self: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .oval-button {
+            display: flex;
+            align-items: center;
+            padding: 25px 35px;
+            background: linear-gradient(135deg, rgba(197, 164, 126, 0.1) 0%, rgba(197, 164, 126, 0.05) 100%);
+            border: 2px solid rgba(197, 164, 126, 0.3);
+            border-radius: 50px;
+            color: #c5a47e;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(197, 164, 126, 0.1);
+            width: 100%;
+        }
+
+        .oval-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(197, 164, 126, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .oval-button:hover::before {
+            left: 100%;
+        }
+
+        .oval-button:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: #c5a47e;
+            background: linear-gradient(135deg, rgba(197, 164, 126, 0.2) 0%, rgba(197, 164, 126, 0.1) 100%);
+            box-shadow: 0 20px 60px rgba(197, 164, 126, 0.3);
+        }
+
+        .oval-icon {
+            width: 50px;
+            height: 50px;
+            margin-right: 20px;
+            border-radius: 50%;
+            padding: 10px;
+            background: rgba(197, 164, 126, 0.1);
+            border: 1px solid rgba(197, 164, 126, 0.3);
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+
+        .oval-button:hover .oval-icon {
+            background: rgba(197, 164, 126, 0.2);
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        .oval-content {
+            flex: 1;
+        }
+
+        .oval-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #c5a47e;
+        }
+
+        .oval-description {
+            font-size: 0.9rem;
+            color: rgba(197, 164, 126, 0.8);
+            line-height: 1.4;
+        }
+
+        .oval-arrow {
+            font-size: 1.5rem;
+            margin-left: 15px;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+        }
+
+        .oval-button:hover .oval-arrow {
+            transform: translateX(5px);
+        }
+
+        .oval-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(197, 164, 126, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.6s;
+            pointer-events: none;
+        }
+
+        .oval-button:hover .oval-glow {
+            width: 200%;
+            height: 200%;
+        }
+
+        /* Специфические стили для каждой кнопки */
+        .teamviewer-oval:hover {
+            border-color: #004CFF;
+            box-shadow: 0 20px 60px rgba(0, 76, 255, 0.3);
+        }
+
+        .anydesk-oval:hover {
+            border-color: #E60012;
+            box-shadow: 0 20px 60px rgba(230, 0, 18, 0.3);
+        }
+
+        .aeroadmin-oval:hover {
+            border-color: #FF8C00;
+            box-shadow: 0 20px 60px rgba(255, 140, 0, 0.3);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .oval-buttons-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 10px;
+            }
+            
+            .oval-button-wrapper:nth-child(3) {
+                grid-column: 1;
+                max-width: none;
+            }
+            
+            .oval-button {
+                padding: 20px 25px;
+            }
+            
+            .oval-icon {
+                width: 40px;
+                height: 40px;
+                margin-right: 15px;
+            }
+            
+            .oval-title {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Прелоадер -->
@@ -104,38 +282,43 @@
                 </div>
             </div>
             
-            <!-- Контейнер для треугольных кнопок -->
-            <div class="triangle-buttons-container animate-slide-up">
-                <div class="triangle-button-wrapper" data-delay="0.1">
-                    <a href="teamviewer.html" class="triangle-button teamviewer-triangle">
-                        <div class="triangle-content">
-                            <img src="izobr/teamviewer-icon.svg" alt="TeamViewer" class="triangle-icon">
-                            <span class="triangle-text">TeamViewer</span>
-                            <div class="triangle-description">Профессиональное решение</div>
+            <!-- Контейнер для овальных кнопок -->
+            <div class="oval-buttons-container animate-slide-up">
+                <!-- Первый ряд - две кнопки -->
+                <div class="oval-button-wrapper" data-delay="0.1">
+                    <a href="teamviewer.html" class="oval-button teamviewer-oval">
+                        <img src="izobr/teamviewer-icon.svg" alt="TeamViewer" class="oval-icon">
+                        <div class="oval-content">
+                            <div class="oval-title">TeamViewer</div>
+                            <div class="oval-description">Профессиональное решение для удаленного доступа с высоким уровнем безопасности</div>
                         </div>
-                        <div class="triangle-glow"></div>
+                        <div class="oval-arrow">→</div>
+                        <div class="oval-glow"></div>
                     </a>
                 </div>
                 
-                <div class="triangle-button-wrapper" data-delay="0.2">
-                    <a href="anydesk.html" class="triangle-button anydesk-triangle">
-                        <div class="triangle-content">
-                            <img src="izobr/anydesk-icon.svg" alt="AnyDesk" class="triangle-icon">
-                            <span class="triangle-text">AnyDesk</span>
-                            <div class="triangle-description">Быстрое подключение</div>
+                <div class="oval-button-wrapper" data-delay="0.2">
+                    <a href="anydesk.html" class="oval-button anydesk-oval">
+                        <img src="izobr/anydesk-icon.svg" alt="AnyDesk" class="oval-icon">
+                        <div class="oval-content">
+                            <div class="oval-title">AnyDesk</div>
+                            <div class="oval-description">Быстрое подключение с минимальной задержкой и высокой производительностью</div>
                         </div>
-                        <div class="triangle-glow"></div>
+                        <div class="oval-arrow">→</div>
+                        <div class="oval-glow"></div>
                     </a>
                 </div>
                 
-                <div class="triangle-button-wrapper" data-delay="0.3">
-                    <a href="aeroadmin.html" class="triangle-button aeroadmin-triangle">
-                        <div class="triangle-content">
-                            <img src="izobr/aeroadmin.png" alt="AeroAdmin" class="triangle-icon">
-                            <span class="triangle-text">AeroAdmin</span>
-                            <div class="triangle-description">Бесплатное решение</div>
+                <!-- Второй ряд - одна кнопка по центру -->
+                <div class="oval-button-wrapper" data-delay="0.3">
+                    <a href="aeroadmin.html" class="oval-button aeroadmin-oval">
+                        <img src="izobr/aeroadmin.png" alt="AeroAdmin" class="oval-icon">
+                        <div class="oval-content">
+                            <div class="oval-title">AeroAdmin</div>
+                            <div class="oval-description">Бесплатное решение для базовых задач удаленного управления</div>
                         </div>
-                        <div class="triangle-glow"></div>
+                                                <div class="oval-arrow">→</div>
+                        <div class="oval-glow"></div>
                     </a>
                 </div>
             </div>
@@ -278,32 +461,40 @@
             });
         }
 
-        // Интерактивность треугольных кнопок
+        // Интерактивность овальных кнопок
         document.addEventListener('DOMContentLoaded', () => {
-            const triangleButtons = document.querySelectorAll('.triangle-button');
+            const ovalButtons = document.querySelectorAll('.oval-button');
             
-            triangleButtons.forEach(button => {
+            ovalButtons.forEach(button => {
                 button.addEventListener('mouseenter', function() {
                     this.classList.add('hovered');
-                    this.querySelector('.triangle-glow').classList.add('active');
+                    this.querySelector('.oval-glow').classList.add('active');
                 });
                 
                 button.addEventListener('mouseleave', function() {
                     this.classList.remove('hovered');
-                    this.querySelector('.triangle-glow').classList.remove('active');
+                    this.querySelector('.oval-glow').classList.remove('active');
                 });
                 
                 // Эффект ripple при клике
                 button.addEventListener('click', function(e) {
                     const ripple = document.createElement('div');
                     ripple.className = 'click-ripple';
+                    ripple.style.position = 'absolute';
+                    ripple.style.borderRadius = '50%';
+                    ripple.style.background = 'rgba(197, 164, 126, 0.3)';
+                    ripple.style.transform = 'scale(0)';
+                    ripple.style.animation = 'ripple 0.6s linear';
+                    ripple.style.pointerEvents = 'none';
                     
                     const rect = this.getBoundingClientRect();
                     const x = e.clientX - rect.left;
                     const y = e.clientY - rect.top;
                     
-                    ripple.style.left = x + 'px';
-                    ripple.style.top = y + 'px';
+                    ripple.style.left = x - 25 + 'px';
+                    ripple.style.top = y - 25 + 'px';
+                    ripple.style.width = '50px';
+                    ripple.style.height = '50px';
                     
                     this.appendChild(ripple);
                     
@@ -356,6 +547,18 @@
             const animatedElements = document.querySelectorAll('.animate-on-scroll');
             animatedElements.forEach(el => observer.observe(el));
         });
+
+        // Добавляем CSS анимацию для ripple эффекта
+        const rippleStyle = document.createElement('style');
+        rippleStyle.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(rippleStyle);
     </script>
 </body>
 </html>

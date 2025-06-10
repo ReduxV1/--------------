@@ -8,10 +8,87 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/filesystem.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+    /* Стили прелоадера */
+    .preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease-out;
+    }
+
+    .preloader.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .filesystem-loader {
+        text-align: center;
+        color: #c5a47e;
+    }
+
+    .loader-icon {
+        margin-bottom: 20px;
+        animation: pulse 2s infinite;
+    }
+
+    .loader-text {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        font-weight: 300;
+    }
+
+    .loader-progress {
+        width: 200px;
+        height: 4px;
+        background: rgba(197, 164, 126, 0.2);
+        border-radius: 2px;
+        overflow: hidden;
+    }
+
+    .progress-bar {
+        width: 0;
+        height: 100%;
+        background: linear-gradient(90deg, #c5a47e, #d4b896);
+        border-radius: 2px;
+        animation: loading 2.5s ease-in-out forwards;
+    }
+
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.1); opacity: 0.7; }
+    }
+
+    @keyframes loading {
+        0% { width: 0; }
+        100% { width: 100%; }
+    }
+</style>
+
 </head>
 
 <body class="filesystem-page">
     <!-- Хедер с меню -->
+     <!-- Прелоадер -->
+    <div class="preloader" id="preloader">
+        <div class="filesystem-loader">
+            <div class="loader-icon">
+                <img src="izobr/harddisk.png" alt="Жесткий диск" style="width: 80px; height: 80px;">
+            </div>
+            <div class="loader-text">Загрузка файловых систем...</div>
+            <div class="loader-progress">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
     <header class="main-header">
         <div class="header-logo">
             <img src="izobr/logo.svg" alt="Логотип" class="logo-img">
@@ -523,6 +600,15 @@
     <!-- Подключение скриптов -->
     <script type="module" src="js/menu.js"></script>
     <script type="module" src="js/filesystem.js"></script>
+    <script>
+        // Прелоадер
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hidden');
+            }, 2500);
+        });
+    </script>
+
 </body>
 </html>
 
