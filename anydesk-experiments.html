@@ -7,8 +7,175 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/anydesk.css">
+    <style>
+        /* Прелоадер */
+        .preloader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background: #1a1a1a;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.3s ease;
+        }
+
+        .preloader-content {
+            text-align: center;
+        }
+
+        .preloader-spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid #333;
+            border-top: 3px solid #007acc;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        .preloader-text {
+            color: #007acc;
+            font-size: 1.2rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        /* Анимации для карточек */
+        .experiment-card {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .experiment-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .experiment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 122, 204, 0.2);
+        }
+
+        /* Анимация для заголовков */
+        .hero-title {
+            opacity: 0;
+            transform: translateY(-30px);
+            animation: slideDown 1s ease 0.5s forwards;
+        }
+
+        .hero-subtitle {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUp 1s ease 0.7s forwards;
+        }
+
+        @keyframes slideDown {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Анимация для номеров экспериментов */
+        .experiment-number {
+            display: inline-block;
+            animation: bounceIn 0.6s ease;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.3);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Анимация для placeholder */
+        .screenshot-placeholder {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .screenshot-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Плавное появление секций */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Анимация для технической информации */
+        .tech-info-item {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.5s ease;
+        }
+
+        .tech-info-item.animate {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
 </head>
 <body>
+    <!-- Прелоадер -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-spinner"></div>
+            <div class="preloader-text">Загрузка экспериментов...</div>
+        </div>
+    </div>
+
     <div class="main-bg">
         <div class="slide-bg" style="background-image: url('izobr/1.gif')"></div>
         <div class="overlay"></div>
@@ -21,23 +188,483 @@
         <nav class="header-menu">
             <ul>
                 <li><a href="index.html">Главная</a></li>
-                <li><a href="anydesk.html">Назад к AnyDesk</a></li>
+                <li class="dropdown">
+                    <a href="#sections" class="active">Разделы ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="os-selection.html">Выбор операционной системы</a></li>
+                        <li><a href="filesystem.html" class="active">Выбор ФС и разметка диска</a></li>
+                        <li><a href="remote-management.html">Средства удаленного управления компьютером</a></li>
+                        <li><a href="diagnost-management.html">Средства диагностики, контроля и мониторинга системы</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#ssilki">Ссылки на официальные сайты ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://www.teamviewer.com" target="_blank">TeamViewer</a></li>
+                        <li><a href="https://anydesk.com" target="_blank">AnyDesk</a></li>
+                        <li><a href="https://www.aeroadmin.com" target="_blank">AeroAdmin</a></li>
+                        <li><a href="https://www.aida64.com" target="_blank">AIDA64</a></li>
+                        <li><a href="https://www.hwinfo.com" target="_blank">HWiNFO</a></li>
+                        <li><a href="https://www.sisoftware.net" target="_blank">SiSoftware Sandra</a></li>
+                    </ul>
+                </li>
+                <li><a href="author.html">Автор</a></li>
             </ul>
         </nav>
     </header>
-
     <main class="main-content">
         <section class="hero-section">
             <div class="container">
-                <h1 style="color: #ffffff; text-align: center;">Эксперименты с AnyDesk</h1>
-                <p style="color: #b0b0b0; text-align: center; font-size: 1.2rem;">Страница находится в разработке</p>
-                <div style="text-align: center; margin-top: 40px;">
-                    <a href="anydesk.html" class="btn-secondary">Вернуться к AnyDesk</a>
+                <h1 class="hero-title" style="color: #ffffff; text-align: center; margin-bottom: 20px;">Эксперименты с AnyDesk</h1>
+                <p class="hero-subtitle" style="color: #b0b0b0; text-align: center; font-size: 1.2rem; margin-bottom: 50px;">
+                    Практические исследования возможностей и производительности программы удаленного доступа
+                </p>
+            </div>
+        </section>
+
+        <section class="experiments-section fade-in" style="padding: 60px 0; background: rgba(0,0,0,0.7);">
+            <div class="container">
+                
+                <!-- Эксперимент 1 -->
+                <div class="experiment-card" style="background: rgba(45, 45, 45, 0.9); border-radius: 10px; padding: 30px; margin-bottom: 40px; border-left: 4px solid #007acc;">
+                    <h2 style="color: #007acc; margin-bottom: 20px;">
+                        <span class="experiment-number" style="background: #007acc; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8em; margin-right: 15px;">01</span>
+                        Настройка различных режимов качества изображения
+                    </h2>
+                    
+                    <div style="color: #e0e0e0; line-height: 1.6; margin-bottom: 25px;">
+                        <p><strong>Цель:</strong> Продемонстрировать визуальные различия между режимами качества изображения в AnyDesk и их влияние на производительность.</p>
+                        
+                        <p><strong>Что показывается:</strong></p>
+                        <ul style="margin-left: 20px;">
+                            <li>Скриншот окна настроек AnyDesk с различными режимами качества</li>
+                            <li>Сравнение визуального качества изображения в каждом режиме</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="screenshot-placeholder" style="background: #333; border: 2px dashed #666; height: 200px; display: flex; align-items: center; justify-content: center; color: #999; margin: 20px 0; border-radius: 8px;">
+                        [Скриншот настроек качества и сравнение производительности]
+                    </div>
+                    
+                    <div style="color: #b0b0b0;">
+                        <strong>Результат:</strong> Наглядное сравнение всех режимов качества с показателями производительности в реальном времени.
+                    </div>
+                </div>
+
+                <!-- Эксперимент 2 -->
+                <div class="experiment-card" style="background: rgba(45, 45, 45, 0.9); border-radius: 10px; padding: 30px; margin-bottom: 40px; border-left: 4px solid #28a745;">
+                    <h2 style="color: #28a745; margin-bottom: 20px;">
+                        <span class="experiment-number" style="background: #28a745; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8em; margin-right: 15px;">02</span>
+                        Тестирование скорости подключения в различных условиях
+                    </h2>
+                    
+                    <div style="color: #e0e0e0; line-height: 1.6; margin-bottom: 25px;">
+                        <p><strong>Цель:</strong> Показать процесс подключения AnyDesk при различных скоростях интернета и качестве сети.</p>
+                        
+                        <p><strong>Что показывается:</strong></p>
+                        <ul style="margin-left: 20px;">
+                            <li>Окно AnyDesk с процессом установки соединения</li>
+                            <li>Скриншот speedtest.net с текущей скоростью интернета</li>
+                            <li>Статистика соединения в AnyDesk (задержка, качество сигнала)</li>
+                            <li>Тест подключения через мобильный интернет (скриншот настроек сети)</li>
+                            <li>Окно с информацией о соединении при нестабильной сети</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="screenshot-placeholder" style="background: #333; border: 2px dashed #666; height: 200px; display: flex; align-items: center; justify-content: center; color: #999; margin: 20px 0; border-radius: 8px;">
+                        [Скриншот процесса подключения и тестов скорости интернета]
+                    </div>
+                    
+                    <div style="color: #b0b0b0;">
+                        <strong>Результат:</strong> Визуальное подтверждение работы AnyDesk при различных условиях подключения к интернету.
+                    </div>
+                </div>
+
+                <!-- Эксперимент 3 -->
+                <div class="experiment-card" style="background: rgba(45, 45, 45, 0.9); border-radius: 10px; padding: 30px; margin-bottom: 40px; border-left: 4px solid #ffc107;">
+                    <h2 style="color: #ffc107; margin-bottom: 20px;">
+                        <span class="experiment-number" style="background: #ffc107; color: black; padding: 5px 15px; border-radius: 20px; font-size: 0.8em; margin-right: 15px;">03</span>
+                        Демонстрация функций безопасности и настроек защиты
+                    </h2>
+                    
+                    <div style="color: #e0e0e0; line-height: 1.6; margin-bottom: 25px;">
+                        <p><strong>Цель:</strong> Показать все доступные настройки безопасности AnyDesk и процесс их настройки.</p>
+                        
+                        <p><strong>Что показывается:</strong></p>
+                        <ul style="margin-left: 20px;">
+                            <li>Главное окно настроек безопасности AnyDesk</li>
+                            <li>Настройка пароля для автоматического доступа</li>
+                            <li>Окно настройки разрешений доступа (клавиатура, мышь, файлы)</li>
+                            <li>Настройка белого списка (Whitelist) доверенных устройств</li>
+                            <li>Окно с информацией о шифровании соединения</li>
+                            <li>Настройка двухфакторной аутентификации</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="screenshot-placeholder" style="background: #333; border: 2px dashed #666; height: 200px; display: flex; align-items: center; justify-content: center; color: #999; margin: 20px 0; border-radius: 8px;">
+                        [Скриншот всех настроек безопасности и процесса их конфигурации]
+                    </div>
+                    
+                    <div style="color: #b0b0b0;">
+                        <strong>Результат:</strong> Полный обзор всех параметров безопасности с наглядной демонстрацией их настройки.
+                    </div>
+                </div>
+
+                                <!-- Эксперимент 4 -->
+                <div class="experiment-card" style="background: rgba(45, 45, 45, 0.9); border-radius: 10px; padding: 30px; margin-bottom: 40px; border-left: 4px solid #dc3545;">
+                    <h2 style="color: #dc3545; margin-bottom: 20px;">
+                        <span class="experiment-number" style="background: #dc3545; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8em; margin-right: 15px;">04</span>
+                        Одновременное подключение нескольких пользователей
+                    </h2>
+                    
+                    <div style="color: #e0e0e0; line-height: 1.6; margin-bottom: 25px;">
+                        <p><strong>Цель:</strong> Продемонстрировать работу AnyDesk при множественных одновременных подключениях и показать нагрузку на систему.</p>
+                        
+                        <p><strong>Что показывается:</strong></p>
+                        <ul style="margin-left: 20px;">
+                            <li>Окно AnyDesk с несколькими активными входящими подключениями</li>
+                            <li>Список активных сессий в интерфейсе программы</li>
+                            <li>Диспетчер задач с показателями нагрузки CPU и RAM при множественных подключениях</li>
+                            <li>Настройки разрешений для каждого подключенного пользователя</li>
+                            <li>Окно монитора сетевой активности с трафиком от всех соединений</li>
+                            <li>Журнал подключений с историей сессий</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="screenshot-placeholder" style="background: #333; border: 2px dashed #666; height: 200px; display: flex; align-items: center; justify-content: center; color: #999; margin: 20px 0; border-radius: 8px;">
+                        [Скриншот множественных подключений и мониторинга системных ресурсов]
+                    </div>
+                    
+                    <div style="color: #b0b0b0;">
+                        <strong>Результат:</strong> Визуальное подтверждение возможности работы с несколькими пользователями одновременно и влияния на производительность системы.
+                    </div>
+                </div>
+
+                <!-- Эксперимент 5 -->
+                <div class="experiment-card" style="background: rgba(45, 45, 45, 0.9); border-radius: 10px; padding: 30px; margin-bottom: 40px; border-left: 4px solid #6f42c1;">
+                    <h2 style="color: #6f42c1; margin-bottom: 20px;">
+                        <span class="experiment-number" style="background: #6f42c1; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8em; margin-right: 15px;">05</span>
+                        Работа между различными операционными системами
+                    </h2>
+                    
+                    <div style="color: #e0e0e0; line-height: 1.6; margin-bottom: 25px;">
+                        <p><strong>Цель:</strong> Показать интерфейс и функциональность AnyDesk на разных операционных системах и демонстрировать кроссплатформенные подключения.</p>
+                        
+                        <p><strong>Что показывается:</strong></p>
+                        <ul style="margin-left: 20px;">
+                            <li>Интерфейс AnyDesk на Windows 10/11 (светлая и темная тема)</li>
+                            <li>Интерфейс AnyDesk на macOS с нативным дизайном</li>
+                            <li>Интерфейс AnyDesk на Linux Ubuntu</li>
+                            <li>Мобильное приложение AnyDesk на Android и iOS</li>
+                            <li>Процесс подключения с Windows на macOS</li>
+                            <li>Передача файлов между Windows и Linux</li>
+                            <li>Удаленное управление мобильным устройством с компьютера</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="screenshot-placeholder" style="background: #333; border: 2px dashed #666; height: 200px; display: flex; align-items: center; justify-content: center; color: #999; margin: 20px 0; border-radius: 8px;">
+                        [Скриншот интерфейса AnyDesk на разных ОС и кроссплатформенных подключений]
+                    </div>
+                    
+                    <div style="color: #b0b0b0;">
+                        <strong>Результат:</strong> Наглядная демонстрация универсальности AnyDesk и одинаковости функций на всех поддерживаемых платформах.
+                    </div>
+                </div>
+
+                <!-- Заключение -->
+                <div class="fade-in" style="background: rgba(0, 122, 204, 0.1); border-radius: 10px; padding: 30px; margin-top: 50px; border: 1px solid #007acc;">
+                    <h2 style="color: #007acc; text-align: center; margin-bottom: 20px;">Заключение исследования</h2>
+                    <div style="color: #e0e0e0; line-height: 1.6; text-align: center;">
+                        <p>Проведенные эксперименты наглядно демонстрируют все возможности программы AnyDesk в различных условиях использования.</p>
+                        <p>Каждый скриншот показывает реальные настройки и результаты работы программы без необходимости создания сложных отчетов.</p>
+                        <p>Визуальные результаты позволяют быстро оценить функциональность и производительность AnyDesk.</p>
+                    </div>
+                </div>
+
+                <!-- Навигация -->
+                <div class="fade-in" style="text-align: center; margin-top: 50px;">
+                    <a href="anydesk.html" class="btn-secondary" style="margin: 0 10px;">← Вернуться к AnyDesk</a>
+                    <a href="index.html" class="btn-primary" style="margin: 0 10px;">На главную</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Дополнительная информация -->
+        <section class="fade-in" style="padding: 40px 0; background: rgba(0,0,0,0.8);">
+            <div class="container">
+                <div style="text-align: center; color: #888;">
+                    <h3 style="color: #ccc; margin-bottom: 20px;">Техническая информация об экспериментах</h3>
+                    <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px;">
+                        <div class="tech-info-item" style="flex: 1; min-width: 200px;">
+                            <h4 style="color: #007acc;">Формат результатов</h4>
+                            <p>Только скриншоты интерфейса</p>
+                        </div>
+                        <div class="tech-info-item" style="flex: 1; min-width: 200px;">
+                            <h4 style="color: #007acc;">Версии ПО</h4>
+                            <p>AnyDesk 7.x - 8.x на всех ОС</p>
+                        </div>
+                        <div class="tech-info-item" style="flex: 1; min-width: 200px;">
+                            <h4 style="color: #007acc;">Тестовые системы</h4>
+                            <p>Windows, macOS, Linux, Android, iOS</p>
+                        </div>
+                        <div class="tech-info-item" style="flex: 1; min-width: 200px;">
+                            <h4 style="color: #007acc;">Метод демонстрации</h4>
+                            <p>Визуальные примеры в реальном времени</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
+    <footer style="background: rgba(0,0,0,0.9); padding: 20px 0; margin-top: 50px;">
+        <div class="container">
+            <div style="text-align: center; color: #666;">
+                <p>&copy; 2024 Эксперименты с AnyDesk. Все результаты представлены в виде скриншотов реального использования.</p>
+            </div>
+        </div>
+    </footer>
+
     <script src="js/menu.js"></script>
+    <script>
+        // Управление прелоадером
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 300);
+            }, 1000);
+        });
+
+        // Анимация появления элементов при скролле
+        function isElementPartiallyInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return rect.top < window.innerHeight && rect.bottom >= 0;
+        }
+
+        function handleScrollAnimation() {
+            // Анимация для карточек экспериментов
+            const experimentCards = document.querySelectorAll('.experiment-card');
+            experimentCards.forEach((card, index) => {
+                if (isElementPartiallyInViewport(card) && !card.classList.contains('animate')) {
+                    setTimeout(() => {
+                        card.classList.add('animate');
+                    }, index * 200);
+                }
+            });
+
+            // Анимация для fade-in элементов
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(element => {
+                if (isElementPartiallyInViewport(element)) {
+                    element.classList.add('visible');
+                }
+            });
+
+                        // Анимация для технической информации
+            const techItems = document.querySelectorAll('.tech-info-item');
+            techItems.forEach((item, index) => {
+                if (isElementPartiallyInViewport(item) && !item.classList.contains('animate')) {
+                    setTimeout(() => {
+                        item.classList.add('animate');
+                    }, index * 100);
+                }
+            });
+        }
+
+        // Запуск анимаций при скролле
+        window.addEventListener('scroll', handleScrollAnimation);
+        
+        // Запуск анимаций при загрузке
+        window.addEventListener('load', () => {
+            setTimeout(handleScrollAnimation, 1200);
+        });
+
+        // Плавное появление hero секции
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroTitle = document.querySelector('.hero-title');
+            const heroSubtitle = document.querySelector('.hero-subtitle');
+            
+            setTimeout(() => {
+                if (heroTitle) heroTitle.style.animationPlayState = 'running';
+                if (heroSubtitle) heroSubtitle.style.animationPlayState = 'running';
+            }, 1000);
+        });
+
+        // Добавление эффекта hover для screenshot placeholder
+        document.querySelectorAll('.screenshot-placeholder').forEach(placeholder => {
+            placeholder.addEventListener('mouseenter', function() {
+                this.style.borderColor = '#007acc';
+                this.style.color = '#007acc';
+                this.style.transform = 'scale(1.02)';
+            });
+            
+            placeholder.addEventListener('mouseleave', function() {
+                this.style.borderColor = '#666';
+                this.style.color = '#999';
+                this.style.transform = 'scale(1)';
+            });
+        });
+
+        // Эффект печатающегося текста для прелоадера
+        const preloaderTexts = [
+            'Загрузка экспериментов...',
+            'Подготовка скриншотов...',
+            'Инициализация демонстрации...',
+            'Готово к просмотру!'
+        ];
+        
+        let currentTextIndex = 0;
+        const preloaderTextElement = document.querySelector('.preloader-text');
+        
+        if (preloaderTextElement) {
+            const textInterval = setInterval(() => {
+                if (currentTextIndex < preloaderTexts.length - 1) {
+                    currentTextIndex++;
+                    preloaderTextElement.textContent = preloaderTexts[currentTextIndex];
+                } else {
+                    clearInterval(textInterval);
+                }
+            }, 300);
+        }
+
+        // Добавление эффекта нажатия для кнопок навигации
+        document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
+            button.addEventListener('mousedown', function() {
+                this.style.transform = 'translateY(2px)';
+            });
+            
+            button.addEventListener('mouseup', function() {
+                this.style.transform = 'translateY(0)';
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Эффект подсветки номеров экспериментов при скролле
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const experimentNumber = entry.target.querySelector('.experiment-number');
+                    if (experimentNumber && !experimentNumber.classList.contains('highlighted')) {
+                        experimentNumber.style.animation = 'bounceIn 0.6s ease';
+                        experimentNumber.classList.add('highlighted');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Наблюдение за карточками экспериментов
+        document.querySelectorAll('.experiment-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Добавление эффекта пульсации для placeholder'ов
+        let pulseInterval;
+        
+        function startPulse() {
+            const placeholders = document.querySelectorAll('.screenshot-placeholder');
+            let currentIndex = 0;
+            
+            pulseInterval = setInterval(() => {
+                // Убираем пульсацию с предыдущего элемента
+                placeholders.forEach(p => p.style.boxShadow = 'none');
+                
+                // Добавляем пульсацию к текущему элементу
+                if (placeholders[currentIndex]) {
+                    placeholders[currentIndex].style.boxShadow = '0 0 20px rgba(0, 122, 204, 0.5)';
+                    placeholders[currentIndex].style.transition = 'box-shadow 0.3s ease';
+                }
+                
+                currentIndex = (currentIndex + 1) % placeholders.length;
+            }, 2000);
+        }
+
+        // Запуск пульсации после загрузки
+        setTimeout(startPulse, 3000);
+
+        // Останавливаем пульсацию при взаимодействии с любым placeholder
+        document.querySelectorAll('.screenshot-placeholder').forEach(placeholder => {
+            placeholder.addEventListener('mouseenter', () => {
+                if (pulseInterval) {
+                    clearInterval(pulseInterval);
+                    document.querySelectorAll('.screenshot-placeholder').forEach(p => {
+                        p.style.boxShadow = 'none';
+                    });
+                }
+            });
+        });
+
+        // Добавление счетчика просмотренных экспериментов
+        let viewedExperiments = new Set();
+        
+        const viewObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const experimentCard = entry.target;
+                    const experimentNumber = experimentCard.querySelector('.experiment-number');
+                    if (experimentNumber) {
+                        const number = experimentNumber.textContent.trim();
+                        if (!viewedExperiments.has(number)) {
+                            viewedExperiments.add(number);
+                            experimentNumber.style.backgroundColor = '#28a745';
+                            experimentNumber.style.animation = 'pulse 0.5s ease';
+                        }
+                    }
+                }
+            });
+        }, { threshold: 0.8 });
+
+        // Наблюдение за просмотром экспериментов
+        document.querySelectorAll('.experiment-card').forEach(card => {
+            viewObserver.observe(card);
+        });
+
+        // Добавление индикатора прогресса просмотра
+        function updateProgressIndicator() {
+            const totalExperiments = document.querySelectorAll('.experiment-card').length;
+            const viewedCount = viewedExperiments.size;
+            const progressPercent = (viewedCount / totalExperiments) * 100;
+            
+            // Создаем индикатор прогресса если его нет
+            let progressBar = document.getElementById('progress-bar');
+            if (!progressBar && viewedCount > 0) {
+                progressBar = document.createElement('div');
+                progressBar.id = 'progress-bar';
+                progressBar.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: ${progressPercent}%;
+                    height: 3px;
+                    background: linear-gradient(90deg, #007acc, #28a745);
+                    z-index: 1000;
+                    transition: width 0.5s ease;
+                `;
+                document.body.appendChild(progressBar);
+            } else if (progressBar) {
+                progressBar.style.width = progressPercent + '%';
+            }
+        }
+
+        // Обновляем прогресс при изменении viewedExperiments
+        const originalAdd = viewedExperiments.add;
+        viewedExperiments.add = function(value) {
+            const result = originalAdd.call(this, value);
+            updateProgressIndicator();
+            return result;
+        };
+    </script>
 </body>
 </html>
+
+
