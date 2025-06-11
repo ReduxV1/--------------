@@ -1430,3 +1430,62 @@ a:focus {
     }
 }
 
+/* Мобильная версия */
+@media (max-width: 768px) {
+    .back-to-tools {
+        bottom: 30px; /* Поднимаем выше чтобы не перекрывалась с другими элементами */
+        left: 15px;
+        border-radius: 50px;
+        padding: 10px 12px;
+        font-size: 12px;
+        gap: 6px;
+        min-width: auto;
+    }
+    
+    .back-to-tools svg {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .back-to-tools span {
+        font-size: 11px;
+    }
+}
+
+/* Для очень маленьких экранов - показываем только иконку */
+@media (max-width: 480px) {
+    .back-to-tools {
+        padding: 8px;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        bottom: 30px;
+        left: 10px;
+        justify-content: center;
+    }
+    
+    .back-to-tools span {
+        display: none; /* Скрываем текст */
+    }
+    
+    .back-to-tools svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+/* Альтернативный вариант - компактная кнопка с коротким текстом */
+@media (max-width: 360px) {
+    .back-to-tools {
+        width: 36px;
+        height: 36px;
+        padding: 6px;
+        bottom: 60px;
+        left: 8px;
+    }
+    
+    .back-to-tools svg {
+        width: 16px;
+        height: 16px;
+    }
+}

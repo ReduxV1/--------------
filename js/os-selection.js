@@ -836,47 +836,6 @@ function initSearch() {
     });
 }
 
-// Функция для создания закладок
-function initBookmarks() {
-    const bookmarkButton = document.createElement('button');
-    bookmarkButton.innerHTML = '🔖';
-    bookmarkButton.title = 'Добавить в закладки';
-    bookmarkButton.style.cssText = `
-        position: fixed;
-        top: 80px;
-        right: 30px;
-        width: 50px;
-        height: 50px;
-        background: linear-gradient(135deg, #c5a47e, #d4b896);
-        color: #1a1f2e;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        font-size: 20px;
-        z-index: 1000;
-        transition: all 0.3s ease;
-    `;
-
-    bookmarkButton.addEventListener('click', () => {
-        if (typeof(Storage) !== "undefined") {
-            const bookmark = {
-                title: document.title,
-                url: window.location.href,
-                timestamp: new Date().toISOString()
-            };
-            
-            let bookmarks = JSON.parse(localStorage.getItem('windowsBookmarks') || '[]');
-            bookmarks.push(bookmark);
-            localStorage.setItem('windowsBookmarks', JSON.stringify(bookmarks));
-            
-            showNotification('Страница добавлена в закладки', 'success');
-        } else {
-            showNotification('Локальное хранилище не поддерживается', 'error');
-        }
-    });
-
-    document.body.appendChild(bookmarkButton);
-}
 
 // Функция для отслеживания времени на странице
 function initTimeTracking() {

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/anydesk.css">
+    <link rel="stylesheet" href="css/mobile.css">
     <style>
         /* Прелоадер */
         .preloader {
@@ -180,37 +181,78 @@
         <div class="slide-bg" style="background-image: url('izobr/1.gif')"></div>
         <div class="overlay"></div>
     </div>
+<header class="main-header">
+    <div class="header-logo">
+        <img src="izobr/logo.svg" alt="Логотип" class="logo-img">
+    </div>
+    
+    <!-- Обычное меню для десктопа -->
+    <nav class="header-menu desktop-menu">
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li class="dropdown">
+                <a href="#sections" class="dropdown-trigger">Разделы ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="os-selection.html">Выбор операционной системы</a></li>
+                    <li><a href="filesystem.html">Выбор ФС и разметка диска</a></li>
+                    <li><a href="remote-management.html" class="active">Средства удаленного управления компьютером</a></li>
+                    <li><a href="diagnost-management.html">Средства диагностики, контроля и мониторинга системы</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#ssilki" class="dropdown-trigger">Ссылки на официальные сайты ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="https://www.teamviewer.com" target="_blank">TeamViewer</a></li>
+                    <li><a href="https://anydesk.com" target="_blank">AnyDesk</a></li>
+                    <li><a href="https://www.aeroadmin.com" target="_blank">AeroAdmin</a></li>
+                    <li><a href="https://www.aida64.com" target="_blank">AIDA64</a></li>
+                    <li><a href="https://www.hwinfo.com" target="_blank">HWiNFO</a></li>
+                    <li><a href="https://www.sisoftware.net" target="_blank">SiSoftware Sandra</a></li>
+                </ul>  
+            </li>
+            <li><a href="author.html">Автор</a></li>
+        </ul>
+    </nav>
 
-    <header class="main-header">
-        <div class="header-logo">
-            <img src="izobr/logo.svg" alt="Логотип" class="logo-img">
-        </div>
-        <nav class="header-menu">
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li class="dropdown">
-                    <a href="#sections" class="active">Разделы ▾</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="os-selection.html">Выбор операционной системы</a></li>
-                        <li><a href="filesystem.html" class="active">Выбор ФС и разметка диска</a></li>
-                        <li><a href="remote-management.html">Средства удаленного управления компьютером</a></li>
-                        <li><a href="diagnost-management.html">Средства диагностики, контроля и мониторинга системы</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#ssilki">Ссылки на официальные сайты ▾</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="https://www.teamviewer.com" target="_blank">TeamViewer</a></li>
-                        <li><a href="https://anydesk.com" target="_blank">AnyDesk</a></li>
-                        <li><a href="https://www.aeroadmin.com" target="_blank">AeroAdmin</a></li>
-                        <li><a href="https://www.aida64.com" target="_blank">AIDA64</a></li>
-                        <li><a href="https://www.hwinfo.com" target="_blank">HWiNFO</a></li>
-                        <li><a href="https://www.sisoftware.net" target="_blank">SiSoftware Sandra</a></li>
-                    </ul>
-                </li>
-                <li><a href="author.html">Автор</a></li>
+    <!-- Кнопка мобильного меню -->
+    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+    </button>
+</header>
+
+<!-- Оверлей для закрытия меню -->
+<div class="menu-overlay" id="menuOverlay"></div>
+
+<!-- Боковое меню для мобильных устройств -->
+<nav class="sidebar-menu" id="sidebarMenu">
+    <button class="close-menu" id="closeMenu">×</button>
+    <ul>
+        <li><a href="index.html" class="menu-item">Главная</a></li>
+        <li class="dropdown mobile-dropdown">
+            <a href="#sections" class="menu-item dropdown-toggle">Разделы <span class="dropdown-arrow">▾</span></a>
+            <ul class="dropdown-menu">
+                <li><a href="os-selection.html">Выбор операционной системы</a></li>
+                <li><a href="filesystem.html">Выбор ФС и разметка диска</a></li>
+                <li><a href="remote-management.html" class="active">Средства удаленного управления компьютером</a></li>
+                <li><a href="diagnost-management.html">Средства диагностики, контроля и мониторинга системы</a></li>
             </ul>
-        </nav>
+        </li>
+        <li class="dropdown mobile-dropdown">
+            <a href="#ssilki" class="menu-item dropdown-toggle">Ссылки на официальные сайты <span class="dropdown-arrow">▾</span></a>
+            <ul class="dropdown-menu">
+                <li><a href="https://www.teamviewer.com" target="_blank">TeamViewer</a></li>
+                <li><a href="https://anydesk.com" target="_blank">AnyDesk</a></li>
+                <li><a href="https://www.aeroadmin.com" target="_blank">AeroAdmin</a></li>
+                <li><a href="https://www.aida64.com" target="_blank">AIDA64</a></li>
+                <li><a href="https://www.hwinfo.com" target="_blank">HWiNFO</a></li>
+                <li><a href="https://www.sisoftware.net" target="_blank">SiSoftware Sandra</a></li>
+            </ul>  
+        </li>
+        <li><a href="author.html" class="menu-item">Автор</a></li>
+    </ul>
+</nav>
     </header>
     <main class="main-content">
         <section class="hero-section">
@@ -664,6 +706,7 @@
             return result;
         };
     </script>
+    <script type="module" src="js/mobile-menu.js"></script>
 </body>
 </html>
 
