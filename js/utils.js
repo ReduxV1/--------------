@@ -7,15 +7,35 @@ export class Utils {
     init() {
         this.setupDeviceDetection();
         this.setupTouchHandling();
+        this.setupDebugInfo();
     }
 
     setupDeviceDetection() {
-        // Определение типа устройства
-        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        // Более точное определение touch устройств
+        const isTouchDevice = (
+            'ontouchstart' in window ||
+            navigator.maxTouchPoints > 0 ||
+            navigator.msMaxTouchPoints > 0 ||
+            window.DocumentTouch && document instanceof DocumentTouch
+        );
+        
         const isMobile = window.innerWidth <= 768;
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+        const isAndroid = /Android/.test(navigator.userAgent);
         
         document.body.classList.toggle('touch-device', isTouchDevice);
         document.body.classList.toggle('mobile-device', isMobile);
+        document.body.classList.toggle('ios-device', isIOS);
+        document.body.classList.toggle('android-device', isAndroid);
+        
+        console.log('Device detection:', {
+            isTouchDevice,
+            isMobile,
+            isIOS,
+            isAndroid,
+            userAgent: navigator.userAgent,
+            maxTouchPoints: navigator.maxTouchPoints
+        });
         
         // Обновляем при изменении размера
         window.addEventListener('resize', () => {
@@ -28,12 +48,72 @@ export class Utils {
         // Предотвращаем двойное касание для масштабирования
         let lastTouchEnd = 0;
         document.addEventListener('touchend', (event) => {
-            const now = (new Date()).getTime();
+            const now = Date.now();
             if (now - lastTouchEnd <= 300) {
                 event.preventDefault();
             }
             lastTouchEnd = now;
-        }, false);
+        }, { passive: false });
+
+        // Предотвращаем контекстное меню на долгое нажатие
+        document.addEventListener('contextmenu', (e) => {
+            if (document.body.classList.contains('touch-device')) {
+                e.preventDefault();
+            }
+        });
+
+        // Добавляем класс при первом touch взаимодействии
+        let firstTouchHandled = false;
+        document.addEventListener('touchstart', () => {
+            if (!firstTouchHandled) {
+                document.body.classList.add('touch-interacted');
+                const sliderContainer = document.querySelector('.slider-container');
+                if (sliderContainer) {
+                    sliderContainer.classList.add('interacted');
+                }
+                firstTouchHandled = true;
+            }
+        }, { once: true, passive: true });
+    }
+
+    setupDebugInfo() {
+        // Отладочная информация для мобильных устройств
+        if (window.location.search.includes('debug=1')) {
+            const debugInfo = document.createElement('div');
+            debugInfo.id = 'debug-info';
+            debugInfo.style.cssText = `
+                position: fixed;
+                top: 10px;
+                left: 10px;
+                background: rgba(0,0,0,0.8);
+                color: white;
+                padding: 10px;
+                font-size: 12px;
+                z-index: 9999;
+                border-radius: 5px;
+                font-family: monospace;
+                max-width: 300px;
+                word-wrap: break-word;
+            `;
+            
+            const updateDebugInfo = () => {
+                debugInfo.innerHTML = `
+                    <strong>Debug Info:</strong><br>
+                    Touch Device: ${document.body.classList.contains('touch-device')}<br>
+                    Mobile: ${document.body.classList.contains('mobile-device')}<br>
+                    iOS: ${document.body.classList.contains('ios-device')}<br>
+                    Android: ${document.body.classList.contains('android-device')}<br>
+                    Screen: ${window.innerWidth}x${window.innerHeight}<br>
+                    Max Touch Points: ${navigator.maxTouchPoints}<br>
+                    User Agent: ${navigator.userAgent.substring(0, 50)}...
+                `;
+            };
+            
+            document.body.appendChild(debugInfo);
+            updateDebugInfo();
+            
+            window.addEventListener('resize', updateDebugInfo);
+        }
     }
 
     // Утилиты для работы с DOM
@@ -76,14 +156,42 @@ export class Utils {
             grid: 'grid' in document.documentElement.style,
             es6: typeof Symbol !== 'undefined',
             customProperties: window.CSS && CSS.supports('color', 'var(--test)'),
-            intersectionObserver: 'IntersectionObserver' in window
+            intersectionObserver: 'IntersectionObserver' in window,
+            touchEvents: 'ontouchstart' in window
         };
 
+        console.log('Browser support:', features);
         return features;
+    }
+
+    // Утилита для безопасного вызова функций
+    static safeCall(fn, context = null, ...args) {
+        try {
+            if (typeof fn === 'function') {
+                return fn.apply(context, args);
+            }
+        } catch (error) {
+            console.error('Error in safeCall:', error);
+        }
+    }
+
+    // Утилита для определения направления свайпа
+    static getSwipeDirection(startX, startY, endX, endY, threshold = 30) {
+        const deltaX = endX - startX;
+        const deltaY = endY - startY;
+        
+        if (Math.abs(deltaX) < threshold && Math.abs(deltaY) < threshold) {
+            return 'tap';
+        }
+        
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+            return deltaX > 0 ? 'right' : 'left';
+        } else {
+            return deltaY > 0 ? 'down' : 'up';
+        }
     }
 }
 
-// Класс для управления состоянием меню
 export class MenuStateManager {
     constructor() {
         this.currentPage = this.getCurrentPage();
@@ -96,6 +204,8 @@ export class MenuStateManager {
                 activeDropdown: null
             }
         };
+        
+        this.setupEventListeners();
     }
 
     getCurrentPage() {
@@ -104,13 +214,26 @@ export class MenuStateManager {
         return page.replace('.html', '');
     }
 
+    setupEventListeners() {
+        // Слушаем события от компонентов
+        document.addEventListener('menuStateChanged', (e) => {
+            console.log('Menu state changed:', e.detail);
+        });
+        
+        document.addEventListener('mobileMenuToggle', (e) => {
+            this.updateMobileState(e.detail.isOpen, e.detail.activeDropdown);
+        });
+    }
+
     updateDesktopState(dropdown) {
         this.menuState.desktop.activeDropdown = dropdown;
+        this.syncState();
     }
 
     updateMobileState(isOpen, dropdown = null) {
         this.menuState.mobile.isOpen = isOpen;
         this.menuState.mobile.activeDropdown = dropdown;
+        this.syncState();
     }
 
     getState() {
@@ -125,5 +248,16 @@ export class MenuStateManager {
         });
         document.dispatchEvent(event);
     }
+
+    // Проверка конфликтов между компонентами
+    checkConflicts() {
+        const { mobile } = this.menuState;
+        
+        // Если мобильное меню открыто, блокируем другие взаимодействия
+        if (mobile.isOpen) {
+            document.body.classList.add('mobile-menu-active');
+        } else {
+            document.body.classList.remove('mobile-menu-active');
+        }
+    }
 }
-    

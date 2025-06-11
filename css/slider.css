@@ -84,30 +84,72 @@
 
 /* Удалены дублирующиеся стили и will-change для .slide-bg */
 
-/* Touch improvements for mobile */
-.slider-container {
-    touch-action: pan-y; /* Разрешаем только вертикальные свайпы */
+/* Touch улучшения для слайдера */
+.touch-device .slider-container {
+    touch-action: pan-y;
     -webkit-overflow-scrolling: touch;
-    overscroll-behavior: none; /* Предотвращаем bounce эффект */
+    overscroll-behavior: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
-/* Улучшенные стили для touch устройств */
-@media (hover: none) and (pointer: coarse) {
-    .slider-container {
-        -webkit-tap-highlight-color: transparent;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
+.touch-device .slide {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* Убираем эффекты hover на touch устройствах */
+.touch-device .slide a:hover {
+    background: initial;
+    color: initial;
+    transform: initial;
+}
+
+.touch-device .slide a:active {
+    background: rgba(197, 164, 126, 0.1);
+    color: #c5a47e;
+}
+
+/* Улучшения производительности */
+.touch-device .slider-container * {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+/* Индикация возможности свайпа */
+.touch-device .slider-container::after {
+    content: '↕';
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(197, 164, 126, 0.6);
+    font-size: 24px;
+    z-index: 1000;
+    animation: bounce 2s infinite;
+    pointer-events: none;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
     }
-    
-    .slide {
-        -webkit-transform: translateZ(0);
-        transform: translateZ(0);
-        will-change: transform;
+    40% {
+        transform: translateX(-50%) translateY(-10px);
     }
+    60% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+/* Скрываем индикатор после первого взаимодействия */
+.touch-device .slider-container.interacted::after {
+    display: none;
 }
 
 /* Индикаторы для навигации по слайдам (опционально) */

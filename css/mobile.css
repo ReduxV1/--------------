@@ -743,3 +743,82 @@
     transform: translateY(0) !important;
 }
 
+/* Улучшенные стили для touch устройств */
+.touch-device {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+}
+
+/* Мобильное меню touch улучшения */
+.touch-device .mobile-menu-toggle {
+    -webkit-tap-highlight-color: rgba(197, 164, 126, 0.2);
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.touch-device .sidebar-menu {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+}
+
+.touch-device .sidebar-menu a,
+.touch-device .sidebar-menu .dropdown-toggle {
+    -webkit-tap-highlight-color: rgba(197, 164, 126, 0.1);
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: pointer;
+}
+
+/* Активные состояния для touch */
+.touch-device .mobile-menu-toggle:active {
+    transform: scale(0.95);
+    background: rgba(197, 164, 126, 0.1);
+}
+
+.touch-device .sidebar-menu a:active {
+    background: rgba(197, 164, 126, 0.15) !important;
+    color: #c5a47e !important;
+}
+
+.touch-device .sidebar-menu .dropdown-toggle:active {
+    background: rgba(197, 164, 126, 0.1) !important;
+    color: #c5a47e !important;
+}
+
+.touch-device .close-menu:active {
+    transform: rotate(90deg) scale(0.9);
+    background: rgba(197, 164, 126, 0.2);
+}
+
+/* Улучшения для больших пальцев */
+@media (max-width: 768px) {
+    .touch-device .mobile-menu-toggle {
+        min-width: 44px;
+        min-height: 44px;
+        padding: 12px;
+    }
+    
+    .touch-device .sidebar-menu a,
+    .touch-device .sidebar-menu .dropdown-toggle {
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .touch-device .close-menu {
+        min-width: 48px;
+        min-height: 48px;
+    }
+}
+
+/* Предотвращаем выделение текста при touch */
+.touch-device .sidebar-menu,
+.touch-device .mobile-menu-toggle,
+.touch-device .slider-container {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

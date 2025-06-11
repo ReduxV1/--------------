@@ -586,3 +586,121 @@ body {
     margin-right: 5px;
 }
 
+/* Глобальные стили для мобильных устройств */
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Предотвращение выделения текста на мобильных */
+.touch-device {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Разрешаем выделение для контентных областей */
+.touch-device .content-article,
+.touch-device .article-text,
+.touch-device p,
+.touch-device h1,
+.touch-device h2,
+.touch-device h3,
+.touch-device h4,
+.touch-device h5,
+.touch-device h6 {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+/* Улучшения для кнопок и интерактивных элементов */
+.touch-device button,
+.touch-device [role="button"],
+.touch-device input[type="button"],
+.touch-device input[type="submit"] {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(197, 164, 126, 0.2);
+}
+
+/* Активные состояния для touch */
+.touch-device .touch-tapped {
+    background: rgba(197, 164, 126, 0.1) !important;
+    transform: scale(0.98);
+    transition: all 0.1s ease;
+}
+
+/* Предотвращаем bounce эффект на iOS */
+.touch-device body {
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Фиксы для viewport на мобильных */
+@supports (padding: max(0px)) {
+    .main-header,
+    .sidebar-menu {
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
+    }
+    
+    .slider-container {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+}
+
+/* Стили для отладки на мобильных */
+.debug-mode.touch-device::before {
+    content: 'TOUCH DEBUG MODE';
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(255, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    font-size: 12px;
+    z-index: 10001;
+    font-family: monospace;
+}
+
+/* Улучшения производительности для анимаций */
+.touch-device * {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-perspective: 1000;
+    perspective: 1000;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+/* Отключаем анимации на слабых устройствах */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Дополнительные стили для старых мобильных браузеров */
+@supports not (display: flex) {
+    .mobile-menu-toggle {
+        display: block !important;
+        float: right;
+    }
+    
+    .sidebar-menu {
+        display: block;
+    }
+}

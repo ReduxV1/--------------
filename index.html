@@ -2,8 +2,11 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Системное ПО - Курсовая работа</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/slider.css">
@@ -21,7 +24,7 @@
         <!-- Обычное меню для десктопа -->
         <nav class="header-menu desktop-menu">
             <ul>
-                <li><a href="index.html" class="active">Главная</a></li>
+                <li><a href="index.html">Главная</a></li>
                 <li class="dropdown">
                     <a href="#sections" class="dropdown-trigger">Разделы ▾</a>
                     <ul class="dropdown-menu">
@@ -47,7 +50,7 @@
         </nav>
 
         <!-- Кнопка мобильного меню -->
-        <button class="mobile-menu-toggle" id="mobileMenuToggle">
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-label="Открыть меню">
             <span class="hamburger-line"></span>
             <span class="hamburger-line"></span>
             <span class="hamburger-line"></span>
@@ -55,15 +58,17 @@
     </header>
 
     <!-- Оверлей для закрытия меню -->
-    <div class="menu-overlay" id="menuOverlay"></div>
+    <div class="menu-overlay" id="menuOverlay" aria-hidden="true"></div>
 
     <!-- Боковое меню для мобильных устройств -->
-    <nav class="sidebar-menu" id="sidebarMenu">
-        <button class="close-menu" id="closeMenu">×</button>
+    <nav class="sidebar-menu" id="sidebarMenu" aria-hidden="true">
+        <button class="close-menu" id="closeMenu" type="button" aria-label="Закрыть меню">×</button>
         <ul>
-            <li><a href="index.html" class="menu-item active">Главная</a></li>
+            <li><a href="index.html" class="menu-item">Главная</a></li>
             <li class="dropdown mobile-dropdown">
-                <a href="#sections" class="menu-item dropdown-toggle">Разделы <span class="dropdown-arrow">▾</span></a>
+                <button class="menu-item dropdown-toggle" type="button" aria-expanded="false">
+                    Разделы <span class="dropdown-arrow">▾</span>
+                </button>
                 <ul class="dropdown-menu">
                     <li><a href="os-selection.html">Выбор операционной системы</a></li>
                     <li><a href="filesystem.html">Выбор ФС и разметка диска</a></li>
@@ -72,7 +77,9 @@
                 </ul>
             </li>
             <li class="dropdown mobile-dropdown">
-                <a href="#ssilki" class="menu-item dropdown-toggle">Ссылки на официальные сайты <span class="dropdown-arrow">▾</span></a>
+                <button class="menu-item dropdown-toggle" type="button" aria-expanded="false">
+                    Ссылки на официальные сайты <span class="dropdown-arrow">▾</span>
+                </button>
                 <ul class="dropdown-menu">
                     <li><a href="https://www.teamviewer.com" target="_blank">TeamViewer</a></li>
                     <li><a href="https://anydesk.com" target="_blank">AnyDesk</a></li>
@@ -86,43 +93,42 @@
         </ul>
     </nav>
 
-    <main>
-        <div class="slider-container">
-            <!-- Слайд 1 -->
-            <div class="slide" aria-hidden="false">
-                <div class="slide-bg"></div>
-                <div class="slide-content"> 
-                    <div class="content-block" id="main-content-block">
-                        <div class="divider-gold" id="main-divider"></div>
-                        <p class="discipline" id="main-discipline">
-                            Курсовой проект по дисциплине<br>
-                            «Системное администрирование»
-                        </p>
-                    </div>
+    <main class="slider-container">
+        <!-- Слайд 1 -->
+        <section class="slide" aria-hidden="false">
+            <div class="slide-bg"></div>
+            <div class="slide-content"> 
+                <div class="content-block" id="main-content-block">
+                    <div class="divider-gold" id="main-divider"></div>
+                    <p class="discipline" id="main-discipline">
+                        Курсовой проект по дисциплине<br>
+                        «Системное администрирование»
+                    </p>
                 </div>
             </div>
+        </section>
 
-            <!-- Слайд 2 -->
-            <div class="slide" aria-hidden="true">
-                <div class="slide-bg"></div>
-                <div class="slide-content">
-                    <div class="divider-gold" id="top-divider"></div>
-                    <div class="content-article" id="content-window">
-                        <h2 class="discipline animated-title" id="main-title" style="color: #c5a47e; text-align: center; margin-bottom: 25px;">
-                            Приветствую
-                        </h2>
-                        <div class="article-text" id="article-content">
-                            <p class="specs">Сайт создан как курсовой проект по дисциплине «Системное администрирование» на тему:</p>
-                            <p class="specs">«Разработка Web-страницы с описанием разделов системного программного обеспечения»</p>
-                            <p class="specs">Далее по сайту будет меню с категориями которые вы можете выбрать.</p>
-                        </div>
-                        <div class="divider-gold" id="bottom-divider" style="margin-top: 25px;"></div>
+        <!-- Слайд 2 -->
+        <section class="slide" aria-hidden="true">
+            <div class="slide-bg"></div>
+            <div class="slide-content">
+                <div class="divider-gold" id="top-divider"></div>
+                <div class="content-article" id="content-window">
+                    <h2 class="discipline animated-title" id="main-title" style="color: #c5a47e; text-align: center; margin-bottom: 25px;">
+                        Приветствую
+                    </h2>
+                    <div class="article-text" id="article-content">
+                        <p class="specs">Сайт создан как курсовой проект по дисциплине «Системное администрирование» на тему:</p>
+                        <p class="specs">«Разработка Web-страницы с описанием разделов системного программного обеспечения»</p>
+                        <p class="specs">Далее по сайту будет меню с категориями которые вы можете выбрать.</p>
                     </div>
+                    <div class="divider-gold" id="bottom-divider" style="margin-top: 25px;"></div>
                 </div>
             </div>
-        </div>
+        </section>
     </main>
     
+    <!-- Скрипты -->
     <script type="module" src="js/menu.js"></script>
     <script type="module" src="js/slider.js"></script>
     <script type="module" src="js/mobile-menu.js"></script>
