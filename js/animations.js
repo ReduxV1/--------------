@@ -1,131 +1,156 @@
 // Класс для управления анимациями
 export class AnimationManager {
     constructor() {
+        this.observers = new Map();
+        this.animatedElements = new Set();
         this.init();
     }
 
     init() {
-        this.setupParticleEffects();
-        this.setupDividerEffects();
-        this.setupRippleEffects();
-        this.setupTouchEffects();
+        this.setupScrollAnimations();
+        this.setupHoverEffects();
+        this.setupClickEffects();
+        this.setupLoadAnimations();
     }
 
-    setupParticleEffects() {
-        // Эффект частиц при клике (исключаем элементы меню)
-        document.addEventListener('click', (e) => {
-            const isMenuElement = e.target.closest('.mobile-menu-toggle') || 
-                                e.target.closest('.sidebar-menu') || 
-                                e.target.closest('.menu-overlay') ||
-                                e.target.closest('a:not(.dropdown-toggle)'); // Исключаем только НЕ dropdown-toggle
-            
-            if (!isMenuElement) {
-                this.createParticles(e.clientX, e.clientY);
-            }
-        });
-    }
+    setupScrollAnimations() {
+        // Проверяем поддержку Intersection Observer
+        if (!('IntersectionObserver' in window)) {
+            console.warn('Intersection Observer not supported');
+            return;
+        }
 
-    createParticles(x, y) {
-        for (let i = 0; i < 6; i++) {
-            const particle = document.createElement('div');
-            particle.style.cssText = `
-                position: fixed;
-                width: 4px;
-                height: 4px;
-                background: #c5a47e;
-                border-radius: 50%;
-                pointer-events: none;
-                z-index: 9999;
-                left: ${x}px;
-                top: ${y}px;
-            `;
-            
-            document.body.appendChild(particle);
-            
-            const angle = (Math.PI * 2 * i) / 6;
-            const velocity = 100;
-            const vx = Math.cos(angle) * velocity;
-            const vy = Math.sin(angle) * velocity;
-            
-            particle.animate([
-                { 
-                    transform: 'translate(0, 0) scale(1)', 
-                    opacity: 1 
-                },
-                { 
-                    transform: `translate(${vx}px, ${vy}px) scale(0)`, 
-                    opacity: 0 
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    this.animateElement(entry.target);
+                    observer.unobserve(entry.target);
                 }
-            ], {
-                duration: 800,
-                easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-            }).onfinish = () => {
-                particle.remove();
-            };
+            });
+        }, observerOptions);
+
+        // Находим все элементы для анимации
+        const animatableElements = document.querySelectorAll(
+            '.scroll-animate, .fade-up, .fade-in, .slide-up, .bounce-in'
+        );
+
+        animatableElements.forEach(el => {
+            observer.observe(el);
+        });
+
+        this.observers.set('scroll', observer);
+    }
+
+    animateElement(element) {
+        if (this.animatedElements.has(element)) return;
+
+        element.classList.add('animated');
+        this.animatedElements.add(element);
+
+        // Добавляем задержку для последовательной анимации
+        const delay = element.dataset.delay || 0;
+        setTimeout(() => {
+            element.classList.add('visible');
+        }, parseInt(delay));
+    }
+
+    setupHoverEffects() {
+        // Только для не-touch устройств
+        if (!document.body.classList.contains('touch-device')) {
+            const hoverElements = document.querySelectorAll('.hover-effect');
+            hoverElements.forEach(el => {
+                el.addEventListener('mouseenter', this.handleHoverIn.bind(this));
+                el.addEventListener('mouseleave', this.handleHoverOut.bind(this));
+            });
         }
     }
 
-    setupDividerEffects() {
-        // Эффект мерцания для разделителя
-        const dividers = document.querySelectorAll('.divider-gold');
-        dividers.forEach(divider => {
-            divider.addEventListener('mouseenter', () => {
-                divider.style.animation = 'shine 0.5s ease-in-out';
-            });
-            
-            divider.addEventListener('animationend', () => {
-                divider.style.animation = '';
-            });
+    handleHoverIn(event) {
+        const element = event.currentTarget;
+        element.classList.add('hovered');
+        
+        // Создаем ripple эффект
+        const ripple = document.createElement('span');
+        ripple.classList.add('ripple');
+        element.appendChild(ripple);
+        
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
+    }
+
+    handleHoverOut(event) {
+        const element = event.currentTarget;
+        element.classList.remove('hovered');
+    }
+
+    setupClickEffects() {
+        // Эффект нажатия для кнопок и ссылок
+        const clickableElements = document.querySelectorAll(
+            'button, .btn, a[href], .clickable'
+        );
+
+        clickableElements.forEach(el => {
+            // Избегаем конфликтов с dropdown и мобильным меню
+            if (el.closest('.dropdown-toggle') || el.closest('.mobile-menu-toggle')) {
+                return;
+            }
+
+            el.addEventListener('click', this.handleClickEffect.bind(this));
         });
     }
 
-    setupRippleEffects() {
-        // Добавляем эффект ripple для кнопок меню
-        const addRippleEffect = (element) => {
-            element.addEventListener('click', function(e) {
-                const ripple = document.createElement('span');
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-                
-                ripple.style.cssText = `
-                    position: absolute;
-                    width: ${size}px;
-                    height: ${size}px;
-                    left: ${x}px;
-                    top: ${y}px;
-                    background: rgba(197, 164, 126, 0.3);
-                    border-radius: 50%;
-                    transform: scale(0);
-                    animation: ripple 0.6s ease-out;
-                    pointer-events: none;
-                `;
-                
-                this.style.position = 'relative';
-                this.style.overflow = 'hidden';
-                this.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-            });
-        };
-
-        // Применяем эффект ripple к кнопкам меню
-        const menuButtons = document.querySelectorAll('.sidebar-menu a, .mobile-menu-toggle');
-        menuButtons.forEach(addRippleEffect);
+    handleClickEffect(event) {
+        const element = event.currentTarget;
+        
+        // Создаем волновой эффект
+        const rect = element.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        
+        const ripple = document.createElement('span');
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        ripple.classList.add('click-ripple');
+        
+        element.appendChild(ripple);
+        
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
     }
 
-    setupTouchEffects() {
-        // Определяем поддержку touch событий
-        const isTouchDevice = () => {
-            return 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
-        };
+    setupLoadAnimations() {
+        // Анимации при загрузке страницы
+        const loadElements = document.querySelectorAll('.load-animate');
+        
+        loadElements.forEach((el, index) => {
+            setTimeout(() => {
+                el.classList.add('loaded');
+            }, index * 100);
+        });
+    }
 
-        // Добавляем специальные стили для touch устройств
-        if (isTouchDevice()) {
-            document.body.classList.add('touch-device');
-        }
+    // Методы для управления анимациями
+    pauseAllAnimations() {
+        document.body.classList.add('animations-paused');
+    }
+
+    resumeAllAnimations() {
+        document.body.classList.remove('animations-paused');
+    }
+
+    // Cleanup
+    destroy() {
+        this.observers.forEach(observer => {
+            observer.disconnect();
+        });
+        this.observers.clear();
+        this.animatedElements.clear();
     }
 }

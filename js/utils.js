@@ -1,5 +1,49 @@
 // Утилиты и вспомогательные функции
 export class Utils {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        this.setupDeviceDetection();
+        this.setupTouchHandling();
+    }
+
+    setupDeviceDetection() {
+        // Определение типа устройства
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        const isMobile = window.innerWidth <= 768;
+        
+        document.body.classList.toggle('touch-device', isTouchDevice);
+        document.body.classList.toggle('mobile-device', isMobile);
+        
+        // Обновляем при изменении размера
+        window.addEventListener('resize', () => {
+            const newIsMobile = window.innerWidth <= 768;
+            document.body.classList.toggle('mobile-device', newIsMobile);
+        });
+    }
+
+    setupTouchHandling() {
+        // Предотвращаем двойное касание для масштабирования
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', (event) => {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    }
+
+    // Утилиты для работы с DOM
+    static createElement(tag, className, innerHTML) {
+        const element = document.createElement(tag);
+        if (className) element.className = className;
+        if (innerHTML) element.innerHTML = innerHTML;
+        return element;
+    }
+
     static debounce(func, wait) {
         let timeout;
         return function executedFunction(...args) {
@@ -12,149 +56,74 @@ export class Utils {
         };
     }
 
-    static showNotification(message, type = 'info', duration = 3000) {
-        const notification = document.createElement('div');
-        notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: ${type === 'error' ? '#ff4444' : '#c5a47e'};
-            color: white;
-            padding: 15px 20px;
-            border-radius: 5px;
-            z-index: 10000;
-            font-size: 14px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-        `;
-        notification.textContent = message;
-        
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.style.transform = 'translateX(0)';
-        }, 100);
-        
-        setTimeout(() => {
-            notification.style.transform = 'translateX(100%)';
-            setTimeout(() => {
-                notification.remove();
-            }, 300);
-        }, duration);
+    static throttle(func, limit) {
+        let inThrottle;
+        return function() {
+            const args = arguments;
+            const context = this;
+            if (!inThrottle) {
+                func.apply(context, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        };
     }
 
-    static smoothScrollTo(element, duration = 300) {
-        const targetPosition = element.offsetTop;
-        const startPosition = element.parentElement.scrollTop;
-        const distance = targetPosition - startPosition;
-        let startTime = null;
-
-        const animation = (currentTime) => {
-            if (startTime === null) startTime = currentTime;
-            const timeElapsed = currentTime - startTime;
-            const run = this.easeInOutQuad(timeElapsed, startPosition, distance, duration);
-            element.parentElement.scrollTop = run;
-            if (timeElapsed < duration) requestAnimationFrame(animation);
+    // Проверка поддержки браузера
+    static checkBrowserSupport() {
+        const features = {
+            flexbox: 'flex' in document.documentElement.style,
+            grid: 'grid' in document.documentElement.style,
+            es6: typeof Symbol !== 'undefined',
+            customProperties: window.CSS && CSS.supports('color', 'var(--test)'),
+            intersectionObserver: 'IntersectionObserver' in window
         };
 
-        requestAnimationFrame(animation);
-    }
-
-    static easeInOutQuad(t, b, c, d) {
-        t /= d / 2;
-        if (t < 1) return c / 2 * t * t + b;
-        t--;
-        return -c / 2 * (t * (t - 2) - 1) + b;
-    }
-
-    static preloadResources() {
-        const criticalResources = [
-            'css/main.css',
-            'css/slider.css',
-            'css/menu.css',
-            'css/animations.css',
-            'css/mobile.css'
-        ];
-        
-        criticalResources.forEach(resource => {
-            const link = document.createElement('link');
-            link.rel = 'preload';
-            link.as = 'style';
-            link.href = resource;
-            document.head.appendChild(link);
-        });
-    }
-
-    static handleImageErrors() {
-        const images = document.querySelectorAll('img');
-        images.forEach(img => {
-            img.addEventListener('error', () => {
-                img.style.display = 'none';
-                console.log(`Не удалось загрузить изображение: ${img.src}`);
-            });
-        });
-    }
-
-    static setupServiceWorker() {
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(registration => {
-                        console.log('SW registered: ', registration);
-                    })
-                    .catch(registrationError => {
-                        console.log('SW registration failed: ', registrationError);
-                    });
-            });
-        }
+        return features;
     }
 }
 
 // Класс для управления состоянием меню
 export class MenuStateManager {
-    static saveMenuState() {
-        const activeDropdowns = [];
-        document.querySelectorAll('.sidebar-menu .dropdown.active').forEach(dropdown => {
-            const link = dropdown.querySelector('.dropdown-toggle');
-            if (link) {
-                activeDropdowns.push(link.textContent.trim());
+    constructor() {
+        this.currentPage = this.getCurrentPage();
+        this.menuState = {
+            desktop: {
+                activeDropdown: null
+            },
+            mobile: {
+                isOpen: false,
+                activeDropdown: null
             }
-        });
-        localStorage.setItem('menuState', JSON.stringify(activeDropdowns));
+        };
     }
 
-    static restoreMenuState() {
-        try {
-            const savedState = localStorage.getItem('menuState');
-            if (savedState) {
-                const activeDropdowns = JSON.parse(savedState);
-                activeDropdowns.forEach(dropdownText => {
-                    const dropdown = Array.from(document.querySelectorAll('.sidebar-menu .dropdown')).find(d => {
-                        const link = d.querySelector('.dropdown-toggle');
-                        return link && link.textContent.trim() === dropdownText;
-                    });
-                    if (dropdown && window.mobileMenu) {
-                        setTimeout(() => {
-                            window.mobileMenu.toggleDropdown(dropdown);
-                        }, 500);
-                    }
-                });
-            }
-        } catch (e) {
-            console.log('Не удалось восстановить состояние меню');
-        }
+    getCurrentPage() {
+        const path = window.location.pathname;
+        const page = path.split('/').pop() || 'index.html';
+        return page.replace('.html', '');
     }
 
-    static markActiveMenuItem() {
-        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-        const menuLinks = document.querySelectorAll('.sidebar-menu a[href]');
-        
-        menuLinks.forEach(link => {
-            const href = link.getAttribute('href');
-            if (href === currentPage || (currentPage === '' && href === 'index.html')) {
-                link.classList.add('active');
-            }
+    updateDesktopState(dropdown) {
+        this.menuState.desktop.activeDropdown = dropdown;
+    }
+
+    updateMobileState(isOpen, dropdown = null) {
+        this.menuState.mobile.isOpen = isOpen;
+        this.menuState.mobile.activeDropdown = dropdown;
+    }
+
+    getState() {
+        return { ...this.menuState };
+    }
+
+    // Синхронизация состояния между компонентами
+    syncState() {
+        // Отправляем событие об изменении состояния
+        const event = new CustomEvent('menuStateChanged', {
+            detail: this.getState()
         });
+        document.dispatchEvent(event);
     }
 }
+    

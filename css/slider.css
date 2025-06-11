@@ -83,3 +83,72 @@
 }
 
 /* Удалены дублирующиеся стили и will-change для .slide-bg */
+
+/* Touch improvements for mobile */
+.slider-container {
+    touch-action: pan-y; /* Разрешаем только вертикальные свайпы */
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: none; /* Предотвращаем bounce эффект */
+}
+
+/* Улучшенные стили для touch устройств */
+@media (hover: none) and (pointer: coarse) {
+    .slider-container {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    
+    .slide {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        will-change: transform;
+    }
+}
+
+/* Индикаторы для навигации по слайдам (опционально) */
+.slide-indicators {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.slide-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(197, 164, 126, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.slide-indicator.active {
+    background: #c5a47e;
+    border-color: #c5a47e;
+    transform: scale(1.2);
+}
+
+.slide-indicator:hover {
+    background: rgba(197, 164, 126, 0.7);
+}
+
+@media (max-width: 768px) {
+    .slide-indicators {
+        right: 15px;
+    }
+    
+    .slide-indicator {
+        width: 10px;
+        height: 10px;
+    }
+}

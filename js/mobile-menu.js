@@ -1,4 +1,4 @@
-// Класс для управления мобильным меню
+// Упрощенная версия без конфликтов
 export class MobileMenu {
     constructor() {
         this.menuToggle = document.getElementById('mobileMenuToggle');
@@ -8,15 +8,11 @@ export class MobileMenu {
         this.dropdowns = document.querySelectorAll('.sidebar-menu .mobile-dropdown');
         this.isMenuOpen = false;
         
-        console.log('MobileMenu initialized');
-        console.log('Found dropdowns:', this.dropdowns.length);
-        
         this.init();
     }
 
     init() {
         if (!this.menuToggle || !this.sidebarMenu) {
-            console.log('Menu elements not found');
             return;
         }
 
@@ -40,7 +36,7 @@ export class MobileMenu {
             });
         }
 
-        // Обработка выпадающих меню
+        // Обработка dropdown только в мобильном меню
         this.dropdowns.forEach(dropdown => {
             const toggle = dropdown.querySelector('.dropdown-toggle');
             if (toggle) {
@@ -52,7 +48,7 @@ export class MobileMenu {
             }
         });
 
-        // Обработка обычных ссылок меню
+        // Обработка обычных ссылок
         const menuItems = document.querySelectorAll('.sidebar-menu .menu-item:not(.dropdown-toggle)');
         menuItems.forEach(item => {
             item.addEventListener('click', () => {
@@ -62,29 +58,14 @@ export class MobileMenu {
             });
         });
 
-        // Обработка ссылок в подменю
-        const submenuLinks = document.querySelectorAll('.sidebar-menu .dropdown-menu a');
-        submenuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                // Для внешних ссылок добавляем небольшую задержку
-                if (link.hasAttribute('target') && link.getAttribute('target') === '_blank') {
-                    setTimeout(() => {
-                        this.closeMenuHandler();
-                    }, 100);
-                } else {
-                    this.closeMenuHandler();
-                }
-            });
-        });
-
-        // Закрытие меню при изменении размера экрана
+        // Закрытие при изменении размера
         window.addEventListener('resize', () => {
             if (window.innerWidth > 768 && this.isMenuOpen) {
                 this.closeMenuHandler();
             }
         });
 
-        // Закрытие меню при нажатии Escape
+        // Закрытие по Escape
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && this.isMenuOpen) {
                 this.closeMenuHandler();
@@ -98,10 +79,14 @@ export class MobileMenu {
             this.menuOverlay.classList.add('active');
         }
         this.menuToggle.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        this.isMenuOpen = true;
         
-        console.log('Menu opened');
+        // Проверяем, не слайдер ли это страница
+        const isSliderPage = document.querySelector('.slider-container') !== null;
+        if (!isSliderPage) {
+            document.body.style.overflow = 'hidden';
+        }
+        
+        this.isMenuOpen = true;
     }
 
     closeMenuHandler() {
@@ -110,10 +95,16 @@ export class MobileMenu {
             this.menuOverlay.classList.remove('active');
         }
         this.menuToggle.classList.remove('active');
-        document.body.style.overflow = '';
+        
+        // Восстанавливаем скролл только если не слайдер
+        const isSliderPage = document.querySelector('.slider-container') !== null;
+        if (!isSliderPage) {
+            document.body.style.overflow = '';
+        }
+        
         this.isMenuOpen = false;
         
-        // Закрываем все выпадающие меню с задержкой
+        // Закрываем dropdown с задержкой
         setTimeout(() => {
             this.dropdowns.forEach(dropdown => {
                 dropdown.classList.remove('active');
@@ -121,104 +112,47 @@ export class MobileMenu {
                 if (dropdownMenu) {
                     dropdownMenu.style.maxHeight = '0px';
                 }
-                const arrow = dropdown.querySelector('.dropdown-arrow');
-                if (arrow) {
-                    arrow.style.transform = 'rotate(0deg)';
-                }
             });
         }, 300);
-        
-        console.log('Menu closed');
     }
 
     toggleDropdown(dropdown) {
         const isCurrentlyActive = dropdown.classList.contains('active');
         const dropdownMenu = dropdown.querySelector('.dropdown-menu');
-        const arrow = dropdown.querySelector('.dropdown-arrow');
         
         if (!dropdownMenu) return;
 
-        console.log('Toggling dropdown:', dropdown, 'Currently active:', isCurrentlyActive);
-
-        // Закрываем все другие выпадающие меню
+        // Закрываем все другие
         this.dropdowns.forEach(item => {
             if (item !== dropdown && item.classList.contains('active')) {
                 item.classList.remove('active');
                 const otherMenu = item.querySelector('.dropdown-menu');
-                const otherArrow = item.querySelector('.dropdown-arrow');
                 if (otherMenu) {
                     otherMenu.style.maxHeight = '0px';
-                }
-                if (otherArrow) {
-                    otherArrow.style.transform = 'rotate(0deg)';
                 }
             }
         });
 
         if (isCurrentlyActive) {
-            // Закрываем текущее меню
             dropdown.classList.remove('active');
             dropdownMenu.style.maxHeight = '0px';
-            if (arrow) {
-                arrow.style.transform = 'rotate(0deg)';
-            }
         } else {
-            // Открываем текущее меню
             dropdown.classList.add('active');
+            const items = dropdownMenu.querySelectorAll('li');
+            let totalHeight = 0;
             
-            // Вычисляем высоту содержимого
-            dropdownMenu.style.maxHeight = 'none'; // Временно убираем ограничение
-            const height = dropdownMenu.scrollHeight;
-            dropdownMenu.style.maxHeight = '0px'; // Возвращаем
-            
-            // Устанавливаем высоту с анимацией
-            requestAnimationFrame(() => {
-                dropdownMenu.style.maxHeight = height + 'px';
+            items.forEach(item => {
+                totalHeight += item.scrollHeight + 2;
             });
             
-            if (arrow) {
-                arrow.style.transform = 'rotate(180deg)';
-            }
+            dropdownMenu.style.maxHeight = (totalHeight + 20) + 'px';
         }
     }
 
-    // Метод для программного закрытия меню
     forceClose() {
         this.closeMenuHandler();
     }
 }
 
-// Инициализация при загрузке DOM
-document.addEventListener('DOMContentLoaded', function() {
-    // Проверяем размер экрана и показываем/скрываем элементы мобильного меню
-    function updateMobileMenuVisibility() {
-        const isMobile = window.innerWidth <= 768;
-        const mobileElements = [
-            document.getElementById('mobileMenuToggle'),
-            document.getElementById('sidebarMenu'),
-            document.getElementById('menuOverlay')
-        ];
-        
-        mobileElements.forEach(element => {
-            if (element) {
-                if (isMobile) {
-                    element.style.display = '';
-                    element.style.visibility = '';
-                } else {
-                    element.style.display = 'none';
-                }
-            }
-        });
-    }
-    
-    // Проверяем при загрузке и изменении размера окна
-    updateMobileMenuVisibility();
-    window.addEventListener('resize', updateMobileMenuVisibility);
-    
-    // Инициализируем мобильное меню только один раз
-    if (!window.mobileMenuInitialized) {
-        const mobileMenu = new MobileMenu();
-        window.mobileMenu = mobileMenu;
-        window.mobileMenuInitialized = true;
-    }
-});
+// УБИРАЕМ дублированную инициализацию!
+// Инициализация теперь только в main.js

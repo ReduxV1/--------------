@@ -9,9 +9,8 @@ export class MenuManager {
     init() {
         this.setupMenuHighlight();
         this.setupDropdownMenus();
-        this.setupMobileMenu();
+        // УБИРАЕМ this.setupMobileMenu(); - теперь это в mobile-menu.js
         
-        // Настраиваем скролл только если это НЕ страница со слайдером
         if (!this.isSliderPage) {
             this.setupSmoothScrolling();
             this.setupScrollSpy();
@@ -68,7 +67,8 @@ export class MenuManager {
     }
 
     setupDropdownMenus() {
-        const dropdowns = document.querySelectorAll('.dropdown');
+        // Обрабатываем только ДЕСКТОПНЫЕ dropdown'ы
+        const dropdowns = document.querySelectorAll('.desktop-menu .dropdown');
         dropdowns.forEach(dropdown => {
             const trigger = dropdown.querySelector('a');
             const menu = dropdown.querySelector('.dropdown-menu');
@@ -125,7 +125,7 @@ export class MenuManager {
                 const isVisible = menu.style.display === 'block';
                                    
                 // Закрываем все другие меню
-                document.querySelectorAll('.dropdown-menu').forEach(m => {
+                document.querySelectorAll('.desktop-menu .dropdown-menu').forEach(m => {
                     if (m !== menu) {
                         m.style.display = 'none';
                     }
@@ -142,117 +142,11 @@ export class MenuManager {
 
         // Закрытие dropdown при клике вне меню
         document.addEventListener('click', (e) => {
-            if (!e.target.closest('.dropdown')) {
-                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+            if (!e.target.closest('.desktop-menu .dropdown')) {
+                document.querySelectorAll('.desktop-menu .dropdown-menu').forEach(menu => {
                     menu.style.display = 'none';
                 });
             }
-        });
-    }
-
-    setupMobileMenu() {
-        // Создаем кнопку мобильного меню если её нет
-        if (!document.querySelector('.mobile-menu-toggle')) {
-            this.createMobileMenuToggle();
-        }
-
-        const toggle = document.querySelector('.mobile-menu-toggle');
-        const menu = document.querySelector('.header-menu');
-               
-        if (toggle && menu) {
-            toggle.addEventListener('click', (e) => {
-                e.stopPropagation();
-                e.preventDefault();
-                const isOpen = menu.classList.contains('mobile-open');
-                               
-                if (isOpen) {
-                    this.closeMobileMenu();
-                } else {
-                    this.openMobileMenu();
-                }
-            });
-
-            // Закрытие меню при клике вне его
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.header-menu') && 
-                    !e.target.closest('.mobile-menu-toggle')) {
-                    this.closeMobileMenu();
-                }
-            });
-
-            // Закрытие меню при изменении размера окна
-            window.addEventListener('resize', () => {
-                if (window.innerWidth > 768) {
-                    this.closeMobileMenu();
-                }
-            });
-        }
-    }
-
-    createMobileMenuToggle() {
-        const toggle = document.createElement('button');
-        toggle.className = 'mobile-menu-toggle';
-        toggle.innerHTML = `
-            <span></span>
-            <span></span>
-            <span></span>
-        `;
-        toggle.setAttribute('aria-label', 'Открыть меню');
-               
-        const header = document.querySelector('.main-header');
-        if (header) {
-            header.appendChild(toggle);
-        }
-    }
-
-    openMobileMenu() {
-        const menu = document.querySelector('.header-menu');
-        const toggle = document.querySelector('.mobile-menu-toggle');
-        const overlay = document.querySelector('.mobile-menu-overlay');
-               
-        if (menu) {
-            menu.classList.add('mobile-open');
-            // Блокируем скролл только если это не страница со слайдером
-            if (!this.isSliderPage) {
-                document.body.style.overflow = 'hidden';
-            }
-        }
-               
-        if (toggle) {
-            toggle.classList.add('active');
-            toggle.setAttribute('aria-label', 'Закрыть меню');
-        }
-
-        if (overlay) {
-            overlay.classList.add('active');
-        }
-    }
-
-    closeMobileMenu() {
-        const menu = document.querySelector('.header-menu');
-        const toggle = document.querySelector('.mobile-menu-toggle');
-        const overlay = document.querySelector('.mobile-menu-overlay');
-               
-        if (menu) {
-            menu.classList.remove('mobile-open');
-            // Восстанавливаем скролл только если это не страница со слайдером
-            if (!this.isSliderPage) {
-                document.body.style.overflow = '';
-            }
-        }
-               
-        if (toggle) {
-            toggle.classList.remove('active');
-            toggle.setAttribute('aria-label', 'Открыть меню');
-        }
-
-        if (overlay) {
-            overlay.classList.remove('active');
-        }
-
-        // Закрываем все dropdown меню
-        document.querySelectorAll('.dropdown-menu').forEach(menu => {
-            menu.style.display = 'none';
         });
     }
 
