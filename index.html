@@ -19,11 +19,11 @@
         </div>
         
         <!-- Обычное меню для десктопа -->
-        <nav class="header-menu">
+        <nav class="header-menu desktop-menu">
             <ul>
                 <li><a href="index.html">Главная</a></li>
                 <li class="dropdown">
-                    <a href="#sections">Разделы ▾</a>
+                    <a href="#sections" class="dropdown-trigger">Разделы ▾</a>
                     <ul class="dropdown-menu">
                         <li><a href="os-selection.html">Выбор операционной системы</a></li>
                         <li><a href="filesystem.html">Выбор ФС и разметка диска</a></li>
@@ -32,7 +32,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#ssilki">Ссылки на официальные сайты ▾</a>
+                    <a href="#ssilki" class="dropdown-trigger">Ссылки на официальные сайты ▾</a>
                     <ul class="dropdown-menu">
                         <li><a href="https://www.teamviewer.com" target="_blank">TeamViewer</a></li>
                         <li><a href="https://anydesk.com" target="_blank">AnyDesk</a></li>
@@ -48,7 +48,9 @@
 
         <!-- Кнопка мобильного меню -->
         <button class="mobile-menu-toggle" id="mobileMenuToggle">
-            ☰
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
         </button>
     </header>
 
@@ -60,8 +62,8 @@
         <button class="close-menu" id="closeMenu">×</button>
         <ul>
             <li><a href="index.html" class="menu-item">Главная</a></li>
-            <li class="dropdown">
-                <a href="#sections" class="menu-item dropdown-toggle">Разделы</a>
+            <li class="dropdown mobile-dropdown">
+                <a href="#sections" class="menu-item dropdown-toggle">Разделы <span class="dropdown-arrow">▾</span></a>
                 <ul class="dropdown-menu">
                     <li><a href="os-selection.html">Выбор операционной системы</a></li>
                     <li><a href="filesystem.html">Выбор ФС и разметка диска</a></li>
@@ -69,8 +71,8 @@
                     <li><a href="diagnost-management.html">Средства диагностики, контроля и мониторинга системы</a></li>
                 </ul>
             </li>
-            <li class="dropdown">
-                <a href="#ssilki" class="menu-item dropdown-toggle">Ссылки на официальные сайты</a>
+            <li class="dropdown mobile-dropdown">
+                <a href="#ssilki" class="menu-item dropdown-toggle">Ссылки на официальные сайты <span class="dropdown-arrow">▾</span></a>
                 <ul class="dropdown-menu">
                     <li><a href="https://www.teamviewer.com" target="_blank">TeamViewer</a></li>
                     <li><a href="https://anydesk.com" target="_blank">AnyDesk</a></li>

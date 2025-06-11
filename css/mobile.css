@@ -31,7 +31,268 @@
     height: 100vh;
     background: rgba(20, 20, 20, 0.95);
     backdrop-filter: blur(10px);
-    transition: right;
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    overflow-y: auto;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar-menu.active {
+    right: 0;
+}
+
+.sidebar-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu > ul {
+    padding-top: 80px;
+}
+
+.sidebar-menu a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 18px 25px;
+    border-bottom: 1px solid rgba(197, 164, 126, 0.1);
+    transition: all 0.3s ease;
+    font-size: 16px;
+    position: relative;
+    overflow: hidden;
+}
+
+.sidebar-menu a:hover {
+    background: rgba(197, 164, 126, 0.1);
+    color: #c5a47e;
+    padding-left: 35px;
+}
+
+.sidebar-menu a.active {
+    background: rgba(197, 164, 126, 0.2);
+    color: #c5a47e;
+    border-left: 4px solid #c5a47e;
+}
+
+.close-menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #c5a47e;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 1001;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-menu:hover {
+    transform: rotate(90deg);
+    color: #fff;
+}
+
+/* Выпадающие меню в боковом меню */
+.sidebar-menu .dropdown {
+    position: relative;
+}
+
+.sidebar-menu .dropdown > a {
+    position: relative;
+    padding-right: 50px;
+}
+
+.sidebar-menu .dropdown > a::after {
+    content: '▾';
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease;
+    font-size: 14px;
+}
+
+.sidebar-menu .dropdown.active > a::after {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.sidebar-menu .dropdown-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.sidebar-menu .dropdown.active .dropdown-menu {
+    max-height: 500px;
+}
+
+.sidebar-menu .dropdown-menu a {
+    padding: 15px 25px 15px 45px;
+    font-size: 14px;
+    border-left: 3px solid transparent;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.3s ease;
+}
+
+.sidebar-menu .dropdown.active .dropdown-menu a {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.sidebar-menu .dropdown-menu a:hover {
+    background: rgba(197, 164, 126, 0.15);
+    border-left-color: #c5a47e;
+    padding-left: 50px;
+}
+
+/* Оверлей */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Скрываем десктопное меню на всех экранах меньше 769px */
+@media (max-width: 768px) {
+    .header-menu,
+    .desktop-menu {
+        display: none !important;
+    }
+
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    .content-article {
+        padding: 20px;
+        margin: 0 15px;
+    }
+
+    .specs {
+        font-size: 1rem;
+    }
+
+    .discipline {
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    .sidebar-menu {
+        width: 320px;
+        right: -320px;
+    }
+}
+
+/* Убеждаемся, что на десктопе мобильное меню скрыто */
+@media (min-width: 769px) {
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+    
+    .sidebar-menu {
+        display: none !important;
+    }
+    
+    .menu-overlay {
+        display: none !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-img {
+        height: 30px;
+    }
+
+    .sidebar-menu {
+        width: 300px;
+        right: -300px;
+    }
+
+    .content-article {
+        padding: 15px;
+        margin: 0 10px;
+    }
+
+    .specs {
+        font-size: 0.9rem;
+    }
+
+    .sidebar-menu a {
+        padding: 16px 20px;
+        font-size: 15px;
+    }
+
+    .sidebar-menu .dropdown-menu a {
+        padding: 12px 20px 12px 40px;
+        font-size: 13px;
+    }
+
+    .sidebar-menu .dropdown > a {
+        padding-right: 45px;
+    }
+
+    .sidebar-menu .dropdown > a::after {
+        right: 20px;
+    }
+}
+
+@media (max-width: 360px) {
+    .sidebar-menu {
+        width: 280px;
+        right: -280px;
+    }
+
+    .sidebar-menu a {
+        padding: 14px 18px;
+        font-size: 14px;
+    }
+
+    .sidebar-menu .dropdown-menu a {
+        padding: 10px 18px 10px 35px;
+        font-size: 12px;
+    }
+}
+
+/* Touch устройства */
+.touch-device .sidebar-menu a:hover {
+    background: initial;
+    color: initial;
+    padding-left: initial;
+}
+
+.touch-device .sidebar-menu a:active {
+    background: rgba(197, 164, 126, 0.2);
+    color: #c5a47e;
+}
+
+.touch-device .sidebar-menu .dropdown-menu a:active {
+    background: rgba(197, 164, 126, 0.15);
+    border-left-color: #c5a47e;
+}
+
+/* Дополнительные стили для плавности */
+.sidebar-menu * {
+    box-sizing: border-box;
 }
 
 /* Мобильные стили */
@@ -51,11 +312,43 @@
     padding: 10px;
     z-index: 1001;
     transition: all 0.3s ease;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
 }
 
 .mobile-menu-toggle:hover {
     transform: scale(1.1);
-    color: #fff;
+}
+
+/* Стили для гамбургер иконки */
+.hamburger-line {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #c5a47e;
+    margin: 3px 0;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.mobile-menu-toggle:hover .hamburger-line {
+    background-color: #fff;
+}
+
+/* Анимация при активном состоянии */
+.mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
 }
 
 /* Боковое меню */
@@ -208,14 +501,15 @@
     visibility: visible;
 }
 
-/* Медиа-запросы */
+/* Скрываем десктопное меню на всех экранах меньше 769px */
 @media (max-width: 768px) {
-    .header-menu {
-        display: none;
+    .header-menu,
+    .desktop-menu {
+        display: none !important;
     }
 
     .mobile-menu-toggle {
-        display: block;
+        display: flex;
     }
 
     .content-article {
@@ -238,6 +532,39 @@
     }
 }
 
+/* Убеждаемся, что на десктопе мобильное меню скрыто */
+@media (min-width: 769px) {
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+    
+    .sidebar-menu {
+        display: none !important;
+    }
+    
+    .menu-overlay {
+        display: none !important;
+    }
+    
+    .close-menu {
+        display: none !important;
+    }
+}
+
+/* На мобильных показываем крестик только когда боковое меню активно */
+@media (max-width: 768px) {
+    .close-menu {
+        display: flex;
+    }
+    
+    .sidebar-menu:not(.active) .close-menu {
+        display: none;
+    }
+    
+    .sidebar-menu.active .close-menu {
+        display: flex;
+    }
+}
 @media (max-width: 480px) {
     .logo-img {
         height: 30px;
@@ -274,6 +601,17 @@
     .sidebar-menu .dropdown > a::after {
         right: 20px;
     }
+
+    /* Адаптивные стили для гамбургера */
+    .mobile-menu-toggle {
+        width: 40px;
+        height: 40px;
+    }
+
+    .hamburger-line {
+        width: 22px;
+        height: 2px;
+    }
 }
 
 @media (max-width: 360px) {
@@ -290,6 +628,16 @@
     .sidebar-menu .dropdown-menu a {
         padding: 10px 18px 10px 35px;
         font-size: 12px;
+    }
+
+    .mobile-menu-toggle {
+        width: 36px;
+        height: 36px;
+    }
+
+    .hamburger-line {
+        width: 20px;
+        height: 2px;
     }
 }
 
@@ -314,4 +662,3 @@
 .sidebar-menu * {
     box-sizing: border-box;
 }
-

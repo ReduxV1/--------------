@@ -191,4 +191,67 @@ export class MobileMenu {
         this.closeMenuHandler();
     }
 }
+document.addEventListener('DOMContentLoaded', function() {
+    // Скрываем элементы мобильного меню на десктопе
+    function checkScreenSize() {
+        const isMobile = window.innerWidth <= 768;
+        const mobileElements = [
+            document.getElementById('mobileMenuToggle'),
+            document.getElementById('sidebarMenu'),
+            document.getElementById('menuOverlay')
+        ];
+        
+        mobileElements.forEach(element => {
+            if (element) {
+                element.style.display = isMobile ? '' : 'none';
+            }
+        });
+    }
+    
+    // Проверяем при загрузке и изменении размера окна
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const sidebarMenu = document.getElementById('sidebarMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const closeMenu = document.getElementById('closeMenu');
+
+    // Открытие меню
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', function() {
+            sidebarMenu.classList.add('active');
+            menuOverlay.classList.add('active');
+            mobileMenuToggle.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    }
+
+    // Закрытие меню
+    function closeMobileMenu() {
+        sidebarMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
+        mobileMenuToggle.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    if (closeMenu) {
+        closeMenu.addEventListener('click', closeMobileMenu);
+    }
+
+    if (menuOverlay) {
+        menuOverlay.addEventListener('click', closeMobileMenu);
+    }
+
+    // Обработка выпадающих меню в боковом меню
+    const mobileDropdowns = document.querySelectorAll('.mobile-dropdown .dropdown-toggle');
+    mobileDropdowns.forEach(dropdown => {
+        dropdown.addEventListener('click', function(e) {
+            e.preventDefault();
+            const parent = this.closest('.mobile-dropdown');
+            parent.classList.toggle('active');
+        });
+    });
+});
+
 
