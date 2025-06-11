@@ -5,303 +5,7 @@
     transition: all 0.3s ease;
 }
 
-.mobile-menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    color: #c5a47e;
-    font-size: 24px;
-    cursor: pointer;
-    padding: 10px;
-    z-index: 1001;
-    transition: all 0.3s ease;
-}
-
-.mobile-menu-toggle:hover {
-    transform: scale(1.1);
-    color: #fff;
-}
-
-/* Боковое меню */
-.sidebar-menu {
-    position: fixed;
-    top: 0;
-    right: -350px;
-    width: 350px;
-    height: 100vh;
-    background: rgba(20, 20, 20, 0.95);
-    backdrop-filter: blur(10px);
-    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 1000;
-    overflow-y: auto;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
-}
-
-.sidebar-menu.active {
-    right: 0;
-}
-
-.sidebar-menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.sidebar-menu > ul {
-    padding-top: 80px;
-}
-
-.sidebar-menu a {
-    display: block;
-    color: #fff;
-    text-decoration: none;
-    padding: 18px 25px;
-    border-bottom: 1px solid rgba(197, 164, 126, 0.1);
-    transition: all 0.3s ease;
-    font-size: 16px;
-    position: relative;
-    overflow: hidden;
-}
-
-.sidebar-menu a:hover {
-    background: rgba(197, 164, 126, 0.1);
-    color: #c5a47e;
-    padding-left: 35px;
-}
-
-.sidebar-menu a.active {
-    background: rgba(197, 164, 126, 0.2);
-    color: #c5a47e;
-    border-left: 4px solid #c5a47e;
-}
-
-.close-menu {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: none;
-    border: none;
-    color: #c5a47e;
-    font-size: 30px;
-    cursor: pointer;
-    z-index: 1001;
-    transition: all 0.3s ease;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.close-menu:hover {
-    transform: rotate(90deg);
-    color: #fff;
-}
-
-/* Выпадающие меню в боковом меню */
-.sidebar-menu .dropdown {
-    position: relative;
-}
-
-.sidebar-menu .dropdown > a {
-    position: relative;
-    padding-right: 50px;
-}
-
-.sidebar-menu .dropdown > a::after {
-    content: '▾';
-    position: absolute;
-    right: 25px;
-    top: 50%;
-    transform: translateY(-50%);
-    transition: transform 0.3s ease;
-    font-size: 14px;
-}
-
-.sidebar-menu .dropdown.active > a::after {
-    transform: translateY(-50%) rotate(180deg);
-}
-
-.sidebar-menu .dropdown-menu {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    background: rgba(0, 0, 0, 0.3);
-}
-
-.sidebar-menu .dropdown.active .dropdown-menu {
-    max-height: 500px;
-}
-
-.sidebar-menu .dropdown-menu a {
-    padding: 15px 25px 15px 45px;
-    font-size: 14px;
-    border-left: 3px solid transparent;
-    opacity: 0;
-    transform: translateX(-20px);
-    transition: all 0.3s ease;
-}
-
-.sidebar-menu .dropdown.active .dropdown-menu a {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.sidebar-menu .dropdown-menu a:hover {
-    background: rgba(197, 164, 126, 0.15);
-    border-left-color: #c5a47e;
-    padding-left: 50px;
-}
-
-/* Оверлей */
-.menu-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-}
-
-.menu-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Скрываем десктопное меню на всех экранах меньше 769px */
-@media (max-width: 768px) {
-    .header-menu,
-    .desktop-menu {
-        display: none !important;
-    }
-
-    .mobile-menu-toggle {
-        display: block;
-    }
-
-    .content-article {
-        padding: 20px;
-        margin: 0 15px;
-    }
-
-    .specs {
-        font-size: 1rem;
-    }
-
-    .discipline {
-        font-size: 1.2rem;
-        text-align: center;
-    }
-
-    .sidebar-menu {
-        width: 320px;
-        right: -320px;
-    }
-}
-
-/* Убеждаемся, что на десктопе мобильное меню скрыто */
-@media (min-width: 769px) {
-    .mobile-menu-toggle {
-        display: none !important;
-    }
-    
-    .sidebar-menu {
-        display: none !important;
-    }
-    
-    .menu-overlay {
-        display: none !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .logo-img {
-        height: 30px;
-    }
-
-    .sidebar-menu {
-        width: 300px;
-        right: -300px;
-    }
-
-    .content-article {
-        padding: 15px;
-        margin: 0 10px;
-    }
-
-    .specs {
-        font-size: 0.9rem;
-    }
-
-    .sidebar-menu a {
-        padding: 16px 20px;
-        font-size: 15px;
-    }
-
-    .sidebar-menu .dropdown-menu a {
-        padding: 12px 20px 12px 40px;
-        font-size: 13px;
-    }
-
-    .sidebar-menu .dropdown > a {
-        padding-right: 45px;
-    }
-
-    .sidebar-menu .dropdown > a::after {
-        right: 20px;
-    }
-}
-
-@media (max-width: 360px) {
-    .sidebar-menu {
-        width: 280px;
-        right: -280px;
-    }
-
-    .sidebar-menu a {
-        padding: 14px 18px;
-        font-size: 14px;
-    }
-
-    .sidebar-menu .dropdown-menu a {
-        padding: 10px 18px 10px 35px;
-        font-size: 12px;
-    }
-}
-
-/* Touch устройства */
-.touch-device .sidebar-menu a:hover {
-    background: initial;
-    color: initial;
-    padding-left: initial;
-}
-
-.touch-device .sidebar-menu a:active {
-    background: rgba(197, 164, 126, 0.2);
-    color: #c5a47e;
-}
-
-.touch-device .sidebar-menu .dropdown-menu a:active {
-    background: rgba(197, 164, 126, 0.15);
-    border-left-color: #c5a47e;
-}
-
-/* Дополнительные стили для плавности */
-.sidebar-menu * {
-    box-sizing: border-box;
-}
-
-/* Мобильные стили */
-.logo-img {
-    height: 50px;
-    width: auto;
-    transition: all 0.3s ease;
-}
-
+/* Кнопка мобильного меню */
 .mobile-menu-toggle {
     display: none;
     background: none;
@@ -358,12 +62,13 @@
     right: -350px;
     width: 350px;
     height: 100vh;
-    background: rgba(20, 20, 20, 0.95);
-    backdrop-filter: blur(10px);
-    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(20, 20, 20, 0.98);
+    backdrop-filter: blur(15px);
+    transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     z-index: 1000;
     overflow-y: auto;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.4);
+    border-left: 1px solid rgba(197, 164, 126, 0.1);
 }
 
 .sidebar-menu.active {
@@ -380,30 +85,48 @@
     padding-top: 80px;
 }
 
+/* Основные ссылки меню */
 .sidebar-menu a {
     display: block;
     color: #fff;
     text-decoration: none;
-    padding: 18px 25px;
-    border-bottom: 1px solid rgba(197, 164, 126, 0.1);
-    transition: all 0.3s ease;
+    padding: 20px 25px;
+    border-bottom: 1px solid rgba(197, 164, 126, 0.08);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     font-size: 16px;
+    font-weight: 500;
     position: relative;
     overflow: hidden;
 }
 
+.sidebar-menu a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(197, 164, 126, 0.05), transparent);
+    transition: left 0.6s ease;
+}
+
+.sidebar-menu a:hover::before {
+    left: 100%;
+}
+
 .sidebar-menu a:hover {
-    background: rgba(197, 164, 126, 0.1);
+    background: rgba(197, 164, 126, 0.08);
     color: #c5a47e;
-    padding-left: 35px;
+    transform: translateX(5px);
 }
 
 .sidebar-menu a.active {
-    background: rgba(197, 164, 126, 0.2);
+    background: rgba(197, 164, 126, 0.15);
     color: #c5a47e;
     border-left: 4px solid #c5a47e;
 }
 
+/* Кнопка закрытия */
 .close-menu {
     position: absolute;
     top: 20px;
@@ -411,89 +134,242 @@
     background: none;
     border: none;
     color: #c5a47e;
-    font-size: 30px;
+    font-size: 28px;
     cursor: pointer;
     z-index: 1001;
     transition: all 0.3s ease;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 50%;
 }
 
 .close-menu:hover {
-    transform: rotate(90deg);
+    transform: rotate(90deg) scale(1.1);
+    background: rgba(197, 164, 126, 0.1);
     color: #fff;
 }
 
-/* Выпадающие меню в боковом меню */
+/* Выпадающие меню в стиле brandshop */
 .sidebar-menu .dropdown {
     position: relative;
+    border-bottom: 1px solid rgba(197, 164, 126, 0.08);
 }
 
-.sidebar-menu .dropdown > a {
+.sidebar-menu .dropdown > .dropdown-toggle {
     position: relative;
-    padding-right: 50px;
+    padding: 20px 60px 20px 25px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.sidebar-menu .dropdown > a::after {
-    content: '▾';
+.sidebar-menu .dropdown > .dropdown-toggle:hover {
+    background: rgba(197, 164, 126, 0.08);
+    color: #c5a47e;
+    transform: translateX(5px);
+}
+
+/* Стрелка выпадающего меню */
+.sidebar-menu .dropdown > .dropdown-toggle::after {
+    content: '▼';
     position: absolute;
     right: 25px;
     top: 50%;
     transform: translateY(-50%);
-    transition: transform 0.3s ease;
-    font-size: 14px;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    font-size: 12px;
+    color: #c5a47e;
 }
 
-.sidebar-menu .dropdown.active > a::after {
+.sidebar-menu .dropdown.active > .dropdown-toggle::after {
     transform: translateY(-50%) rotate(180deg);
+    color: #fff;
 }
 
+/* Контейнер выпадающего меню */
 .sidebar-menu .dropdown-menu {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease;
-    background: rgba(0, 0, 0, 0.3);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background: rgba(0, 0, 0, 0.4);
+    border-top: 1px solid rgba(197, 164, 126, 0.05);
 }
 
 .sidebar-menu .dropdown.active .dropdown-menu {
     max-height: 500px;
 }
 
-.sidebar-menu .dropdown-menu a {
-    padding: 15px 25px 15px 45px;
-    font-size: 14px;
-    border-left: 3px solid transparent;
+/* Элементы выпадающего меню */
+.sidebar-menu .dropdown-menu li {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateY(-15px);
+    transition: all 0.4s ease;
+    transition-delay: 0s;
+}
+
+.sidebar-menu .dropdown.active .dropdown-menu li {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Поочередное появление элементов */
+.sidebar-menu .dropdown.active .dropdown-menu li:nth-child(1) { transition-delay: 0.05s; }
+.sidebar-menu .dropdown.active .dropdown-menu li:nth-child(2) { transition-delay: 0.1s; }
+.sidebar-menu .dropdown.active .dropdown-menu li:nth-child(3) { transition-delay: 0.15s; }
+.sidebar-menu .dropdown.active .dropdown-menu li:nth-child(4) { transition-delay: 0.2s; }
+.sidebar-menu .dropdown.active .dropdown-menu li:nth-child(5) { transition-delay: 0.25s; }
+.sidebar-menu .dropdown.active .dropdown-menu li:nth-child(6) { transition-delay: 0.3s; }
+.sidebar-menu .dropdown.active .dropdown-menu li:nth-child(7) { transition-delay: 0.35s; }
+.sidebar-menu .dropdown.active .dropdown-menu li:nth-child(8) { transition-delay: 0.4s; }
+
+/* Ссылки в выпадающем меню */
+.sidebar-menu .dropdown-menu a {
+    padding: 16px 25px 16px 45px;
+    font-size: 15px;
+    font-weight: 400;
+    border-left: 3px solid transparent;
+    border-bottom: 1px solid rgba(197, 164, 126, 0.05);
+    color: rgba(255, 255, 255, 0.9);
+    position: relative;
     transition: all 0.3s ease;
 }
 
-.sidebar-menu .dropdown.active .dropdown-menu a {
-    opacity: 1;
-    transform: translateX(0);
+.sidebar-menu .dropdown-menu a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(197, 164, 126, 0.1), transparent);
+    transition: width 0.3s ease;
+}
+
+.sidebar-menu .dropdown-menu a:hover::before {
+    width: 100%;
 }
 
 .sidebar-menu .dropdown-menu a:hover {
-    background: rgba(197, 164, 126, 0.15);
+    background: rgba(197, 164, 126, 0.1);
     border-left-color: #c5a47e;
+    color: #c5a47e;
+    transform: translateX(8px);
     padding-left: 50px;
 }
 
-/* Оверлей */
+/* Последний элемент без нижней границы */
+.sidebar-menu .dropdown-menu li:last-child a {
+    border-bottom: none;
+}
+
+/* Иконки для разных типов ссылок */
+.sidebar-menu .dropdown-menu a[href*="os-selection"]::after {
+    content: '💻';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.sidebar-menu .dropdown-menu a[href*="filesystem"]::after {
+    content: '💾';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.sidebar-menu .dropdown-menu a[href*="remote-management"]::after {
+    content: '🖥️';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.sidebar-menu .dropdown-menu a[href*="diagnost-management"]::after {
+    content: '🔧';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.sidebar-menu .dropdown-menu a[href*="teamviewer"]::after,
+.sidebar-menu .dropdown-menu a[href*="anydesk"]::after,
+.sidebar-menu .dropdown-menu a[href*="aeroadmin"]::after {
+    content: '🔗';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.sidebar-menu .dropdown-menu a[href*="aida64"]::after,
+.sidebar-menu .dropdown-menu a[href*="hwinfo"]::after,
+.sidebar-menu .dropdown-menu a[href*="sisoftware"]::after {
+    content: '📊';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.sidebar-menu .dropdown-menu a:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* Анимация активного состояния dropdown */
+.sidebar-menu .dropdown.active {
+    background: rgba(197, 164, 126, 0.03);
+    border-radius: 8px;
+    margin: 2px 0;
+    box-shadow: inset 0 0 20px rgba(197, 164, 126, 0.05);
+}
+
+.sidebar-menu .dropdown.active > .dropdown-toggle {
+    background: rgba(197, 164, 126, 0.08);
+    color: #c5a47e;
+}
+
+/* Оверлей для закрытия меню */
 .menu-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6);
     z-index: 999;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(2px);
 }
 
 .menu-overlay.active {
@@ -501,7 +377,26 @@
     visibility: visible;
 }
 
-/* Скрываем десктопное меню на всех экранах меньше 769px */
+/* Специальные стили для разделителей */
+.sidebar-menu .menu-separator {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(197, 164, 126, 0.3), transparent);
+    margin: 10px 0;
+}
+
+/* Стили для заголовков секций */
+.sidebar-menu .section-header {
+    padding: 15px 25px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #c5a47e;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.8;
+    border-bottom: none;
+}
+
+/* Медиа-запросы */
 @media (max-width: 768px) {
     .header-menu,
     .desktop-menu {
@@ -532,7 +427,6 @@
     }
 }
 
-/* Убеждаемся, что на десктопе мобильное меню скрыто */
 @media (min-width: 769px) {
     .mobile-menu-toggle {
         display: none !important;
@@ -551,20 +445,6 @@
     }
 }
 
-/* На мобильных показываем крестик только когда боковое меню активно */
-@media (max-width: 768px) {
-    .close-menu {
-        display: flex;
-    }
-    
-    .sidebar-menu:not(.active) .close-menu {
-        display: none;
-    }
-    
-    .sidebar-menu.active .close-menu {
-        display: flex;
-    }
-}
 @media (max-width: 480px) {
     .logo-img {
         height: 30px;
@@ -585,24 +465,23 @@
     }
 
     .sidebar-menu a {
-        padding: 16px 20px;
+        padding: 18px 20px;
         font-size: 15px;
     }
 
     .sidebar-menu .dropdown-menu a {
-        padding: 12px 20px 12px 40px;
-        font-size: 13px;
+        padding: 14px 20px 14px 40px;
+        font-size: 14px;
     }
 
-    .sidebar-menu .dropdown > a {
-        padding-right: 45px;
+    .sidebar-menu .dropdown > .dropdown-toggle {
+        padding: 18px 50px 18px 20px;
     }
 
-    .sidebar-menu .dropdown > a::after {
+    .sidebar-menu .dropdown > .dropdown-toggle::after {
         right: 20px;
     }
 
-    /* Адаптивные стили для гамбургера */
     .mobile-menu-toggle {
         width: 40px;
         height: 40px;
@@ -621,13 +500,17 @@
     }
 
     .sidebar-menu a {
-        padding: 14px 18px;
+        padding: 16px 18px;
         font-size: 14px;
     }
 
     .sidebar-menu .dropdown-menu a {
-        padding: 10px 18px 10px 35px;
-        font-size: 12px;
+        padding: 12px 18px 12px 35px;
+        font-size: 13px;
+    }
+
+    .sidebar-menu .dropdown > .dropdown-toggle {
+        padding: 16px 45px 16px 18px;
     }
 
     .mobile-menu-toggle {
@@ -642,23 +525,83 @@
 }
 
 /* Touch устройства */
-.touch-device .sidebar-menu a:hover {
-    background: initial;
-    color: initial;
-    padding-left: initial;
+@media (hover: none) and (pointer: coarse) {
+    .sidebar-menu a:hover {
+        background: initial;
+        color: initial;
+        transform: initial;
+        padding-left: initial;
+    }
+
+    .sidebar-menu a:active {
+        background: rgba(197, 164, 126, 0.15);
+        color: #c5a47e;
+    }
+
+    .sidebar-menu .dropdown-menu a:active {
+        background: rgba(197, 164, 126, 0.1);
+        border-left-color: #c5a47e;
+    }
+
+    .sidebar-menu .dropdown > .dropdown-toggle:hover {
+        background: initial;
+        color: initial;
+        transform: initial;
+    }
+
+    .sidebar-menu .dropdown > .dropdown-toggle:active {
+        background: rgba(197, 164, 126, 0.08);
+        color: #c5a47e;
+    }
 }
 
-.touch-device .sidebar-menu a:active {
-    background: rgba(197, 164, 126, 0.2);
-    color: #c5a47e;
+/* Стили для скролла */
+.sidebar-menu::-webkit-scrollbar {
+    width: 6px;
 }
 
-.touch-device .sidebar-menu .dropdown-menu a:active {
-    background: rgba(197, 164, 126, 0.15);
-    border-left-color: #c5a47e;
+.sidebar-menu::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-menu::-webkit-scrollbar-thumb {
+    background: rgba(197, 164, 126, 0.3);
+    border-radius: 3px;
+}
+
+.sidebar-menu::-webkit-scrollbar-thumb:hover {
+    background: rgba(197, 164, 126, 0.5);
 }
 
 /* Дополнительные стили для плавности */
 .sidebar-menu * {
     box-sizing: border-box;
+}
+
+/* Анимация появления меню */
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.sidebar-menu.active {
+    animation: slideInRight 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Стили для темной темы */
+@media (prefers-color-scheme: dark) {
+    .sidebar-menu {
+        background: rgba(15, 15, 15, 0.98);
+        border-left-color: rgba(197, 164, 126, 0.15);
+    }
+    
+    .menu-overlay {
+        background: rgba(0, 0, 0, 0.7);
+    }
 }

@@ -8,10 +8,26 @@ export class MobileMenu {
         this.dropdowns = document.querySelectorAll('.sidebar-menu .dropdown');
         this.isMenuOpen = false;
         
+        console.log('MobileMenu initialized');
+        console.log('Found dropdowns:', this.dropdowns.length);
+        
+        // Проверяем все клики по документу
+        document.addEventListener('click', (e) => {
+            console.log('Global click detected on:', e.target);
+            if (e.target.closest('.dropdown-toggle')) {
+                console.log('Click on dropdown-toggle detected!');
+            }
+        }, true); // true = capture phase
+        
         this.init();
     }
 
     init() {
+        if (!this.menuToggle || !this.sidebarMenu) {
+            console.log('Menu elements not found');
+            return;
+        }
+
         // Открытие меню
         this.menuToggle.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -19,26 +35,33 @@ export class MobileMenu {
         });
 
         // Закрытие меню
-        this.closeMenu.addEventListener('click', (e) => {
-            e.stopPropagation();
-            this.closeMenuHandler();
-        });
+        if (this.closeMenu) {
+            this.closeMenu.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.closeMenuHandler();
+            });
+        }
 
-        this.menuOverlay.addEventListener('click', () => {
-            this.closeMenuHandler();
-        });
+        if (this.menuOverlay) {
+            this.menuOverlay.addEventListener('click', () => {
+                this.closeMenuHandler();
+            });
+        }
 
-        // Обработка выпадающих меню
-        this.dropdowns.forEach(dropdown => {
-            const link = dropdown.querySelector('.dropdown-toggle');
-            if (link) {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
+        // Обработка выпадающих меню через глобальный обработчик
+        
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.dropdown-toggle') && e.target.closest('.sidebar-menu')) {
+                console.log('Dropdown toggle clicked via global handler');
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const dropdown = e.target.closest('.dropdown');
+                if (dropdown) {
                     this.toggleDropdown(dropdown);
-                });
+                }
             }
-        });
+        }, true); // capture phase
 
         // Обработка обычных ссылок
         const menuItems = document.querySelectorAll('.sidebar-menu .menu-item:not(.dropdown-toggle)');
@@ -75,24 +98,24 @@ export class MobileMenu {
         });
     }
 
-    openMenu() {
+        openMenu() {
         this.sidebarMenu.classList.add('active');
-        this.menuOverlay.classList.add('active');
+        if (this.menuOverlay) {
+            this.menuOverlay.classList.add('active');
+        }
+        this.menuToggle.classList.add('active');
         document.body.style.overflow = 'hidden';
         this.isMenuOpen = true;
-        
-        // Анимация иконки меню
-        this.menuToggle.style.transform = 'rotate(90deg)';
     }
 
     closeMenuHandler() {
         this.sidebarMenu.classList.remove('active');
-        this.menuOverlay.classList.remove('active');
+        if (this.menuOverlay) {
+            this.menuOverlay.classList.remove('active');
+        }
+        this.menuToggle.classList.remove('active');
         document.body.style.overflow = '';
         this.isMenuOpen = false;
-        
-        // Возвращаем иконку меню в исходное положение
-        this.menuToggle.style.transform = 'rotate(0deg)';
         
         // Закрываем все выпадающие меню с задержкой
         setTimeout(() => {
@@ -119,70 +142,28 @@ export class MobileMenu {
                 const otherMenu = item.querySelector('.dropdown-menu');
                 if (otherMenu) {
                     otherMenu.style.maxHeight = '0px';
-                    const otherItems = otherMenu.querySelectorAll('li');
-                    otherItems.forEach(li => {
-                        li.style.transitionDelay = '0s';
-                    });
                 }
             }
         });
-                if (isCurrentlyActive) {
+
+        if (isCurrentlyActive) {
             // Закрываем текущее меню
             dropdown.classList.remove('active');
             dropdownMenu.style.maxHeight = '0px';
-            
-            // Убираем задержки анимации
-            const items = dropdownMenu.querySelectorAll('li');
-            items.forEach(li => {
-                li.style.transitionDelay = '0s';
-            });
         } else {
             // Открываем текущее меню
             dropdown.classList.add('active');
             
-            // Вычисляем высоту содержимого
+            // Простой расчет высоты
             const items = dropdownMenu.querySelectorAll('li');
             let totalHeight = 0;
             
-            items.forEach((item, index) => {
-                // Временно делаем элемент видимым для измерения
-                const originalDisplay = item.style.display;
-                const originalVisibility = item.style.visibility;
-                const originalPosition = item.style.position;
-                
-                item.style.display = 'block';
-                item.style.visibility = 'hidden';
-                item.style.position = 'absolute';
-                
-                totalHeight += item.offsetHeight;
-                
-                // Возвращаем исходные стили
-                item.style.display = originalDisplay;
-                item.style.visibility = originalVisibility;
-                item.style.position = originalPosition;
-                
-                // Устанавливаем задержки для плавного появления
-                item.style.transitionDelay = `${(index + 1) * 0.1}s`;
+            items.forEach(item => {
+                totalHeight += item.scrollHeight + 2; // +2 для отступов
             });
             
-            // Добавляем немного дополнительного пространства для границ и отступов
-            totalHeight += items.length * 2;
-            
-            // Устанавливаем высоту с небольшим запасом
+            // Устанавливаем высоту
             dropdownMenu.style.maxHeight = (totalHeight + 20) + 'px';
-            
-            // Прокручиваем к активному элементу, если он не виден
-            setTimeout(() => {
-                const dropdownRect = dropdown.getBoundingClientRect();
-                const menuRect = this.sidebarMenu.getBoundingClientRect();
-                
-                if (dropdownRect.bottom > menuRect.bottom - 50) {
-                    dropdown.scrollIntoView({ 
-                        behavior: 'smooth', 
-                        block: 'center' 
-                    });
-                }
-            }, 200);
         }
     }
 
@@ -253,5 +234,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-
 

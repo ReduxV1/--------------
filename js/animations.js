@@ -17,7 +17,7 @@ export class AnimationManager {
             const isMenuElement = e.target.closest('.mobile-menu-toggle') || 
                                 e.target.closest('.sidebar-menu') || 
                                 e.target.closest('.menu-overlay') ||
-                                e.target.closest('a');
+                                e.target.closest('a:not(.dropdown-toggle)'); // Исключаем только НЕ dropdown-toggle
             
             if (!isMenuElement) {
                 this.createParticles(e.clientX, e.clientY);

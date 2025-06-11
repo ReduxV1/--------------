@@ -11,7 +11,7 @@ export class FullPageSlider {
         window.addEventListener('wheel', this.handleScroll.bind(this));
         
         document.addEventListener('click', (e) => {
-            if (e.target.closest('a')) {
+            if (e.target.closest('a') && !e.target.closest('.dropdown-toggle')) { // Исключаем dropdown-toggle
                 e.stopPropagation();
                 return;
             }

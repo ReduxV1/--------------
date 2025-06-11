@@ -1,8 +1,9 @@
 // Главный файл для инициализации всех компонентов
 import { FullPageSlider } from './slider.js';
-import { MobileMenu } from './mobile-menu.js';
 import { AnimationManager } from './animations.js';
+import { MobileMenu } from './mobile-menu.js';
 import { Utils, MenuStateManager } from './utils.js';
+
 
 class App {
     constructor() {
