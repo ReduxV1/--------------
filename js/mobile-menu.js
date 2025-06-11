@@ -5,19 +5,11 @@ export class MobileMenu {
         this.sidebarMenu = document.getElementById('sidebarMenu');
         this.menuOverlay = document.getElementById('menuOverlay');
         this.closeMenu = document.getElementById('closeMenu');
-        this.dropdowns = document.querySelectorAll('.sidebar-menu .dropdown');
+        this.dropdowns = document.querySelectorAll('.sidebar-menu .mobile-dropdown');
         this.isMenuOpen = false;
         
         console.log('MobileMenu initialized');
         console.log('Found dropdowns:', this.dropdowns.length);
-        
-        // Проверяем все клики по документу
-        document.addEventListener('click', (e) => {
-            console.log('Global click detected on:', e.target);
-            if (e.target.closest('.dropdown-toggle')) {
-                console.log('Click on dropdown-toggle detected!');
-            }
-        }, true); // true = capture phase
         
         this.init();
     }
@@ -48,22 +40,19 @@ export class MobileMenu {
             });
         }
 
-        // Обработка выпадающих меню через глобальный обработчик
-        
-        document.addEventListener('click', (e) => {
-            if (e.target.closest('.dropdown-toggle') && e.target.closest('.sidebar-menu')) {
-                console.log('Dropdown toggle clicked via global handler');
-                e.preventDefault();
-                e.stopPropagation();
-                
-                const dropdown = e.target.closest('.dropdown');
-                if (dropdown) {
+        // Обработка выпадающих меню
+        this.dropdowns.forEach(dropdown => {
+            const toggle = dropdown.querySelector('.dropdown-toggle');
+            if (toggle) {
+                toggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
                     this.toggleDropdown(dropdown);
-                }
+                });
             }
-        }, true); // capture phase
+        });
 
-        // Обработка обычных ссылок
+        // Обработка обычных ссылок меню
         const menuItems = document.querySelectorAll('.sidebar-menu .menu-item:not(.dropdown-toggle)');
         menuItems.forEach(item => {
             item.addEventListener('click', () => {
@@ -73,13 +62,18 @@ export class MobileMenu {
             });
         });
 
-        // Обработка внешних ссылок в подменю
-        const externalLinks = document.querySelectorAll('.sidebar-menu .dropdown-menu a[target="_blank"]');
-        externalLinks.forEach(link => {
+        // Обработка ссылок в подменю
+        const submenuLinks = document.querySelectorAll('.sidebar-menu .dropdown-menu a');
+        submenuLinks.forEach(link => {
             link.addEventListener('click', () => {
-                setTimeout(() => {
+                // Для внешних ссылок добавляем небольшую задержку
+                if (link.hasAttribute('target') && link.getAttribute('target') === '_blank') {
+                    setTimeout(() => {
+                        this.closeMenuHandler();
+                    }, 100);
+                } else {
                     this.closeMenuHandler();
-                }, 100);
+                }
             });
         });
 
@@ -98,7 +92,7 @@ export class MobileMenu {
         });
     }
 
-        openMenu() {
+    openMenu() {
         this.sidebarMenu.classList.add('active');
         if (this.menuOverlay) {
             this.menuOverlay.classList.add('active');
@@ -106,6 +100,8 @@ export class MobileMenu {
         this.menuToggle.classList.add('active');
         document.body.style.overflow = 'hidden';
         this.isMenuOpen = true;
+        
+        console.log('Menu opened');
     }
 
     closeMenuHandler() {
@@ -125,23 +121,36 @@ export class MobileMenu {
                 if (dropdownMenu) {
                     dropdownMenu.style.maxHeight = '0px';
                 }
+                const arrow = dropdown.querySelector('.dropdown-arrow');
+                if (arrow) {
+                    arrow.style.transform = 'rotate(0deg)';
+                }
             });
         }, 300);
+        
+        console.log('Menu closed');
     }
 
     toggleDropdown(dropdown) {
         const isCurrentlyActive = dropdown.classList.contains('active');
         const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+        const arrow = dropdown.querySelector('.dropdown-arrow');
         
         if (!dropdownMenu) return;
+
+        console.log('Toggling dropdown:', dropdown, 'Currently active:', isCurrentlyActive);
 
         // Закрываем все другие выпадающие меню
         this.dropdowns.forEach(item => {
             if (item !== dropdown && item.classList.contains('active')) {
                 item.classList.remove('active');
                 const otherMenu = item.querySelector('.dropdown-menu');
+                const otherArrow = item.querySelector('.dropdown-arrow');
                 if (otherMenu) {
                     otherMenu.style.maxHeight = '0px';
+                }
+                if (otherArrow) {
+                    otherArrow.style.transform = 'rotate(0deg)';
                 }
             }
         });
@@ -150,20 +159,26 @@ export class MobileMenu {
             // Закрываем текущее меню
             dropdown.classList.remove('active');
             dropdownMenu.style.maxHeight = '0px';
+            if (arrow) {
+                arrow.style.transform = 'rotate(0deg)';
+            }
         } else {
             // Открываем текущее меню
             dropdown.classList.add('active');
             
-            // Простой расчет высоты
-            const items = dropdownMenu.querySelectorAll('li');
-            let totalHeight = 0;
+            // Вычисляем высоту содержимого
+            dropdownMenu.style.maxHeight = 'none'; // Временно убираем ограничение
+            const height = dropdownMenu.scrollHeight;
+            dropdownMenu.style.maxHeight = '0px'; // Возвращаем
             
-            items.forEach(item => {
-                totalHeight += item.scrollHeight + 2; // +2 для отступов
+            // Устанавливаем высоту с анимацией
+            requestAnimationFrame(() => {
+                dropdownMenu.style.maxHeight = height + 'px';
             });
             
-            // Устанавливаем высоту
-            dropdownMenu.style.maxHeight = (totalHeight + 20) + 'px';
+            if (arrow) {
+                arrow.style.transform = 'rotate(180deg)';
+            }
         }
     }
 
@@ -172,9 +187,11 @@ export class MobileMenu {
         this.closeMenuHandler();
     }
 }
+
+// Инициализация при загрузке DOM
 document.addEventListener('DOMContentLoaded', function() {
-    // Скрываем элементы мобильного меню на десктопе
-    function checkScreenSize() {
+    // Проверяем размер экрана и показываем/скрываем элементы мобильного меню
+    function updateMobileMenuVisibility() {
         const isMobile = window.innerWidth <= 768;
         const mobileElements = [
             document.getElementById('mobileMenuToggle'),
@@ -184,54 +201,24 @@ document.addEventListener('DOMContentLoaded', function() {
         
         mobileElements.forEach(element => {
             if (element) {
-                element.style.display = isMobile ? '' : 'none';
+                if (isMobile) {
+                    element.style.display = '';
+                    element.style.visibility = '';
+                } else {
+                    element.style.display = 'none';
+                }
             }
         });
     }
     
     // Проверяем при загрузке и изменении размера окна
-    checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
+    updateMobileMenuVisibility();
+    window.addEventListener('resize', updateMobileMenuVisibility);
     
-    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-    const sidebarMenu = document.getElementById('sidebarMenu');
-    const menuOverlay = document.getElementById('menuOverlay');
-    const closeMenu = document.getElementById('closeMenu');
-
-    // Открытие меню
-    if (mobileMenuToggle) {
-        mobileMenuToggle.addEventListener('click', function() {
-            sidebarMenu.classList.add('active');
-            menuOverlay.classList.add('active');
-            mobileMenuToggle.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
+    // Инициализируем мобильное меню только один раз
+    if (!window.mobileMenuInitialized) {
+        const mobileMenu = new MobileMenu();
+        window.mobileMenu = mobileMenu;
+        window.mobileMenuInitialized = true;
     }
-
-    // Закрытие меню
-    function closeMobileMenu() {
-        sidebarMenu.classList.remove('active');
-        menuOverlay.classList.remove('active');
-        mobileMenuToggle.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-
-    if (closeMenu) {
-        closeMenu.addEventListener('click', closeMobileMenu);
-    }
-
-    if (menuOverlay) {
-        menuOverlay.addEventListener('click', closeMobileMenu);
-    }
-
-    // Обработка выпадающих меню в боковом меню
-    const mobileDropdowns = document.querySelectorAll('.mobile-dropdown .dropdown-toggle');
-    mobileDropdowns.forEach(dropdown => {
-        dropdown.addEventListener('click', function(e) {
-            e.preventDefault();
-            const parent = this.closest('.mobile-dropdown');
-            parent.classList.toggle('active');
-        });
-    });
 });
-
