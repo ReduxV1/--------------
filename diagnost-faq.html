@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Подробные ответы на вопросы о диагностике компьютера. AIDA64, HWiNFO, Sandra и другие инструменты системного мониторинга.">
+    <title>FAQ - Диагностика и мониторинг системы</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/diagnost-faq.css">
+    <link rel="stylesheet" href="css/faq-enhancement.css">
+    <link rel="stylesheet" href="css/mobile.css">
+    <link rel="stylesheet" href="css/faq-enhancements.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-logo">
+            <img src="izobr/logo.svg" alt="Логотип" class="logo-img">
+        </div>
+        
+        <!-- Обычное меню для десктопа -->
+        <nav class="header-menu desktop-menu">
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li class="dropdown">
+                    <a href="#sections" class="dropdown-trigger">Разделы ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="os-selection.html">Выбор операционной системы</a></li>
+                        <li><a href="filesystem.html">Выбор ФС и разметка диска</a></li>
+                        <li><a href="remote-management.html">Средства удаленного управления компьютером</a></li>
+                        <li><a href="diagnost-management.html">Средства диагностики, контроля и мониторинга системы</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#ssilki" class="dropdown-trigger">Ссылки на официальные сайты ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://www.teamviewer.com" target="_blank">TeamViewer</a></li>
+                        <li><a href="https://anydesk.com" target="_blank">AnyDesk</a></li>
+                        <li><a href="https://www.aeroadmin.com" target="_blank">AeroAdmin</a></li>
+                        <li><a href="https://www.aida64.com" target="_blank">AIDA64</a></li>
+                        <li><a href="https://www.hwinfo.com" target="_blank">HWiNFO</a></li>
+                        <li><a href="https://www.sisoftware.net" target="_blank">SiSoftware Sandra</a></li>
+                    </ul>
+                </li>
+                <li><a href="author.html">Автор</a></li>
+            </ul>
+        </nav>
+
+        <!-- Кнопка мобильного меню -->
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-label="Открыть меню">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+    </header>
+
+    <!-- Оверлей для закрытия меню -->
+    <div class="menu-overlay" id="menuOverlay" aria-hidden="true"></div>
+
+    <!-- Боковое меню для мобильных устройств -->
+    <nav class="sidebar-menu" id="sidebarMenu" aria-hidden="true">
+        <button class="close-menu" id="closeMenu" type="button" aria-label="Закрыть меню">×</button>
+        <ul>
+            <li><a href="index.html" class="menu-item">Главная</a></li>
+            <li class="dropdown mobile-dropdown">
+                <button class="menu-item dropdown-toggle" type="button" aria-expanded="false">
+                    Разделы <span class="dropdown-arrow">▾</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="os-selection.html">Выбор операционной системы</a></li>
+                    <li><a href="filesystem.html">Выбор ФС и разметка диска</a></li>
+                    <li><a href="remote-management.html">Средства удаленного управления компьютером</a></li>
+                    <li><a href="diagnost-management.html">Средства диагностики, контроля и мониторинга системы</a></li>
+                </ul>
+            </li>
+            <li class="dropdown mobile-dropdown">
+                <button class="menu-item dropdown-toggle" type="button" aria-expanded="false">
+                    Ссылки на официальные сайты <span class="dropdown-arrow">▾</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="https://www.teamviewer.com" target="_blank">TeamViewer</a></li>
+                    <li><a href="https://anydesk.com" target="_blank">AnyDesk</a></li>
+                    <li><a href="https://www.aeroadmin.com" target="_blank">AeroAdmin</a></li>
+                    <li><a href="https://www.aida64.com" target="_blank">AIDA64</a></li>
+                    <li><a href="https://www.hwinfo.com" target="_blank">HWiNFO</a></li>
+                    <li><a href="https://www.sisoftware.net" target="_blank">SiSoftware Sandra</a></li>
+                </ul>  
+            </li>
+            <li><a href="author.html" class="menu-item">Автор</a></li>
+        </ul>
+    </nav>
+
+    <!-- Основной контент -->
+    <main class="faq-main">
+        <!-- Заголовок страницы -->
+        <section class="page-header">
+            <div class="container">
+                <h1>Часто задаваемые вопросы</h1>
+                <p class="page-subtitle">Диагностика, контроль и мониторинг компьютерных систем</p>
+            </div>
+        </section>
+
+        <!-- Поиск и фильтры -->
+        <section class="search-section">
+            <div class="container">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Поиск по вопросам..." class="search-input">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+                
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-category="all">Все вопросы</button>
+                    <button class="filter-tab" data-category="software">Программы</button>
+                    <button class="filter-tab" data-category="hardware">Железо</button>
+                    <button class="filter-tab" data-category="problems">Проблемы</button>
+                    <button class="filter-tab" data-category="setup">Настройка</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ контент -->
+        <section class="faq-content">
+            <div class="container">
+                
+                <!-- Общие вопросы о диагностике -->
+                <div class="faq-category">
+                    <h2 class="category-title">Общие вопросы о диагностике</h2>
+                    
+                    <div class="faq-item" data-category="software">
+                        <div class="faq-question">
+                            <h3>Что такое системная диагностика и зачем она нужна?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="answer-content">
+                                <p><strong>Системная диагностика</strong> — это процесс анализа состояния компьютера и его компонентов для выявления проблем, оценки производительности и предотвращения сбоев.</p>
+                                
+                                <h4>Основные задачи диагностики:</h4>
+                                <ul>
+                                    <li><i class="fas fa-check"></i> Мониторинг температуры процессора и видеокарты</li>
+                                    <li><i class="fas fa-check"></i> Проверка состояния жёсткого диска и SSD</li>
+                                    <li><i class="fas fa-check"></i> Анализ использования оперативной памяти</li>
+                                    <li><i class="fas fa-check"></i> Контроль работы системы охлаждения</li>
+                                    <li><i class="fas fa-check"></i> Выявление узких мест в производительности</li>
+                                </ul>
+                                
+                                <div class="info-box">
+                                    <i class="fas fa-lightbulb"></i>
+                                    <p><strong>Совет:</strong> Регулярная диагностика помогает предотвратить серьёзные поломки и продлить срок службы компьютера.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="software">
+                        <div class="faq-question">
+                            <h3>Какие программы лучше всего подходят для диагностики?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="answer-content">
+                                <div class="software-comparison">
+                                    <div class="software-item">
+                                        <div class="software-header">
+                                            <h4><i class="fas fa-star"></i> AIDA64</h4>
+                                            <span class="price-tag">Платная</span>
+                                        </div>
+                                        <p><strong>Лучший выбор для комплексной диагностики</strong></p>
+                                        <ul>
+                                            <li>Подробная информация о всех компонентах</li>
+                                            <li>Стресс-тесты процессора, памяти, видеокарты</li>
+                                            <li>Мониторинг температур в реальном времени</li>
+                                            <li>Создание отчётов в различных форматах</li>
+                                        </ul>
+                                        <div class="rating">
+                                            <span>Рейтинг: </span>
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="software-item">
+                                        <div class="software-header">
+                                            <h4><i class="fas fa-download"></i> HWiNFO</h4>
+                                            <span class="free-tag">Бесплатная</span>
+                                        </div>
+                                        <p><strong>Лучшая бесплатная альтернатива</strong></p>
+                                        <ul>
+                                            <li>Очень подробная информация о железе</li>
+                                            <li>Точные показания датчиков</li>
+                                            <li>Поддержка новейших компонентов</li>
+                                            <li>Экспорт данных в различные форматы</li>
+                                        </ul>
+                                        <div class="rating">
+                                            <span>Рейтинг: </span>
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="software-item">
+                                        <div class="software-header">
+                                            <h4><i class="fas fa-cogs"></i> SiSoftware Sandra</h4>
+                                            <span class="freemium-tag">Freemium</span>
+                                        </div>
+                                        <p><strong>Для глубокого анализа производительности</strong></p>
+                                        <ul>
+                                            <li>Множество тестов производительности</li>
+                                            <li>Сравнение с другими системами</li>
+                                            <li>Анализ узких мест</li>
+                                            <li>Рекомендации по улучшению</li>
+                                        </ul>
+                                        <div class="rating">
+                                            <span>Рейтинг: </span>
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Вопросы по конкретным программам -->
+                <div class="faq-category">
+                    <h2 class="category-title">AIDA64</h2>
+                    
+                    <div class="faq-item" data-category="software">
+                        <div class="faq-question">
+                            <h3>Как правильно настроить AIDA64 после установки?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="answer-content">
+                                <div class="step-guide">
+                                    <div class="step">
+                                        <div class="step-number">1</div>
+                                        <div class="step-content">
+                                            <h4>Первый запуск</h4>
+                                            <p>После установки запустите AIDA64 от имени администратора для получения полной информации о системе.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="step">
+                                        <div class="step-number">2</div>
+                                        <div class="step-content">
+                                            <h4>Настройка мониторинга</h4>
+                                            <p>Перейдите в <code>Файл → Настройки → Мониторинг</code> и включите отображение значений в системном трее.</p>
+                                            <ul>
+                                                <li>Установите интервал обновления 2-5 секунд</li>
+                                                <li>Выберите нужные датчики (температура CPU, GPU, обороты вентиляторов)</li>
+                                                <li>Настройте цветовые предупреждения</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="step">
+                                        <div class="step-number">3</div>
+                                        <div class="step-content">
+                                            <h4>Создание панели мониторинга</h4>
+                                            <p>Настройте OSD (On Screen Display) для отображения важных параметров в играх:</p>
+                                            <ul>
+                                                <li>Включите <code>Вид → Панель мониторинга</code></li>
+                                                <li>Добавьте температуры CPU и GPU</li>
+                                                <li>Добавьте загрузку процессора и памяти</li>
+                                                <li>Настройте размещение и прозрачность</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="warning-box">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <p><strong>Важно:</strong> Не оставляйте AIDA64 постоянно запущенной - это может влиять на производительность системы.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                                        <div class="faq-item" data-category="software">
+                        <div class="faq-question">
+                            <h3>Как провести стресс-тест в AIDA64?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="answer-content">
+                                <p>Стресс-тест помогает выявить проблемы со стабильностью системы при максимальной нагрузке.</p>
+                                
+                                <div class="test-guide">
+                                    <h4><i class="fas fa-play"></i> Порядок проведения теста:</h4>
+                                    <ol>
+                                        <li>Откройте <code>Сервис → Тест стабильности системы</code></li>
+                                        <li>Выберите компоненты для тестирования:
+                                            <ul>
+                                                <li><strong>CPU</strong> - для процессора</li>
+                                                <li><strong>FPU</strong> - для математического сопроцессора</li>
+                                                <li><strong>Memory</strong> - для оперативной памяти</li>
+                                                <li><strong>GPU</strong> - для видеокарты</li>
+                                            </ul>
+                                        </li>
+                                        <li>Нажмите <code>Start</code> и следите за температурами</li>
+                                        <li>Рекомендуемое время теста: 15-30 минут</li>
+                                    </ol>
+                                </div>
+                                
+                                <div class="temperature-guide">
+                                    <h4><i class="fas fa-thermometer-half"></i> Безопасные температуры:</h4>
+                                    <div class="temp-table">
+                                        <div class="temp-row">
+                                            <span class="component">Процессор Intel:</span>
+                                            <span class="temp-value safe">до 85°C</span>
+                                        </div>
+                                        <div class="temp-row">
+                                            <span class="component">Процессор AMD:</span>
+                                            <span class="temp-value safe">до 90°C</span>
+                                        </div>
+                                        <div class="temp-row">
+                                            <span class="component">Видеокарта:</span>
+                                            <span class="temp-value safe">до 83°C</span>
+                                        </div>
+                                        <div class="temp-row">
+                                            <span class="component">Материнская плата:</span>
+                                            <span class="temp-value safe">до 60°C</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="danger-box">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <p><strong>Остановите тест немедленно, если:</strong></p>
+                                    <ul>
+                                        <li>Температура превышает безопасные значения</li>
+                                        <li>Система зависает или перезагружается</li>
+                                        <li>Появляются артефакты на экране</li>
+                                        <li>Слышны странные звуки от вентиляторов</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HWiNFO -->
+                <div class="faq-category">
+                    <h2 class="category-title">HWiNFO</h2>
+                    
+                    <div class="faq-item" data-category="software">
+                        <div class="faq-question">
+                            <h3>В чём преимущества HWiNFO перед другими программами?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="answer-content">
+                                <div class="advantages-grid">
+                                    <div class="advantage-card">
+                                        <i class="fas fa-money-bill-slash"></i>
+                                        <h4>Полностью бесплатная</h4>
+                                        <p>Никаких ограничений или платных функций. Полный функционал доступен всем пользователям.</p>
+                                    </div>
+                                    
+                                    <div class="advantage-card">
+                                        <i class="fas fa-sync-alt"></i>
+                                        <h4>Частые обновления</h4>
+                                        <p>Поддержка новейшего железа добавляется очень быстро. Обновления выходят каждые 2-3 недели.</p>
+                                    </div>
+                                    
+                                    <div class="advantage-card">
+                                        <i class="fas fa-microscope"></i>
+                                        <h4>Подробная информация</h4>
+                                        <p>Показывает даже те параметры, которые недоступны в других программах.</p>
+                                    </div>
+                                    
+                                    <div class="advantage-card">
+                                        <i class="fas fa-chart-line"></i>
+                                        <h4>Точные датчики</h4>
+                                        <p>Считается эталоном точности показаний температурных датчиков.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="comparison-table">
+                                    <h4>Сравнение с конкурентами:</h4>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Функция</th>
+                                                <th>HWiNFO</th>
+                                                <th>AIDA64</th>
+                                                <th>CPU-Z</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Мониторинг в реальном времени</td>
+                                                <td><i class="fas fa-check text-success"></i></td>
+                                                <td><i class="fas fa-check text-success"></i></td>
+                                                <td><i class="fas fa-times text-danger"></i></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Стресс-тесты</td>
+                                                <td><i class="fas fa-times text-danger"></i></td>
+                                                <td><i class="fas fa-check text-success"></i></td>
+                                                <td><i class="fas fa-times text-danger"></i></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Поддержка новых процессоров</td>
+                                                <td><i class="fas fa-check text-success"></i></td>
+                                                <td><i class="fas fa-check text-warning"></i></td>
+                                                <td><i class="fas fa-check text-warning"></i></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Цена</td>
+                                                <td>Бесплатно</td>
+                                                <td>$39.95</td>
+                                                <td>Бесплатно</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="setup">
+                        <div class="faq-question">
+                            <h3>Как настроить автозапуск мониторинга в HWiNFO?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="answer-content">
+                                <div class="setup-steps">
+                                    <div class="step">
+                                        <div class="step-number">1</div>
+                                        <div class="step-content">
+                                            <h4>Настройка автозапуска</h4>
+                                            <p>В настройках HWiNFO установите флажки:</p>
+                                            <ul>
+                                                <li><code>☑ Auto-start when Windows starts</code></li>
+                                                <li><code>☑ Start monitoring automatically</code></li>
+                                                <li><code>☑ Minimize to tray</code></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="step">
+                                        <div class="step-number">2</div>
+                                        <div class="step-content">
+                                            <h4>Настройка отображения в трее</h4>
+                                            <p>Настройте, какие параметры показывать в системном трее:</p>
+                                            <ul>
+                                                <li>Температура процессора</li>
+                                                <li>Температура видеокарты</li>
+                                                <li>Использование процессора</li>
+                                                <li>Обороты вентиляторов</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="step">
+                                        <div class="step-number">3</div>
+                                        <div class="step-content">
+                                            <h4>Настройка уведомлений</h4>
+                                            <p>Установите предупреждения при превышении температур:</p>
+                                            <ul>
+                                                <li>CPU: 80°C - предупреждение, 90°C - критично</li>
+                                                <li>GPU: 75°C - предупреждение, 85°C - критично</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Проблемы и их решения -->
+                <div class="faq-category">
+                    <h2 class="category-title">Распространённые проблемы</h2>
+                    
+                    <div class="faq-item" data-category="problems">
+                        <div class="faq-question">
+                            <h3>Компьютер перегревается - что делать?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="answer-content">
+                                <div class="problem-solution">
+                                    <div class="symptoms">
+                                        <h4><i class="fas fa-thermometer-full"></i> Признаки перегрева:</h4>
+                                        <ul>
+                                            <li>Температура процессора выше 85°C</li>
+                                            <li>Видеокарта нагревается свыше 80°C</li>
+                                            <li>Вентиляторы работают на максимальных оборотах</li>
+                                            <li>Компьютер зависает или выключается</li>
+                                            <li>Снижается производительность (троллинг)</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="solutions">
+                                        <h4><i class="fas fa-tools"></i> Способы решения:</h4>
+                                        
+                                        <div class="solution-priority high">
+                                            <h5>🔴 Срочные меры:</h5>
+                                            <ol>
+                                                <li>Выключите компьютер и дайте остыть</li>
+                                                <li>Проверьте работу всех вентиляторов</li>
+                                                <li>Очистите от пыли (сжатый воздух или пылесос)</li>
+                                                <li>Проверьте термопасту на процессоре</li>
+                                            </ol>
+                                        </div>
+                                        
+                                        <div class="solution-priority medium">
+                                            <h5>🟡 Профилактические меры:</h5>
+                                            <ol>
+                                                <li>Улучшите вентиляцию корпуса</li>
+                                                <li>Установите дополнительные вентиляторы</li>
+                                                <li>Проверьте настройки энергосбережения</li>
+                                                <li>Обновите BIOS материнской платы</li>
+                                            </ol>
+                                        </div>
+                                        
+                                        <div class="solution-priority low">
+                                            <h5>🟢 Долгосрочные решения:</h5>
+                                            <ol>
+                                                <li>Замените кулер на более мощный</li>
+                                                <li>Рассмотрите жидкостное охлаждение</li>
+                                                <li>Проведите андервольтинг процессора</li>
+                                                <li>Улучшите корпус с лучшей вентиляцией</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="maintenance-schedule">
+                                    <h4><i class="fas fa-calendar-alt"></i> График профилактики:</h4>
+                                    <ul>
+                                        <li><strong>Каждый месяц:</strong> Проверка температур</li>
+                                        <li><strong>Каждые 3 месяца:</strong> Очистка от пыли</li>
+                                        <li><strong>Каждый год:</strong> Замена термопасты</li>
+                                        <li><strong>Каждые 2-3 года:</strong> Замена термопрокладок</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="problems">
+                        <div class="faq-question">
+                            <h3>Как диагностировать проблемы с оперативной памятью?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="answer-content">
+                                <div class="memory-diagnostics">
+                                    <div class="symptoms-section">
+                                        <h4><i class="fas fa-memory"></i> Признаки проблем с RAM:</h4>
+                                        <ul>
+                                            <li>Синие экраны смерти (BSOD)</li>
+                                            <li>Случайные зависания системы</li>
+                                            <li>Ошибки при запуске программ</li>
+                                            <li>Медленная работа системы</li>
+                                            <li>Файлы повреждаются сами собой</li>
+                                            <li>Компьютер не включается</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="diagnostic-tools">
+                                        <h4><i class="fas fa-wrench"></i> Инструменты диагностики:</h4>
+                                        
+                                        <div class="tool-card">
+                                            <h5>Windows Memory Diagnostic</h5>
+                                            <p><strong>Встроенный инструмент Windows</strong></p>
+                                            <div class="instructions">
+                                                <ol>
+                                                    <li>Нажмите <kbd>Win + R</kbd>, введите <code>mdsched.exe</code></li>
+                                                    <li>Выберите "Выполнить перезагрузку и проверку проблем"</li>
+                                                    <li>Компьютер перезагрузится и запустит тест</li>
+                                                    <li>После теста система загрузится, результаты в журнале событий</li>
+                                                </ol>
+                                            </div>
+                                            <div class="pros-cons">
+                                                <div class="pros">
+                                                    <strong>Плюсы:</strong> Бесплатно, встроено в Windows
+                                                </div>
+                                                <div class="cons">
+                                                    <strong>Минусы:</strong> Базовая функциональность
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="tool-card">
+                                            <h5>MemTest86</h5>
+                                            <p><strong>Профессиональный инструмент</strong></p>
+                                            <div class="instructions">
+                                                <ol>
+                                                    <li>Скачайте с официального сайта PassMark</li>
+                                                    <li>Создайте загрузочную флешку</li>
+                                                    <li>Загрузитесь с флешки</li>
+                                                    <li>Запустите полный тест (несколько часов)</li>
+                                                </ol>
+                                            </div>
+                                            <div class="pros-cons">
+                                                <div class="pros">
+                                                    <strong>Плюсы:</strong> Очень точный, много тестов
+                                                </div>
+                                                <div class="cons">
+                                                    <strong>Минусы:</strong> Требует загрузочной флешки
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="tool-card">  
+                                            <h5>HCI MemTest</h5>
+                                            <p><strong>Тест из-под Windows</strong></p>
+                                            <div class="instructions">
+                                                <ol>
+                                                    <li>Скачайте программу (бесплатная)</li>
+                                                    <li>Запустите несколько экземпляров</li>
+                                                    <li>Установите по ~90% доступной памяти на экземпляр</li>
+                                                    <li>Запустите тест на несколько часов</li>
+                                                </ol>
+                                            </div>
+                                            <div class="pros-cons">
+                                                <div class="pros">
+                                                    <strong>Плюсы:</strong> Работает в Windows, быстрый
+                                                </div>
+                                                <div class="cons">
+                                                    <strong>Минусы:</strong> Не тестирует всю память
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="interpretation">
+                                        <h4><i class="fas fa-search"></i> Интерпретация результатов:</h4>
+                                        <div class="result-types">
+                                            <div class="result-good">
+                                                <i class="fas fa-check-circle"></i>
+                                                <div>
+                                                    <strong>0 ошибок</strong>
+                                                    <p>Память в порядке. Если проблемы остаются - ищите причину в другом месте.</p>
+                                                </div>
+                                            </div>
+                                            <div class="result-warning">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                                <div>
+                                                    <strong>1-10 ошибок</strong>
+                                                    <p>Возможны проблемы. Попробуйте переставить планки, почистить контакты.</p>
+                                                </div>
+                                            </div>
+                                            <div class="result-bad">
+                                                <i class="fas fa-times-circle"></i>
+                                                <div>
+                                                    <strong>Много ошибок</strong>
+                                                    <p>Память неисправна. Требуется замена планок.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="hardware">
+                        <div class="faq-question">
+                            <h3>Как проверить состояние жёсткого диска?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="answer-content">
+                                <div class="disk-health">
+                                    <div class="warning-signs">
+                                        <h4><i class="fas fa-hdd"></i> Признаки проблем с диском:</h4>
+                                        <ul>
+                                            <li>Медленная загрузка системы и программ</li>
+                                            <li>Странные звуки (щелчки, скрежет)</li>
+                                            <li>Ошибки при копировании файлов</li>
+                                            <li>Синие экраны с упоминанием диска</li>
+                                            <li>Файлы внезапно исчезают или повреждаются</li>
+                                            <li>Высокая температура диска (выше 50°C)</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="diagnostic-methods">
+                                        <h4><i class="fas fa-stethoscope"></i> Методы диагностики:</h4>
+                                        
+                                        <div class="method-card">
+                                            <h5>1. Встроенная проверка Windows</h5>
+                                            <div class="command-box">
+                                                <p><strong>Через командную строку:</strong></p>
+                                                <code>chkdsk C: /f /r</code>
+                                                <p><em>Где C: - буква диска для проверки</em></p>
+                                            </div>
+                                            <div class="command-box">
+                                                <p><strong>Через проводник:</strong></p>
+                                                <ol>
+                                                    <li>Правой кнопкой по диску → Свойства</li>
+                                                    <li>Вкладка "Сервис" → "Проверить"</li>
+                                                    <li>Поставить все галочки</li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="method-card">
+                                            <h5>2. SMART-диагностика</h5>
+                                            <p>Используйте программы для чтения SMART-атрибутов:</p>
+                                            <ul>
+                                                <li><strong>CrystalDiskInfo</strong> - простая и бесплатная</li>
+                                                <li><strong>HD Tune</strong> - расширенные тесты</li>
+                                                <li><strong>Victoria HDD</strong> - профессиональная диагностика</li>
+                                            </ul>
+                                            
+                                            <div class="smart-attributes">
+                                                <h6>Важные SMART-атрибуты:</h6>
+                                                <table>
+                                                    <tr>
+                                                        <td><strong>Reallocated Sectors</strong></td>
+                                                        <td>Количество переназначенных секторов (должно быть 0)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Pending Sectors</strong></td>
+                                                        <td>Нестабильные сектора (должно быть 0)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Temperature</strong></td>
+                                                        <td>Температура диска (не выше 50°C)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Power-On Hours</strong></td>
+                                                        <td>Время работы (для оценки износа)</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="method-card">
+                                            <h5>3. Тест производительности</h5>
+                                            <p>Проверьте скорость чтения/записи:</p>
+                                            <ul>
+                                                <li><strong>CrystalDiskMark</strong> - быстрый тест скорости</li>
+                                                <li><strong>AS SSD Benchmark</strong> - для SSD накопителей</li>
+                                                <li><strong>HD Tune Pro</strong> - детальный анализ</li>
+                                            </ul>
+                                            
+                                            <div class="speed-reference">
+                                                <h6>Ориентировочные скорости:</h6>
+                                                <ul>
+                                                    <li><strong>HDD 7200 RPM:</strong> 80-160 МБ/с</li>
+                                                    <li><strong>SATA SSD:</strong> 400-550 МБ/с</li>
+                                                    <li><strong>NVMe SSD:</strong> 1500-7000 МБ/с</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="prevention-tips">
+                                        <h4><i class="fas fa-shield-alt"></i> Профилактика:</h4>
+                                        <ul>
+                                            <li>Регулярно проверяйте SMART-данные</li>
+                                            <li>Следите за температурой дисков</li>
+                                            <li>Дефрагментируйте HDD раз в месяц</li>
+                                            <li>Не заполняйте диск более чем на 85%</li>
+                                            <li>Используйте ИБП для защиты от скачков напряжения</li>
+                                            <li>Регулярно делайте резервные копии важных данных</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Настройка и оптимизация -->
+                <div class="faq-category">
+                    <h2 class="category-title">Настройка и оптимизация</h2>
+                    
+                    <div class="faq-item" data-category="setup">
+                        <div class="faq-question">
+                            <h3>Как настроить автоматический мониторинг системы?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="answer-content">
+                                <div class="monitoring-setup">
+                                    <div class="approach-card">
+                                        <h4><i class="fas fa-desktop"></i> Вариант 1: Программный мониторинг</h4>
+                                        <div class="setup-steps">
+                                            <div class="step">
+                                                <span class="step-num">1</span>
+                                                <div>
+                                                    <strong>Установите HWiNFO64</strong>
+                                                    <p>Настройте автозапуск и мониторинг в трее</p>
+                                                </div>
+                                            </div>
+                                            <div class="step">
+                                                <span class="step-num">2</span>
+                                                <div>
+                                                    <strong>Настройте уведомления</strong>
+                                                    <p>Установите предупреждения при критических температурах</p>
+                                                </div>
+                                            </div>
+                                            <div class="step">
+                                                <span class="step-num">3</span>
+                                                <div>
+                                                    <strong>Включите логирование</strong>
+                                                    <p>Для анализа проблем задним числом</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                                                            <h4><i class="fas fa-microchip"></i> Вариант 2: Аппаратный мониторинг</h4>
+                                        <div class="hardware-options">
+                                            <div class="hw-option">
+                                                <h5>LCD-панели для корпуса</h5>
+                                                <ul>
+                                                    <li>NZXT Kraken Z-серии</li>
+                                                    <li>Corsair Commander Pro</li>
+                                                    <li>Aquacomputer Aquasuite</li>
+                                                </ul>
+                                                <p><strong>Плюсы:</strong> Красиво, информативно, не нагружает систему</p>
+                                                <p><strong>Минусы:</strong> Дорого, требует настройки</p>
+                                            </div>
+                                            
+                                            <div class="hw-option">
+                                                <h5>Мониторинг через материнскую плату</h5>
+                                                <ul>
+                                                    <li>ASUS AI Suite</li>
+                                                    <li>MSI Dragon Center</li>
+                                                    <li>Gigabyte System Information Viewer</li>
+                                                </ul>
+                                                <p><strong>Плюсы:</strong> Бесплатно, интеграция с RGB</p>
+                                                <p><strong>Минусы:</strong> Часто глючное ПО</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="monitoring-schedule">
+                                        <h4><i class="fas fa-calendar-check"></i> Рекомендуемый график мониторинга:</h4>
+                                        <div class="schedule-table">
+                                            <div class="schedule-row">
+                                                <span class="frequency">Постоянно</span>
+                                                <span class="task">Температуры CPU/GPU, обороты вентиляторов</span>
+                                            </div>
+                                            <div class="schedule-row">
+                                                <span class="frequency">Еженедельно</span>
+                                                <span class="task">Проверка SMART-атрибутов дисков</span>
+                                            </div>
+                                            <div class="schedule-row">
+                                                <span class="frequency">Ежемесячно</span>
+                                                <span class="task">Стресс-тест системы, очистка от пыли</span>
+                                            </div>
+                                            <div class="schedule-row">
+                                                <span class="frequency">Раз в полгода</span>
+                                                <span class="task">Полная диагностика, замена термопасты</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="setup">
+                        <div class="faq-question">
+                            <h3>Какие параметры системы нужно контролировать обязательно?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="answer-content">
+                                <div class="critical-params">
+                                    <div class="param-category">
+                                        <h4><i class="fas fa-thermometer-three-quarters"></i> Температуры (критично)</h4>
+                                        <div class="param-list">
+                                            <div class="param-item">
+                                                <strong>CPU Temperature</strong>
+                                                <span class="normal-range">Норма: 30-70°C</span>
+                                                <span class="critical-range">Критично: >85°C</span>
+                                            </div>
+                                            <div class="param-item">
+                                                <strong>GPU Temperature</strong>
+                                                <span class="normal-range">Норма: 40-75°C</span>
+                                                <span class="critical-range">Критично: >83°C</span>
+                                            </div>
+                                            <div class="param-item">
+                                                <strong>Motherboard Temperature</strong>
+                                                <span class="normal-range">Норма: 30-50°C</span>
+                                                <span class="critical-range">Критично: >60°C</span>
+                                            </div>
+                                            <div class="param-item">
+                                                <strong>Storage Temperature</strong>
+                                                <span class="normal-range">Норма: 30-45°C</span>
+                                                <span class="critical-range">Критично: >50°C</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="param-category">
+                                        <h4><i class="fas fa-fan"></i> Система охлаждения (важно)</h4>
+                                        <div class="param-list">
+                                            <div class="param-item">
+                                                <strong>CPU Fan Speed</strong>
+                                                <span class="normal-range">Норма: 800-2000 RPM</span>
+                                                <span class="critical-range">Критично: <500 RPM</span>
+                                            </div>
+                                            <div class="param-item">
+                                                <strong>Case Fans</strong>
+                                                <span class="normal-range">Норма: 600-1500 RPM</span>
+                                                <span class="critical-range">Критично: Остановка</span>
+                                            </div>
+                                            <div class="param-item">
+                                                <strong>GPU Fan Speed</strong>
+                                                <span class="normal-range">Норма: 0-2500 RPM</span>
+                                                <span class="critical-range">Критично: Не работает при нагрузке</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="param-category">
+                                        <h4><i class="fas fa-bolt"></i> Питание (контроль)</h4>
+                                        <div class="param-list">
+                                            <div class="param-item">
+                                                <strong>CPU Voltage</strong>
+                                                <span class="normal-range">Норма: 0.8-1.4V</span>
+                                                <span class="critical-range">Критично: >1.5V</span>
+                                            </div>
+                                            <div class="param-item">
+                                                <strong>12V Rail</strong>
+                                                <span class="normal-range">Норма: 11.4-12.6V</span>
+                                                <span class="critical-range">Критично: <11V или >13V</span>
+                                            </div>
+                                            <div class="param-item">
+                                                <strong>5V Rail</strong>
+                                                <span class="normal-range">Норma: 4.75-5.25V</span>
+                                                <span class="critical-range">Критично: <4.5V или >5.5V</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="param-category">
+                                        <h4><i class="fas fa-hdd"></i> Диски (еженедельно)</h4>
+                                        <div class="param-list">
+                                            <div class="param-item">
+                                                <strong>Health Status</strong>
+                                                <span class="normal-range">Норма: Good/Excellent</span>
+                                                <span class="critical-range">Критично: Bad/Caution</span>
+                                            </div>
+                                            <div class="param-item">
+                                                <strong>Reallocated Sectors</strong>
+                                                <span class="normal-range">Норма: 0</span>
+                                                <span class="critical-range">Критично: >0</span>
+                                            </div>
+                                            <div class="param-item">
+                                                <strong>Pending Sectors</strong>
+                                                <span class="normal-range">Норма: 0</span>
+                                                <span class="critical-range">Критично: >0</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="monitoring-tips">
+                                    <h4><i class="fas fa-lightbulb"></i> Полезные советы:</h4>
+                                    <ul>
+                                        <li>Записывайте базовые показания сразу после сборки</li>
+                                        <li>Температуры в играх важнее, чем в простое</li>
+                                        <li>Обращайте внимание на тренды, а не разовые всплески</li>
+                                        <li>Проверяйте показания несколькими программами</li>
+                                        <li>Учитывайте температуру окружающей среды</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Выбор программного обеспечения -->
+                <div class="faq-category">
+                    <h2 class="category-title">Выбор ПО для диагностики</h2>
+                    
+                    <div class="faq-item" data-category="software">
+                        <div class="faq-question">
+                            <h3>Какую программу выбрать новичку?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="answer-content">
+                                <div class="beginner-guide">
+                                    <div class="recommendation-card best">
+                                        <div class="card-header">
+                                            <h4><i class="fas fa-crown"></i> Лучший выбор: HWiNFO64</h4>
+                                            <span class="badge free">Бесплатно</span>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="why-best">
+                                                <h5>Почему именно эта программа:</h5>
+                                                <ul>
+                                                    <li>✅ Полностью бесплатная</li>
+                                                    <li>✅ Простой и понятный интерфейс</li>
+                                                    <li>✅ Не требует специальных знаний</li>
+                                                    <li>✅ Отличная поддержка нового железа</li>
+                                                    <li>✅ Не содержит рекламы и мусора</li>
+                                                </ul>
+                                            </div>
+                                            
+                                            <div class="quick-start">
+                                                <h5>Быстрый старт:</h5>
+                                                <ol>
+                                                    <li>Скачайте с официального сайта</li>
+                                                    <li>Установите с настройками по умолчанию</li>
+                                                    <li>При первом запуске выберите "Sensors-only"</li>
+                                                    <li>Следите за температурами CPU и GPU</li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="alternative-options">
+                                        <h4>Альтернативные варианты:</h4>
+                                        
+                                        <div class="alt-option">
+                                            <h5><i class="fas fa-microchip"></i> CPU-Z + GPU-Z</h5>
+                                            <p><strong>Для тех, кому нужна только базовая информация</strong></p>
+                                            <div class="pros-cons-mini">
+                                                <span class="pro">Очень простые</span>
+                                                <span class="con">Нет мониторинга температур</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="alt-option">
+                                            <h5><i class="fas fa-chart-area"></i> MSI Afterburner</h5>
+                                            <p><strong>Если нужен мониторинг в играх</strong></p>
+                                            <div class="pros-cons-mini">
+                                                <span class="pro">OSD в играх</span>
+                                                <span class="con">Только GPU + основные параметры</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="alt-option">
+                                            <h5><i class="fas fa-tachometer-alt"></i> Speccy</h5>
+                                            <p><strong>От создателей CCleaner</strong></p>
+                                            <div class="pros-cons-mini">
+                                                <span class="pro">Красивый интерфейс</span>
+                                                <span class="con">Реклама, медленное обновление базы</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="avoid-list">
+                                        <h4><i class="fas fa-exclamation-triangle"></i> Чего стоит избегать:</h4>
+                                        <ul>
+                                            <li><strong>Программы от неизвестных разработчиков</strong> - могут содержать вирусы</li>
+                                            <li><strong>Слишком старые версии</strong> - не поддерживают новое железо</li>
+                                            <li><strong>Программы с рекламой</strong> - отвлекают и замедляют работу</li>
+                                            <li><strong>Китайские "комбайны"</strong> - часто содержат шпионское ПО</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Сообщение если ничего не найдено -->
+                                <div class="no-results" id="noResults" style="display: none;">
+                    <div class="no-results-content">
+                        <i class="fas fa-search"></i>
+                        <h3>Ничего не найдено</h3>
+                        <p>Попробуйте изменить поисковый запрос или выберите другую категорию</p>
+                        <button class="btn-clear-search" onclick="clearSearch()">Очистить поиск</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Дополнительная информация -->
+        <section class="additional-info">
+            <div class="container">
+                <div class="info-cards">
+                    <div class="info-card">
+                        <i class="fas fa-book"></i>
+                        <h3>Полезные ресурсы</h3>
+                        <ul>
+                            <li><a href="https://www.hwinfo.com/" target="_blank" rel="noopener">Официальный сайт HWiNFO</a></li>
+                            <li><a href="https://www.aida64.com/" target="_blank" rel="noopener">Официальный сайт AIDA64</a></li>
+                            <li><a href="https://www.sisoftware.net/" target="_blank" rel="noopener">SiSoftware Sandra</a></li>
+                            <li><a href="https://crystalmark.info/" target="_blank" rel="noopener">CrystalDiskInfo/Mark</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <i class="fas fa-tools"></i>
+                        <h3>Дополнительные инструменты</h3>
+                        <ul>
+                            <li><a href="https://www.memtest86.com/" target="_blank" rel="noopener">MemTest86 - тест памяти</a></li>
+                            <li><a href="https://www.prime95.org/" target="_blank" rel="noopener">Prime95 - стресс-тест CPU</a></li>
+                            <li><a href="https://geeks3d.com/furmark/" target="_blank" rel="noopener">FurMark - стресс-тест GPU</a></li>
+                            <li><a href="https://www.hdtune.com/" target="_blank" rel="noopener">HD Tune - диагностика дисков</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <i class="fas fa-question-circle"></i>
+                        <h3>Нужна помощь?</h3>
+                        <p>Если вы не нашли ответ на свой вопрос, обратитесь к специалистам или изучите детальное руководство по диагностике системы.</p>
+                        <div class="help-buttons">
+                            <a href="diagnost-management.html" class="btn-secondary">
+                                <i class="fas fa-arrow-left"></i>
+                                Вернуться к обзору
+                            </a>
+                            <a href="author.html" class="btn-primary">
+                                <i class="fas fa-user"></i>
+                                Связаться с автором
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="diagnost-management.html">Диагностика и мониторинг</a></li>
+                        <li><a href="author.html">Автор</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Полезные ссылки</h4>
+                    <ul>
+                        <li><a href="https://www.hwinfo.com/" target="_blank" rel="noopener">HWiNFO</a></li>
+                        <li><a href="https://www.aida64.com/" target="_blank" rel="noopener">AIDA64</a></li>
+                        <li><a href="https://www.sisoftware.net/" target="_blank" rel="noopener">Sandra</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>О проекте</h4>
+                    <p>Справочник по диагностике и мониторингу компьютерных систем. Подробные инструкции и практические советы.</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Диагностика системы. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Кнопка "Наверх" -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Подключение скриптов -->
+    <script src="js/mobile-menu.js"></script>
+    <script src="js/diagnost-faq.js"></script>
+    <script src="js/faq-init.js"></script>
+    <script src="js/faq-sw.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+
+
+
