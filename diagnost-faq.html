@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<UPDATED_CODE><!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -10,17 +10,71 @@
     <link rel="stylesheet" href="css/diagnost-faq.css">
     <link rel="stylesheet" href="css/faq-enhancement.css">
     <link rel="stylesheet" href="css/mobile.css">
-    <link rel="stylesheet" href="css/faq-enhancements.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Только минимальные стили для прелоадера */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg, #1a1a1a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(197, 164, 126, 0.3);
+            border-top: 3px solid #c5a47e;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: #c5a47e;
+            margin-top: 20px;
+            font-size: 1.1rem;
+        }
+    </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Простой прелоадер -->
+    <div class="preloader" id="preloader">
+        <div style="text-align: center;">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Загрузка...</div>
+        </div>
+    </div>
+
+    <!-- Фон как в main.css -->
+    <div class="main-bg">
+        <div class="slide-bg" style="background-image: url('izobr/1.gif')"></div>
+        <div class="overlay"></div>
+    </div>
+
+    <!-- Header точно как в других файлах -->
     <header class="main-header">
         <div class="header-logo">
             <img src="izobr/logo.svg" alt="Логотип" class="logo-img">
         </div>
         
-        <!-- Обычное меню для десктопа -->
+        <!-- Десктопное меню -->
         <nav class="header-menu desktop-menu">
             <ul>
                 <li><a href="index.html">Главная</a></li>
@@ -30,7 +84,7 @@
                         <li><a href="os-selection.html">Выбор операционной системы</a></li>
                         <li><a href="filesystem.html">Выбор ФС и разметка диска</a></li>
                         <li><a href="remote-management.html">Средства удаленного управления компьютером</a></li>
-                        <li><a href="diagnost-management.html">Средства диагностики, контроля и мониторинга системы</a></li>
+                        <li><a href="diagnost-management.html" class="active">Средства диагностики, контроля и мониторинга системы</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -48,37 +102,33 @@
             </ul>
         </nav>
 
-        <!-- Кнопка мобильного меню -->
-        <button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-label="Открыть меню">
+        <!-- Мобильная кнопка -->
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">
             <span class="hamburger-line"></span>
             <span class="hamburger-line"></span>
             <span class="hamburger-line"></span>
         </button>
     </header>
 
-    <!-- Оверлей для закрытия меню -->
-    <div class="menu-overlay" id="menuOverlay" aria-hidden="true"></div>
+    <!-- Оверлей для мобильного меню -->
+    <div class="menu-overlay" id="menuOverlay"></div>
 
-    <!-- Боковое меню для мобильных устройств -->
-    <nav class="sidebar-menu" id="sidebarMenu" aria-hidden="true">
-        <button class="close-menu" id="closeMenu" type="button" aria-label="Закрыть меню">×</button>
+    <!-- Боковое мобильное меню -->
+    <nav class="sidebar-menu" id="sidebarMenu">
+        <button class="close-menu" id="closeMenu">×</button>
         <ul>
             <li><a href="index.html" class="menu-item">Главная</a></li>
             <li class="dropdown mobile-dropdown">
-                <button class="menu-item dropdown-toggle" type="button" aria-expanded="false">
-                    Разделы <span class="dropdown-arrow">▾</span>
-                </button>
+                <a href="#sections" class="menu-item dropdown-toggle">Разделы <span class="dropdown-arrow">▾</span></a>
                 <ul class="dropdown-menu">
                     <li><a href="os-selection.html">Выбор операционной системы</a></li>
                     <li><a href="filesystem.html">Выбор ФС и разметка диска</a></li>
                     <li><a href="remote-management.html">Средства удаленного управления компьютером</a></li>
-                    <li><a href="diagnost-management.html">Средства диагностики, контроля и мониторинга системы</a></li>
+                    <li><a href="diagnost-management.html" class="active">Средства диагностики, контроля и мониторинга системы</a></li>
                 </ul>
             </li>
             <li class="dropdown mobile-dropdown">
-                <button class="menu-item dropdown-toggle" type="button" aria-expanded="false">
-                    Ссылки на официальные сайты <span class="dropdown-arrow">▾</span>
-                </button>
+                <a href="#ssilki" class="menu-item dropdown-toggle">Ссылки на официальные сайты <span class="dropdown-arrow">▾</span></a>
                 <ul class="dropdown-menu">
                     <li><a href="https://www.teamviewer.com" target="_blank">TeamViewer</a></li>
                     <li><a href="https://anydesk.com" target="_blank">AnyDesk</a></li>
@@ -97,6 +147,11 @@
         <!-- Заголовок страницы -->
         <section class="page-header">
             <div class="container">
+                <div class="breadcrumb">
+                    <a href="index.html">Главная</a> / 
+                    <a href="diagnost-management.html">Диагностика</a> / 
+                    <span>FAQ</span>
+                </div>
                 <h1>Часто задаваемые вопросы</h1>
                 <p class="page-subtitle">Диагностика, контроль и мониторинг компьютерных систем</p>
             </div>
@@ -139,16 +194,18 @@
                                 
                                 <h4>Основные задачи диагностики:</h4>
                                 <ul>
-                                    <li><i class="fas fa-check"></i> Мониторинг температуры процессора и видеокарты</li>
-                                    <li><i class="fas fa-check"></i> Проверка состояния жёсткого диска и SSD</li>
-                                    <li><i class="fas fa-check"></i> Анализ использования оперативной памяти</li>
-                                    <li><i class="fas fa-check"></i> Контроль работы системы охлаждения</li>
-                                    <li><i class="fas fa-check"></i> Выявление узких мест в производительности</li>
+                                    <li>Мониторинг температуры процессора и видеокарты</li>
+                                    <li>Проверка состояния жёсткого диска и SSD</li>
+                                    <li>Анализ использования оперативной памяти</li>
+                                    <li>Контроль работы системы охлаждения</li>
+                                    <li>Выявление узких мест в производительности</li>
                                 </ul>
                                 
                                 <div class="info-box">
                                     <i class="fas fa-lightbulb"></i>
-                                    <p><strong>Совет:</strong> Регулярная диагностика помогает предотвратить серьёзные поломки и продлить срок службы компьютера.</p>
+                                    <div>
+                                        <strong>Совет:</strong> Регулярная диагностика помогает предотвратить серьёзные поломки и продлить срок службы компьютера.
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -931,7 +988,7 @@
                                             </div>
                                             <div class="param-item">
                                                 <strong>5V Rail</strong>
-                                                <span class="normal-range">Норma: 4.75-5.25V</span>
+                                                <span class="norma">Норма: 4.75-5.25V</span>
                                                 <span class="critical-range">Критично: <4.5V или >5.5V</span>
                                             </div>
                                         </div>
@@ -1165,6 +1222,8 @@
     <script src="js/faq-init.js"></script>
     <script src="js/faq-sw.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/menu.js"></script>
+    
 </body>
 </html>
 
