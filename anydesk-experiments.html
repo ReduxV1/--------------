@@ -284,12 +284,51 @@
                         </ul>
                     </div>
                     
-                    <div class="screenshot-placeholder" style="background: #333; border: 2px dashed #666; height: 200px; display: flex; align-items: center; justify-content: center; color: #999; margin: 20px 0; border-radius: 8px;">
-                        [Скриншот настроек качества и сравнение производительности]
+                    <div class="screenshot-placeholder" style="background: #222; border: 2px solid #666; border-radius: 8px; overflow: hidden; margin: 20px 0; min-height: 200px; display: flex; align-items: center; justify-content: center; position: relative;">
+                        <div class="image-gallery" style="margin: 20px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3); background: #222;">
+                            <div class="gallery-container" style="position: relative;">
+                                <div class="image-wrapper" style="text-align: center; min-height: 600px; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box;">
+                                    <img id="mainImage" src="izobr/anydesk/1.png" alt="Максимальное качество" style="max-width: 100%; height: auto; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;" onclick="openFullscreen(this)">
+                                </div>
+                                
+                                <!-- Навигационные стрелки -->
+                                <button class="gallery-nav prev" onclick="changeImage(-1)" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); background: rgba(0,122,204,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">‹</button>
+                                
+                                <button class="gallery-nav next" onclick="changeImage(1)" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: rgba(0,122,204,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">›</button>
+                                
+                                <!-- Счетчик изображений -->
+                                <div class="image-counter" style="position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.8); color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px; z-index: 10;">
+                                    <span id="currentImage">1</span> / <span id="totalImages">3</span>
+                                </div>
+                                
+                                <!-- Иконка полноэкранного просмотра -->
+                                <div class="fullscreen-hint" style="position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.8); color: white; padding: 8px 12px; border-radius: 20px; font-size: 12px; z-index: 10; display: flex; align-items: center; gap: 5px;">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M7,14H5V19H10V17H7V14M12,10H14V7H19V5H14A2,2 0 0,0 12,7V10M5,5V7H7V10H9V7A2,2 0 0,0 7,5H5M19,14H17V17H14V19H17A2,2 0 0,0 19,17V14Z"/>
+                                    </svg>
+                                    Увеличить
+                                </div>
+                            </div>
+                            
+                            <!-- Миниатюры -->
+                            <div class="thumbnails" style="display: flex; justify-content: center; gap: 10px; padding: 15px; background: rgba(0,122,204,0.1);">
+                                <img src="izobr/anydesk/1.png" alt="Максимальное качество" class="thumbnail active" onclick="goToImage(0)" style="width: 80px; height: 60px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid #007acc; transition: all 0.3s ease;">
+                                <img src="izobr/anydesk/2.png" alt="Баланс" class="thumbnail" onclick="goToImage(1)" style="width: 80px; height: 60px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                                <img src="izobr/anydesk/3.png" alt="Минимальное качество" class="thumbnail" onclick="goToImage(2)" style="width: 80px; height: 60px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                            </div>
+                        </div>
                     </div>
                     
                     <div style="color: #b0b0b0;">
-                        <strong>Результат:</strong> Наглядное сравнение всех режимов качества с показателями производительности в реальном времени.
+                        <strong>Результат:</strong> Наглядное сравнение всех режимов качества с показателями производительности в реальном времени.Как можно заметить при хорошем интернет соединении разница практически не заметна.
+                    </div>
+                </div>
+
+                <!-- Полноэкранный просмотр -->
+                <div id="fullscreenModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; opacity: 0; transition: opacity 0.3s ease;" onclick="closeFullscreen(event)">
+                    <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; padding: 40px; box-sizing: border-box;">
+                        <img id="fullscreenImage" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 10px;">
+                        <button onclick="closeFullscreen()" style="position: absolute; top: 30px; right: 30px; background: rgba(255,255,255,0.2); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 30px; transition: background 0.3s ease;">×</button>
                     </div>
                 </div>
 
@@ -705,6 +744,152 @@
             updateProgressIndicator();
             return result;
         };
+
+                // Галерея изображений
+        let currentImageIndex = 0;
+        const imageData = [
+            {
+                src: 'izobr/anydesk/1.png',
+                alt: 'Настройки качества AnyDesk',
+                description: 'Настройки качества изображения в AnyDesk'
+            },
+            {
+                src: 'izobr/anydesk/2.png',
+                alt: 'Сравнение производительности',
+                description: 'Сравнение производительности при разных настройках'
+            },
+            {
+                src: 'izobr/anydesk/3.png',
+                alt: 'Тестирование качества изображения',
+                description: 'Тестирование качества изображения в реальном времени'
+            }
+        ];
+
+        // Показать изображение
+        function showImage(index) {
+            const mainImage = document.getElementById('mainImage');
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            const data = imageData[index];
+            
+            // Обновить главное изображение
+            mainImage.style.opacity = '0.3';
+            setTimeout(() => {
+                mainImage.src = data.src;
+                mainImage.alt = data.alt;
+                mainImage.style.opacity = '1';
+            }, 150);
+            
+            // Обновить миниатюры
+            thumbnails.forEach((thumb, i) => {
+                if (i === index) {
+                    thumb.classList.add('active');
+                    thumb.style.border = '2px solid #007acc';
+                    thumb.style.opacity = '1';
+                } else {
+                    thumb.classList.remove('active');
+                    thumb.style.border = '2px solid transparent';
+                    thumb.style.opacity = '0.7';
+                }
+            });
+            
+            // Обновить счетчик и описание
+            document.getElementById('currentImage').textContent = index + 1;
+            document.getElementById('imageDescription').textContent = data.description;
+            
+            currentImageIndex = index;
+        }
+
+        // Переключение изображений
+        function changeImage(direction) {
+            let newIndex = currentImageIndex + direction;
+            
+            if (newIndex >= imageData.length) {
+                newIndex = 0;
+            } else if (newIndex < 0) {
+                newIndex = imageData.length - 1;
+            }
+            
+            showImage(newIndex);
+        }
+
+        // Переход к конкретному изображению
+        function goToImage(index) {
+            showImage(index);
+        }
+
+        // Полноэкранный просмотр
+        function openFullscreen(img) {
+            const modal = document.getElementById('fullscreenModal');
+            const fullscreenImg = document.getElementById('fullscreenImage');
+            
+            fullscreenImg.src = img.src;
+            fullscreenImg.alt = img.alt;
+            modal.style.display = 'block';
+            
+            setTimeout(() => {
+                modal.style.opacity = '1';
+            }, 10);
+            
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeFullscreen(event) {
+            if (event) event.stopPropagation();
+            const modal = document.getElementById('fullscreenModal');
+            modal.style.opacity = '0';
+            
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        // Hover эффекты
+        document.addEventListener('DOMContentLoaded', function() {
+            // Эффекты для навигационных кнопок
+            document.querySelectorAll('.gallery-nav').forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    this.style.background = '#007acc';
+                    this.style.transform = 'translateY(-50%) scale(1.1)';
+                });
+                
+                btn.addEventListener('mouseleave', function() {
+                    this.style.background = 'rgba(0,122,204,0.9)';
+                    this.style.transform = 'translateY(-50%) scale(1)';
+                });
+            });
+
+            // Эффекты для миниатюр
+            document.querySelectorAll('.thumbnail').forEach(thumb => {
+                thumb.addEventListener('mouseenter', function() {
+                    if (!this.classList.contains('active')) {
+                        this.style.opacity = '1';
+                        this.style.transform = 'scale(1.05)';
+                    }
+                });
+                
+                thumb.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('active')) {
+                        this.style.opacity = '0.7';
+                        this.style.transform = 'scale(1)';
+                    }
+                });
+            });
+
+            // Инициализация
+            showImage(0);
+        });
+
+        // Поддержка клавиатуры
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeFullscreen();
+            } else if (e.key === 'ArrowLeft') {
+                changeImage(-1);
+            } else if (e.key === 'ArrowRight') {
+                changeImage(1);
+            }
+        });
     </script>
     <script type="module" src="js/mobile-menu.js"></script>
     <script type="module" src="js/main.js"></script>
