@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,13 +46,25 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
+
+            0%,
+            100% {
+                opacity: 0.7;
+            }
+
+            50% {
+                opacity: 1;
+            }
         }
 
         /* Анимации для карточек */
@@ -109,12 +122,15 @@
                 transform: scale(0.3);
                 opacity: 0;
             }
+
             50% {
                 transform: scale(1.05);
             }
+
             70% {
                 transform: scale(0.9);
             }
+
             100% {
                 transform: scale(1);
                 opacity: 1;
@@ -134,13 +150,18 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
             animation: shimmer 2s infinite;
         }
 
         @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 100%;
+            }
         }
 
         /* Плавное появление секций */
@@ -166,8 +187,66 @@
             opacity: 1;
             transform: scale(1);
         }
+
+        /* Улучшенные размеры изображений для читаемости - БЕЗ размывающих эффектов */
+        .image-wrapper {
+            min-height: 500px !important;
+            background: #1a1a1a;
+        }
+
+        #mainImage {
+            max-height: 480px !important;
+            width: auto !important;
+            /* УБИРАЕМ размывающие свойства */
+            image-rendering: auto;
+            image-rendering: -webkit-optimize-quality;
+        }
+
+        .thumbnail {
+            width: 90px !important;
+            height: 70px !important;
+            /* УБИРАЕМ размывающие свойства */
+            image-rendering: auto;
+            image-rendering: -webkit-optimize-quality;
+        }
+
+        /* Улучшение качества изображений */
+        .image-gallery {
+            background: #1a1a1a !important;
+        }
+
+        .gallery-container {
+            background: #1a1a1a;
+        }
+
+        /* Zoom функция для лучшей читаемости */
+        .zoomable {
+            transition: transform 0.3s ease;
+            cursor: zoom-in;
+        }
+
+        .zoomable.zoomed {
+            transform: scale(1.5);
+            cursor: zoom-out;
+            z-index: 100;
+            position: relative;
+        }
+
+        /* Индикатор качества изображения */
+        .quality-indicator {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #00ff00;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            z-index: 10;
+        }
     </style>
 </head>
+
 <body>
     <!-- Прелоадер -->
     <div class="preloader" id="preloader">
@@ -181,26 +260,70 @@
         <div class="slide-bg" style="background-image: url('izobr/1.gif')"></div>
         <div class="overlay"></div>
     </div>
-<header class="main-header">
-    <div class="header-logo">
-        <img src="izobr/logo.svg" alt="Логотип" class="logo-img">
-    </div>
-    
-    <!-- Обычное меню для десктопа -->
-    <nav class="header-menu desktop-menu">
+    <header class="main-header">
+        <div class="header-logo">
+            <img src="izobr/logo.svg" alt="Логотип" class="logo-img">
+        </div>
+
+        <!-- Обычное меню для десктопа -->
+        <nav class="header-menu desktop-menu">
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li class="dropdown">
+                    <a href="#sections" class="dropdown-trigger">Разделы ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="os-selection.html">Выбор операционной системы</a></li>
+                        <li><a href="filesystem.html">Выбор ФС и разметка диска</a></li>
+                        <li><a href="remote-management.html" class="active">Средства удаленного управления
+                                компьютером</a></li>
+                        <li><a href="diagnost-management.html">Средства диагностики, контроля и мониторинга системы</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#ssilki" class="dropdown-trigger">Ссылки на официальные сайты ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://www.teamviewer.com" target="_blank">TeamViewer</a></li>
+                        <li><a href="https://anydesk.com" target="_blank">AnyDesk</a></li>
+                        <li><a href="https://www.aeroadmin.com" target="_blank">AeroAdmin</a></li>
+                        <li><a href="https://www.aida64.com" target="_blank">AIDA64</a></li>
+                        <li><a href="https://www.hwinfo.com" target="_blank">HWiNFO</a></li>
+                        <li><a href="https://www.sisoftware.net" target="_blank">SiSoftware Sandra</a></li>
+                    </ul>
+                </li>
+                <li><a href="author.html">Автор</a></li>
+            </ul>
+        </nav>
+
+        <!-- Кнопка мобильного меню -->
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+    </header>
+
+    <!-- Оверлей для закрытия меню -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <!-- Боковое меню для мобильных устройств -->
+    <nav class="sidebar-menu" id="sidebarMenu">
+        <button class="close-menu" id="closeMenu">×</button>
         <ul>
-            <li><a href="index.html">Главная</a></li>
-            <li class="dropdown">
-                <a href="#sections" class="dropdown-trigger">Разделы ▾</a>
+            <li><a href="index.html" class="menu-item">Главная</a></li>
+            <li class="dropdown mobile-dropdown">
+                <a href="#sections" class="menu-item dropdown-toggle">Разделы <span class="dropdown-arrow">▾</span></a>
                 <ul class="dropdown-menu">
                     <li><a href="os-selection.html">Выбор операционной системы</a></li>
                     <li><a href="filesystem.html">Выбор ФС и разметка диска</a></li>
-                    <li><a href="remote-management.html" class="active">Средства удаленного управления компьютером</a></li>
+                    <li><a href="remote-management.html" class="active">Средства удаленного управления компьютером</a>
+                    </li>
                     <li><a href="diagnost-management.html">Средства диагностики, контроля и мониторинга системы</a></li>
                 </ul>
             </li>
-            <li class="dropdown">
-                <a href="#ssilki" class="dropdown-trigger">Ссылки на официальные сайты ▾</a>
+            <li class="dropdown mobile-dropdown">
+                <a href="#ssilki" class="menu-item dropdown-toggle">Ссылки на официальные сайты <span
+                        class="dropdown-arrow">▾</span></a>
                 <ul class="dropdown-menu">
                     <li><a href="https://www.teamviewer.com" target="_blank">TeamViewer</a></li>
                     <li><a href="https://anydesk.com" target="_blank">AnyDesk</a></li>
@@ -208,57 +331,19 @@
                     <li><a href="https://www.aida64.com" target="_blank">AIDA64</a></li>
                     <li><a href="https://www.hwinfo.com" target="_blank">HWiNFO</a></li>
                     <li><a href="https://www.sisoftware.net" target="_blank">SiSoftware Sandra</a></li>
-                </ul>  
+                </ul>
             </li>
-            <li><a href="author.html">Автор</a></li>
+            <li><a href="author.html" class="menu-item">Автор</a></li>
         </ul>
     </nav>
-
-    <!-- Кнопка мобильного меню -->
-    <button class="mobile-menu-toggle" id="mobileMenuToggle">
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-    </button>
-</header>
-
-<!-- Оверлей для закрытия меню -->
-<div class="menu-overlay" id="menuOverlay"></div>
-
-<!-- Боковое меню для мобильных устройств -->
-<nav class="sidebar-menu" id="sidebarMenu">
-    <button class="close-menu" id="closeMenu">×</button>
-    <ul>
-        <li><a href="index.html" class="menu-item">Главная</a></li>
-        <li class="dropdown mobile-dropdown">
-            <a href="#sections" class="menu-item dropdown-toggle">Разделы <span class="dropdown-arrow">▾</span></a>
-            <ul class="dropdown-menu">
-                <li><a href="os-selection.html">Выбор операционной системы</a></li>
-                <li><a href="filesystem.html">Выбор ФС и разметка диска</a></li>
-                <li><a href="remote-management.html" class="active">Средства удаленного управления компьютером</a></li>
-                <li><a href="diagnost-management.html">Средства диагностики, контроля и мониторинга системы</a></li>
-            </ul>
-        </li>
-        <li class="dropdown mobile-dropdown">
-            <a href="#ssilki" class="menu-item dropdown-toggle">Ссылки на официальные сайты <span class="dropdown-arrow">▾</span></a>
-            <ul class="dropdown-menu">
-                <li><a href="https://www.teamviewer.com" target="_blank">TeamViewer</a></li>
-                <li><a href="https://anydesk.com" target="_blank">AnyDesk</a></li>
-                <li><a href="https://www.aeroadmin.com" target="_blank">AeroAdmin</a></li>
-                <li><a href="https://www.aida64.com" target="_blank">AIDA64</a></li>
-                <li><a href="https://www.hwinfo.com" target="_blank">HWiNFO</a></li>
-                <li><a href="https://www.sisoftware.net" target="_blank">SiSoftware Sandra</a></li>
-            </ul>  
-        </li>
-        <li><a href="author.html" class="menu-item">Автор</a></li>
-    </ul>
-</nav>
 
     <main class="main-content">
         <section class="hero-section">
             <div class="container">
-                <h1 class="hero-title" style="color: #ffffff; text-align: center; margin-bottom: 20px;">Эксперименты с AnyDesk</h1>
-                <p class="hero-subtitle" style="color: #b0b0b0; text-align: center; font-size: 1.2rem; margin-bottom: 50px;">
+                <h1 class="hero-title" style="color: #ffffff; text-align: center; margin-bottom: 20px;">Эксперименты с
+                    AnyDesk</h1>
+                <p class="hero-subtitle"
+                    style="color: #b0b0b0; text-align: center; font-size: 1.2rem; margin-bottom: 50px;">
                     Практические исследования возможностей и производительности программы удаленного доступа
                 </p>
             </div>
@@ -266,208 +351,323 @@
 
         <section class="experiments-section fade-in" style="padding: 60px 0; background: rgba(0,0,0,0.7);">
             <div class="container">
-                
+
                 <!-- Эксперимент 1 -->
-                <div class="experiment-card" style="background: rgba(45, 45, 45, 0.9); border-radius: 10px; padding: 30px; margin-bottom: 40px; border-left: 4px solid #007acc;">
+                <div class="experiment-card"
+                    style="background: rgba(45, 45, 45, 0.9); border-radius: 10px; padding: 30px; margin-bottom: 40px; border-left: 4px solid #007acc;">
                     <h2 style="color: #007acc; margin-bottom: 20px;">
-                        <span class="experiment-number" style="background: #007acc; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8em; margin-right: 15px;">01</span>
+                        <span class="experiment-number"
+                            style="background: #007acc; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8em; margin-right: 15px;">01</span>
                         Настройка различных режимов качества изображения
                     </h2>
-                    
+
                     <div style="color: #e0e0e0; line-height: 1.6; margin-bottom: 25px;">
-                        <p><strong>Цель:</strong> Продемонстрировать визуальные различия между режимами качества изображения в AnyDesk и их влияние на производительность.</p>
-                        
+                        <p><strong>Цель:</strong> Продемонстрировать визуальные различия между режимами качества
+                            изображения в AnyDesk и их влияние на производительность.</p>
+
                         <p><strong>Что показывается:</strong></p>
                         <ul style="margin-left: 20px;">
                             <li>Скриншот окна настроек AnyDesk с различными режимами качества</li>
                             <li>Сравнение визуального качества изображения в каждом режиме</li>
                         </ul>
                     </div>
-                    
-                    <div class="screenshot-placeholder" style="background: #222; border: 2px solid #666; border-radius: 8px; overflow: hidden; margin: 20px 0; min-height: 200px; display: flex; align-items: center; justify-content: center; position: relative;">
-                        <div class="image-gallery" style="margin: 20px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3); background: #222;">
-                            <div class="gallery-container" style="position: relative;">
-                                <div class="image-wrapper" style="text-align: center; min-height: 600px; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box;">
-                                    <img id="mainImage" src="izobr/anydesk/1.png" alt="Максимальное качество" style="max-width: 100%; height: auto; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;" onclick="openFullscreen(this)">
+
+                    <div class="screenshot-placeholder"
+                        style="background: #1a1a1a; border: 2px solid #666; border-radius: 8px; overflow: hidden; margin: 20px 0; min-height: 200px; display: flex; align-items: center; justify-content: center; position: relative;">
+                        <div class="image-gallery"
+                            style="margin: 20px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3); background: #1a1a1a; width: 100%;">
+                            <div class="gallery-container" style="position: relative; background: #1a1a1a;">
+                                <div class="image-wrapper"
+                                    style="text-align: center; min-height: 500px; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; background: #1a1a1a;">
+                                    <img id="mainImage" src="izobr/anydesk/1.png" alt="Настройки качества AnyDesk"
+                                        class="zoomable"
+                                        style="max-width: 100%; max-height: 480px; height: auto; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;"
+                                        onclick="toggleZoom(this)">
                                 </div>
-                                
+
                                 <!-- Навигационные стрелки -->
-                                <button class="gallery-nav prev" onclick="changeImage(-1)" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); background: rgba(0,122,204,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">‹</button>
-                                
-                                <button class="gallery-nav next" onclick="changeImage(1)" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: rgba(0,122,204,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">›</button>
-                                
+                                <button class="gallery-nav prev" onclick="changeImage(-1)"
+                                    style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); background: rgba(0,122,204,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">‹</button>
+
+                                <button class="gallery-nav next" onclick="changeImage(1)"
+                                    style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: rgba(0,122,204,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">›</button>
+
                                 <!-- Счетчик изображений -->
-                                <div class="image-counter" style="position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.8); color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px; z-index: 10;">
+                                <div class="image-counter"
+                                    style="position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.8); color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px; z-index: 10;">
                                     <span id="currentImage">1</span> / <span id="totalImages">3</span>
                                 </div>
-                                
-                                <!-- Иконка полноэкранного просмотра -->
-                                <div class="fullscreen-hint" style="position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.8); color: white; padding: 8px 12px; border-radius: 20px; font-size: 12px; z-index: 10; display: flex; align-items: center; gap: 5px;">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M7,14H5V19H10V17H7V14M12,10H14V7H19V5H14A2,2 0 0,0 12,7V10M5,5V7H7V10H9V7A2,2 0 0,0 7,5H5M19,14H17V17H14V19H17A2,2 0 0,0 19,17V14Z"/>
-                                    </svg>
-                                    Увеличить
+
+                                <!-- Индикатор качества -->
+                                <div class="quality-indicator">
+                                    <span id="qualityText">HD Качество</span>
                                 </div>
                             </div>
-                            
+
+                            <!-- Description -->
+                            <div class="image-description"
+                                style="padding: 15px; background: rgba(0,122,204,0.1); color: #e0e0e0; text-align: center; font-size: 14px;">
+                                <span id="imageDescription">Настройки качества изображения в AnyDesk - максимальное
+                                    качество</span>
+                            </div>
+
                             <!-- Миниатюры -->
-                            <div class="thumbnails" style="display: flex; justify-content: center; gap: 10px; padding: 15px; background: rgba(0,122,204,0.1);">
-                                <img src="izobr/anydesk/1.png" alt="Максимальное качество" class="thumbnail active" onclick="goToImage(0)" style="width: 80px; height: 60px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid #007acc; transition: all 0.3s ease;">
-                                <img src="izobr/anydesk/2.png" alt="Баланс" class="thumbnail" onclick="goToImage(1)" style="width: 80px; height: 60px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
-                                <img src="izobr/anydesk/3.png" alt="Минимальное качество" class="thumbnail" onclick="goToImage(2)" style="width: 80px; height: 60px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                            <div class="thumbnails"
+                                style="display: flex; justify-content: center; gap: 10px; padding: 15px; background: rgba(0,122,204,0.1); flex-wrap: wrap;">
+                                <img src="izobr/anydesk/1.png" alt="Максимальное качество" class="thumbnail active"
+                                    onclick="goToImage(0)"
+                                    style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid #007acc; transition: all 0.3s ease; image-rendering: crisp-edges;">
+                                <img src="izobr/anydesk/2.png" alt="Сбалансированное качество" class="thumbnail"
+                                    onclick="goToImage(2)"
+                                    style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease; image-rendering: crisp-edges;">
+                                <img src="izobr/anydesk/3.png" alt="Быстрое соединение" class="thumbnail"
+                                    onclick="goToImage(3)"
+                                    style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease; image-rendering: crisp-edges;">
                             </div>
                         </div>
                     </div>
-                    
-                    <div style="color: #b0b0b0;">
-                        <strong>Результат:</strong> Наглядное сравнение всех режимов качества с показателями производительности в реальном времени.Как можно заметить при хорошем интернет соединении разница практически не заметна.
-                    </div>
-                </div>
 
-                <!-- Полноэкранный просмотр -->
-                <div id="fullscreenModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; opacity: 0; transition: opacity 0.3s ease;" onclick="closeFullscreen(event)">
-                    <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; padding: 40px; box-sizing: border-box;">
-                        <img id="fullscreenImage" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 10px;">
-                        <button onclick="closeFullscreen()" style="position: absolute; top: 30px; right: 30px; background: rgba(255,255,255,0.2); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 30px; transition: background 0.3s ease;">×</button>
-                    </div>
-                </div>
+                    <!-- Эксперимент 2 -->
+                    <div class="experiment-card"
+                        style="background: rgba(45, 45, 45, 0.9); border-radius: 10px; padding: 30px; margin-bottom: 40px; border-left: 4px solid #28a745;">
+                        <h2 style="color: #28a745; margin-bottom: 20px;">
+                            <span class="experiment-number"
+                                style="background: #28a745; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8em; margin-right: 15px;">02</span>
+                            Тестирование функции обмена файлами между устройствами
+                        </h2>
 
-                <!-- Эксперимент 2 -->
-                <div class="experiment-card" style="background: rgba(45, 45, 45, 0.9); border-radius: 10px; padding: 30px; margin-bottom: 40px; border-left: 4px solid #28a745;">
-                    <h2 style="color: #28a745; margin-bottom: 20px;">
-                        <span class="experiment-number" style="background: #28a745; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8em; margin-right: 15px;">02</span>
-                        Тестирование скорости подключения в различных условиях
-                    </h2>
-                    
-                    <div style="color: #e0e0e0; line-height: 1.6; margin-bottom: 25px;">
-                        <p><strong>Цель:</strong> Показать процесс подключения AnyDesk при различных скоростях интернета и качестве сети.</p>
-                        
-                        <p><strong>Что показывается:</strong></p>
-                        <ul style="margin-left: 20px;">
-                            <li>Окно AnyDesk с процессом установки соединения</li>
-                            <li>Скриншот speedtest.net с текущей скоростью интернета</li>
-                            <li>Статистика соединения в AnyDesk (задержка, качество сигнала)</li>
-                            <li>Тест подключения через мобильный интернет (скриншот настроек сети)</li>
-                            <li>Окно с информацией о соединении при нестабильной сети</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="screenshot-placeholder" style="background: #333; border: 2px dashed #666; height: 200px; display: flex; align-items: center; justify-content: center; color: #999; margin: 20px 0; border-radius: 8px;">
-                        [Скриншот процесса подключения и тестов скорости интернета]
-                    </div>
-                    
-                    <div style="color: #b0b0b0;">
-                        <strong>Результат:</strong> Визуальное подтверждение работы AnyDesk при различных условиях подключения к интернету.
-                    </div>
-                </div>
+                        <div style="color: #e0e0e0; line-height: 1.6; margin-bottom: 25px;">
+                            <p><strong>Цель:</strong> Продемонстрировать процесс передачи файлов через AnyDesk и
+                                показать скорость передачи в различных условиях.</p>
 
-                <!-- Эксперимент 3 -->
-                <div class="experiment-card" style="background: rgba(45, 45, 45, 0.9); border-radius: 10px; padding: 30px; margin-bottom: 40px; border-left: 4px solid #ffc107;">
-                    <h2 style="color: #ffc107; margin-bottom: 20px;">
-                        <span class="experiment-number" style="background: #ffc107; color: black; padding: 5px 15px; border-radius: 20px; font-size: 0.8em; margin-right: 15px;">03</span>
-                        Демонстрация функций безопасности и настроек защиты
-                    </h2>
-                    
-                    <div style="color: #e0e0e0; line-height: 1.6; margin-bottom: 25px;">
-                        <p><strong>Цель:</strong> Показать все доступные настройки безопасности AnyDesk и процесс их настройки.</p>
-                        
-                        <p><strong>Что показывается:</strong></p>
-                        <ul style="margin-left: 20px;">
-                            <li>Главное окно настроек безопасности AnyDesk</li>
-                            <li>Настройка пароля для автоматического доступа</li>
-                            <li>Окно настройки разрешений доступа (клавиатура, мышь, файлы)</li>
-                            <li>Настройка белого списка (Whitelist) доверенных устройств</li>
-                            <li>Окно с информацией о шифровании соединения</li>
-                            <li>Настройка двухфакторной аутентификации</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="screenshot-placeholder" style="background: #333; border: 2px dashed #666; height: 200px; display: flex; align-items: center; justify-content: center; color: #999; margin: 20px 0; border-radius: 8px;">
-                        [Скриншот всех настроек безопасности и процесса их конфигурации]
-                    </div>
-                    
-                    <div style="color: #b0b0b0;">
-                        <strong>Результат:</strong> Полный обзор всех параметров безопасности с наглядной демонстрацией их настройки.
-                    </div>
-                </div>
+                            <p><strong>Что показывается:</strong></p>
+                            <ul style="margin-left: 20px;">
+                                <li>Интерфейс встроенного файл-менеджера AnyDesk</li>
+                                <li>Процесс передачи файлов разного размера (документы, изображения, видео)</li>
+                                <li>Окно прогресса передачи с отображением скорости</li>
+                            </ul>
+                        </div>
 
-                                <!-- Эксперимент 4 -->
-                <div class="experiment-card" style="background: rgba(45, 45, 45, 0.9); border-radius: 10px; padding: 30px; margin-bottom: 40px; border-left: 4px solid #dc3545;">
-                    <h2 style="color: #dc3545; margin-bottom: 20px;">
-                        <span class="experiment-number" style="background: #dc3545; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8em; margin-right: 15px;">04</span>
-                        Одновременное подключение нескольких пользователей
-                    </h2>
-                    
-                    <div style="color: #e0e0e0; line-height: 1.6; margin-bottom: 25px;">
-                        <p><strong>Цель:</strong> Продемонстрировать работу AnyDesk при множественных одновременных подключениях и показать нагрузку на систему.</p>
-                        
-                        <p><strong>Что показывается:</strong></p>
-                        <ul style="margin-left: 20px;">
-                            <li>Окно AnyDesk с несколькими активными входящими подключениями</li>
-                            <li>Список активных сессий в интерфейсе программы</li>
-                            <li>Диспетчер задач с показателями нагрузки CPU и RAM при множественных подключениях</li>
-                            <li>Настройки разрешений для каждого подключенного пользователя</li>
-                            <li>Окно монитора сетевой активности с трафиком от всех соединений</li>
-                            <li>Журнал подключений с историей сессий</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="screenshot-placeholder" style="background: #333; border: 2px dashed #666; height: 200px; display: flex; align-items: center; justify-content: center; color: #999; margin: 20px 0; border-radius: 8px;">
-                        [Скриншот множественных подключений и мониторинга системных ресурсов]
-                    </div>
-                    
-                    <div style="color: #b0b0b0;">
-                        <strong>Результат:</strong> Визуальное подтверждение возможности работы с несколькими пользователями одновременно и влияния на производительность системы.
-                    </div>
-                </div>
+                        <div class="screenshot-placeholder"
+                            style="background: #1a1a1a; border: 2px solid #666; border-radius: 8px; overflow: hidden; margin: 20px 0; min-height: 200px; display: flex; align-items: center; justify-content: center; position: relative;">
+                            <div class="image-gallery-2"
+                                style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3); background: #1a1a1a; width: 100%;">
+                                <div class="gallery-container-2" style="position: relative; background: #1a1a1a;">
+                                    <div class="image-wrapper-2"
+                                        style="text-align: center; min-height: 400px; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; background: #1a1a1a;">
+                                        <img id="mainImage2" src="izobr/anydesk/File-manage.png"
+                                            alt="Файл-менеджер AnyDesk" class="zoomable"
+                                            style="max-width: 100%; max-height: 380px; height: auto; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;"
+                                            onclick="toggleZoom2(this)">
+                                    </div>
 
-                <!-- Эксперимент 5 -->
-                <div class="experiment-card" style="background: rgba(45, 45, 45, 0.9); border-radius: 10px; padding: 30px; margin-bottom: 40px; border-left: 4px solid #6f42c1;">
-                    <h2 style="color: #6f42c1; margin-bottom: 20px;">
-                        <span class="experiment-number" style="background: #6f42c1; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8em; margin-right: 15px;">05</span>
-                        Работа между различными операционными системами
-                    </h2>
-                    
-                    <div style="color: #e0e0e0; line-height: 1.6; margin-bottom: 25px;">
-                        <p><strong>Цель:</strong> Показать интерфейс и функциональность AnyDesk на разных операционных системах и демонстрировать кроссплатформенные подключения.</p>
-                        
-                        <p><strong>Что показывается:</strong></p>
-                        <ul style="margin-left: 20px;">
-                            <li>Интерфейс AnyDesk на Windows 10/11 (светлая и темная тема)</li>
-                            <li>Интерфейс AnyDesk на macOS с нативным дизайном</li>
-                            <li>Интерфейс AnyDesk на Linux Ubuntu</li>
-                            <li>Мобильное приложение AnyDesk на Android и iOS</li>
-                            <li>Процесс подключения с Windows на macOS</li>
-                            <li>Передача файлов между Windows и Linux</li>
-                            <li>Удаленное управление мобильным устройством с компьютера</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="screenshot-placeholder" style="background: #333; border: 2px dashed #666; height: 200px; display: flex; align-items: center; justify-content: center; color: #999; margin: 20px 0; border-radius: 8px;">
-                        [Скриншот интерфейса AnyDesk на разных ОС и кроссплатформенных подключений]
-                    </div>
-                    
-                    <div style="color: #b0b0b0;">
-                        <strong>Результат:</strong> Наглядная демонстрация универсальности AnyDesk и одинаковости функций на всех поддерживаемых платформах.
-                    </div>
-                </div>
+                                    <!-- Навигационные стрелки -->
+                                    <button class="gallery-nav-2 prev" onclick="changeImage2(-1)"
+                                        style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); background: rgba(40,167,69,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">‹</button>
 
-                <!-- Заключение -->
-                <div class="fade-in" style="background: rgba(0, 122, 204, 0.1); border-radius: 10px; padding: 30px; margin-top: 50px; border: 1px solid #007acc;">
-                    <h2 style="color: #007acc; text-align: center; margin-bottom: 20px;">Заключение исследования</h2>
-                    <div style="color: #e0e0e0; line-height: 1.6; text-align: center;">
-                        <p>Проведенные эксперименты наглядно демонстрируют все возможности программы AnyDesk в различных условиях использования.</p>
-                        <p>Каждый скриншот показывает реальные настройки и результаты работы программы без необходимости создания сложных отчетов.</p>
-                        <p>Визуальные результаты позволяют быстро оценить функциональность и производительность AnyDesk.</p>
-                    </div>
-                </div>
+                                    <button class="gallery-nav-2 next" onclick="changeImage2(1)"
+                                        style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: rgba(40,167,69,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">›</button>
 
-                <!-- Навигация -->
-                <div class="fade-in" style="text-align: center; margin-top: 50px;">
-                    <a href="anydesk.html" class="btn-secondary" style="margin: 0 10px;">← Вернуться к AnyDesk</a>
-                    <a href="index.html" class="btn-primary" style="margin: 0 10px;">На главную</a>
-                </div>
-            </div>
+                                    <!-- Счетчик изображений -->
+                                    <div class="image-counter-2"
+                                        style="position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.8); color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px; z-index: 10;">
+                                        <span id="currentImage2">1</span> / <span id="totalImages2">4</span>
+                                    </div>
+                                </div>
+
+                                <!-- Description -->
+                                <div class="image-description-2"
+                                    style="padding: 15px; background: rgba(40,167,69,0.1); color: #e0e0e0; text-align: center; font-size: 14px;">
+                                    <span id="imageDescription2">Файл-менеджер AnyDesk для передачи файлов</span>
+                                </div>
+
+                                <!-- Миниатюры -->
+                                <div class="thumbnails-2"
+                                    style="display: flex; justify-content: center; gap: 10px; padding: 15px; background: rgba(40,167,69,0.1); flex-wrap: wrap;">
+                                    <img src="izobr/anydesk/File-manage.png" alt="Файл-менеджер"
+                                        class="thumbnail-2 active" onclick="goToImage2(0)"
+                                        style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid #28a745; transition: all 0.3s ease;">
+                                    <img src="izobr/anydesk/Small-file.png" alt="Маленький файл" class="thumbnail-2"
+                                        onclick="goToImage2(1)"
+                                        style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                                    <img src="izobr/anydesk/Big-file.png" alt="Большой файл" class="thumbnail-2"
+                                        onclick="goToImage2(2)"
+                                        style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                                    <img src="izobr/anydesk/remote-device.png" alt="Удаленное устройство"
+                                        class="thumbnail-2" onclick="goToImage2(3)"
+                                        style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="color: #b0b0b0;">
+                            <strong>Результат:</strong> Наглядная демонстрация удобства встроенного файл-менеджера и
+                            высокой скорости передачи файлов через защищенное соединение.
+                        </div>
+                    </div>
+
+                    <!-- Эксперимент 3 -->
+                    <div class="experiment-card"
+                        style="background: rgba(45, 45, 45, 0.9); border-radius: 10px; padding: 30px; margin-bottom: 40px; border-left: 4px solid #ffc107;">
+                        <h2 style="color: #ffc107; margin-bottom: 20px;">
+                            <span class="experiment-number"
+                                style="background: #ffc107; color: black; padding: 5px 15px; border-radius: 20px; font-size: 0.8em; margin-right: 15px;">03</span>
+                            Демонстрация функций безопасности и настроек защиты
+                        </h2>
+
+                        <div style="color: #e0e0e0; line-height: 1.6; margin-bottom: 25px;">
+                            <p><strong>Цель:</strong> Показать все доступные настройки безопасности AnyDesk и процесс их
+                                настройки.</p>
+
+                            <p><strong>Что показывается:</strong></p>
+                            <ul style="margin-left: 20px;">
+                                <li>Главное окно настроек безопасности AnyDesk</li>
+                                <li>Настройка пароля для автоматического доступа</li>
+                                <li>Окно настройки разрешений доступа (клавиатура, мышь, файлы)</li>
+                                <li>Настройка белого списка (Whitelist) доверенных устройств</li>
+                                <li>Окно с информацией о шифровании соединения</li>
+
+                            </ul>
+                        </div>
+
+                        <div class="screenshot-placeholder"
+                            style="background: #1a1a1a; border: 2px solid #666; border-radius: 8px; overflow: hidden; margin: 20px 0; min-height: 200px; display: flex; align-items: center; justify-content: center; position: relative;">
+                            <div class="image-gallery-3"
+                                style="margin: 20px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3); background: #1a1a1a; width: 100%;">
+                                <div class="gallery-container-3" style="position: relative; background: #1a1a1a;">
+                                    <div class="image-wrapper-3"
+                                        style="text-align: center; min-height: 400px; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; background: #1a1a1a;">
+                                        <img id="mainImage3" src="izobr/anydesk/Security-settings1.png"
+                                            alt="Настройки безопасности" class="zoomable"
+                                            style="max-width: 100%; max-height: 350px; height: auto; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;"
+                                            onclick="toggleZoom3(this)">
+                                    </div>
+
+                                    <!-- Навигационные стрелки -->
+                                    <button class="gallery-nav-3 prev" onclick="changeImage3(-1)"
+                                        style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); background: rgba(255,193,7,0.9); border: none; color: black; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">‹</button>
+
+                                    <button class="gallery-nav-3 next" onclick="changeImage3(1)"
+                                        style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: rgba(255,193,7,0.9); border: none; color: black; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">›</button>
+
+                                    <!-- Счетчик изображений -->
+                                    <div class="image-counter-3"
+                                        style="position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.8); color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px; z-index: 10;">
+                                        <span id="currentImage3">1</span> / <span id="totalImages3">3</span>
+                                    </div>
+
+                                    <!-- Миниатюры -->
+                                    <div class="thumbnails-3"
+                                        style="display: flex; justify-content: center; gap: 10px; padding: 15px; background: rgba(255,193,7,0.1); flex-wrap: wrap;">
+                                        <img src="izobr/anydesk/Security-settings1.png" alt="Настройки безопасности"
+                                            class="thumbnail-3 active" onclick="goToImage3(0)"
+                                            style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid #ffc107; transition: all 0.3s ease;">
+                                        <img src="izobr/anydesk/mouse-keybord-access.png"
+                                            alt="Настройки доступа мыши и клавиатуры" class="thumbnail-3"
+                                            onclick="goToImage3(1)"
+                                            style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                                        <img src="izobr/anydesk/connection-status.png" alt="Состояние подключения"
+                                            class="thumbnail-3" onclick="goToImage3(2)"
+                                            style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Эксперимент 4 -->
+                        <div class="experiment-card"
+                            style="background: rgba(45, 45, 45, 0.9); border-radius: 10px; padding: 30px; margin-bottom: 40px; border-left: 4px solid #dc3545;">
+                            <h2 style="color: #dc3545; margin-bottom: 20px;">
+                                <span class="experiment-number"
+                                    style="background: #dc3545; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8em; margin-right: 15px;">04</span>
+                                Одновременное подключение нескольких пользователей
+                            </h2>
+
+                            <div style="color: #e0e0e0; line-height: 1.6; margin-bottom: 25px;">
+                                <p><strong>Цель:</strong> Продемонстрировать работу AnyDesk при множественных
+                                    одновременных подключениях и показать нагрузку на систему.</p>
+
+                                <p><strong>Что показывается:</strong></p>
+                                <ul style="margin-left: 20px;">
+                                    <li>Окно AnyDesk с несколькими активными входящими подключениями</li>
+                                    <li>Список активных сессий в интерфейсе программы</li>
+                                    <li>Диспетчер задач с показателями нагрузки CPU и RAM при множественных подключениях
+                                    </li>
+                                    <li>Настройки разрешений для каждого подключенного пользователя</li>
+                                    <li>Окно монитора сетевой активности с трафиком от всех соединений</li>
+                                    <li>Журнал подключений с историей сессий</li>
+                                </ul>
+                            </div>
+
+                            <div class="screenshot-placeholder"
+                                style="background: #333; border: 2px dashed #666; height: 200px; display: flex; align-items: center; justify-content: center; color: #999; margin: 20px 0; border-radius: 8px;">
+                                [Скриншот множественных подключений и мониторинга системных ресурсов]
+                            </div>
+
+                            <div style="color: #b0b0b0;">
+                                <strong>Результат:</strong> Визуальное подтверждение возможности работы с несколькими
+                                пользователями одновременно и влияния на производительность системы.
+                            </div>
+                        </div>
+
+                        <!-- Эксперимент 5 -->
+                        <div class="experiment-card"
+                            style="background: rgba(45, 45, 45, 0.9); border-radius: 10px; padding: 30px; margin-bottom: 40px; border-left: 4px solid #6f42c1;">
+                            <h2 style="color: #6f42c1; margin-bottom: 20px;">
+                                <span class="experiment-number"
+                                    style="background: #6f42c1; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8em; margin-right: 15px;">05</span>
+                                Работа между различными операционными системами
+                            </h2>
+
+                            <div style="color: #e0e0e0; line-height: 1.6; margin-bottom: 25px;">
+                                <p><strong>Цель:</strong> Показать интерфейс и функциональность AnyDesk на разных
+                                    операционных системах и демонстрировать кроссплатформенные подключения.</p>
+
+                                <p><strong>Что показывается:</strong></p>
+                                <ul style="margin-left: 20px;">
+                                    <li>Интерфейс AnyDesk на Windows 10/11 (светлая и темная тема)</li>
+                                    <li>Интерфейс AnyDesk на macOS с нативным дизайном</li>
+                                    <li>Интерфейс AnyDesk на Linux Ubuntu</li>
+                                    <li>Мобильное приложение AnyDesk на Android и iOS</li>
+                                    <li>Процесс подключения с Windows на macOS</li>
+                                    <li>Передача файлов между Windows и Linux</li>
+                                    <li>Удаленное управление мобильным устройством с компьютера</li>
+                                </ul>
+                            </div>
+
+                            <div class="screenshot-placeholder"
+                                style="background: #333; border: 2px dashed #666; height: 200px; display: flex; align-items: center; justify-content: center; color: #999; margin: 20px 0; border-radius: 8px;">
+                                [Скриншот интерфейса AnyDesk на разных ОС и кроссплатформенных подключений]
+                            </div>
+
+                            <div style="color: #b0b0b0;">
+                                <strong>Результат:</strong> Наглядная демонстрация универсальности AnyDesk и
+                                одинаковости функций на всех поддерживаемых платформах.
+                            </div>
+                        </div>
+
+                        <!-- Заключение -->
+                        <div class="fade-in"
+                            style="background: rgba(0, 122, 204, 0.1); border-radius: 10px; padding: 30px; margin-top: 50px; border: 1px solid #007acc;">
+                            <h2 style="color: #007acc; text-align: center; margin-bottom: 20px;">Заключение исследования
+                            </h2>
+                            <div style="color: #e0e0e0; line-height: 1.6; text-align: center;">
+                                <p>Проведенные эксперименты наглядно демонстрируют все возможности программы AnyDesk в
+                                    различных условиях использования.</p>
+                                <p>Каждый скриншот показывает реальные настройки и результаты работы программы без
+                                    необходимости создания сложных отчетов.</p>
+                                <p>Визуальные результаты позволяют быстро оценить функциональность и производительность
+                                    AnyDesk.</p>
+                            </div>
+                        </div>
+
+                        <!-- Навигация -->
+                        <div class="fade-in" style="text-align: center; margin-top: 50px;">
+                            <a href="anydesk.html" class="btn-secondary" style="margin: 0 10px;">← Вернуться к
+                                AnyDesk</a>
+                            <a href="index.html" class="btn-primary" style="margin: 0 10px;">На главную</a>
+                        </div>
+                    </div>
         </section>
 
         <!-- Дополнительная информация -->
@@ -501,7 +701,8 @@
     <footer style="background: rgba(0,0,0,0.9); padding: 20px 0; margin-top: 50px;">
         <div class="container">
             <div style="text-align: center; color: #666;">
-                <p>&copy; 2024 Эксперименты с AnyDesk. Все результаты представлены в виде скриншотов реального использования.</p>
+                <p>&copy; 2024 Эксперименты с AnyDesk. Все результаты представлены в виде скриншотов реального
+                    использования.</p>
             </div>
         </div>
     </footer>
@@ -509,7 +710,7 @@
     <script src="js/menu.js"></script>
     <script>
         // Управление прелоадером
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             const preloader = document.getElementById('preloader');
             setTimeout(() => {
                 preloader.style.opacity = '0';
@@ -544,7 +745,7 @@
                 }
             });
 
-                        // Анимация для технической информации
+            // Анимация для технической информации
             const techItems = document.querySelectorAll('.tech-info-item');
             techItems.forEach((item, index) => {
                 if (isElementPartiallyInViewport(item) && !item.classList.contains('animate')) {
@@ -557,36 +758,21 @@
 
         // Запуск анимаций при скролле
         window.addEventListener('scroll', handleScrollAnimation);
-        
+
         // Запуск анимаций при загрузке
         window.addEventListener('load', () => {
             setTimeout(handleScrollAnimation, 1200);
         });
 
         // Плавное появление hero секции
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const heroTitle = document.querySelector('.hero-title');
             const heroSubtitle = document.querySelector('.hero-subtitle');
-            
+
             setTimeout(() => {
                 if (heroTitle) heroTitle.style.animationPlayState = 'running';
                 if (heroSubtitle) heroSubtitle.style.animationPlayState = 'running';
             }, 1000);
-        });
-
-        // Добавление эффекта hover для screenshot placeholder
-        document.querySelectorAll('.screenshot-placeholder').forEach(placeholder => {
-            placeholder.addEventListener('mouseenter', function() {
-                this.style.borderColor = '#007acc';
-                this.style.color = '#007acc';
-                this.style.transform = 'scale(1.02)';
-            });
-            
-            placeholder.addEventListener('mouseleave', function() {
-                this.style.borderColor = '#666';
-                this.style.color = '#999';
-                this.style.transform = 'scale(1)';
-            });
         });
 
         // Эффект печатающегося текста для прелоадера
@@ -596,10 +782,10 @@
             'Инициализация демонстрации...',
             'Готово к просмотру!'
         ];
-        
+
         let currentTextIndex = 0;
         const preloaderTextElement = document.querySelector('.preloader-text');
-        
+
         if (preloaderTextElement) {
             const textInterval = setInterval(() => {
                 if (currentTextIndex < preloaderTexts.length - 1) {
@@ -613,15 +799,15 @@
 
         // Добавление эффекта нажатия для кнопок навигации
         document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
-            button.addEventListener('mousedown', function() {
+            button.addEventListener('mousedown', function () {
                 this.style.transform = 'translateY(2px)';
             });
-            
-            button.addEventListener('mouseup', function() {
+
+            button.addEventListener('mouseup', function () {
                 this.style.transform = 'translateY(0)';
             });
-            
-            button.addEventListener('mouseleave', function() {
+
+            button.addEventListener('mouseleave', function () {
                 this.style.transform = 'translateY(0)';
             });
         });
@@ -649,45 +835,10 @@
             observer.observe(card);
         });
 
-        // Добавление эффекта пульсации для placeholder'ов
-        let pulseInterval;
-        
-        function startPulse() {
-            const placeholders = document.querySelectorAll('.screenshot-placeholder');
-            let currentIndex = 0;
-            
-            pulseInterval = setInterval(() => {
-                // Убираем пульсацию с предыдущего элемента
-                placeholders.forEach(p => p.style.boxShadow = 'none');
-                
-                // Добавляем пульсацию к текущему элементу
-                if (placeholders[currentIndex]) {
-                    placeholders[currentIndex].style.boxShadow = '0 0 20px rgba(0, 122, 204, 0.5)';
-                    placeholders[currentIndex].style.transition = 'box-shadow 0.3s ease';
-                }
-                
-                currentIndex = (currentIndex + 1) % placeholders.length;
-            }, 2000);
-        }
-
-        // Запуск пульсации после загрузки
-        setTimeout(startPulse, 3000);
-
-        // Останавливаем пульсацию при взаимодействии с любым placeholder
-        document.querySelectorAll('.screenshot-placeholder').forEach(placeholder => {
-            placeholder.addEventListener('mouseenter', () => {
-                if (pulseInterval) {
-                    clearInterval(pulseInterval);
-                    document.querySelectorAll('.screenshot-placeholder').forEach(p => {
-                        p.style.boxShadow = 'none';
-                    });
-                }
-            });
-        });
 
         // Добавление счетчика просмотренных экспериментов
         let viewedExperiments = new Set();
-        
+
         const viewObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -715,7 +866,7 @@
             const totalExperiments = document.querySelectorAll('.experiment-card').length;
             const viewedCount = viewedExperiments.size;
             const progressPercent = (viewedCount / totalExperiments) * 100;
-            
+
             // Создаем индикатор прогресса если его нет
             let progressBar = document.getElementById('progress-bar');
             if (!progressBar && viewedCount > 0) {
@@ -739,13 +890,13 @@
 
         // Обновляем прогресс при изменении viewedExperiments
         const originalAdd = viewedExperiments.add;
-        viewedExperiments.add = function(value) {
+        viewedExperiments.add = function (value) {
             const result = originalAdd.call(this, value);
             updateProgressIndicator();
             return result;
         };
 
-                // Галерея изображений
+        // Галерея изображений
         let currentImageIndex = 0;
         const imageData = [
             {
@@ -770,7 +921,7 @@
             const mainImage = document.getElementById('mainImage');
             const thumbnails = document.querySelectorAll('.thumbnail');
             const data = imageData[index];
-            
+
             // Обновить главное изображение
             mainImage.style.opacity = '0.3';
             setTimeout(() => {
@@ -778,7 +929,7 @@
                 mainImage.alt = data.alt;
                 mainImage.style.opacity = '1';
             }, 150);
-            
+
             // Обновить миниатюры
             thumbnails.forEach((thumb, i) => {
                 if (i === index) {
@@ -791,24 +942,23 @@
                     thumb.style.opacity = '0.7';
                 }
             });
-            
-            // Обновить счетчик и описание
+
+            // Обновить счетчик
             document.getElementById('currentImage').textContent = index + 1;
-            document.getElementById('imageDescription').textContent = data.description;
-            
+
             currentImageIndex = index;
         }
 
         // Переключение изображений
         function changeImage(direction) {
             let newIndex = currentImageIndex + direction;
-            
+
             if (newIndex >= imageData.length) {
                 newIndex = 0;
             } else if (newIndex < 0) {
                 newIndex = imageData.length - 1;
             }
-            
+
             showImage(newIndex);
         }
 
@@ -821,15 +971,15 @@
         function openFullscreen(img) {
             const modal = document.getElementById('fullscreenModal');
             const fullscreenImg = document.getElementById('fullscreenImage');
-            
+
             fullscreenImg.src = img.src;
             fullscreenImg.alt = img.alt;
             modal.style.display = 'block';
-            
+
             setTimeout(() => {
                 modal.style.opacity = '1';
             }, 10);
-            
+
             document.body.style.overflow = 'hidden';
         }
 
@@ -837,7 +987,7 @@
             if (event) event.stopPropagation();
             const modal = document.getElementById('fullscreenModal');
             modal.style.opacity = '0';
-            
+
             setTimeout(() => {
                 modal.style.display = 'none';
                 document.body.style.overflow = 'auto';
@@ -845,15 +995,15 @@
         }
 
         // Hover эффекты
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Эффекты для навигационных кнопок
             document.querySelectorAll('.gallery-nav').forEach(btn => {
-                btn.addEventListener('mouseenter', function() {
+                btn.addEventListener('mouseenter', function () {
                     this.style.background = '#007acc';
                     this.style.transform = 'translateY(-50%) scale(1.1)';
                 });
-                
-                btn.addEventListener('mouseleave', function() {
+
+                btn.addEventListener('mouseleave', function () {
                     this.style.background = 'rgba(0,122,204,0.9)';
                     this.style.transform = 'translateY(-50%) scale(1)';
                 });
@@ -861,14 +1011,14 @@
 
             // Эффекты для миниатюр
             document.querySelectorAll('.thumbnail').forEach(thumb => {
-                thumb.addEventListener('mouseenter', function() {
+                thumb.addEventListener('mouseenter', function () {
                     if (!this.classList.contains('active')) {
                         this.style.opacity = '1';
                         this.style.transform = 'scale(1.05)';
                     }
                 });
-                
-                thumb.addEventListener('mouseleave', function() {
+
+                thumb.addEventListener('mouseleave', function () {
                     if (!this.classList.contains('active')) {
                         this.style.opacity = '0.7';
                         this.style.transform = 'scale(1)';
@@ -890,10 +1040,301 @@
                 changeImage(1);
             }
         });
+
+        // Автоматическое воспроизведение слайд-шоу (опционально)
+        let autoplayInterval;
+
+        function startAutoplay() {
+            autoplayInterval = setInterval(() => {
+                changeImage(1);
+            }, 5000); // Переключение каждые 5 секунд
+        }
+
+        function stopAutoplay() {
+            if (autoplayInterval) {
+                clearInterval(autoplayInterval);
+                autoplayInterval = null;
+            }
+        }
+
+        // Запуск автовоспроизведения через 10 секунд после загрузки
+        setTimeout(startAutoplay, 10000);
+
+        // Остановка автовоспроизведения при взаимодействии пользователя
+        document.querySelectorAll('.gallery-nav, .thumbnail').forEach(element => {
+            element.addEventListener('click', stopAutoplay);
+        });
+
+        // Добавление индикатора загрузки изображений
+        function addImageLoadingIndicator() {
+            const mainImage = document.getElementById('mainImage');
+
+            mainImage.addEventListener('loadstart', function () {
+                this.style.opacity = '0.5';
+            });
+
+            mainImage.addEventListener('load', function () {
+                this.style.opacity = '1';
+            });
+
+            mainImage.addEventListener('error', function () {
+                this.style.opacity = '1';
+                this.alt = 'Изображение не загружено';
+            });
+        }
+
+        // Инициализация индикатора загрузки
+        addImageLoadingIndicator();
+
+        // Добавление подсказок для элементов управления
+        function addTooltips() {
+            const prevBtn = document.querySelector('.gallery-nav.prev');
+            const nextBtn = document.querySelector('.gallery-nav.next');
+            const fullscreenHint = document.querySelector('.fullscreen-hint');
+
+            if (prevBtn) prevBtn.title = 'Предыдущее изображение (←)';
+            if (nextBtn) nextBtn.title = 'Следующее изображение (→)';
+            if (fullscreenHint) fullscreenHint.title = 'Нажмите на изображение для полноэкранного просмотра';
+        }
+
+        // Инициализация подсказок
+        addTooltips();
+
+        // Оптимизация для мобильных устройств
+        function optimizeForMobile() {
+            if (window.innerWidth <= 768) {
+                // Увеличиваем размер кнопок навигации на мобильных
+                document.querySelectorAll('.gallery-nav').forEach(btn => {
+                    btn.style.width = '60px';
+                    btn.style.height = '60px';
+                    btn.style.fontSize = '24px';
+                });
+
+                // Увеличиваем миниатюры
+                document.querySelectorAll('.thumbnail').forEach(thumb => {
+                    thumb.style.width = '70px';
+                    thumb.style.height = '53px';
+                });
+            }
+        }
+
+        // Запуск оптимизации при загрузке и изменении размера
+        window.addEventListener('load', optimizeForMobile);
+        window.addEventListener('resize', optimizeForMobile);
+
+        // Добавление жестов для мобильных устройств
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        function handleGesture() {
+            if (touchEndX < touchStartX - 50) {
+                changeImage(1); // Свайп влево - следующее изображение
+            }
+            if (touchEndX > touchStartX + 50) {
+                changeImage(-1); // Свайп вправо - предыдущее изображение
+            }
+        }
+
+        const imageWrapper = document.querySelector('.image-wrapper');
+        if (imageWrapper) {
+            imageWrapper.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+
+            imageWrapper.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleGesture();
+            });
+        }
+
+        // Галерея изображений для второго эксперимента
+        let currentImageIndex2 = 0;
+        const imageData2 = [
+            {
+                src: 'izobr/anydesk/File-manage.png',
+                alt: 'Файл-менеджер AnyDesk',
+                description: 'Файл-менеджер AnyDesk для передачи файлов'
+            },
+            {
+                src: 'izobr/anydesk/Small-file.png',
+                alt: 'Процесс передачи файлов',
+                description: 'Процесс передачи файлов с индикатором прогресса'
+            },
+            {
+                src: 'izobr/anydesk/Big-file.png',
+                alt: 'Настройки безопасности',
+                description: 'Настройки безопасности для передачи файлов'
+            },
+            {
+                src: 'izobr/anydesk/remote-device.png',
+                alt: 'Статистика передачи',
+                description: 'Статистика и скорость передачи файлов'
+            }
+        ];
+
+        // Показать изображение во второй галерее
+        function showImage2(index) {
+            const mainImage = document.getElementById('mainImage2');
+            const thumbnails = document.querySelectorAll('.thumbnail-2');
+            const data = imageData2[index];
+
+            mainImage.style.opacity = '0.3';
+            setTimeout(() => {
+                mainImage.src = data.src;
+                mainImage.alt = data.alt;
+                mainImage.style.opacity = '1';
+            }, 150);
+
+            thumbnails.forEach((thumb, i) => {
+                if (i === index) {
+                    thumb.classList.add('active');
+                    thumb.style.border = '2px solid #28a745';
+                    thumb.style.opacity = '1';
+                } else {
+                    thumb.classList.remove('active');
+                    thumb.style.border = '2px solid transparent';
+                    thumb.style.opacity = '0.7';
+                }
+            });
+
+            document.getElementById('currentImage2').textContent = index + 1;
+            document.getElementById('imageDescription2').textContent = data.description;
+
+            currentImageIndex2 = index;
+        }
+
+        // Переключение изображений во второй галерее
+        function changeImage2(direction) {
+            let newIndex = currentImageIndex2 + direction;
+
+            if (newIndex >= imageData2.length) {
+                newIndex = 0;
+            } else if (newIndex < 0) {
+                newIndex = imageData2.length - 1;
+            }
+
+            showImage2(newIndex);
+        }
+
+        // Переход к конкретному изображению во второй галерее
+        function goToImage2(index) {
+            showImage2(index);
+        }
+
+        // Функция масштабирования для второй галереи
+        function toggleZoom2(img) {
+            if (img.classList.contains('zoomed')) {
+                img.classList.remove('zoomed');
+                img.style.transform = 'scale(1)';
+            } else {
+                img.classList.add('zoomed');
+                img.style.transform = 'scale(1.8)';
+                img.style.transformOrigin = 'center';
+            }
+        }
+
+        // Инициализация второй галереи
+        document.addEventListener('DOMContentLoaded', function () {
+            // Инициализация только если элементы существуют
+            if (document.getElementById('mainImage2')) {
+                showImage2(0);
+            }
+        });
+
+        // Галерея изображений для третьего эксперимента
+        let currentImageIndex3 = 0;
+        const imageData3 = [
+            {
+                src: 'izobr/anydesk/Security-settings1.png',
+                alt: 'Настройки безопасности',
+                description: 'Главное окно настроек безопасности AnyDesk'
+            },
+            {
+                src: 'izobr/anydesk/mouse-keybord-access.png',
+                alt: 'Настройки доступа мыши и клавиатуры',
+                description: 'Настройки разрешений доступа к клавиатуре и мыши'
+            },
+            {
+                src: 'izobr/anydesk/connection-status.png',
+                alt: 'Состояние подключения',
+                description: 'Информация о состоянии и безопасности подключения'
+            }
+        ];
+
+        // Показать изображение в третьей галерее
+        function showImage3(index) {
+            const mainImage = document.getElementById('mainImage3');
+            const thumbnails = document.querySelectorAll('.thumbnail-3');
+            const data = imageData3[index];
+
+            mainImage.style.opacity = '0.3';
+            setTimeout(() => {
+                mainImage.src = data.src;
+                mainImage.alt = data.alt;
+                mainImage.style.opacity = '1';
+            }, 150);
+
+            thumbnails.forEach((thumb, i) => {
+                if (i === index) {
+                    thumb.classList.add('active');
+                    thumb.style.border = '2px solid #ffc107';
+                    thumb.style.opacity = '1';
+                } else {
+                    thumb.classList.remove('active');
+                    thumb.style.border = '2px solid transparent';
+                    thumb.style.opacity = '0.7';
+                }
+            });
+
+            document.getElementById('currentImage3').textContent = index + 1;
+            document.getElementById('imageDescription3').textContent = data.description;
+
+            currentImageIndex3 = index;
+        }
+
+        // Переключение изображений в третьей галерее
+        function changeImage3(direction) {
+            let newIndex = currentImageIndex3 + direction;
+
+            if (newIndex >= imageData3.length) {
+                newIndex = 0;
+            } else if (newIndex < 0) {
+                newIndex = imageData3.length - 1;
+            }
+
+            showImage3(newIndex);
+        }
+
+        // Переход к конкретному изображению в третьей галерее
+        function goToImage3(index) {
+            showImage3(index);
+        }
+
+        // Функция масштабирования для третьей галереи
+        function toggleZoom3(img) {
+            if (img.classList.contains('zoomed')) {
+                img.classList.remove('zoomed');
+                img.style.transform = 'scale(1)';
+            } else {
+                img.classList.add('zoomed');
+                img.style.transform = 'scale(1.8)';
+                img.style.transformOrigin = 'center';
+            }
+        }
+
+        // Обновляем инициализацию для включения третьей галереи
+        document.addEventListener('DOMContentLoaded', function () {
+            if (document.getElementById('mainImage')) {
+                showImage(0);
+            }
+            if (document.getElementById('mainImage3')) {
+                showImage3(0);
+            }
+        });
+
     </script>
     <script type="module" src="js/mobile-menu.js"></script>
     <script type="module" src="js/main.js"></script>
 </body>
+
 </html>
-
-
