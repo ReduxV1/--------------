@@ -585,89 +585,171 @@
 
                             <div style="color: #e0e0e0; line-height: 1.6; margin-bottom: 25px;">
                                 <p><strong>Цель:</strong> Продемонстрировать работу AnyDesk при множественных
-                                    одновременных подключениях и показать нагрузку на систему.</p>
+                                    одновременных подключениях.</p>
 
                                 <p><strong>Что показывается:</strong></p>
                                 <ul style="margin-left: 20px;">
                                     <li>Окно AnyDesk с несколькими активными входящими подключениями</li>
                                     <li>Список активных сессий в интерфейсе программы</li>
-                                    <li>Диспетчер задач с показателями нагрузки CPU и RAM при множественных подключениях
-                                    </li>
                                     <li>Настройки разрешений для каждого подключенного пользователя</li>
-                                    <li>Окно монитора сетевой активности с трафиком от всех соединений</li>
-                                    <li>Журнал подключений с историей сессий</li>
                                 </ul>
                             </div>
 
-                            <div class="screenshot-placeholder"
-                                style="background: #333; border: 2px dashed #666; height: 200px; display: flex; align-items: center; justify-content: center; color: #999; margin: 20px 0; border-radius: 8px;">
-                                [Скриншот множественных подключений и мониторинга системных ресурсов]
+                            <div class="image-gallery-4"
+                                style="margin: 20px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3); background: #1a1a1a;">
+                                <div class="gallery-container-4" style="position: relative; background: #1a1a1a;">
+                                    <!-- ОСНОВНОЕ ИЗОБРАЖЕНИЕ -->
+                                    <div class="image-wrapper-4"
+                                        style="text-align: center; min-height: 400px; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; background: #1a1a1a;">
+                                        <img id="mainImage4" src="izobr/anydesk/from-wind.png"
+                                            alt="Как выглядит с Windows"
+                                            style="max-width: 100%; max-height: 350px; height: auto; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;"
+                                            onclick="toggleZoom4(this)">
+                                    </div>
+
+                                    <!-- НАВИГАЦИОННЫЕ СТРЕЛКИ -->
+                                    <button class="gallery-nav-4 prev" onclick="changeImage4(-1)"
+                                        style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); background: rgba(220,53,69,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">‹</button>
+
+                                    <button class="gallery-nav-4 next" onclick="changeImage4(1)"
+                                        style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: rgba(220,53,69,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">›</button>
+
+                                    <!-- СЧЕТЧИК ИЗОБРАЖЕНИЙ -->
+                                    <div class="image-counter-4"
+                                        style="position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.8); color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px; z-index: 10;">
+                                        <span id="currentImage4">1</span> / <span id="totalImages4">3</span>
+                                    </div>
+
+                                    <!-- ИКОНКА УВЕЛИЧЕНИЯ -->
+                                    <div class="zoom-hint-4"
+                                        style="position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.8); color: white; padding: 8px 12px; border-radius: 20px; font-size: 12px; z-index: 10; display: flex; align-items: center; gap: 5px;">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                            <path
+                                                d="M15.5,14L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5M9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5C7,5 5,7 5,9.5C7,12 9.5,14Z" />
+                                        </svg>
+                                        Увеличить
+                                    </div>
+                                </div>
+
+                                <!-- ОПИСАНИЕ ИЗОБРАЖЕНИЯ -->
+                                <div class="image-description-4"
+                                    style="padding: 15px; background: rgba(220,53,69,0.1); color: #e0e0e0; text-align: center; font-size: 14px;">
+                                    <span id="imageDescription4">Как выглядит подключение на персональном компьютере на
+                                        базе Windows</span>
+                                </div>
+
+                                <!-- МИНИАТЮРЫ СНИЗУ -->
+                                <div class="thumbnails-4"
+                                    style="display: flex; justify-content: center; gap: 10px; padding: 15px; background: rgba(220,53,69,0.1); flex-wrap: wrap;">
+                                    <img src="izobr/anydesk/from-wind.png" alt="Как выглядит с Windows"
+                                        class="thumbnail-4 active" onclick="goToImage4(0)"
+                                        style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid #dc3545; transition: all 0.3s ease;">
+                                    <img src="izobr/anydesk/from-mobile.png"
+                                        alt="Окно состояния, когда подключены несколько устройств" class="thumbnail-4"
+                                        onclick="goToImage4(1)"
+                                        style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                                    <img src="izobr/anydesk/on-mobile.jpg" alt="Как это выглядит на телефоне"
+                                        class="thumbnail-4" onclick="goToImage4(2)"
+                                        style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                                </div>
                             </div>
 
-                            <div style="color: #b0b0b0;">
+                            <!-- РЕЗУЛЬТАТ ВНИЗУ ПОД ГАЛЕРЕЕЙ -->
+                            <div style="color: #b0b0b0; margin-top: 20px;">
                                 <strong>Результат:</strong> Визуальное подтверждение возможности работы с несколькими
                                 пользователями одновременно и влияния на производительность системы.
                             </div>
                         </div>
 
-                        <!-- Эксперимент 5 -->
+                        <!-- Эксперимент 5 - ВСТРОЕННЫЙ ЧАТ -->
                         <div class="experiment-card"
                             style="background: rgba(45, 45, 45, 0.9); border-radius: 10px; padding: 30px; margin-bottom: 40px; border-left: 4px solid #6f42c1;">
                             <h2 style="color: #6f42c1; margin-bottom: 20px;">
                                 <span class="experiment-number"
                                     style="background: #6f42c1; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8em; margin-right: 15px;">05</span>
-                                Работа между различными операционными системами
+                                Использование встроенного чата и сообщений
                             </h2>
 
                             <div style="color: #e0e0e0; line-height: 1.6; margin-bottom: 25px;">
-                                <p><strong>Цель:</strong> Показать интерфейс и функциональность AnyDesk на разных
-                                    операционных системах и демонстрировать кроссплатформенные подключения.</p>
+                                <p><strong>Цель:</strong> Продемонстрировать возможности текстового общения между
+                                    пользователями во время удаленной сессии AnyDesk.</p>
 
                                 <p><strong>Что показывается:</strong></p>
                                 <ul style="margin-left: 20px;">
-                                    <li>Интерфейс AnyDesk на Windows 10/11 (светлая и темная тема)</li>
-                                    <li>Интерфейс AnyDesk на macOS с нативным дизайном</li>
-                                    <li>Интерфейс AnyDesk на Linux Ubuntu</li>
-                                    <li>Мобильное приложение AnyDesk на Android и iOS</li>
-                                    <li>Процесс подключения с Windows на macOS</li>
-                                    <li>Передача файлов между Windows и Linux</li>
-                                    <li>Удаленное управление мобильным устройством с компьютера</li>
+                                    <li>Открытие окна чата во время активной сессии</li>
+                                    <li>Отправка и получение текстовых сообщений между устройствами</li>
+                                    <li>Настройки уведомлений для входящих сообщений</li>
+                                    <li>История переписки в рамках одной сессии</li>
                                 </ul>
                             </div>
 
-                            <div class="screenshot-placeholder"
-                                style="background: #333; border: 2px dashed #666; height: 200px; display: flex; align-items: center; justify-content: center; color: #999; margin: 20px 0; border-radius: 8px;">
-                                [Скриншот интерфейса AnyDesk на разных ОС и кроссплатформенных подключений]
+                            <!-- ГАЛЕРЕЯ ДЛЯ 5-ГО ЭКСПЕРИМЕНТА -->
+                            <div class="image-gallery-5"
+                                style="margin: 20px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3); background: #1a1a1a;">
+                                <div class="gallery-container-5" style="position: relative; background: #1a1a1a;">
+                                    <!-- ОСНОВНОЕ ИЗОБРАЖЕНИЕ -->
+                                    <div class="image-wrapper-5"
+                                        style="text-align: center; min-height: 400px; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; background: #1a1a1a;">
+                                        <img id="mainImage5" src="izobr/anydesk/chat-window.png" alt="Окно чата AnyDesk"
+                                            style="max-width: 100%; max-height: 350px; height: auto; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;"
+                                            onclick="toggleZoom5(this)">
+                                    </div>
+
+                                    <!-- НАВИГАЦИОННЫЕ СТРЕЛКИ -->
+                                    <button class="gallery-nav-5 prev" onclick="changeImage5(-1)"
+                                        style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); background: rgba(111,66,193,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">‹</button>
+
+                                    <button class="gallery-nav-5 next" onclick="changeImage5(1)"
+                                        style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: rgba(111,66,193,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">›</button>
+
+                                    <!-- СЧЕТЧИК ИЗОБРАЖЕНИЙ -->
+                                    <div class="image-counter-5"
+                                        style="position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.8); color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px; z-index: 10;">
+                                        <span id="currentImage5">1</span> / <span id="totalImages5">4</span>
+                                    </div>
+
+                                    <!-- ИКОНКА УВЕЛИЧЕНИЯ -->
+                                    <div class="zoom-hint-5"
+                                        style="position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.8); color: white; padding: 8px 12px; border-radius: 20px; font-size: 12px; z-index: 10; display: flex; align-items: center; gap: 5px;">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                            <path
+                                                d="M15.5,14L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5M9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5C7,5 5,7 5,9.5C7,12 9.5,14Z" />
+                                        </svg>
+                                        Увеличить
+                                    </div>
+                                </div>
+
+                                <!-- ОПИСАНИЕ ИЗОБРАЖЕНИЯ -->
+                                <div class="image-description-5"
+                                    style="padding: 15px; background: rgba(111,66,193,0.1); color: #e0e0e0; text-align: center; font-size: 14px;">
+                                    <span id="imageDescription5">Окно чата AnyDesk во время активной сессии</span>
+                                </div>
+
+                                <!-- МИНИАТЮРЫ -->
+                                <div class="thumbnails-5"
+                                    style="display: flex; justify-content: center; gap: 10px; padding: 15px; background: rgba(111,66,193,0.1); flex-wrap: wrap;">
+                                    <img src="izobr/anydesk/chat-window.png" alt="Окно чата" class="thumbnail-5 active"
+                                        onclick="goToImage5(0)"
+                                        style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid #6f42c1; transition: all 0.3s ease;">
+                                    <img src="izobr/anydesk/send-message.png" alt="Отправка сообщения"
+                                        class="thumbnail-5" onclick="goToImage5(1)"
+                                        style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                                    <img src="izobr/anydesk/chat-notifications.png" alt="Настройки уведомлений"
+                                        class="thumbnail-5" onclick="goToImage5(2)"
+                                        style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                                    <img src="izobr/anydesk/chat-history.png" alt="История сообщений"
+                                        class="thumbnail-5" onclick="goToImage5(3)"
+                                        style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                                </div>
                             </div>
 
-                            <div style="color: #b0b0b0;">
-                                <strong>Результат:</strong> Наглядная демонстрация универсальности AnyDesk и
-                                одинаковости функций на всех поддерживаемых платформах.
+                            <!-- РЕЗУЛЬТАТ -->
+                            <div style="color: #b0b0b0; margin-top: 20px;">
+                                <strong>Результат:</strong> Наглядная демонстрация удобства текстового общения для
+                                координации действий во время удаленной работы без необходимости использования внешних
+                                мессенджеров.
                             </div>
                         </div>
-
-                        <!-- Заключение -->
-                        <div class="fade-in"
-                            style="background: rgba(0, 122, 204, 0.1); border-radius: 10px; padding: 30px; margin-top: 50px; border: 1px solid #007acc;">
-                            <h2 style="color: #007acc; text-align: center; margin-bottom: 20px;">Заключение исследования
-                            </h2>
-                            <div style="color: #e0e0e0; line-height: 1.6; text-align: center;">
-                                <p>Проведенные эксперименты наглядно демонстрируют все возможности программы AnyDesk в
-                                    различных условиях использования.</p>
-                                <p>Каждый скриншот показывает реальные настройки и результаты работы программы без
-                                    необходимости создания сложных отчетов.</p>
-                                <p>Визуальные результаты позволяют быстро оценить функциональность и производительность
-                                    AnyDesk.</p>
-                            </div>
-                        </div>
-
-                        <!-- Навигация -->
-                        <div class="fade-in" style="text-align: center; margin-top: 50px;">
-                            <a href="anydesk.html" class="btn-secondary" style="margin: 0 10px;">← Вернуться к
-                                AnyDesk</a>
-                            <a href="index.html" class="btn-primary" style="margin: 0 10px;">На главную</a>
-                        </div>
-                    </div>
         </section>
 
         <!-- Дополнительная информация -->
@@ -686,7 +768,7 @@
                         </div>
                         <div class="tech-info-item" style="flex: 1; min-width: 200px;">
                             <h4 style="color: #007acc;">Тестовые системы</h4>
-                            <p>Windows, macOS, Linux, Android, iOS</p>
+                            <p>Windows, iOS</p>
                         </div>
                         <div class="tech-info-item" style="flex: 1; min-width: 200px;">
                             <h4 style="color: #007acc;">Метод демонстрации</h4>
@@ -1261,19 +1343,39 @@
             }
         ];
 
-        // Показать изображение в третьей галерее
+        // ИСПРАВЛЕННАЯ ФУНКЦИЯ ПОКАЗА ИЗОБРАЖЕНИЯ
         function showImage3(index) {
+            console.log('showImage3 вызвана с индексом:', index);
+
+            // Проверка корректности индекса
+            if (index < 0 || index >= imageData3.length) {
+                console.log('Некорректный индекс:', index);
+                return;
+            }
+
             const mainImage = document.getElementById('mainImage3');
             const thumbnails = document.querySelectorAll('.thumbnail-3');
+            const currentCounter = document.getElementById('currentImage3');
+            const description = document.getElementById('imageDescription3');
+
+            // Проверка существования элементов
+            if (!mainImage) {
+                console.log('mainImage3 не найден');
+                return;
+            }
+
             const data = imageData3[index];
 
+            // Плавное обновление главного изображения
             mainImage.style.opacity = '0.3';
             setTimeout(() => {
                 mainImage.src = data.src;
                 mainImage.alt = data.alt;
                 mainImage.style.opacity = '1';
+                console.log('Изображение обновлено:', data.src);
             }, 150);
 
+            // Обновление миниатюр
             thumbnails.forEach((thumb, i) => {
                 if (i === index) {
                     thumb.classList.add('active');
@@ -1286,51 +1388,524 @@
                 }
             });
 
-            document.getElementById('currentImage3').textContent = index + 1;
-            document.getElementById('imageDescription3').textContent = data.description;
-
-            currentImageIndex3 = index;
-        }
-
-        // Переключение изображений в третьей галерее
-        function changeImage3(direction) {
-            let newIndex = currentImageIndex3 + direction;
-
-            if (newIndex >= imageData3.length) {
-                newIndex = 0;
-            } else if (newIndex < 0) {
-                newIndex = imageData3.length - 1;
+            // Обновление счетчика и описания
+            if (currentCounter) {
+                currentCounter.textContent = index + 1;
+            }
+            if (description) {
+                description.textContent = data.description;
             }
 
+            // Обновление текущего индекса
+            currentImageIndex3 = index;
+            console.log('Текущий индекс установлен:', currentImageIndex3);
+        }
+
+        // ИСПРАВЛЕННАЯ ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ
+        // ИСПРАВЛЕННАЯ ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ ДЛЯ 3-ГО ЭКСПЕРИМЕНТА
+        function changeImage3(direction) {
+            console.log('changeImage3 вызвана с направлением:', direction);
+            console.log('Текущий индекс до изменения:', currentImageIndex3);
+
+            // ИНВЕРТИРУЕМ НАПРАВЛЕНИЕ для исправления стрелок
+            let newIndex = currentImageIndex3 + (-direction); // Меняем знак направления
+
+            // Циклическое переключение
+            if (newIndex >= imageData3.length) {
+                newIndex = 0;
+                console.log('Переход к первому изображению');
+            } else if (newIndex < 0) {
+                newIndex = imageData3.length - 1;
+                console.log('Переход к последнему изображению');
+            }
+
+            console.log('Новый индекс:', newIndex);
             showImage3(newIndex);
         }
 
-        // Переход к конкретному изображению в третьей галерее
+
+        // ПЕРЕХОД К КОНКРЕТНОМУ ИЗОБРАЖЕНИЮ
         function goToImage3(index) {
-            showImage3(index);
+            console.log('goToImage3 вызвана с индексом:', index);
+            if (index >= 0 && index < imageData3.length) {
+                showImage3(index);
+            } else {
+                console.log('Некорректный индекс в goToImage3:', index);
+            }
         }
 
-        // Функция масштабирования для третьей галереи
+        // ФУНКЦИЯ МАСШТАБИРОВАНИЯ
         function toggleZoom3(img) {
             if (img.classList.contains('zoomed')) {
                 img.classList.remove('zoomed');
                 img.style.transform = 'scale(1)';
+                img.style.cursor = 'zoom-in';
+                console.log('Масштаб убран');
             } else {
                 img.classList.add('zoomed');
                 img.style.transform = 'scale(1.8)';
                 img.style.transformOrigin = 'center';
+                img.style.cursor = 'zoom-out';
+                console.log('Масштаб применен');
             }
         }
 
-        // Обновляем инициализацию для включения третьей галереи
+        // HOVER ЭФФЕКТЫ ДЛЯ 3-Й ГАЛЕРЕИ
+        function initHoverEffects3() {
+            console.log('Инициализация hover эффектов для 3-й галереи');
+
+            // Эффекты для навигационных кнопок
+            document.querySelectorAll('.gallery-nav-3').forEach((btn, index) => {
+                console.log('Настройка hover для кнопки навигации', index);
+
+                btn.addEventListener('mouseenter', function () {
+                    this.style.background = '#ffc107';
+                    this.style.transform = 'translateY(-50%) scale(1.1)';
+                });
+
+                btn.addEventListener('mouseleave', function () {
+                    this.style.background = 'rgba(255,193,7,0.9)';
+                    this.style.transform = 'translateY(-50%) scale(1)';
+                });
+
+                // Добавляем обработчик клика для дополнительной надежности
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const isPrev = this.classList.contains('prev');
+                    console.log('Клик по кнопке:', isPrev ? 'назад' : 'вперед');
+                    changeImage3(isPrev ? -1 : 1);
+                });
+            });
+
+            // Эффекты для миниатюр
+            document.querySelectorAll('.thumbnail-3').forEach((thumb, index) => {
+                console.log('Настройка hover для миниатюры', index);
+
+                thumb.addEventListener('mouseenter', function () {
+                    if (!this.classList.contains('active')) {
+                        this.style.opacity = '1';
+                        this.style.transform = 'scale(1.05)';
+                    }
+                });
+
+                thumb.addEventListener('mouseleave', function () {
+                    if (!this.classList.contains('active')) {
+                        this.style.opacity = '0.7';
+                        this.style.transform = 'scale(1)';
+                    }
+                });
+
+                // Добавляем обработчик клика для дополнительной надежности
+                thumb.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    console.log('Клик по миниатюре', index);
+                    goToImage3(index);
+                });
+            });
+        }
+
+        // ИСПРАВЛЕННАЯ ИНИЦИАЛИЗАЦИЯ
+        function initGallery3() {
+            console.log('Инициализация 3-й галереи');
+
+            // Проверяем наличие элементов
+            const mainImage = document.getElementById('mainImage3');
+            const thumbnails = document.querySelectorAll('.thumbnail-3');
+
+            if (!mainImage) {
+                console.log('mainImage3 не найден при инициализации');
+                return false;
+            }
+
+            if (thumbnails.length === 0) {
+                console.log('Миниатюры не найдены при инициализации');
+                return false;
+            }
+
+            console.log('Найдено миниатюр:', thumbnails.length);
+
+            // Инициализация hover эффектов
+            initHoverEffects3();
+
+            // Показываем первое изображение
+            showImage3(0);
+
+            console.log('3-я галерея успешно инициализирована');
+            return true;
+        }
+
+        // Галерея изображений для четвертого эксперимента
+        let currentImageIndex4 = 0;
+        const imageData4 = [
+            {
+                src: 'izobr/anydesk/from-wind.png',
+                alt: 'Как выглядит с Windows',
+                description: 'Как выглядит подключение на персональном компьютере на базе Windows'
+            },
+            {
+                src: 'izobr/anydesk/from-mobile.png',
+                alt: 'Окно состояния, когда подключены несколько устройств',
+                description: 'Окно состояния, когда подключены несколько устройств'
+            },
+            {
+                src: 'izobr/anydesk/on-mobile.jpg',
+                alt: 'Вид на мобильном устройстве',
+                description: 'Как выглядит подключение на мобильном устройстве'
+            }
+        ];
+
+        // Показать изображение в четвертой галерее
+        function showImage4(index) {
+            const mainImage = document.getElementById('mainImage4');
+            const thumbnails = document.querySelectorAll('.thumbnail-4');
+            const data = imageData4[index];
+
+            if (!mainImage || !thumbnails.length) return;
+            if (index < 0 || index >= imageData4.length) return;
+
+            mainImage.style.opacity = '0.3';
+            setTimeout(() => {
+                mainImage.src = data.src;
+                mainImage.alt = data.alt;
+                mainImage.style.opacity = '1';
+            }, 150);
+
+            thumbnails.forEach((thumb, i) => {
+                if (i === index) {
+                    thumb.classList.add('active');
+                    thumb.style.border = '2px solid #dc3545';
+                    thumb.style.opacity = '1';
+                } else {
+                    thumb.classList.remove('active');
+                    thumb.style.border = '2px solid transparent';
+                    thumb.style.opacity = '0.7';
+                }
+            });
+
+            document.getElementById('currentImage4').textContent = index + 1;
+            document.getElementById('imageDescription4').textContent = data.description;
+
+            currentImageIndex4 = index;
+        }
+
+        // Переключение изображений в четвертой галерее
+        function changeImage4(direction) {
+            let newIndex = currentImageIndex4 + direction;
+
+            if (newIndex >= imageData4.length) {
+                newIndex = 0;
+            } else if (newIndex < 0) {
+                newIndex = imageData4.length - 1;
+            }
+
+            showImage4(newIndex);
+        }
+
+        // Переход к конкретному изображению в четвертой галерее
+        function goToImage4(index) {
+            showImage4(index);
+        }
+
+        // Функция масштабирования для четвертой галереи
+        function toggleZoom4(img) {
+            if (img.classList.contains('zoomed')) {
+                img.classList.remove('zoomed');
+                img.style.transform = 'scale(1)';
+                img.style.cursor = 'zoom-in';
+            } else {
+                img.classList.add('zoomed');
+                img.style.transform = 'scale(1.8)';
+                img.style.transformOrigin = 'center';
+                img.style.cursor = 'zoom-out';
+            }
+        }
+
+        // Hover эффекты для четвертой галереи
+        function initHoverEffects4() {
+            // Эффекты для навигационных кнопок
+            document.querySelectorAll('.gallery-nav-4').forEach(btn => {
+                btn.addEventListener('mouseenter', function () {
+                    this.style.background = '#dc3545';
+                    this.style.transform = 'translateY(-50%) scale(1.1)';
+                });
+
+                btn.addEventListener('mouseleave', function () {
+                    this.style.background = 'rgba(220,53,69,0.9)';
+                    this.style.transform = 'translateY(-50%) scale(1)';
+                });
+            });
+
+            // Эффекты для миниатюр
+            document.querySelectorAll('.thumbnail-4').forEach(thumb => {
+                thumb.addEventListener('mouseenter', function () {
+                    if (!this.classList.contains('active')) {
+                        this.style.opacity = '1';
+                        this.style.transform = 'scale(1.05)';
+                    }
+                });
+
+                thumb.addEventListener('mouseleave', function () {
+                    if (!this.classList.contains('active')) {
+                        this.style.opacity = '0.7';
+                        this.style.transform = 'scale(1)';
+                    }
+                });
+            });
+        }
+
+        // ОБНОВЛЕННАЯ ИНИЦИАЛИЗАЦИЯ ВСЕХ ГАЛЕРЕЙ
         document.addEventListener('DOMContentLoaded', function () {
+            // Инициализация первой галереи
             if (document.getElementById('mainImage')) {
                 showImage(0);
             }
+
+            // Инициализация третьей галереи
             if (document.getElementById('mainImage3')) {
                 showImage3(0);
+                initHoverEffects3();
+            }
+
+            // Инициализация четвертой галереи
+            if (document.getElementById('mainImage4')) {
+                console.log('Initializing fourth gallery');
+                showImage4(0);
+                initHoverEffects4();
             }
         });
+
+        // ОБНОВЛЕННАЯ ПОДДЕРЖКА КЛАВИАТУРЫ ДЛЯ ВСЕХ ГАЛЕРЕЙ
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                // Закрытие полноэкранного режима и zoom
+                const zoomedImages = document.querySelectorAll('.zoomed');
+                zoomedImages.forEach(img => {
+                    img.classList.remove('zoomed');
+                    img.style.transform = 'scale(1)';
+                    img.style.cursor = 'zoom-in';
+                });
+            }
+
+            // Проверяем, какая галерея в фокусе
+            const activeElement = document.activeElement;
+            const isFirstGallery = activeElement && activeElement.closest('.image-gallery');
+            const isThirdGallery = activeElement && activeElement.closest('.image-gallery-3');
+            const isFourthGallery = activeElement && activeElement.closest('.image-gallery-4');
+
+            if (e.key === 'ArrowLeft') {
+                if (isFourthGallery) {
+                    changeImage4(-1);
+                } else if (isThirdGallery) {
+                    changeImage3(-1);
+                } else if (isFirstGallery) {
+                    changeImage(-1);
+                }
+            } else if (e.key === 'ArrowRight') {
+                if (isFourthGallery) {
+                    changeImage4(1);
+                } else if (isThirdGallery) {
+                    changeImage3(1);
+                } else if (isFirstGallery) {
+                    changeImage(1);
+                }
+            }
+        });
+
+        // ГАЛЕРЕЯ ИЗОБРАЖЕНИЙ ДЛЯ ПЯТОГО ЭКСПЕРИМЕНТА (ЧАТ)
+        let currentImageIndex5 = 0;
+        const imageData5 = [
+            {
+                src: 'izobr/anydesk/chat-window.png',
+                alt: 'Окно чата AnyDesk',
+                description: 'Окно чата AnyDesk во время активной сессии'
+            },
+            {
+                src: 'izobr/anydesk/send-message.png',
+                alt: 'Отправка сообщения',
+                description: 'Процесс отправки текстового сообщения удаленному пользователю'
+            },
+            {
+                src: 'izobr/anydesk/chat-notifications.png',
+                alt: 'Настройки уведомлений',
+                description: 'Настройки уведомлений для входящих сообщений чата'
+            },
+            {
+                src: 'izobr/anydesk/chat-history.png',
+                alt: 'История сообщений',
+                description: 'История переписки в рамках текущей сессии'
+            }
+        ];
+
+        // ПОКАЗАТЬ ИЗОБРАЖЕНИЕ В 5-Й ГАЛЕРЕЕ
+        function showImage5(index) {
+            console.log('showImage5 вызвана с индексом:', index);
+
+            if (index < 0 || index >= imageData5.length) {
+                console.log('Некорректный индекс для 5-й галереи:', index);
+                return;
+            }
+
+            const mainImage = document.getElementById('mainImage5');
+            const thumbnails = document.querySelectorAll('.thumbnail-5');
+            const currentCounter = document.getElementById('currentImage5');
+            const description = document.getElementById('imageDescription5');
+
+            if (!mainImage) {
+                console.log('mainImage5 не найден');
+                return;
+            }
+
+            const data = imageData5[index];
+
+            // Плавное обновление изображения
+            mainImage.style.opacity = '0.3';
+            setTimeout(() => {
+                mainImage.src = data.src;
+                mainImage.alt = data.alt;
+                mainImage.style.opacity = '1';
+                console.log('5-я галерея: изображение обновлено:', data.src);
+            }, 150);
+
+            // Обновление миниатюр
+            thumbnails.forEach((thumb, i) => {
+                if (i === index) {
+                    thumb.classList.add('active');
+                    thumb.style.border = '2px solid #6f42c1';
+                    thumb.style.opacity = '1';
+                } else {
+                    thumb.classList.remove('active');
+                    thumb.style.border = '2px solid transparent';
+                    thumb.style.opacity = '0.7';
+                }
+            });
+
+            // Обновление счетчика и описания
+            if (currentCounter) {
+                currentCounter.textContent = index + 1;
+            }
+            if (description) {
+                description.textContent = data.description;
+            }
+
+            currentImageIndex5 = index;
+        }
+
+        // ПЕРЕКЛЮЧЕНИЕ ИЗОБРАЖЕНИЙ В 5-Й ГАЛЕРЕЕ
+        function changeImage5(direction) {
+            console.log('changeImage5 вызвана с направлением:', direction);
+
+            let newIndex = currentImageIndex5 + direction;
+
+            if (newIndex >= imageData5.length) {
+                newIndex = 0;
+            } else if (newIndex < 0) {
+                newIndex = imageData5.length - 1;
+            }
+
+            showImage5(newIndex);
+        }
+
+        // ПЕРЕХОД К КОНКРЕТНОМУ ИЗОБРАЖЕНИЮ В 5-Й ГАЛЕРЕЕ
+        function goToImage5(index) {
+            console.log('goToImage5 вызвана с индексом:', index);
+            if (index >= 0 && index < imageData5.length) {
+                showImage5(index);
+            }
+        }
+
+        // ФУНКЦИЯ МАСШТАБИРОВАНИЯ ДЛЯ 5-Й ГАЛЕРЕИ
+        function toggleZoom5(img) {
+            if (img.classList.contains('zoomed')) {
+                img.classList.remove('zoomed');
+                img.style.transform = 'scale(1)';
+                img.style.cursor = 'zoom-in';
+            } else {
+                img.classList.add('zoomed');
+                img.style.transform = 'scale(1.8)';
+                img.style.transformOrigin = 'center';
+                img.style.cursor = 'zoom-out';
+            }
+        }
+
+        // HOVER ЭФФЕКТЫ ДЛЯ 5-Й ГАЛЕРЕИ
+        function initHoverEffects5() {
+            console.log('Инициализация hover эффектов для 5-й галереи');
+
+            // Эффекты для навигационных кнопок
+            document.querySelectorAll('.gallery-nav-5').forEach(btn => {
+                btn.addEventListener('mouseenter', function () {
+                    this.style.background = '#6f42c1';
+                    this.style.transform = 'translateY(-50%) scale(1.1)';
+                });
+
+                btn.addEventListener('mouseleave', function () {
+                    this.style.background = 'rgba(111,66,193,0.9)';
+                    this.style.transform = 'translateY(-50%) scale(1)';
+                });
+
+                // Обработчик клика для надежности
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const isPrev = this.classList.contains('prev');
+                    console.log('Клик по кнопке 5-й галереи:', isPrev ? 'назад' : 'вперед');
+                    changeImage5(isPrev ? -1 : 1);
+                });
+            });
+
+            // Эффекты для миниатюр
+            document.querySelectorAll('.thumbnail-5').forEach((thumb, index) => {
+                thumb.addEventListener('mouseenter', function () {
+                    if (!this.classList.contains('active')) {
+                        this.style.opacity = '1';
+                        this.style.transform = 'scale(1.05)';
+                    }
+                });
+
+                thumb.addEventListener('mouseleave', function () {
+                    if (!this.classList.contains('active')) {
+                        this.style.opacity = '0.7';
+                        this.style.transform = 'scale(1)';
+                    }
+                });
+
+                // Обработчик клика для надежности
+                thumb.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    console.log('Клик по миниатюре 5-й галереи:', index);
+                    goToImage5(index);
+                });
+            });
+        }
+
+        // ИНИЦИАЛИЗАЦИЯ 5-Й ГАЛЕРЕИ
+        function initGallery5() {
+            console.log('Инициализация 5-й галереи (чат)');
+
+            const mainImage = document.getElementById('mainImage5');
+            const thumbnails = document.querySelectorAll('.thumbnail-5');
+
+            if (!mainImage) {
+                console.log('mainImage5 не найден при инициализации');
+                return false;
+            }
+
+            if (thumbnails.length === 0) {
+                console.log('Миниатюры 5-й галереи не найдены');
+                return false;
+            }
+
+            console.log('5-я галерея: найдено миниатюр:', thumbnails.length);
+
+            // Инициализация hover эффектов
+            initHoverEffects5();
+
+            // Показываем первое изображение
+            showImage5(0);
+
+            console.log('5-я галерея успешно инициализирована');
+            return true;
+        }
+
 
     </script>
     <script type="module" src="js/mobile-menu.js"></script>
