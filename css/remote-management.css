@@ -12,17 +12,55 @@
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
+    transition: all 0.8s ease-out;
+    opacity: 1;
+    visibility: visible;
 }
 
 .preloader.hidden {
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
 }
 
 .remote-loader {
     text-align: center;
     color: #c5a47e;
+    transform: translateY(0);
+    animation: loaderPulse 2s ease-in-out infinite alternate;
+}
+@keyframes loaderPulse {
+    0% { transform: translateY(0) scale(1); }
+    100% { transform: translateY(-10px) scale(1.02); }
+}
+
+.loader-icon {
+    margin-bottom: 1.5rem;
+    animation: iconFloat 3s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(180deg); }
+}
+
+.loader-text {
+    margin: 1.5rem 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(197, 164, 126, 0.5);
+    animation: textGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+    0% { 
+        opacity: 0.8;
+        text-shadow: 0 0 10px rgba(197, 164, 126, 0.3);
+    }
+    100% { 
+        opacity: 1;
+        text-shadow: 0 0 20px rgba(197, 164, 126, 0.8);
+    }
 }
 
 .loader-text {
@@ -32,24 +70,65 @@
 }
 
 .loader-progress {
-    width: 200px;
-    height: 4px;
+    width: 250px;
+    height: 6px;
     background: rgba(197, 164, 126, 0.2);
-    border-radius: 2px;
+    border-radius: 3px;
     overflow: hidden;
-    margin-top: 1rem;
+    margin: 2rem auto 0;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .progress-bar {
     height: 100%;
-    background: linear-gradient(90deg, #c5a47e, #d4b896);
-    border-radius: 2px;
-    animation: loadProgress 2.5s ease-out;
+    background: linear-gradient(90deg, #c5a47e 0%, #d4b896 50%, #c5a47e 100%);
+    background-size: 200% 100%;
+    border-radius: 3px;
+    width: 0%;
+    animation: 
+        loadProgress 2.5s ease-out forwards,
+        progressShimmer 1.5s ease-in-out infinite;
+    box-shadow: 0 0 10px rgba(197, 164, 126, 0.5);
 }
 
 @keyframes loadProgress {
     0% { width: 0%; }
+    20% { width: 15%; }
+    40% { width: 35%; }
+    60% { width: 55%; }
+    80% { width: 85%; }
     100% { width: 100%; }
+}
+
+@keyframes progressShimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Улучшенная SVG анимация */
+.loader-icon svg {
+    filter: drop-shadow(0 0 10px rgba(197, 164, 126, 0.5));
+}
+
+.loader-icon svg circle {
+    stroke-dasharray: 283;
+    stroke-dashoffset: 283;
+    animation: circleProgress 2s ease-in-out infinite;
+}
+
+@keyframes circleProgress {
+    0% { 
+        stroke-dashoffset: 283;
+        opacity: 0.3;
+    }
+    50% { 
+        stroke-dashoffset: 141;
+        opacity: 1;
+    }
+    100% { 
+        stroke-dashoffset: 0;
+        opacity: 0.3;
+    }
 }
 
 /* Частицы */

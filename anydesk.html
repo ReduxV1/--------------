@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <!-- Добавить эти мета-теги -->
-    <meta name="description" content="AnyDesk - быстрое, безопасное и простое решение для удаленного доступа к компьютерам. Скачать бесплатно.">
+    <meta name="description"
+        content="AnyDesk - быстрое, безопасное и простое решение для удаленного доступа к компьютерам. Скачать бесплатно.">
     <meta name="keywords" content="AnyDesk, удаленный доступ, удаленное управление, TeamViewer альтернатива">
     <meta name="author" content="Ваше имя">
     <meta property="og:title" content="AnyDesk - Удаленное управление">
-    <meta property="og:description" content="Быстрое, безопасное и простое решение для удаленного доступа к компьютерам">
+    <meta property="og:description"
+        content="Быстрое, безопасное и простое решение для удаленного доступа к компьютерам">
     <meta property="og:type" content="website">
     <title>AnyDesk - Удаленное управление</title>
     <link rel="stylesheet" href="css/main.css">
@@ -23,19 +26,80 @@
     <div class="preloader" id="preloader">
         <div class="anydesk-loader">
             <div class="loader-icon">
-                <svg width="80" height="80" viewBox="0 0 100 100" fill="none">
-                    <circle cx="50" cy="50" r="45" stroke="#c5a47e" stroke-width="2" fill="none" opacity="0.3"/>
-                    <path d="M50 5 A45 45 0 0 1 95 50" stroke="#c5a47e" stroke-width="3" fill="none">
-                        <animateTransform attributeName="transform" type="rotate" dur="1s" repeatCount="indefinite" values="0 50 50;360 50 50"/>
-                    </path>
+                <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+                    <!-- Внешний статичный круг -->
+                    <circle cx="50" cy="50" r="45" stroke="rgba(197, 164, 126, 0.2)" stroke-width="1" fill="none" />
+
+                    <!-- Анимированный внешний круг -->
+                    <circle cx="50" cy="50" r="45" stroke="#c5a47e" stroke-width="3" fill="none" stroke-linecap="round"
+                        stroke-dasharray="283" stroke-dashoffset="283">
+                        <animate attributeName="stroke-dashoffset" values="283;141;0;283" dur="3s"
+                            repeatCount="indefinite" />
+                        <animateTransform attributeName="transform" type="rotate" values="0 50 50;360 50 50" dur="2s"
+                            repeatCount="indefinite" />
+                    </circle>
+
+                    <!-- Средний круг -->
+                    <circle cx="50" cy="50" r="32" stroke="rgba(230, 0, 18, 0.4)" stroke-width="2" fill="none"
+                        stroke-dasharray="201" stroke-dashoffset="201">
+                        <animate attributeName="stroke-dashoffset" values="201;100;0;201" dur="2.5s"
+                            repeatCount="indefinite" />
+                        <animateTransform attributeName="transform" type="rotate" values="360 50 50;0 50 50" dur="2.5s"
+                            repeatCount="indefinite" />
+                    </circle>
+
+                    <!-- Внутренний круг -->
+                    <circle cx="50" cy="50" r="20" stroke="rgba(197, 164, 126, 0.6)" stroke-width="2" fill="none"
+                        stroke-dasharray="126" stroke-dashoffset="126">
+                        <animate attributeName="stroke-dashoffset" values="126;63;0;126" dur="1.8s"
+                            repeatCount="indefinite" />
+                        <animateTransform attributeName="transform" type="rotate" values="0 50 50;360 50 50" dur="1.8s"
+                            repeatCount="indefinite" />
+                    </circle>
+
+                    <!-- Центральная пульсирующая точка -->
+                    <circle cx="50" cy="50" r="4" fill="#c5a47e">
+                        <animate attributeName="r" values="4;8;4" dur="1.5s" repeatCount="indefinite" />
+                        <animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite" />
+                        <animate attributeName="fill" values="#c5a47e;#d4b896;#c5a47e" dur="2s"
+                            repeatCount="indefinite" />
+                    </circle>
+
+                    <!-- Орбитальные точки -->
+                    <circle cx="50" cy="15" r="2" fill="rgba(230, 0, 18, 0.8)">
+                        <animateTransform attributeName="transform" type="rotate" values="0 50 50;360 50 50" dur="3s"
+                            repeatCount="indefinite" />
+                        <animate attributeName="opacity" values="0.8;0.3;0.8" dur="1s" repeatCount="indefinite" />
+                    </circle>
+
+                    <circle cx="85" cy="50" r="1.5" fill="rgba(197, 164, 126, 0.9)">
+                        <animateTransform attributeName="transform" type="rotate" values="0 50 50;-360 50 50" dur="4s"
+                            repeatCount="indefinite" />
+                        <animate attributeName="r" values="1.5;3;1.5" dur="2s" repeatCount="indefinite" />
+                    </circle>
                 </svg>
             </div>
+
             <div class="loader-text">Загрузка AnyDesk...</div>
+
             <div class="loader-progress">
                 <div class="progress-bar"></div>
             </div>
+
+            <div class="loader-status">
+                <div class="status-text" id="statusText">Инициализация...</div>
+                <div class="loading-dots">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+
+            <div class="loader-percentage" id="loaderPercentage">0%</div>
         </div>
     </div>
+
 
     <!-- Фоновые эффекты -->
     <div class="main-bg">
@@ -48,25 +112,69 @@
     </div>
 
     <header class="main-header">
-    <div class="header-logo">
-        <img src="izobr/logo.svg" alt="Логотип" class="logo-img">
-    </div>
-    
-    <!-- Обычное меню для десктопа -->
-    <nav class="header-menu desktop-menu">
+        <div class="header-logo">
+            <img src="izobr/logo.svg" alt="Логотип" class="logo-img">
+        </div>
+
+        <!-- Обычное меню для десктопа -->
+        <nav class="header-menu desktop-menu">
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li class="dropdown">
+                    <a href="#sections" class="dropdown-trigger">Разделы ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="os-selection.html">Выбор операционной системы</a></li>
+                        <li><a href="filesystem.html">Выбор ФС и разметка диска</a></li>
+                        <li><a href="remote-management.html" class="active">Средства удаленного управления
+                                компьютером</a></li>
+                        <li><a href="diagnost-management.html">Средства диагностики, контроля и мониторинга системы</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#ssilki" class="dropdown-trigger">Ссылки на официальные сайты ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://www.teamviewer.com" target="_blank">TeamViewer</a></li>
+                        <li><a href="https://anydesk.com" target="_blank">AnyDesk</a></li>
+                        <li><a href="https://www.aeroadmin.com" target="_blank">AeroAdmin</a></li>
+                        <li><a href="https://www.aida64.com" target="_blank">AIDA64</a></li>
+                        <li><a href="https://www.hwinfo.com" target="_blank">HWiNFO</a></li>
+                        <li><a href="https://www.sisoftware.net" target="_blank">SiSoftware Sandra</a></li>
+                    </ul>
+                </li>
+                <li><a href="author.html">Автор</a></li>
+            </ul>
+        </nav>
+
+        <!-- Кнопка мобильного меню -->
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+    </header>
+
+    <!-- Оверлей для закрытия меню -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <!-- Боковое меню для мобильных устройств -->
+    <nav class="sidebar-menu" id="sidebarMenu">
+        <button class="close-menu" id="closeMenu">×</button>
         <ul>
-            <li><a href="index.html">Главная</a></li>
-            <li class="dropdown">
-                <a href="#sections" class="dropdown-trigger">Разделы ▾</a>
+            <li><a href="index.html" class="menu-item">Главная</a></li>
+            <li class="dropdown mobile-dropdown">
+                <a href="#sections" class="menu-item dropdown-toggle">Разделы <span class="dropdown-arrow">▾</span></a>
                 <ul class="dropdown-menu">
                     <li><a href="os-selection.html">Выбор операционной системы</a></li>
                     <li><a href="filesystem.html">Выбор ФС и разметка диска</a></li>
-                    <li><a href="remote-management.html" class="active">Средства удаленного управления компьютером</a></li>
+                    <li><a href="remote-management.html" class="active">Средства удаленного управления компьютером</a>
+                    </li>
                     <li><a href="diagnost-management.html">Средства диагностики, контроля и мониторинга системы</a></li>
                 </ul>
             </li>
-            <li class="dropdown">
-                <a href="#ssilki" class="dropdown-trigger">Ссылки на официальные сайты ▾</a>
+            <li class="dropdown mobile-dropdown">
+                <a href="#ssilki" class="menu-item dropdown-toggle">Ссылки на официальные сайты <span
+                        class="dropdown-arrow">▾</span></a>
                 <ul class="dropdown-menu">
                     <li><a href="https://www.teamviewer.com" target="_blank">TeamViewer</a></li>
                     <li><a href="https://anydesk.com" target="_blank">AnyDesk</a></li>
@@ -74,51 +182,11 @@
                     <li><a href="https://www.aida64.com" target="_blank">AIDA64</a></li>
                     <li><a href="https://www.hwinfo.com" target="_blank">HWiNFO</a></li>
                     <li><a href="https://www.sisoftware.net" target="_blank">SiSoftware Sandra</a></li>
-                </ul>  
+                </ul>
             </li>
-            <li><a href="author.html">Автор</a></li>
+            <li><a href="author.html" class="menu-item">Автор</a></li>
         </ul>
     </nav>
-
-    <!-- Кнопка мобильного меню -->
-    <button class="mobile-menu-toggle" id="mobileMenuToggle">
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-    </button>
-</header>
-
-<!-- Оверлей для закрытия меню -->
-<div class="menu-overlay" id="menuOverlay"></div>
-
-<!-- Боковое меню для мобильных устройств -->
-<nav class="sidebar-menu" id="sidebarMenu">
-    <button class="close-menu" id="closeMenu">×</button>
-    <ul>
-        <li><a href="index.html" class="menu-item">Главная</a></li>
-        <li class="dropdown mobile-dropdown">
-            <a href="#sections" class="menu-item dropdown-toggle">Разделы <span class="dropdown-arrow">▾</span></a>
-            <ul class="dropdown-menu">
-                <li><a href="os-selection.html">Выбор операционной системы</a></li>
-                <li><a href="filesystem.html">Выбор ФС и разметка диска</a></li>
-                <li><a href="remote-management.html" class="active">Средства удаленного управления компьютером</a></li>
-                <li><a href="diagnost-management.html">Средства диагностики, контроля и мониторинга системы</a></li>
-            </ul>
-        </li>
-        <li class="dropdown mobile-dropdown">
-            <a href="#ssilki" class="menu-item dropdown-toggle">Ссылки на официальные сайты <span class="dropdown-arrow">▾</span></a>
-            <ul class="dropdown-menu">
-                <li><a href="https://www.teamviewer.com" target="_blank">TeamViewer</a></li>
-                <li><a href="https://anydesk.com" target="_blank">AnyDesk</a></li>
-                <li><a href="https://www.aeroadmin.com" target="_blank">AeroAdmin</a></li>
-                <li><a href="https://www.aida64.com" target="_blank">AIDA64</a></li>
-                <li><a href="https://www.hwinfo.com" target="_blank">HWiNFO</a></li>
-                <li><a href="https://www.sisoftware.net" target="_blank">SiSoftware Sandra</a></li>
-            </ul>  
-        </li>
-        <li><a href="author.html" class="menu-item">Автор</a></li>
-    </ul>
-</nav>
 
     <!-- Основной контент -->
     <main class="main-content">
@@ -126,25 +194,25 @@
         <section class="hero-section">
             <div class="container">
                 <div class="breadcrumb animate-fade-up">
-                    <a href="index.html">Главная</a> / 
-                    <a href="remote-management.html">Удаленное управление</a> / 
+                    <a href="index.html">Главная</a> /
+                    <a href="remote-management.html">Удаленное управление</a> /
                     <span>AnyDesk</span>
                 </div>
-                
+
                 <div class="hero-content">
                     <div class="hero-icon animate-fade-up delay-200">
                         <img src="izobr/anydesk-icon.svg" alt="AnyDesk" class="anydesk-hero-logo">
                     </div>
-                    
+
                     <h1 class="hero-title animate-fade-up delay-400">
                         <span class="title-highlight">AnyDesk</span><br>
                         Удаленное управление
                     </h1>
-                    
+
                     <p class="hero-subtitle animate-fade-up delay-600">
                         Быстрое, безопасное и простое решение для удаленного доступа к компьютерам
                     </p>
-                    
+
                     <div class="hero-stats animate-fade-up delay-800">
                         <div class="stat-item">
                             <span class="stat-number" data-target="600">0</span>
@@ -170,20 +238,24 @@
                     <h2>О программе AnyDesk</h2>
                     <p>Профессиональное решение для удаленного доступа</p>
                 </div>
-                
+
                 <div class="overview-content">
                     <div class="overview-text scroll-animate">
                         <h3>Что такое AnyDesk?</h3>
-                        <p>AnyDesk — проприетарное программное обеспечение для удалённого доступа, удалённого управления и удалённого обслуживания компьютеров и других конечных устройств, выпущенное в 2015 году, разрабатываемое компанией AnyDesk Software GmbH.</p>
-                        
-                        <p>Предлагает возможности удалённого управления, передачи файлов и VPN. AnyDesk отличается высокой скоростью работы, простотой использования и надежной защитой данных.</p>
-                        
+                        <p>AnyDesk — проприетарное программное обеспечение для удалённого доступа, удалённого управления
+                            и удалённого обслуживания компьютеров и других конечных устройств, выпущенное в 2015 году,
+                            разрабатываемое компанией AnyDesk Software GmbH.</p>
+
+                        <p>Предлагает возможности удалённого управления, передачи файлов и VPN. AnyDesk отличается
+                            высокой скоростью работы, простотой использования и надежной защитой данных.</p>
+
                         <div class="company-info">
                             <h4>О компании</h4>
-                            <p>Компания AnyDesk Software GmbH основана в 2014 году в Штутгарте, Германия, и в настоящее время имеет филиалы в США, Китае и Гонконге, а также Инновационный хаб в Грузии.</p>
+                            <p>Компания AnyDesk Software GmbH основана в 2014 году в Штутгарте, Германия, и в настоящее
+                                время имеет филиалы в США, Китае и Гонконге, а также Инновационный хаб в Грузии.</p>
                         </div>
                     </div>
-                    
+
                     <div class="overview-image scroll-animate">
                         <img src="izobr/anydesk-company.jpg" alt="AnyDesk Company" class="company-image">
                     </div>
@@ -198,12 +270,13 @@
                     <h2>Основные возможности</h2>
                     <p>Все необходимые инструменты для удаленной работы</p>
                 </div>
-                
+
                 <div class="features-grid">
                     <div class="feature-card scroll-animate">
                         <div class="feature-icon">
                             <svg width="60" height="60" viewBox="0 0 24 24" fill="#c5a47e">
-                                <path d="M20 3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h3l-1 1v2h12v-2l-1-1h3c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 13H4V5h16v11z"/>
+                                <path
+                                    d="M20 3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h3l-1 1v2h12v-2l-1-1h3c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 13H4V5h16v11z" />
                             </svg>
                         </div>
                         <h3>Удаленный доступ</h3>
@@ -214,11 +287,12 @@
                             <li>Поддержка высокого разрешения</li>
                         </ul>
                     </div>
-                    
+
                     <div class="feature-card scroll-animate">
                         <div class="feature-icon">
                             <svg width="60" height="60" viewBox="0 0 24 24" fill="#c5a47e">
-                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                                <path
+                                    d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
                             </svg>
                         </div>
                         <h3>Передача файлов</h3>
@@ -229,11 +303,12 @@
                             <li>Поддержка больших файлов</li>
                         </ul>
                     </div>
-                    
+
                     <div class="feature-card scroll-animate">
                         <div class="feature-icon">
                             <svg width="60" height="60" viewBox="0 0 24 24" fill="#c5a47e">
-                                <path d="M17,12V3A1,1 0 0,0 16,2H3A1,1 0 0,0 2,3V16L6,12H16A1,1 0 0,0 17,12M21,6H19V15H6V17A1,1 0 0,0 7,18H18L22,22V7A1,1 0 0,0 21,6Z"/>
+                                <path
+                                    d="M17,12V3A1,1 0 0,0 16,2H3A1,1 0 0,0 2,3V16L6,12H16A1,1 0 0,0 17,12M21,6H19V15H6V17A1,1 0 0,0 7,18H18L22,22V7A1,1 0 0,0 21,6Z" />
                             </svg>
                         </div>
                         <h3>Чат и видеозвонки</h3>
@@ -244,11 +319,12 @@
                             <li>Видеозвонки HD качества</li>
                         </ul>
                     </div>
-                    
+
                     <div class="feature-card scroll-animate">
                         <div class="feature-icon">
                             <svg width="60" height="60" viewBox="0 0 24 24" fill="#c5a47e">
-                                <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.5 16,12.4 16,13V16C16,17.4 15.4,18 14.8,18H9.2C8.6,18 8,17.4 8,16V13C8,12.4 8.6,11.5 9.2,11.5V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,10V11.5H13.5V10C13.5,8.7 12.8,8.2 12,8.2Z"/>
+                                <path
+                                    d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.5 16,12.4 16,13V16C16,17.4 15.4,18 14.8,18H9.2C8.6,18 8,17.4 8,16V13C8,12.4 8.6,11.5 9.2,11.5V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,10V11.5H13.5V10C13.5,8.7 12.8,8.2 12,8.2Z" />
                             </svg>
                         </div>
                         <h3>Безопасность</h3>
@@ -270,20 +346,20 @@
                     <h2>Преимущества и недостатки</h2>
                     <p>Объективная оценка программы AnyDesk</p>
                 </div>
-                
+
                 <div class="pros-cons-grid">
                     <div class="pros-card scroll-animate">
                         <div class="card-header">
                             <div class="card-icon pros-icon">
                                 <svg width="40" height="40" viewBox="0 0 24 24" fill="#4CAF50">
-                                    <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+                                    <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
                                 </svg>
                             </div>
                             <h3>Преимущества</h3>
                         </div>
                         <ul class="pros-cons-list">
                             <li>Высокая скорость и стабильность соединения</li>
-                                                        <li>Простота установки и использования</li>
+                            <li>Простота установки и использования</li>
                             <li>Кроссплатформенность (Windows, Mac, Linux, Android, iOS)</li>
                             <li>Бесплатная версия для личного использования</li>
                             <li>Низкая задержка и высокое качество изображения</li>
@@ -294,12 +370,13 @@
                             <li>Техническая поддержка 24/7</li>
                         </ul>
                     </div>
-                    
+
                     <div class="cons-card scroll-animate">
                         <div class="card-header">
                             <div class="card-icon cons-icon">
                                 <svg width="40" height="40" viewBox="0 0 24 24" fill="#f44336">
-                                    <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/>
+                                    <path
+                                        d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
                                 </svg>
                             </div>
                             <h3>Недостатки</h3>
@@ -325,7 +402,7 @@
                     <h2>Версии и цены</h2>
                     <p>Выберите подходящий план для ваших потребностей</p>
                 </div>
-                
+
                 <div class="pricing-grid">
                     <div class="pricing-card scroll-animate">
                         <div class="pricing-header">
@@ -347,10 +424,11 @@
                             </ul>
                         </div>
                         <div class="pricing-action">
-                            <a href="https://anydesk.com/download" class="btn-secondary" target="_blank">Скачать бесплатно</a>
+                            <a href="https://anydesk.com/download" class="btn-secondary" target="_blank">Скачать
+                                бесплатно</a>
                         </div>
                     </div>
-                    
+
                     <div class="pricing-card featured scroll-animate">
                         <div class="featured-badge">Популярный</div>
                         <div class="pricing-header">
@@ -376,7 +454,7 @@
                             <a href="https://anydesk.com/pricing" class="btn-primary" target="_blank">Выбрать план</a>
                         </div>
                     </div>
-                    
+
                     <div class="pricing-card scroll-animate">
                         <div class="pricing-header">
                             <h3>AnyDesk Professional</h3>
@@ -401,7 +479,7 @@
                             <a href="https://anydesk.com/pricing" class="btn-secondary" target="_blank">Выбрать план</a>
                         </div>
                     </div>
-                    
+
                     <div class="pricing-card scroll-animate">
                         <div class="pricing-header">
                             <h3>AnyDesk Enterprise</h3>
@@ -423,7 +501,8 @@
                             </ul>
                         </div>
                         <div class="pricing-action">
-                            <a href="https://anydesk.com/contact" class="btn-secondary" target="_blank">Связаться с нами</a>
+                            <a href="https://anydesk.com/contact" class="btn-secondary" target="_blank">Связаться с
+                                нами</a>
                         </div>
                     </div>
                 </div>
@@ -437,12 +516,13 @@
                     <h2>Системные требования</h2>
                     <p>Минимальные требования для работы AnyDesk</p>
                 </div>
-                
+
                 <div class="requirements-grid">
                     <div class="requirement-card scroll-animate">
                         <div class="req-icon">
                             <svg width="50" height="50" viewBox="0 0 24 24" fill="#c5a47e">
-                                <path d="M4,6H20V16H4M20,18A2,2 0 0,0 22,16V6C22,4.89 21.1,4 20,4H4C2.89,4 2,4.89 2,6V16A2,2 0 0,0 4,18H0V20H24V18H20Z"/>
+                                <path
+                                    d="M4,6H20V16H4M20,18A2,2 0 0,0 22,16V6C22,4.89 21.1,4 20,4H4C2.89,4 2,4.89 2,6V16A2,2 0 0,0 4,18H0V20H24V18H20Z" />
                             </svg>
                         </div>
                         <h3>Windows</h3>
@@ -453,11 +533,12 @@
                             <li>Интернет-соединение</li>
                         </ul>
                     </div>
-                    
+
                     <div class="requirement-card scroll-animate">
                         <div class="req-icon">
                             <svg width="50" height="50" viewBox="0 0 24 24" fill="#c5a47e">
-                                <path d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.47C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.09,16.67C20.06,16.74 19.67,18.11 18.71,19.5M13,3.5C13.73,2.67 14.94,2.04 15.94,2C16.07,3.17 15.6,4.35 14.9,5.19C14.21,6.04 13.07,6.7 11.95,6.61C11.8,5.46 12.36,4.26 13,3.5Z"/>
+                                <path
+                                    d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.47C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.09,16.67C20.06,16.74 19.67,18.11 18.71,19.5M13,3.5C13.73,2.67 14.94,2.04 15.94,2C16.07,3.17 15.6,4.35 14.9,5.19C14.21,6.04 13.07,6.7 11.95,6.61C11.8,5.46 12.36,4.26 13,3.5Z" />
                             </svg>
                         </div>
                         <h3>macOS</h3>
@@ -468,11 +549,12 @@
                             <li>Интернет-соединение</li>
                         </ul>
                     </div>
-                    
+
                     <div class="requirement-card scroll-animate">
                         <div class="req-icon">
                             <svg width="50" height="50" viewBox="0 0 24 24" fill="#c5a47e">
-                                <path d="M2,3V21H22V3H2M20,19H4V5H20V19M6,7V9H8V7H6M10,7V9H18V7H10M6,11V13H8V11H6M10,11V13H18V11H10M6,15V17H8V15H6M10,15V17H14V15H10Z"/>
+                                <path
+                                    d="M2,3V21H22V3H2M20,19H4V5H20V19M6,7V9H8V7H6M10,7V9H18V7H10M6,11V13H8V11H6M10,11V13H18V11H10M6,15V17H8V15H6M10,15V17H14V15H10Z" />
                             </svg>
                         </div>
                         <h3>Linux</h3>
@@ -483,12 +565,13 @@
                             <li>X11 или Wayland</li>
                         </ul>
                     </div>
-                    
+
                     <div class="requirement-card scroll-animate">
                         <div class="req-icon">
                             <svg width="50" height="50" viewBox="0 0 24 24" fill="#c5a47e">
-                                <path d="M17,19H7V5H17M17,1H7C5.89,1 5,1.89 5,3V21A2,2 0 0,0 7,23H17A2,2 0 0,0 19,21V3C19,1.89 18.1,1 17,1Z"/>
-                                <circle cx="12" cy="20" r="1"/>
+                                <path
+                                    d="M17,19H7V5H17M17,1H7C5.89,1 5,1.89 5,3V21A2,2 0 0,0 7,23H17A2,2 0 0,0 19,21V3C19,1.89 18.1,1 17,1Z" />
+                                <circle cx="12" cy="20" r="1" />
                             </svg>
                         </div>
                         <h3>Мобильные</h3>
@@ -499,7 +582,7 @@
                             <li>Wi-Fi или мобильный интернет</li>
                         </ul>
                     </div>
-                                    </div>
+                </div>
             </div>
         </section>
 
@@ -510,7 +593,7 @@
                     <h2>Сравнение с конкурентами</h2>
                     <p>AnyDesk в сравнении с другими решениями</p>
                 </div>
-                
+
                 <div class="comparison-table-container scroll-animate">
                     <table class="comparison-table">
                         <thead>
@@ -593,40 +676,45 @@
                     <h2>Установка и настройка</h2>
                     <p>Пошаговое руководство по установке AnyDesk</p>
                 </div>
-                
+
                 <div class="installation-steps">
                     <div class="step-card scroll-animate">
                         <div class="step-number">1</div>
                         <div class="step-content">
                             <h3>Скачивание</h3>
-                            <p>Перейдите на официальный сайт AnyDesk и скачайте версию для вашей операционной системы</p>
+                            <p>Перейдите на официальный сайт AnyDesk и скачайте версию для вашей операционной системы
+                            </p>
                             <a href="https://anydesk.com/download" class="step-link" target="_blank">Скачать AnyDesk</a>
                         </div>
                     </div>
-                    
+
                     <div class="step-card scroll-animate">
                         <div class="step-number">2</div>
                         <div class="step-content">
                             <h3>Установка</h3>
-                            <p>Запустите скачанный файл и следуйте инструкциям мастера установки. Процесс займет несколько минут</p>
-                            <div class="step-note">Примечание: Для Windows может потребоваться права администратора</div>
+                            <p>Запустите скачанный файл и следуйте инструкциям мастера установки. Процесс займет
+                                несколько минут</p>
+                            <div class="step-note">Примечание: Для Windows может потребоваться права администратора
+                            </div>
                         </div>
                     </div>
-                    
+
                     <div class="step-card scroll-animate">
                         <div class="step-number">3</div>
                         <div class="step-content">
                             <h3>Первый запуск</h3>
-                            <p>После установки запустите AnyDesk. Программа автоматически сгенерирует уникальный ID для вашего компьютера</p>
+                            <p>После установки запустите AnyDesk. Программа автоматически сгенерирует уникальный ID для
+                                вашего компьютера</p>
                             <div class="step-tip">Совет: Запишите ваш ID в безопасном месте</div>
                         </div>
                     </div>
-                    
+
                     <div class="step-card scroll-animate">
                         <div class="step-number">4</div>
                         <div class="step-content">
                             <h3>Настройка безопасности</h3>
-                            <p>Установите пароль для неконтролируемого доступа и настройте права доступа по вашему усмотрению</p>
+                            <p>Установите пароль для неконтролируемого доступа и настройте права доступа по вашему
+                                усмотрению</p>
                             <div class="step-warning">Важно: Используйте надежный пароль для защиты</div>
                         </div>
                     </div>
@@ -641,7 +729,7 @@
                     <h2>Часто задаваемые вопросы</h2>
                     <p>Ответы на популярные вопросы об AnyDesk</p>
                 </div>
-                
+
                 <div class="faq-container">
                     <div class="faq-item scroll-animate">
                         <div class="faq-question" onclick="toggleFAQ(this)">
@@ -649,57 +737,64 @@
                             <span class="faq-icon">+</span>
                         </div>
                         <div class="faq-answer">
-                            <p>Да, AnyDesk использует банковский уровень шифрования TLS 1.2 с RSA 2048 ключами. Все соединения защищены от перехвата, а данные передаются в зашифрованном виде.</p>
+                            <p>Да, AnyDesk использует банковский уровень шифрования TLS 1.2 с RSA 2048 ключами. Все
+                                соединения защищены от перехвата, а данные передаются в зашифрованном виде.</p>
                         </div>
                     </div>
-                    
+
                     <div class="faq-item scroll-animate">
                         <div class="faq-question" onclick="toggleFAQ(this)">
                             <h3>Можно ли использовать AnyDesk бесплатно?</h3>
                             <span class="faq-icon">+</span>
                         </div>
                         <div class="faq-answer">
-                            <p>Да, AnyDesk предлагает бесплатную версию для личного некоммерческого использования с ограничением до 3 устройств. Для коммерческого использования требуется платная лицензия.</p>
+                            <p>Да, AnyDesk предлагает бесплатную версию для личного некоммерческого использования с
+                                ограничением до 3 устройств. Для коммерческого использования требуется платная лицензия.
+                            </p>
                         </div>
                     </div>
-                    
+
                     <div class="faq-item scroll-animate">
                         <div class="faq-question" onclick="toggleFAQ(this)">
                             <h3>Какая скорость интернета нужна для работы?</h3>
                             <span class="faq-icon">+</span>
                         </div>
                         <div class="faq-answer">
-                            <p>Минимальная скорость - 100 Кбит/с, но для комфортной работы рекомендуется от 1 Мбит/с. AnyDesk автоматически адаптируется к скорости соединения.</p>
+                            <p>Минимальная скорость - 100 Кбит/с, но для комфортной работы рекомендуется от 1 Мбит/с.
+                                AnyDesk автоматически адаптируется к скорости соединения.</p>
                         </div>
                     </div>
-                    
+
                     <div class="faq-item scroll-animate">
                         <div class="faq-question" onclick="toggleFAQ(this)">
                             <h3>Работает ли AnyDesk через брандмауэр?</h3>
                             <span class="faq-icon">+</span>
                         </div>
                         <div class="faq-answer">
-                            <p>Да, AnyDesk работает через NAT и большинство брандмауэров без дополнительной настройки. Программа использует исходящие соединения через порт 80 или 443.</p>
+                            <p>Да, AnyDesk работает через NAT и большинство брандмауэров без дополнительной настройки.
+                                Программа использует исходящие соединения через порт 80 или 443.</p>
                         </div>
                     </div>
-                    
+
                     <div class="faq-item scroll-animate">
                         <div class="faq-question" onclick="toggleFAQ(this)">
                             <h3>Можно ли передавать файлы через AnyDesk?</h3>
                             <span class="faq-icon">+</span>
                         </div>
                         <div class="faq-answer">
-                            <p>Да, AnyDesk поддерживает передачу файлов с помощью простого перетаскивания (drag & drop). Все файлы передаются в зашифрованном виде.</p>
+                            <p>Да, AnyDesk поддерживает передачу файлов с помощью простого перетаскивания (drag & drop).
+                                Все файлы передаются в зашифрованном виде.</p>
                         </div>
                     </div>
-                    
+
                     <div class="faq-item scroll-animate">
                         <div class="faq-question" onclick="toggleFAQ(this)">
                             <h3>Поддерживает ли AnyDesk мобильные устройства?</h3>
                             <span class="faq-icon">+</span>
                         </div>
                         <div class="faq-answer">
-                            <p>Да, доступны приложения для Android и iOS. Вы можете управлять компьютером с мобильного устройства или наоборот.</p>
+                            <p>Да, доступны приложения для Android и iOS. Вы можете управлять компьютером с мобильного
+                                устройства или наоборот.</p>
                         </div>
                     </div>
                 </div>
@@ -715,13 +810,14 @@
                     <div class="cta-buttons">
                         <a href="https://anydesk.com/download" class="btn-primary" target="_blank">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
+                                <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
                             </svg>
                             Скачать бесплатно
                         </a>
                         <a href="https://anydesk.com/pricing" class="btn-secondary" target="_blank">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z"/>
+                                <path
+                                    d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z" />
                             </svg>
                             Выбрать план
                         </a>
@@ -729,19 +825,19 @@
                     <div class="cta-features">
                         <div class="cta-feature">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="#4CAF50">
-                                <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+                                <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
                             </svg>
                             <span>Бесплатная версия</span>
                         </div>
                         <div class="cta-feature">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="#4CAF50">
-                                <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+                                <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
                             </svg>
                             <span>Быстрая установка</span>
                         </div>
                         <div class="cta-feature">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="#4CAF50">
-                                <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+                                <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
                             </svg>
                             <span>Техподдержка 24/7</span>
                         </div>
@@ -751,42 +847,47 @@
         </section>
     </main>
 
-            <!-- Секция экспериментов -->
-        <section class="experiments-section">
-            <div class="container">
-                <div class="experiments-content scroll-animate">
-                    <div class="experiments-icon">
-                        <svg width="80" height="80" viewBox="0 0 24 24" fill="#c5a47e">
-                            <path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"/>
+    <!-- Секция экспериментов -->
+    <section class="experiments-section">
+        <div class="container">
+            <div class="experiments-content scroll-animate">
+                <div class="experiments-icon">
+                    <svg width="80" height="80" viewBox="0 0 24 24" fill="#c5a47e">
+                        <path
+                            d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
+                    </svg>
+                </div>
+
+                <h2>Хотите узнать больше?</h2>
+                <p>Изучите практические эксперименты с AnyDesk, тестирование функций и сравнительный анализ
+                    производительности</p>
+
+                <div class="experiments-action">
+                    <a href="anydesk-experiments.html" class="btn-experiments">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z" />
                         </svg>
-                    </div>
-                    
-                    <h2>Хотите узнать больше?</h2>
-                    <p>Изучите практические эксперименты с AnyDesk, тестирование функций и сравнительный анализ производительности</p>
-                    
-                    <div class="experiments-action">
-                        <a href="anydesk-experiments.html" class="btn-experiments">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
-                            </svg>
-                            Перейти к экспериментам
-                        </a>
-                    </div>
+                        Перейти к экспериментам
+                    </a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
     <!-- Кнопка "Наверх" -->
     <button class="scroll-to-top" id="scrollToTop" onclick="scrollToTop()">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M12 19V5M5 12L12 5L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 19V5M5 12L12 5L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
         </svg>
     </button>
 
     <!-- Кнопка возврата к списку инструментов -->
     <button class="back-to-tools" onclick="goBackToTools()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M19 12H5M12 19L5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M19 12H5M12 19L5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
         </svg>
         <span>К списку инструментов</span>
     </button>
@@ -810,6 +911,5 @@
     <script type="module" src="js/mobile-menu.js"></script>
     <script type="module" src="js/main.js"></script>
 </body>
+
 </html>
-
-
