@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
-    <title>Диагностика и мониторинг</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/menu.css">
-    <link rel="stylesheet" href="css/remote-management.css">
-    <link rel="stylesheet" href="css/mobile.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Средства удаленного управления</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/remote-management.css">
+    <link rel="stylesheet" href="../css/mobile.css">
     <style>
         /* Стили для овальных кнопок */
         .oval-buttons-container {
@@ -145,19 +144,19 @@
         }
 
         /* Специфические стили для каждой кнопки */
-        .aida64-oval:hover {
-            border-color: #ff6b35;
-            box-shadow: 0 20px 60px rgba(255, 107, 53, 0.3);
+        .teamviewer-oval:hover {
+            border-color: #004CFF;
+            box-shadow: 0 20px 60px rgba(0, 76, 255, 0.3);
         }
 
-        .hwinfo-oval:hover {
-            border-color: #4285f4;
-            box-shadow: 0 20px 60px rgba(66, 133, 244, 0.3);
+        .anydesk-oval:hover {
+            border-color: #E60012;
+            box-shadow: 0 20px 60px rgba(230, 0, 18, 0.3);
         }
 
-        .sandra-oval:hover {
-            border-color: #34a853;
-            box-shadow: 0 20px 60px rgba(52, 168, 83, 0.3);
+        .aeroadmin-oval:hover {
+            border-color: #FF8C00;
+            box-shadow: 0 20px 60px rgba(255, 140, 0, 0.3);
         }
 
         /* Адаптивность */
@@ -187,38 +186,53 @@
                 font-size: 1.2rem;
             }
         }
-
-        /* Дополнительные стили для красивого расположения */
-        .buttons-row {
-            display: contents;
-        }
     </style>
 </head>
 <body>
     <!-- Прелоадер -->
     <div class="preloader" id="preloader">
-        <div class="remote-loader">
-            <div class="loader-icon">
-                <svg width="80" height="80" viewBox="0 0 100 100" fill="none">
-                    <circle cx="50" cy="50" r="45" stroke="#c5a47e" stroke-width="2" fill="none" opacity="0.3"/>
-                    <path d="M50 5 A45 45 0 0 1 95 50" stroke="#c5a47e" stroke-width="3" fill="none">
-                        <animateTransform attributeName="transform" type="rotate" dur="1s" repeatCount="indefinite" values="0 50 50;360 50 50"/>
-                    </path>
-                </svg>
-            </div>
-            <div class="loader-text">Загрузка системы диагностики...</div>
-            <div class="loader-progress">
-                <div class="progress-bar"></div>
-            </div>
+    <div class="remote-loader">
+        <div class="loader-icon">
+            <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+                <circle cx="50" cy="50" r="45" stroke="rgba(197, 164, 126, 0.2)" stroke-width="2" fill="none"/>
+                <circle cx="50" cy="50" r="45" stroke="#c5a47e" stroke-width="3" fill="none" stroke-linecap="round">
+                    <animateTransform 
+                        attributeName="transform" 
+                        type="rotate" 
+                        dur="2s" 
+                        repeatCount="indefinite" 
+                        values="0 50 50;360 50 50"/>
+                </circle>
+                <circle cx="50" cy="50" r="25" stroke="#d4b896" stroke-width="2" fill="none" opacity="0.6">
+                    <animateTransform 
+                        attributeName="transform" 
+                        type="rotate" 
+                        dur="1.5s" 
+                        repeatCount="indefinite" 
+                        values="360 50 50;0 50 50"/>
+                </circle>
+            </svg>
+        </div>
+        <div class="loader-text">Загрузка удаленного управления...</div>
+        <div class="loader-progress">
+            <div class="progress-bar"></div>
+        </div>
+        <div class="loader-status">
+            <span class="status-dots">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </span>
         </div>
     </div>
+</div>
 
     <!-- Анимированные частицы -->
     <div class="particles-container" id="particles"></div>
 
     <!-- Фоновый слой -->
     <div class="main-bg">
-        <div class="slide-bg" style="background-image: url('izobr/1.gif')"></div>
+        <div class="slide-bg" style="background-image: url('../izobr/1.gif')"></div>
         <div class="overlay"></div>
         <div class="network-animation">
             <div class="network-line line-1"></div>
@@ -233,20 +247,20 @@
     <!-- Хедер с меню -->
     <header class="main-header">
         <div class="header-logo">
-            <img src="izobr/logo.svg" alt="Логотип" class="logo-img">
+            <img src="../izobr/logo.svg" alt="Логотип" class="logo-img">
         </div>
         
         <!-- Обычное меню для десктопа -->
         <nav class="header-menu desktop-menu">
             <ul>
-                <li><a href="index.html">Главная</a></li>
+                <li><a href="../index.html">Главная</a></li>
                 <li class="dropdown">
                     <a href="#sections" class="active dropdown-trigger">Разделы ▾</a>
                     <ul class="dropdown-menu">
-                        <li><a href="os-selection.html">Выбор операционной системы</a></li>
+                        <li><a href="os-selection.html" class="active">Выбор операционной системы</a></li>
                         <li><a href="filesystem.html">Выбор ФС и разметка диска</a></li>
                         <li><a href="remote-management.html">Средства удаленного управления компьютером</a></li>
-                        <li><a href="diagnost-management.html" class="active">Средства диагностики, контроля и мониторинга системы</a></li>
+                        <li><a href="diagnost-management.html">Средства диагностики, контроля и мониторинга системы</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -279,14 +293,14 @@
     <nav class="sidebar-menu" id="sidebarMenu">
         <button class="close-menu" id="closeMenu">×</button>
         <ul>
-            <li><a href="index.html" class="menu-item">Главная</a></li>
+            <li><a href="../index.html" class="menu-item">Главная</a></li>
             <li class="dropdown mobile-dropdown">
                 <a href="#sections" class="menu-item dropdown-toggle">Разделы <span class="dropdown-arrow">▾</span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="os-selection.html">Выбор операционной системы</a></li>
+                    <li><a href="os-selection.html" class="active">Выбор операционной системы</a></li>
                     <li><a href="filesystem.html">Выбор ФС и разметка диска</a></li>
                     <li><a href="remote-management.html">Средства удаленного управления компьютером</a></li>
-                    <li><a href="diagnost-management.html" class="active">Средства диагностики, контроля и мониторинга системы</a></li>
+                    <li><a href="diagnost-management.html">Средства диагностики, контроля и мониторинга системы</a></li>
                 </ul>
             </li>
             <li class="dropdown mobile-dropdown">
@@ -304,11 +318,12 @@
         </ul>
     </nav>
 
+
     <!-- Основной контент -->
     <div class="content-container">
         <div class="gold-frame animate-fade-in">
             <div class="title-animation">
-                <h1 class="typing-title">Средства диагностики, контроля и мониторинга системы</h1>
+                <h1 class="typing-title">Средства удаленного управления компьютером</h1>
                 <div class="title-glow"></div>
             </div>
             <div class="divider-gold animated-divider"></div>
@@ -317,15 +332,15 @@
             <div class="stats-counter animate-slide-up">
                 <div class="stat-item">
                     <div class="stat-number" data-target="3">0</div>
-                    <div class="stat-label">Инструменты</div>
+                    <div class="stat-label">Программы</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number" data-target="99">0</div>
-                    <div class="stat-label">% Точность</div>
+                    <div class="stat-number" data-target="100">0</div>
+                    <div class="stat-label">% Надежность</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number" data-target="500">0</div>
-                    <div class="stat-label">+ Параметров</div>
+                    <div class="stat-number" data-target="24">0</div>
+                    <div class="stat-label">7 Поддержка</div>
                 </div>
             </div>
             
@@ -333,11 +348,11 @@
             <div class="oval-buttons-container animate-slide-up">
                 <!-- Первый ряд - две кнопки -->
                 <div class="oval-button-wrapper" data-delay="0.1">
-                    <a href="AIDA64.html" class="oval-button aida64-oval">
-                        <img src="izobr/AIDA.png" alt="AIDA64" class="oval-icon">
+                    <a href="teamviewer.html" class="oval-button teamviewer-oval">
+                        <img src="../izobr/teamviewer-icon.svg" alt="TeamViewer" class="oval-icon">
                         <div class="oval-content">
-                            <div class="oval-title">AIDA64</div>
-                            <div class="oval-description">Комплексная диагностика системы, мониторинг температур и производительности</div>
+                            <div class="oval-title">TeamViewer</div>
+                            <div class="oval-description">Профессиональное решение для удаленного доступа с высоким уровнем безопасности</div>
                         </div>
                         <div class="oval-arrow">→</div>
                         <div class="oval-glow"></div>
@@ -345,11 +360,11 @@
                 </div>
                 
                 <div class="oval-button-wrapper" data-delay="0.2">
-                    <a href="HWiNFO.html" class="oval-button hwinfo-oval">
-                        <img src="izobr/HWiNFO_logo.png" alt="HWiNFO" class="oval-icon">
+                    <a href="anydesk.html" class="oval-button anydesk-oval">
+                        <img src="../izobr/anydesk-icon.svg" alt="AnyDesk" class="oval-icon">
                         <div class="oval-content">
-                            <div class="oval-title">HWiNFO</div>
-                            <div class="oval-description">Детальная информация о железе и реальный мониторинг системы</div>
+                            <div class="oval-title">AnyDesk</div>
+                            <div class="oval-description">Быстрое подключение с минимальной задержкой и высокой производительностью</div>
                         </div>
                         <div class="oval-arrow">→</div>
                         <div class="oval-glow"></div>
@@ -358,13 +373,13 @@
                 
                 <!-- Второй ряд - одна кнопка по центру -->
                 <div class="oval-button-wrapper" data-delay="0.3">
-                    <a href="#Sandra" class="oval-button sandra-oval">
-                                                <img src="izobr/SiSoftware_Sandra_Logo.png" alt="SiSoftware Sandra" class="oval-icon">
+                    <a href="aeroadmin.html" class="oval-button aeroadmin-oval">
+                        <img src="../izobr/aeroadmin.png" alt="AeroAdmin" class="oval-icon">
                         <div class="oval-content">
-                            <div class="oval-title">SiSoftware Sandra</div>
-                            <div class="oval-description">Профессиональные бенчмарки и тестирование производительности</div>
+                            <div class="oval-title">AeroAdmin</div>
+                            <div class="oval-description">Бесплатное решение для базовых задач удаленного управления</div>
                         </div>
-                        <div class="oval-arrow">→</div>
+                                                <div class="oval-arrow">→</div>
                         <div class="oval-glow"></div>
                     </a>
                 </div>
@@ -377,10 +392,10 @@
                     <i class="fas fa-question-circle faq-icon-header"></i>
                     <h2>Нужна дополнительная информация?</h2>
                 </div>
-                <p>Изучите часто задаваемые вопросы о диагностике и мониторинге системы</p>
-                <a href="diagnost-faq.html" class="faq-button">
+                <p>Изучите часто задаваемые вопросы об удаленном управлении</p>
+                <a href="faq.html" class="faq-button">
                     <div class="faq-button-content">
-                        <img src="izobr/faq-icon.svg" alt="FAQ">
+                        <img src="../izobr/faq-icon.svg" alt="FAQ">
                         <span>Часто задаваемые вопросы</span>
                     </div>
                     <i class="arrow">→</i>
@@ -396,9 +411,9 @@
         <div class="scroll-ripple"></div>
     </button>
 
-    <script type="module" src="js/menu.js"></script>
-    <script type="module" src="js/remote-management.js"></script>
-    
+    <script type="module" src="../js/menu.js"></script>
+    <script type="module" src="../js/remote-management.js"></script>
+    <script type="module" src="../js/mobile-menu.js"></script>
     <script>
         // Прелоадер
         window.addEventListener('load', function() {
@@ -553,18 +568,14 @@
 
             // FAQ кнопка анимация
             const faqButton = document.querySelector('.faq-button');
-            if (faqButton) {
-                faqButton.addEventListener('click', function(e) {
-                    const ripple = this.querySelector('.button-ripple');
-                    if (ripple) {
-                        ripple.classList.add('animate');
-                        
-                        setTimeout(() => {
-                            ripple.classList.remove('animate');
-                        }, 600);
-                    }
-                });
-            }
+            faqButton.addEventListener('click', function(e) {
+                const ripple = this.querySelector('.button-ripple');
+                ripple.classList.add('animate');
+                
+                setTimeout(() => {
+                    ripple.classList.remove('animate');
+                }, 600);
+            });
         });
 
         // Параллакс эффект
@@ -611,8 +622,6 @@
         `;
         document.head.appendChild(rippleStyle);
     </script>
-    <script type="module" src="js/mobile-menu.js"></script>
-    <script type="module" src="js/main.js"></script>
+    <script type="module" src="../js/main.js"></script>
 </body>
 </html>
-  

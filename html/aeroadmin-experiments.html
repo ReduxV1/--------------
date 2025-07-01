@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AeroAdmin - Эксперименты</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/menu.css">
-    <link rel="stylesheet" href="css/teamviewer.css">
-    <link rel="stylesheet" href="css/mobile.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/teamviewer.css">
+    <link rel="stylesheet" href="../css/mobile.css">
     <style>
         /* Прелоадер в стиле AeroAdmin */
         .preloader {
@@ -218,20 +218,20 @@
     </div>
 
     <div class="main-bg">
-        <div class="slide-bg" style="background-image: url('izobr/aeroadmin-bg.gif')"></div>
+        <div class="slide-bg" style="background-image: url('../izobr/aeroadmin-bg.gif')"></div>
         <div class="overlay"></div>
     </div>
 
     <!-- Шапка сайта -->
     <header class="main-header">
         <div class="header-logo">
-            <img src="izobr/logo.svg" alt="Логотип" class="logo-img">
+            <img src="../izobr/logo.svg" alt="Логотип" class="logo-img">
         </div>
 
         <!-- Обычное меню для десктопа -->
         <nav class="header-menu desktop-menu">
             <ul>
-                <li><a href="index.html">Главная</a></li>
+                <li><a href="../index.html">Главная</a></li>
                 <li class="dropdown">
                     <a href="#sections" class="dropdown-trigger">Разделы ▾</a>
                     <ul class="dropdown-menu">
@@ -273,7 +273,7 @@
     <nav class="sidebar-menu" id="sidebarMenu">
         <button class="close-menu" id="closeMenu">×</button>
         <ul>
-            <li><a href="index.html" class="menu-item">Главная</a></li>
+            <li><a href="../index.html" class="menu-item">Главная</a></li>
             <li class="dropdown mobile-dropdown">
                 <a href="#sections" class="menu-item dropdown-toggle">Разделы <span class="dropdown-arrow">▾</span></a>
                 <ul class="dropdown-menu">
@@ -345,7 +345,7 @@
                             <!-- ОСНОВНОЕ ИЗОБРАЖЕНИЕ -->
                             <div class="image-wrapper"
                                 style="text-align: center; min-height: 400px; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; background: #1a1a1a;">
-                                <img id="mainImageAero" src="izobr/aeroadmin/download.png" alt="Загрузка AeroAdmin"
+                                <img id="mainImageAero" src="../izobr/aeroadmin/download.png" alt="Загрузка AeroAdmin"
                                     style="max-width: 100%; max-height: 350px; height: auto; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;"
                                     onclick="toggleZoomAero(this)">
                             </div>
@@ -384,13 +384,13 @@
                         <!-- МИНИАТЮРЫ -->
                         <div class="thumbnails-aero"
                             style="display: flex; justify-content: center; gap: 10px; padding: 15px; background: rgba(255,107,53,0.1); flex-wrap: wrap;">
-                            <img src="izobr/aeroadmin/download.png" alt="Загрузка AeroAdmin"
+                            <img src="../izobr/aeroadmin/download.png" alt="Загрузка AeroAdmin"
                                 class="thumbnail-aero active" onclick="goToImageAero(0)"
                                 style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid #ff6b35; transition: all 0.3s ease;">
-                            <img src="izobr/aeroadmin/main-window.png" alt="Главное окно" class="thumbnail-aero"
+                            <img src="../izobr/aeroadmin/main-window.png" alt="Главное окно" class="thumbnail-aero"
                                 onclick="goToImageAero(1)"
                                 style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
-                            <img src="izobr/aeroadmin/connection-id.png" alt="ID подключения" class="thumbnail-aero"
+                            <img src="../izobr/aeroadmin/connection-id.png" alt="ID подключения" class="thumbnail-aero"
                                 onclick="goToImageAero(2)"
                                 style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
                         </div>
@@ -436,7 +436,7 @@
                             <!-- ОСНОВНОЕ ИЗОБРАЖЕНИЕ -->
                             <div class="image-wrapper"
                                 style="text-align: center; min-height: 400px; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; background: #1a1a1a;">
-                                <img id="mainImageSecurity" src="izobr/aeroadmin/main-window.png"
+                                <img id="mainImageSecurity" src="../izobr/aeroadmin/main-window.png"
                                     alt="Настройка пароля безопасности"
                                     style="max-width: 100%; max-height: 350px; height: auto; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;"
                                     onclick="toggleZoomSecurity(this)">
@@ -475,20 +475,20 @@
                         <!-- МИНИАТЮРЫ -->
                         <div class="thumbnails-security"
                             style="display: flex; justify-content: center; gap: 10px; padding: 15px; background: rgba(74,158,255,0.1); flex-wrap: wrap;">
-                            <img src="izobr/aeroadmin/main-window.png" alt="Настройка пароля"
+                            <img src="../izobr/aeroadmin/main-window.png" alt="Настройка пароля"
                                 class="thumbnail-security active" onclick="goToImageSecurity(0)"
                                 style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid #4a9eff; transition: all 0.3s ease;">
-                            <img src="izobr/aeroadmin/request-password.png" alt="Запрос пароля"
+                            <img src="../izobr/aeroadmin/request-password.png" alt="Запрос пароля"
                                 class="thumbnail-security" onclick="goToImageSecurity(1)"
                                 style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
-                            <img src="izobr/aeroadmin/remote-connect.jpg"
+                            <img src="../izobr/aeroadmin/remote-connect.jpg"
                                 alt="Успешная попытка подключения со стороны удаленного устройства" class="thumbnail-security"
                                 onclick="goToImageSecurity(2)"
                                 style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
-                            <img src="izobr/aeroadmin/wrong-pass.png" alt="Неправильный пароль"
+                            <img src="../izobr/aeroadmin/wrong-pass.png" alt="Неправильный пароль"
                                 class="thumbnail-security" onclick="goToImageSecurity(3)"
                                 style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
-                             <img src="izobr/aeroadmin/wrong-pass1.png" alt="Несколько неудачных паролей"
+                             <img src="../izobr/aeroadmin/wrong-pass1.png" alt="Несколько неудачных паролей"
                                 class="thumbnail-security" onclick="goToImageSecurity(3)"
                                 style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
                         
@@ -631,7 +631,7 @@
                 <!-- Навигация -->
                 <div class="fade-in" style="text-align: center; margin-top: 50px;">
                     <a href="aeroadmin.html" class="btn-secondary" style="margin: 0 10px;">← Вернуться к AeroAdmin</a>
-                    <a href="index.html" class="btn-primary" style="margin: 0 10px;">На главную</a>
+                    <a href="../index.html" class="btn-primary" style="margin: 0 10px;">На главную</a>
                 </div>
             </div>
         </section>
@@ -674,7 +674,7 @@
         </div>
     </footer>
 
-    <script src="js/menu.js"></script>
+    <script src="../js/menu.js"></script>
     <script>
         // Управление прелоадером
         window.addEventListener('load', function () {
@@ -915,24 +915,24 @@
         console.log('🇷🇺 Russian Solution: AeroAdmin demonstration ready!');
 
     </script>
-    <script type="module" src="js/mobile-menu.js"></script>
-    <script type="module" src="js/main.js"></script>
+    <script type="module" src="../js/mobile-menu.js"></script>
+    <script type="module" src="../js/main.js"></script>
     <script>
         // ГАЛЕРЕЯ ИЗОБРАЖЕНИЙ ДЛЯ AEROADMIN (1-й эксперимент)
         let currentImageIndexAero = 0;
         const imageDataAero = [
             {
-                src: 'izobr/aeroadmin/download.png',
+                src: '../izobr/aeroadmin/download.png',
                 alt: 'Загрузка AeroAdmin',
                 description: 'Портативная версия AeroAdmin - первый запуск'
             },
             {
-                src: 'izobr/aeroadmin/main-window.png',
+                src: '../izobr/aeroadmin/main-window.png',
                 alt: 'Главное окно',
                 description: 'Основное окно программы'
             },
             {
-                src: 'izobr/aeroadmin/connection-id.png',
+                src: '../izobr/aeroadmin/connection-id.png',
                 alt: 'ID подключения',
                 description: 'Автоматическое получение ID и пароля подключения'
             },
@@ -942,27 +942,27 @@
         let currentImageIndexSecurity = 0;
         const imageDataSecurity = [
             {
-                src: 'izobr/aeroadmin/main-window.png',
+                src: '../izobr/aeroadmin/main-window.png',
                 alt: 'Настройка пароля безопасности',
                 description: 'Настройка временного пароля для защиты доступа'
             },
             {
-                src: 'izobr/aeroadmin/request-password.png',
+                src: '../izobr/aeroadmin/request-password.png',
                 alt: 'Запрос пароля',
                 description: 'Запрос пароля при попытке подключения'
             },
             {
-                src: 'izobr/aeroadmin/remote-connect.jpg',
+                src: '../izobr/aeroadmin/remote-connect.jpg',
                 alt: 'Успешное подключение',
                 description: 'Успешное подключение с правильным паролем'
             },
             {
-                src: 'izobr/aeroadmin/wrong-pass.png',
+                src: '../izobr/aeroadmin/wrong-pass.png',
                 alt: 'Неправильный пароль',
                 description: 'Предупреждение о неправильном пароле'
             },
             {
-                src: 'izobr/aeroadmin/wrong-pass1.png',
+                src: '../izobr/aeroadmin/wrong-pass1.png',
                 alt: 'Несколько неудачных паролей',
                 description: 'Предупреждение о нескольких неудачных попытках входа'
             }

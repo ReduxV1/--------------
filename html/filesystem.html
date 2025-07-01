@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <title>Выбор ФС и разметка диска</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/menu.css">
-    <link rel="stylesheet" href="css/filesystem.css">
-    <link rel="stylesheet" href="css/mobile.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/filesystem.css">
+    <link rel="stylesheet" href="../css/mobile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <style>
     /* Стили прелоадера */
@@ -81,7 +81,7 @@
     <div class="preloader" id="preloader">
         <div class="filesystem-loader">
             <div class="loader-icon">
-                <img src="izobr/harddisk.png" alt="Жесткий диск" style="width: 80px; height: 80px;">
+                <img src="../izobr/harddisk.png" alt="Жесткий диск" style="width: 80px; height: 80px;">
             </div>
             <div class="loader-text">Загрузка файловых систем...</div>
             <div class="loader-progress">
@@ -93,13 +93,13 @@
     <!-- Хедер с меню -->
     <header class="main-header">
         <div class="header-logo">
-            <img src="izobr/logo.svg" alt="Логотип" class="logo-img">
+            <img src="../izobr/logo.svg" alt="Логотип" class="logo-img">
         </div>
         
         <!-- Обычное меню для десктопа -->
         <nav class="header-menu desktop-menu">
             <ul>
-                <li><a href="index.html">Главная</a></li>
+                <li><a href="../index.html">Главная</a></li>
                 <li class="dropdown">
                     <a href="#sections" class="active dropdown-trigger">Разделы ▾</a>
                     <ul class="dropdown-menu">
@@ -139,7 +139,7 @@
     <nav class="sidebar-menu" id="sidebarMenu">
         <button class="close-menu" id="closeMenu">×</button>
         <ul>
-            <li><a href="index.html" class="menu-item">Главная</a></li>
+            <li><a href="../index.html" class="menu-item">Главная</a></li>
             <li class="dropdown mobile-dropdown">
                 <a href="#sections" class="menu-item dropdown-toggle">Разделы <span class="dropdown-arrow">▾</span></a>
                 <ul class="dropdown-menu">
@@ -171,7 +171,7 @@
             <div class="container">
                 <div class="hero-content">
                     <div class="hero-icon">
-                        <img src="izobr/harddisk.png" alt="Жесткий диск" class="hero-logo">
+                        <img src="../izobr/harddisk.png" alt="Жесткий диск" class="hero-logo">
                     </div>
                     <h1 class="hero-title">
                         Файловые системы и <span class="title-highlight">разметка диска</span>
@@ -197,7 +197,7 @@
                         <div class="featured-badge">Рекомендуется</div>
                         <div class="fs-header">
                             <div class="fs-icon">
-                                <img src="izobr/ntfs.svg" alt="NTFS">
+                                <img src="../izobr/ntfs.svg" alt="NTFS">
                             </div>
                             <div class="fs-info">
                                 <h3>NTFS</h3>
@@ -240,7 +240,7 @@
                     <div class="fs-card">
                         <div class="fs-header">
                             <div class="fs-icon">
-                                <img src="izobr/fat32.svg" alt="FAT32">
+                                <img src="../izobr/fat32.svg" alt="FAT32">
                             </div>
                             <div class="fs-info">
                                 <h3>FAT32</h3>
@@ -283,7 +283,7 @@
                     <div class="fs-card">
                         <div class="fs-header">
                             <div class="fs-icon">
-                                <img src="izobr/exfat.svg" alt="exFAT">
+                                <img src="../izobr/exfat.svg" alt="exFAT">
                             </div>
                             <div class="fs-info">
                                 <h3>exFAT</h3>
@@ -326,7 +326,7 @@
                     <div class="fs-card">
                         <div class="fs-header">
                             <div class="fs-icon">
-                                <img src="izobr/ext4.svg" alt="ext4">
+                                <img src="../izobr/ext4.svg" alt="ext4">
                             </div>
                             <div class="fs-info">
                                 <h3>ext4</h3>
@@ -441,7 +441,7 @@
                 <div class="recommendations-grid">
                     <div class="recommendation-card">
                         <div class="rec-icon">
-                            <img src="izobr/homeuser.png" alt="Домашний пользователь">
+                            <img src="../izobr/homeuser.png" alt="Домашний пользователь">
                         </div>
                         <h3>Домашний пользователь</h3>
                         <div class="rec-scheme">
@@ -461,7 +461,7 @@
 
                     <div class="recommendation-card">
                         <div class="rec-icon">
-                            <img src="izobr/gamer.png" alt="Геймер">
+                            <img src="../izobr/gamer.png" alt="Геймер">
                         </div>
                         <h3>Геймер</h3>
                         <div class="rec-scheme">
@@ -486,7 +486,7 @@
 
                     <div class="recommendation-card">
                         <div class="rec-icon">
-                            <img src="izobr/prof-user.png" alt="Профессионал">
+                            <img src="../izobr/prof-user.png" alt="Профессионал">
                         </div>
                         <h3>Профессионал</h3>
                         <div class="rec-scheme">
@@ -642,10 +642,10 @@
     </main>
 
     <!-- Подключение скриптов -->
-    <script type="module" src="js/menu.js"></script>
-    <script type="module" src="js/filesystem.js"></script>
-    <script type="module" src="js/mobile-menu.js"></script>
-    <script type="module" src="js/main.js"></script>
+    <script type="module" src="../js/menu.js"></script>
+    <script type="module" src="../js/filesystem.js"></script>
+    <script type="module" src="../js/mobile-menu.js"></script>
+    <script type="module" src="../js/main.js"></script>
     <script>
         // Прелоадер
         window.addEventListener('load', function() {

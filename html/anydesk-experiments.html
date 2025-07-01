@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AnyDesk - Эксперименты</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/menu.css">
-    <link rel="stylesheet" href="css/anydesk.css">
-    <link rel="stylesheet" href="css/mobile.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/anydesk.css">
+    <link rel="stylesheet" href="../css/mobile.css">
     <style>
         /* Прелоадер */
         .preloader {
@@ -257,18 +257,18 @@
     </div>
 
     <div class="main-bg">
-        <div class="slide-bg" style="background-image: url('izobr/1.gif')"></div>
+        <div class="slide-bg" style="background-image: url('../izobr/1.gif')"></div>
         <div class="overlay"></div>
     </div>
     <header class="main-header">
         <div class="header-logo">
-            <img src="izobr/logo.svg" alt="Логотип" class="logo-img">
+            <img src="../izobr/logo.svg" alt="Логотип" class="logo-img">
         </div>
 
         <!-- Обычное меню для десктопа -->
         <nav class="header-menu desktop-menu">
             <ul>
-                <li><a href="index.html">Главная</a></li>
+                <li><a href="../index.html">Главная</a></li>
                 <li class="dropdown">
                     <a href="#sections" class="dropdown-trigger">Разделы ▾</a>
                     <ul class="dropdown-menu">
@@ -310,7 +310,7 @@
     <nav class="sidebar-menu" id="sidebarMenu">
         <button class="close-menu" id="closeMenu">×</button>
         <ul>
-            <li><a href="index.html" class="menu-item">Главная</a></li>
+            <li><a href="../index.html" class="menu-item">Главная</a></li>
             <li class="dropdown mobile-dropdown">
                 <a href="#sections" class="menu-item dropdown-toggle">Разделы <span class="dropdown-arrow">▾</span></a>
                 <ul class="dropdown-menu">
@@ -379,7 +379,7 @@
                             <div class="gallery-container" style="position: relative; background: #1a1a1a;">
                                 <div class="image-wrapper"
                                     style="text-align: center; min-height: 500px; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; background: #1a1a1a;">
-                                    <img id="mainImage" src="izobr/anydesk/1.png" alt="Настройки качества AnyDesk"
+                                    <img id="mainImage" src="../izobr/anydesk/1.png" alt="Настройки качества AnyDesk"
                                         class="zoomable"
                                         style="max-width: 100%; max-height: 480px; height: auto; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;"
                                         onclick="toggleZoom(this)">
@@ -414,13 +414,13 @@
                             <!-- Миниатюры -->
                             <div class="thumbnails"
                                 style="display: flex; justify-content: center; gap: 10px; padding: 15px; background: rgba(0,122,204,0.1); flex-wrap: wrap;">
-                                <img src="izobr/anydesk/1.png" alt="Максимальное качество" class="thumbnail active"
+                                <img src="../izobr/anydesk/1.png" alt="Максимальное качество" class="thumbnail active"
                                     onclick="goToImage(0)"
                                     style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid #007acc; transition: all 0.3s ease; image-rendering: crisp-edges;">
-                                <img src="izobr/anydesk/2.png" alt="Сбалансированное качество" class="thumbnail"
+                                <img src="../izobr/anydesk/2.png" alt="Сбалансированное качество" class="thumbnail"
                                     onclick="goToImage(2)"
                                     style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease; image-rendering: crisp-edges;">
-                                <img src="izobr/anydesk/3.png" alt="Быстрое соединение" class="thumbnail"
+                                <img src="../izobr/anydesk/3.png" alt="Быстрое соединение" class="thumbnail"
                                     onclick="goToImage(3)"
                                     style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease; image-rendering: crisp-edges;">
                             </div>
@@ -455,7 +455,7 @@
                                 <div class="gallery-container-2" style="position: relative; background: #1a1a1a;">
                                     <div class="image-wrapper-2"
                                         style="text-align: center; min-height: 400px; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; background: #1a1a1a;">
-                                        <img id="mainImage2" src="izobr/anydesk/File-manage.png"
+                                        <img id="mainImage2" src="../izobr/anydesk/File-manage.png"
                                             alt="Файл-менеджер AnyDesk" class="zoomable"
                                             style="max-width: 100%; max-height: 380px; height: auto; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;"
                                             onclick="toggleZoom2(this)">
@@ -484,16 +484,16 @@
                                 <!-- Миниатюры -->
                                 <div class="thumbnails-2"
                                     style="display: flex; justify-content: center; gap: 10px; padding: 15px; background: rgba(40,167,69,0.1); flex-wrap: wrap;">
-                                    <img src="izobr/anydesk/File-manage.png" alt="Файл-менеджер"
+                                    <img src="../izobr/anydesk/File-manage.png" alt="Файл-менеджер"
                                         class="thumbnail-2 active" onclick="goToImage2(0)"
                                         style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid #28a745; transition: all 0.3s ease;">
-                                    <img src="izobr/anydesk/Small-file.png" alt="Маленький файл" class="thumbnail-2"
+                                    <img src="../izobr/anydesk/Small-file.png" alt="Маленький файл" class="thumbnail-2"
                                         onclick="goToImage2(1)"
                                         style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
-                                    <img src="izobr/anydesk/Big-file.png" alt="Большой файл" class="thumbnail-2"
+                                    <img src="../izobr/anydesk/Big-file.png" alt="Большой файл" class="thumbnail-2"
                                         onclick="goToImage2(2)"
                                         style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
-                                    <img src="izobr/anydesk/remote-device.png" alt="Удаленное устройство"
+                                    <img src="../izobr/anydesk/remote-device.png" alt="Удаленное устройство"
                                         class="thumbnail-2" onclick="goToImage2(3)"
                                         style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
                                 </div>
@@ -537,7 +537,7 @@
                                 <div class="gallery-container-3" style="position: relative; background: #1a1a1a;">
                                     <div class="image-wrapper-3"
                                         style="text-align: center; min-height: 400px; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; background: #1a1a1a;">
-                                        <img id="mainImage3" src="izobr/anydesk/Security-settings1.png"
+                                        <img id="mainImage3" src="../izobr/anydesk/Security-settings1.png"
                                             alt="Настройки безопасности" class="zoomable"
                                             style="max-width: 100%; max-height: 350px; height: auto; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;"
                                             onclick="toggleZoom3(this)">
@@ -559,14 +559,14 @@
                                     <!-- Миниатюры -->
                                     <div class="thumbnails-3"
                                         style="display: flex; justify-content: center; gap: 10px; padding: 15px; background: rgba(255,193,7,0.1); flex-wrap: wrap;">
-                                        <img src="izobr/anydesk/Security-settings1.png" alt="Настройки безопасности"
+                                        <img src="../izobr/anydesk/Security-settings1.png" alt="Настройки безопасности"
                                             class="thumbnail-3 active" onclick="goToImage3(0)"
                                             style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid #ffc107; transition: all 0.3s ease;">
-                                        <img src="izobr/anydesk/mouse-keybord-access.png"
+                                        <img src="../izobr/anydesk/mouse-keybord-access.png"
                                             alt="Настройки доступа мыши и клавиатуры" class="thumbnail-3"
                                             onclick="goToImage3(1)"
                                             style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
-                                        <img src="izobr/anydesk/connection-status.png" alt="Состояние подключения"
+                                        <img src="../izobr/anydesk/connection-status.png" alt="Состояние подключения"
                                             class="thumbnail-3" onclick="goToImage3(2)"
                                             style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
                                     </div>
@@ -601,7 +601,7 @@
                                     <!-- ОСНОВНОЕ ИЗОБРАЖЕНИЕ -->
                                     <div class="image-wrapper-4"
                                         style="text-align: center; min-height: 400px; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; background: #1a1a1a;">
-                                        <img id="mainImage4" src="izobr/anydesk/from-wind.png"
+                                        <img id="mainImage4" src="../izobr/anydesk/from-wind.png"
                                             alt="Как выглядит с Windows"
                                             style="max-width: 100%; max-height: 350px; height: auto; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;"
                                             onclick="toggleZoom4(this)">
@@ -641,14 +641,14 @@
                                 <!-- МИНИАТЮРЫ СНИЗУ -->
                                 <div class="thumbnails-4"
                                     style="display: flex; justify-content: center; gap: 10px; padding: 15px; background: rgba(220,53,69,0.1); flex-wrap: wrap;">
-                                    <img src="izobr/anydesk/from-wind.png" alt="Как выглядит с Windows"
+                                    <img src="../izobr/anydesk/from-wind.png" alt="Как выглядит с Windows"
                                         class="thumbnail-4 active" onclick="goToImage4(0)"
                                         style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid #dc3545; transition: all 0.3s ease;">
-                                    <img src="izobr/anydesk/from-mobile.png"
+                                    <img src="../izobr/anydesk/from-mobile.png"
                                         alt="Окно состояния, когда подключены несколько устройств" class="thumbnail-4"
                                         onclick="goToImage4(1)"
                                         style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
-                                    <img src="izobr/anydesk/on-mobile.jpg" alt="Как это выглядит на телефоне"
+                                    <img src="../izobr/anydesk/on-mobile.jpg" alt="Как это выглядит на телефоне"
                                         class="thumbnail-4" onclick="goToImage4(2)"
                                         style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
                                 </div>
@@ -690,7 +690,7 @@
                                     <!-- ОСНОВНОЕ ИЗОБРАЖЕНИЕ -->
                                     <div class="image-wrapper-5"
                                         style="text-align: center; min-height: 400px; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; background: #1a1a1a;">
-                                        <img id="mainImage5" src="izobr/anydesk/chat-window.png" alt="Окно чата AnyDesk"
+                                        <img id="mainImage5" src="../izobr/anydesk/chat-window.png" alt="Окно чата AnyDesk"
                                             style="max-width: 100%; max-height: 350px; height: auto; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;"
                                             onclick="toggleZoom5(this)">
                                     </div>
@@ -728,16 +728,16 @@
                                 <!-- МИНИАТЮРЫ -->
                                 <div class="thumbnails-5"
                                     style="display: flex; justify-content: center; gap: 10px; padding: 15px; background: rgba(111,66,193,0.1); flex-wrap: wrap;">
-                                    <img src="izobr/anydesk/chat-window.png" alt="Окно чата" class="thumbnail-5 active"
+                                    <img src="../izobr/anydesk/chat-window.png" alt="Окно чата" class="thumbnail-5 active"
                                         onclick="goToImage5(0)"
                                         style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid #6f42c1; transition: all 0.3s ease;">
-                                    <img src="izobr/anydesk/send-message.png" alt="Отправка сообщения"
+                                    <img src="../izobr/anydesk/send-message.png" alt="Отправка сообщения"
                                         class="thumbnail-5" onclick="goToImage5(1)"
                                         style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
-                                    <img src="izobr/anydesk/chat-notifications.png" alt="Настройки уведомлений"
+                                    <img src="../izobr/anydesk/chat-notifications.png" alt="Настройки уведомлений"
                                         class="thumbnail-5" onclick="goToImage5(2)"
                                         style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
-                                    <img src="izobr/anydesk/chat-history.png" alt="История сообщений"
+                                    <img src="../izobr/anydesk/chat-history.png" alt="История сообщений"
                                         class="thumbnail-5" onclick="goToImage5(3)"
                                         style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
                                 </div>
@@ -789,7 +789,7 @@
         </div>
     </footer>
 
-    <script src="js/menu.js"></script>
+    <script src="../js/menu.js"></script>
     <script>
         // Управление прелоадером
         window.addEventListener('load', function () {
@@ -982,17 +982,17 @@
         let currentImageIndex = 0;
         const imageData = [
             {
-                src: 'izobr/anydesk/1.png',
+                src: '../izobr/anydesk/1.png',
                 alt: 'Настройки качества AnyDesk',
                 description: 'Настройки качества изображения в AnyDesk'
             },
             {
-                src: 'izobr/anydesk/2.png',
+                src: '../izobr/anydesk/2.png',
                 alt: 'Сравнение производительности',
                 description: 'Сравнение производительности при разных настройках'
             },
             {
-                src: 'izobr/anydesk/3.png',
+                src: '../izobr/anydesk/3.png',
                 alt: 'Тестирование качества изображения',
                 description: 'Тестирование качества изображения в реальном времени'
             }
@@ -1233,22 +1233,22 @@
         let currentImageIndex2 = 0;
         const imageData2 = [
             {
-                src: 'izobr/anydesk/File-manage.png',
+                src: '../izobr/anydesk/File-manage.png',
                 alt: 'Файл-менеджер AnyDesk',
                 description: 'Файл-менеджер AnyDesk для передачи файлов'
             },
             {
-                src: 'izobr/anydesk/Small-file.png',
+                src: '../izobr/anydesk/Small-file.png',
                 alt: 'Процесс передачи файлов',
                 description: 'Процесс передачи файлов с индикатором прогресса'
             },
             {
-                src: 'izobr/anydesk/Big-file.png',
+                src: '../izobr/anydesk/Big-file.png',
                 alt: 'Настройки безопасности',
                 description: 'Настройки безопасности для передачи файлов'
             },
             {
-                src: 'izobr/anydesk/remote-device.png',
+                src: '../izobr/anydesk/remote-device.png',
                 alt: 'Статистика передачи',
                 description: 'Статистика и скорость передачи файлов'
             }
@@ -1327,17 +1327,17 @@
         let currentImageIndex3 = 0;
         const imageData3 = [
             {
-                src: 'izobr/anydesk/Security-settings1.png',
+                src: '../izobr/anydesk/Security-settings1.png',
                 alt: 'Настройки безопасности',
                 description: 'Главное окно настроек безопасности AnyDesk'
             },
             {
-                src: 'izobr/anydesk/mouse-keybord-access.png',
+                src: '../izobr/anydesk/mouse-keybord-access.png',
                 alt: 'Настройки доступа мыши и клавиатуры',
                 description: 'Настройки разрешений доступа к клавиатуре и мыши'
             },
             {
-                src: 'izobr/anydesk/connection-status.png',
+                src: '../izobr/anydesk/connection-status.png',
                 alt: 'Состояние подключения',
                 description: 'Информация о состоянии и безопасности подключения'
             }
@@ -1537,17 +1537,17 @@
         let currentImageIndex4 = 0;
         const imageData4 = [
             {
-                src: 'izobr/anydesk/from-wind.png',
+                src: '../izobr/anydesk/from-wind.png',
                 alt: 'Как выглядит с Windows',
                 description: 'Как выглядит подключение на персональном компьютере на базе Windows'
             },
             {
-                src: 'izobr/anydesk/from-mobile.png',
+                src: '../izobr/anydesk/from-mobile.png',
                 alt: 'Окно состояния, когда подключены несколько устройств',
                 description: 'Окно состояния, когда подключены несколько устройств'
             },
             {
-                src: 'izobr/anydesk/on-mobile.jpg',
+                src: '../izobr/anydesk/on-mobile.jpg',
                 alt: 'Вид на мобильном устройстве',
                 description: 'Как выглядит подключение на мобильном устройстве'
             }
@@ -1714,22 +1714,22 @@
         let currentImageIndex5 = 0;
         const imageData5 = [
             {
-                src: 'izobr/anydesk/chat-window.png',
+                src: '../izobr/anydesk/chat-window.png',
                 alt: 'Окно чата AnyDesk',
                 description: 'Окно чата AnyDesk во время активной сессии'
             },
             {
-                src: 'izobr/anydesk/send-message.png',
+                src: '../izobr/anydesk/send-message.png',
                 alt: 'Отправка сообщения',
                 description: 'Процесс отправки текстового сообщения удаленному пользователю'
             },
             {
-                src: 'izobr/anydesk/chat-notifications.png',
+                src: '../izobr/anydesk/chat-notifications.png',
                 alt: 'Настройки уведомлений',
                 description: 'Настройки уведомлений для входящих сообщений чата'
             },
             {
-                src: 'izobr/anydesk/chat-history.png',
+                src: '../izobr/anydesk/chat-history.png',
                 alt: 'История сообщений',
                 description: 'История переписки в рамках текущей сессии'
             }
@@ -1907,8 +1907,8 @@
 
 
     </script>
-    <script type="module" src="js/mobile-menu.js"></script>
-    <script type="module" src="js/main.js"></script>
+    <script type="module" src="../js/mobile-menu.js"></script>
+    <script type="module" src="../js/main.js"></script>
 </body>
 
 </html>
