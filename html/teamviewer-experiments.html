@@ -280,30 +280,75 @@
         <section class="experiments-section fade-in" style="padding: 60px 0; background: rgba(0,0,0,0.7);">
             <div class="container">
 
-                <!-- Эксперимент 2 -->
+                <!-- Эксперимент 1 -->
                 <div class="experiment-card" style="background: rgba(45, 45, 45, 0.9); border-radius: 10px; padding: 30px; margin-bottom: 40px; border-left: 4px solid #28a745;">
                     <h2 style="color: #28a745; margin-bottom: 20px;">
                         <span class="experiment-number" style="background: #28a745; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8em; margin-right: 15px;">01</span>
-                        Тестирование TeamViewer Management Console
+                        Тест синхронизации буфера обмена
                     </h2>
                     
                     <div style="color: #e0e0e0; line-height: 1.6; margin-bottom: 25px;">
-                        <p><strong>Цель:</strong> Показать возможности централизованного управления устройствами через веб-консоль TeamViewer.</p>
+                        <p><strong>Цель:</strong> Проверить корректность передачи текста между локальным и удаленным ПК через буфер обмена.</p>
                         
                         <p><strong>Что показывается:</strong></p>
                         <ul style="margin-left: 20px;">
-                            <li>Веб-интерфейс TeamViewer Management Console</li>
-                            <li>Список управляемых компьютеров и их статус</li>
-                            <li>Настройка групп устройств и политик доступа</li>
-                            <li>Журнал подключений и отчеты по использованию</li>
-                            <li>Управление пользователями и их правами</li>
-                            <li>Мониторинг активных сессий в реальном времени</li>
-                            <li>Настройка уведомлений и алертов</li>
+                            <li>Копирование текста (например, из Блокнота) на локальном ПК.</li>
+                            <li>Вставка этого текста в приложение (Блокнот, браузер) на удаленном ПК через TeamViewer.</li>
                         </ul>
                     </div>
                     
-                    <div class="screenshot-placeholder" style="background: #333; border: 2px dashed #666; height: 200px; display: flex; align-items: center; justify-content: center; color: #999; margin: 20px 0; border-radius: 8px;">
-                        [Скриншот TeamViewer Management Console и централизованного управления]
+                    <!-- ГАЛЕРЕЯ ДЛЯ 1-ГО ЭКСПЕРИМЕНТА (БУФЕР ОБМЕНА) -->
+                    <div class="image-gallery clipboard-gallery"
+                        style="margin: 20px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3); background: #1a1a1a;">
+                        <div class="gallery-container" style="position: relative; background: #1a1a1a;">
+                            <!-- ОСНОВНОЕ ИЗОБРАЖЕНИЕ -->
+                            <div class="image-wrapper"
+                                style="text-align: center; min-height: 400px; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; background: #1a1a1a;">
+                                <img id="mainImageClipboard" src="../izobr/teamviewer/copy-local.png" alt="Копирование в буфер обмена"
+                                    style="max-width: 100%; max-height: 350px; height: auto; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;"
+                                    onclick="toggleZoomClipboard(this)">
+                            </div>
+
+                            <!-- НАВИГАЦИОННЫЕ СТРЕЛКИ -->
+                            <button class="gallery-nav-clipboard prev"
+                                style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); background: rgba(40,167,69,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">‹</button>
+
+                            <button class="gallery-nav-clipboard next"
+                                style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: rgba(40,167,69,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">›</button>
+
+                            <!-- СЧЕТЧИК ИЗОБРАЖЕНИЙ -->
+                            <div class="image-counter-clipboard"
+                                style="position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.8); color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px; z-index: 10;">
+                                <span id="currentImageClipboard">1</span> / <span id="totalImagesClipboard">2</span>
+                            </div>
+
+                            <!-- ИКОНКА УВЕЛИЧЕНИЯ -->
+                            <div class="zoom-hint-clipboard"
+                                style="position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.8); color: white; padding: 8px 12px; border-radius: 20px; font-size: 12px; z-index: 10; display: flex; align-items: center; gap: 5px;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M15.5,14L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5M9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5C7,5 5,7 5,9.5C7,12 9.5,14Z" />
+                                </svg>
+                                Увеличить
+                            </div>
+                        </div>
+
+                        <!-- ОПИСАНИЕ ИЗОБРАЖЕНИЯ -->
+                        <div class="image-description-clipboard"
+                            style="padding: 15px; background: rgba(40,167,69,0.1); color: #e0e0e0; text-align: center; font-size: 14px;">
+                            <span id="imageDescriptionClipboard">Копирование текста в буфер обмена на локальном компьютере</span>
+                        </div>
+
+                        <!-- МИНИАТЮРЫ -->
+                        <div class="thumbnails-clipboard"
+                            style="display: flex; justify-content: center; gap: 10px; padding: 15px; background: rgba(40,167,69,0.1); flex-wrap: wrap;">
+                            <img src="../izobr/teamviewer/copy-local.png" alt="Копирование в буфер на основном ПК"
+                                class="thumbnail-clipboard active" onclick="goToImageClipboard(0)"
+                                style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid #28a745; transition: all 0.3s ease;">
+                            <img src="../izobr/teamviewer/copy-remote.png" alt="Вставка из буфера в дистанционный ПК"
+                                class="thumbnail-clipboard" onclick="goToImageClipboard(1)"
+                                style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                        </div>
                     </div>
                     
                     <div style="color: #b0b0b0;">
@@ -311,30 +356,79 @@
                     </div>
                 </div>
 
-                <!-- Эксперимент 4 -->
+                <!-- Эксперимент 2 -->
                 <div class="experiment-card" style="background: rgba(45, 45, 45, 0.9); border-radius: 10px; padding: 30px; margin-bottom: 40px; border-left: 4px solid #dc3545;">
                     <h2 style="color: #dc3545; margin-bottom: 20px;">
                         <span class="experiment-number" style="background: #dc3545; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8em; margin-right: 15px;">02</span>
-                        Презентации и групповые конференции
+                        Передача файлов через "перетаскивание"
                     </h2>
                     
                     <div style="color: #e0e0e0; line-height: 1.6; margin-bottom: 25px;">
-                        <p><strong>Цель:</strong> Показать возможности TeamViewer для проведения презентаций и групповых конференций с несколькими участниками.</p>
+                        <p><strong>Цель:</strong> Демонстрация простого способа обмена файлами между компьютерами.</p>
                         
                         <p><strong>Что показывается:</strong></p>
                         <ul style="margin-left: 20px;">
-                            <li>Создание и настройка презентации в TeamViewer</li>
-                            <li>Интерфейс приглашения участников в конференцию</li>
-                            <li>Панель управления презентацией с инструментами</li>
-                            <li>Функции аннотаций и рисования поверх экрана</li>
-                            <li>Список подключенных участников и их статус</li>
-                            <li>Чат конференции и обмен файлами</li>
-                            <li>Запись презентации и сохранение</li>
+                            <li>Открытие окна файлового менеджера на локальном и удаленном ПК в сессии TeamViewer.</li>
+                            <li>Перетаскивание файла (например, изображения или документа) с локального рабочего стола на удаленный рабочий стол.</li>
+                            <li>Проверка целостности файла после передачи</li>
                         </ul>
                     </div>
                     
-                    <div class="screenshot-placeholder" style="background: #333; border: 2px dashed #666; height: 200px; display: flex; align-items: center; justify-content: center; color: #999; margin: 20px 0; border-radius: 8px;">
-                        [Скриншот интерфейса презентаций и групповых конференций TeamViewer]
+                     <!-- ГАЛЕРЕЯ ДЛЯ 2-ГО ЭКСПЕРИМЕНТА (ПЕРЕДАЧА ФАЙЛОВ) -->
+                    <div class="image-gallery filetransfer-gallery"
+                        style="margin: 20px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3); background: #1a1a1a;">
+                        <div class="gallery-container" style="position: relative; background: #1a1a1a;">
+                            <!-- ОСНОВНОЕ ИЗОБРАЖЕНИЕ -->
+                            <div class="image-wrapper"
+                                style="text-align: center; min-height: 400px; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; background: #1a1a1a;">
+                                <img id="mainImageFileTransfer" src="../izobr/teamviewer/before-drag.png" alt="Состояние до переноса файла"
+                                    style="max-width: 100%; max-height: 350px; height: auto; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;"
+                                    onclick="toggleZoomFileTransfer(this)">
+                            </div>
+
+                            <!-- НАВИГАЦИОННЫЕ СТРЕЛКИ -->
+                            <button class="gallery-nav-filetransfer prev"
+                                style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); background: rgba(220,53,69,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">‹</button>
+
+                            <button class="gallery-nav-filetransfer next"
+                                style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: rgba(220,53,69,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">›</button>
+
+                            <!-- СЧЕТЧИК ИЗОБРАЖЕНИЙ -->
+                            <div class="image-counter-filetransfer"
+                                style="position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.8); color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px; z-index: 10;">
+                                <span id="currentImageFileTransfer">1</span> / <span id="totalImagesFileTransfer">3</span>
+                            </div>
+
+                            <!-- ИКОНКА УВЕЛИЧЕНИЯ -->
+                            <div class="zoom-hint-filetransfer"
+                                style="position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.8); color: white; padding: 8px 12px; border-radius: 20px; font-size: 12px; z-index: 10; display: flex; align-items: center; gap: 5px;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M15.5,14L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5M9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5C7,5 5,7 5,9.5C7,12 9.5,14Z" />
+                                </svg>
+                                Увеличить
+                            </div>
+                        </div>
+
+                        <!-- ОПИСАНИЕ ИЗОБРАЖЕНИЯ -->
+                        <div class="image-description-filetransfer"
+                            style="padding: 15px; background: rgba(220,53,69,0.1); color: #e0e0e0; text-align: center; font-size: 14px;">
+                            <span id="imageDescriptionFileTransfer">Открытие файлового менеджера в TeamViewer</span>
+                        </div>
+
+                        <!-- МИНИАТЮРЫ -->
+                        <div class="thumbnails-filetransfer"
+                            style="display: flex; justify-content: center; gap: 10px; padding: 15px; background: rgba(220,53,69,0.1); flex-wrap: wrap;">
+                            <img src="../izobr/teamviewer/before-drag.png" alt="Состояние до переноса файла"
+                                class="thumbnail-filetransfer active" onclick="goToImageFileTransfer(0)"
+                                style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid #dc3545; transition: all 0.3s ease;">
+                             <img src="../izobr/teamviewer/after-drag.png" alt="Состояние после перетаскивание файла"
+                                class="thumbnail-filetransfer" onclick="goToImageFileTransfer(1)"
+                                style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                            <img src="../izobr/teamviewer/all-file.png" alt="Проверка работоспособоности файлов"
+                                class="thumbnail-filetransfer" onclick="goToImageFileTransfer(2)"
+                                style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                        </div>
                     </div>
                     
                     <div style="color: #b0b0b0;">
@@ -342,7 +436,7 @@
                     </div>
                 </div>
 
-                <!-- Эксперимент 5 -->
+                <!-- Эксперимент 3 -->
                 <div class="experiment-card" style="background: rgba(45, 45, 45, 0.9); border-radius: 10px; padding: 30px; margin-bottom: 40px; border-left: 4px solid #6f42c1;">
                     <h2 style="color: #6f42c1; margin-bottom: 20px;">
                         <span class="experiment-number" style="background: #6f42c1; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8em; margin-right: 15px;">03</span>
@@ -357,15 +451,61 @@
                             <li>Интерфейс файлового менеджера TeamViewer</li>
                             <li>Двухпанельный режим для удобной навигации</li>
                             <li>Массовая передача файлов с индикатором прогресса</li>
-                            <li>Функция синхронизации папок между компьютерами</li>
-                            <li>Настройка автоматической передачи файлов</li>
-                            <li>Журнал передач и статистика скорости</li>
-                            <li>Функция сжатия файлов перед передачей</li>
                         </ul>
                     </div>
                     
-                    <div class="screenshot-placeholder" style="background: #333; border: 2px dashed #666; height: 200px; display: flex; align-items: center; justify-content: center; color: #999; margin: 20px 0; border-radius: 8px;">
-                        [Скриншот файлового менеджера и процесса передачи файлов]
+                    <!-- ГАЛЕРЕЯ ДЛЯ 3-ГО ЭКСПЕРИМЕНТА (ФАЙЛОВЫЙ МЕНЕДЖЕР) -->
+                    <div class="image-gallery filemanager-gallery"
+                        style="margin: 20px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(111, 66, 193, 0.3); background: #1a1a1a;">
+                        <div class="gallery-container" style="position: relative; background: #1a1a1a;">
+                            <!-- ОСНОВНОЕ ИЗОБРАЖЕНИЕ -->
+                            <div class="image-wrapper"
+                                style="text-align: center; min-height: 400px; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; background: #1a1a1a;">
+                                <img id="mainImageFileManager" src="../izobr/teamviewer/file-interface.png" alt="Интерфейс файлового менеджера"
+                                    style="max-width: 100%; max-height: 350px; height: auto; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;"
+                                    onclick="toggleZoomFileManager(this)">
+                            </div>
+
+                            <!-- НАВИГАЦИОННЫЕ СТРЕЛКИ -->
+                            <button class="gallery-nav-filemanager prev"
+                                style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); background: rgba(111,66,193,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">‹</button>
+
+                            <button class="gallery-nav-filemanager next"
+                                style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: rgba(111,66,193,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">›</button>
+
+                            <!-- СЧЕТЧИК ИЗОБРАЖЕНИЙ -->
+                            <div class="image-counter-filemanager"
+                                style="position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.8); color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px; z-index: 10;">
+                                <span id="currentImageFileManager">1</span> / <span id="totalImagesFileManager">2</span>
+                            </div>
+
+                            <!-- ИКОНКА УВЕЛИЧЕНИЯ -->
+                            <div class="zoom-hint-filemanager"
+                                style="position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.8); color: white; padding: 8px 12px; border-radius: 20px; font-size: 12px; z-index: 10; display: flex; align-items: center; gap: 5px;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M15.5,14L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5M9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5C7,5 5,7 5,9.5C7,12 9.5,14Z" />
+                                </svg>
+                                Увеличить
+                            </div>
+                        </div>
+
+                        <!-- ОПИСАНИЕ ИЗОБРАЖЕНИЯ -->
+                        <div class="image-description-filemanager"
+                            style="padding: 15px; background: rgba(111,66,193,0.1); color: #e0e0e0; text-align: center; font-size: 14px;">
+                            <span id="imageDescriptionFileManager">Интерфейс встроенного файлового менеджера TeamViewer</span>
+                        </div>
+
+                        <!-- МИНИАТЮРЫ -->
+                        <div class="thumbnails-filemanager"
+                            style="display: flex; justify-content: center; gap: 10px; padding: 15px; background: rgba(111,66,193,0.1); flex-wrap: wrap;">
+                            <img src="../izobr/teamviewer/file-interface.png" alt="Интерфейс файлового менеджера"
+                                class="thumbnail-filemanager active" onclick="goToImageFileManager(0)"
+                                style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid #6f42c1; transition: all 0.3s ease;">
+                            <img src="../izobr/teamviewer/proceed.png" alt="Прогресс массовой передачи"
+                                class="thumbnail-filemanager" onclick="goToImageFileManager(1)"
+                                style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                        </div>
                     </div>
                     
                     <div style="color: #b0b0b0;">
@@ -373,42 +513,94 @@
                     </div>
                 </div>
 
-                <!-- Эксперимент 6 -->
+                <!-- Эксперимент 4 -->
                 <div class="experiment-card" style="background: rgba(45, 45, 45, 0.9); border-radius: 10px; padding: 30px; margin-bottom: 40px; border-left: 4px solid #17a2b8;">
                     <h2 style="color: #17a2b8; margin-bottom: 20px;">
                         <span class="experiment-number" style="background: #17a2b8; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8em; margin-right: 15px;">04</span>
-                        Мобильные приложения и кроссплатформенность
+                        Передача комбинаций клавиш (Ctrl+Alt+Del)
                     </h2>
                     
                     <div style="color: #e0e0e0; line-height: 1.6; margin-bottom: 25px;">
-                        <p><strong>Цель:</strong> Показать работу TeamViewer на мобильных устройствах и взаимодействие между различными платформами.</p>
+                        <p><strong>Цель:</strong> Проверить работу функции отправки системных комбинаций клавиш на удаленный ПК.</p>
                         
                         <p><strong>Что показывается:</strong></p>
                         <ul style="margin-left: 20px;">
-                            <li>Мобильное приложение TeamViewer на Android и iOS</li>
-                            <li>Удаленное управление компьютером с мобильного устройства</li>
-                            <li>Интерфейс TeamViewer QuickSupport на смартфоне</li>
-                            <li>Подключение к мобильному устройству с компьютера</li>
-                            <li>Функция удаленной поддержки мобильных устройств</li>
-                            <li>Синхронизация контактов между устройствами</li>
-                            <li>Работа TeamViewer на планшетах</li>
+                            <li>Нажатие комбинации Ctrl+Alt+Del через меню TeamViewer ("Действия" → "Ctrl+Alt+Del").</li>
+                            <li>Наблюдение за реакцией удаленного ПК (появление экрана безопасности Windows: блокировка, смена пароля и т.д.).</li>
+                            <li>Использование других комбинаций (например, Alt+F4 для закрытия окна)</li>
                         </ul>
                     </div>
                     
-                    <div class="screenshot-placeholder" style="background: #333; border: 2px dashed #666; height: 200px; display: flex; align-items: center; justify-content: center; color: #999; margin: 20px 0; border-radius: 8px;">
-                        [Скриншот мобильных приложений и кроссплатформенного взаимодействия]
+                    <!-- ГАЛЕРЕЯ ДЛЯ 4-ГО ЭКСПЕРИМЕНТА (КОМБИНАЦИИ КЛАВИШ) -->
+                    <div class="image-gallery keycombo-gallery"
+                        style="margin: 20px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3); background: #1a1a1a;">
+                        <div class="gallery-container" style="position: relative; background: #1a1a1a;">
+                            <!-- ОСНОВНОЕ ИЗОБРАЖЕНИЕ -->
+                            <div class="image-wrapper"
+                                style="text-align: center; min-height: 400px; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; background: #1a1a1a;">
+                                <img id="mainImageKeyCombo" src="../izobr/teamviewer/actions-menu.png" alt="Меню действий TeamViewer"
+                                    style="max-width: 100%; max-height: 350px; height: auto; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;"
+                                    onclick="toggleZoomKeyCombo(this)">
+                            </div>
+
+                            <!-- НАВИГАЦИОННЫЕ СТРЕЛКИ -->
+                            <button class="gallery-nav-keycombo prev"
+                                style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); background: rgba(23,162,184,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">‹</button>
+
+                            <button class="gallery-nav-keycombo next"
+                                style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: rgba(23,162,184,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">›</button>
+
+                            <!-- СЧЕТЧИК ИЗОБРАЖЕНИЙ -->
+                            <div class="image-counter-keycombo"
+                                style="position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.8); color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px; z-index: 10;">
+                                <span id="currentImageKeyCombo">1</span> / <span id="totalImagesKeyCombo">4</span>
+                            </div>
+
+                            <!-- ИКОНКА УВЕЛИЧЕНИЯ -->
+                            <div class="zoom-hint-keycombo"
+                                style="position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.8); color: white; padding: 8px 12px; border-radius: 20px; font-size: 12px; z-index: 10; display: flex; align-items: center; gap: 5px;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M15.5,14L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5M9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5C7,5 5,7 5,9.5C7,12 9.5,14Z" />
+                                </svg>
+                                Увеличить
+                            </div>
+                        </div>
+
+                        <!-- ОПИСАНИЕ ИЗОБРАЖЕНИЯ -->
+                        <div class="image-description-keycombo"
+                            style="padding: 15px; background: rgba(23,162,184,0.1); color: #e0e0e0; text-align: center; font-size: 14px;">
+                            <span id="imageDescriptionKeyCombo">Меню "Действия" в TeamViewer для отправки системных комбинаций клавиш</span>
+                        </div>
+
+                        <!-- МИНИАТЮРЫ -->
+                        <div class="thumbnails-keycombo"
+                            style="display: flex; justify-content: center; gap: 10px; padding: 15px; background: rgba(23,162,184,0.1); flex-wrap: wrap;">
+                            <img src="../izobr/teamviewer/hotkey-menu.png" alt="Меню действий"
+                                class="thumbnail-keycombo active" onclick="goToImageKeyCombo(0)"
+                                style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid #17a2b8; transition: all 0.3s ease;">
+                            <img src="../izobr/teamviewer/afterctrl-al-del.png" alt="Срабатывание команды Ctrl+Alt+Del"
+                                class="thumbnail-keycombo" onclick="goToImageKeyCombo(1)"
+                                style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                            <img src="../izobr/teamviewer/lock-menu.png" alt="Выбор блокировки Windows"
+                                class="thumbnail-keycombo" onclick="goToImageKeyCombo(2)"
+                                style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                            <img src="../izobr/teamviewer/lock-screen.png" alt="Блокировка Windows"
+                                class="thumbnail-keycombo" onclick="goToImageKeyCombo(3)"
+                                style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                        </div>
                     </div>
                     
                     <div style="color: #b0b0b0;">
-                        <strong>Результат:</strong> Демонстрация универсальности TeamViewer на всех типах устройств и операционных систем.
+                        <strong>Результат:</strong> Подтверждение возможности выполнения критичных системных действий удаленно.
                     </div>
                 </div>
 
-                <!-- Эксперимент 7 -->
+                <!-- Эксперимент 5 -->
                 <div class="experiment-card" style="background: rgba(45, 45, 45, 0.9); border-radius: 10px; padding: 30px; margin-bottom: 40px; border-left: 4px solid #fd7e14;">
                     <h2 style="color: #fd7e14; margin-bottom: 20px;">
                         <span class="experiment-number" style="background: #fd7e14; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8em; margin-right: 15px;">05</span>
-                        Настройка безопасности и корпоративных политик
+                        Настройка безопасности.
                     </h2>
                     
                     <div style="color: #e0e0e0; line-height: 1.6; margin-bottom: 25px;">
@@ -416,22 +608,71 @@
                         
                         <p><strong>Что показывается:</strong></p>
                         <ul style="margin-left: 20px;">
-                            <li>Панель безопасности в TeamViewer Management Console</li>
-                            <li>Настройка двухфакторной аутентификации (2FA)</li>
-                            <li>Создание и применение политик безопасности</li>
-                            <li>Настройка белых и черных списков IP-адресов</li>
-                            <li>Журнал аудита и мониторинг подключений</li>
-                            <li>Настройка SSO (Single Sign-On) интеграции</li>
-                            <li>Конфигурация условного доступа</li>
+                            <li>Возможность быстрого подключения(доверенного)</li>
+                            <li>Создание случайного пароля подключения</li>
+                            <li>Настройка черного списка</li>
                         </ul>
                     </div>
                     
-                    <div class="screenshot-placeholder" style="background: #333; border: 2px dashed #666; height: 200px; display: flex; align-items: center; justify-content: center; color: #999; margin: 20px 0; border-radius: 8px;">
-                        [Скриншот настроек безопасности и корпоративных политик]
+                    <!-- ГАЛЕРЕЯ ДЛЯ 5-ГО ЭКСПЕРИМЕНТА (БЕЗОПАСНОСТЬ) -->
+                    <div class="image-gallery security-gallery"
+                        style="margin: 20px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(253, 126, 20, 0.3); background: #1a1a1a;">
+                        <div class="gallery-container" style="position: relative; background: #1a1a1a;">
+                            <!-- ОСНОВНОЕ ИЗОБРАЖЕНИЕ -->
+                            <div class="image-wrapper"
+                                style="text-align: center; min-height: 400px; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; background: #1a1a1a;">
+                                <img id="mainImageSecurity" src="../izobr/teamviewer/easy-connect.png" alt="Быстрое подключение к известному ПК"
+                                    style="max-width: 100%; max-height: 350px; height: auto; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;"
+                                    onclick="toggleZoomSecurity(this)">
+                            </div>
+
+                            <!-- НАВИГАЦИОННЫЕ СТРЕЛКИ -->
+                            <button class="gallery-nav-security prev"
+                                style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); background: rgba(253,126,20,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">‹</button>
+
+                            <button class="gallery-nav-security next"
+                                style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: rgba(253,126,20,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">›</button>
+
+                            <!-- СЧЕТЧИК ИЗОБРАЖЕНИЙ -->
+                            <div class="image-counter-security"
+                                style="position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.8); color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px; z-index: 10;">
+                                <span id="currentImageSecurity">1</span> / <span id="totalImagesSecurity">3</span>
+                            </div>
+
+                            <!-- ИКОНКА УВЕЛИЧЕНИЯ -->
+                            <div class="zoom-hint-security"
+                                style="position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.8); color: white; padding: 8px 12px; border-radius: 20px; font-size: 12px; z-index: 10; display: flex; align-items: center; gap: 5px;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M15.5,14L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5M9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5C7,5 5,7 5,9.5C7,12 9.5,14Z" />
+                                </svg>
+                                Увеличить
+                            </div>
+                        </div>
+
+                        <!-- ОПИСАНИЕ ИЗОБРАЖЕНИЯ -->
+                        <div class="image-description-security"
+                            style="padding: 15px; background: rgba(253,126,20,0.1); color: #e0e0e0; text-align: center; font-size: 14px;">
+                            <span id="imageDescriptionSecurity">TeamViewer Management Console - центральная панель управления безопасностью</span>
+                        </div>
+
+                        <!-- МИНИАТЮРЫ -->
+                        <div class="thumbnails-security"
+                            style="display: flex; justify-content: center; gap: 10px; padding: 15px; background: rgba(253,126,20,0.1); flex-wrap: wrap;">
+                            <img src="../izobr/teamviewer/easy-connect.png" alt="Быстрое подключение к известному ПК"
+                                class="thumbnail-security active" onclick="goToImageSecurity(0)"
+                                style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid #fd7e14; transition: all 0.3s ease;">
+                            <img src="../izobr/teamviewer/random-password.png" alt="Случайный пароль"
+                                class="thumbnail-security" onclick="goToImageSecurity(1)"
+                                style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                            <img src="../izobr/teamviewer/white-list.png" alt="Белый список"
+                                class="thumbnail-security" onclick="goToImageSecurity(2)"
+                                style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                        </div>
                     </div>
                     
                     <div style="color: #b0b0b0;">
-                        <strong>Результат:</strong> Визуальный обзор всех возможностей обеспечения безопасности в корпоративной среде.
+                        <strong>Результат:</strong> Визуальный обзор возможностей обеспечения безопасности.
                     </div>
                 </div>
 
@@ -877,7 +1118,7 @@
     </script>
     <script type="module" src="../js/mobile-menu.js"></script>
     <script type="module" src="../js/main.js"></script>
+    <script type="module" src="../js/teamviewerphoto.js"></script>
 </body>
 </html>
-
 

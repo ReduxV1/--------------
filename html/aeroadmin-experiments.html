@@ -523,14 +523,79 @@
                         </ul>
                     </div>
 
-                    <div class="screenshot-placeholder"
-                        style="background: #333; border: 2px dashed #666; height: 200px; display: flex; align-items: center; justify-content: center; color: #999; margin: 20px 0; border-radius: 8px;">
-                        [Скриншот файлового менеджера AeroAdmin с демонстрацией передачи файлов]
+                    <!-- ГАЛЕРЕЯ ДЛЯ 3-ГО ЭКСПЕРИМЕНТА (СКОРОСТЬ ПЕРЕДАЧИ) -->
+                    <div class="image-gallery speed-gallery"
+                        style="margin: 20px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3); background: #1a1a1a;">
+                        <div class="gallery-container" style="position: relative; background: #1a1a1a;">
+                            <!-- ОСНОВНОЕ ИЗОБРАЖЕНИЕ/ВИДЕО -->
+                            <div class="media-wrapper"
+                                style="text-align: center; min-height: 400px; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; background: #1a1a1a;">
+                                <!-- Изображение по умолчанию -->
+                                <img id="mainImageSpeed" src="../izobr/AeroAdmin/start-recording.jpeg" alt="Начало записи AeroAdmin"
+                                    style="max-width: 100%; max-height: 350px; height: auto; border-radius: 8px; transition: all 0.3s ease; cursor: pointer; display: block;"
+                                    onclick="toggleZoomSpeed(this)">
+                                
+                                <!-- Видео (скрыто по умолчанию) -->
+                                <video id="mainVideoSpeed" 
+                                    style="max-width: 100%; max-height: 350px; height: auto; border-radius: 8px; transition: all 0.3s ease; display: none;" 
+                                    controls preload="metadata" muted>
+                                    <source src="../izobr/AeroAdmin/recording.mp4" type="video/mp4">
+                                </video>
+                            </div>
+
+                            <!-- НАВИГАЦИОННЫЕ СТРЕЛКИ -->
+                            <button class="gallery-nav-speed prev"
+                                style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); background: rgba(40,167,69,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">‹</button>
+
+                            <button class="gallery-nav-speed next"
+                                style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: rgba(40,167,69,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">›</button>
+
+                            <!-- СЧЕТЧИК ИЗОБРАЖЕНИЙ -->
+                            <div class="media-counter-speed"
+                                style="position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.8); color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px; z-index: 10;">
+                                <span id="currentMediaSpeed">1</span> / <span id="totalMediaSpeed">3</span>
+                            </div>
+
+                            <!-- ИКОНКА УВЕЛИЧЕНИЯ/ВИДЕО -->
+                            <div class="zoom-hint-speed"
+                                style="position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.8); color: white; padding: 8px 12px; border-radius: 20px; font-size: 12px; z-index: 10; display: flex; align-items: center; gap: 5px;">
+                                <svg id="zoomIcon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M15.5,14L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5M9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5C7,5 5,7 5,9.5C7,12 9.5,14Z" />
+                                </svg>
+                                <svg id="videoIcon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                                    <path d="M8,5.14V19.14L19,12.14L8,5.14Z" />
+                                </svg>
+                                <span id="hintText">Увеличить</span>
+                            </div>
+                        </div>
+
+                        <!-- ОПИСАНИЕ МЕДИА -->
+                        <div class="media-description-speed"
+                            style="padding: 15px; background: rgba(40,167,69,0.1); color: #e0e0e0; text-align: center; font-size: 14px;">
+                            <span id="mediaDescriptionSpeed">Файловый менеджер AeroAdmin - интерфейс передачи файлов</span>
+                        </div>
+
+                        <!-- МИНИАТЮРЫ -->
+                        <div class="thumbnails-speed"
+                            style="display: flex; justify-content: center; gap: 10px; padding: 15px; background: rgba(40,167,69,0.1); flex-wrap: wrap;">
+                            <img src="../izobr/AeroAdmin/start-recording.jpeg" alt="Начало записи"
+                                class="thumbnail-speed active" onclick="goToMediaSpeed(0)"
+                                style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid #28a745; transition: all 0.3s ease;">
+                            <img src="../izobr/AeroAdmin/record-setting.png" alt="Настройка записи"
+                                class="thumbnail-speed" onclick="goToMediaSpeed(1)"
+                                style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                            <div class="thumbnail-speed video-thumbnail" onclick="goToMediaSpeed(2)"
+                                style="width: 90px; height: 70px; background: linear-gradient(45deg, #28a745, #20c997); border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; position: relative;">
+                                <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
+                                    <path d="M8,5.14V19.14L19,12.14L8,5.14Z" />
+                                </svg>
+                                <div style="position: absolute; bottom: 2px; right: 4px; background: rgba(0,0,0,0.8); color: white; font-size: 8px; padding: 1px 3px; border-radius: 2px;">MP4</div>
+                            </div>
+                        </div>
                     </div>
 
                     <div style="color: #b0b0b0;">
-                        <strong>Результат:</strong> Наглядное сравнение эффективности передачи данных через AeroAdmin и
-                        по локальной сети.
+                        <strong>Результат:</strong> Наглядное представление возможности записиывание сессии поключения
                     </div>
                 </div>
 
@@ -550,25 +615,70 @@
                         <p><strong>Что показывается:</strong></p>
                         <ul style="margin-left: 20px;">
                             <li>Воспроизведение видео или простой игры на удаленном ПК.</li>
-                            <li>Просмотр этого контента через окно AeroAdmin с разными настройками качества ("Скорость",
-                                "Качество").</li>
-                            <li>Использование функции "Экранная доска" (если доступна) для рисования поверх
-                                динамического контента.</li>
+                            <li>Просмотр этого контента через окно AeroAdmin </li>
                             <li>Наблюдение за артефактами изображения, плавностью и отзывчивостью управления.</li>
-                            <li>Отключение визуальных эффектов для ускорения</li>
-                            <li>Мониторинг скорости соединения в реальном времени</li>
-                            <li>Профили настроек для разных сценариев</li>
                         </ul>
                     </div>
 
-                    <div class="screenshot-placeholder"
-                        style="background: #333; border: 2px dashed #666; height: 200px; display: flex; align-items: center; justify-content: center; color: #999; margin: 20px 0; border-radius: 8px;">
-                        [Скриншот настроек качества и производительности AeroAdmin]
+                    <!-- ГАЛЕРЕЯ ДЛЯ 4-ГО ЭКСПЕРИМЕНТА (КАЧЕСТВО ВИДЕОПОТОКА) -->
+                    <div class="image-gallery performance-gallery"
+                        style="margin: 20px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3); background: #1a1a1a;">
+                        <div class="gallery-container" style="position: relative; background: #1a1a1a;">
+                            <!-- ОСНОВНОЕ ИЗОБРАЖЕНИЕ -->
+                            <div class="image-wrapper"
+                                style="text-align: center; min-height: 400px; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; background: #1a1a1a;">
+                                <img id="mainImagePerformance" src="izobr/aeroadmin/performance/quality-settings.png" alt="Настройки качества AeroAdmin"
+                                    style="max-width: 100%; max-height: 350px; height: auto; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;"
+                                    onclick="toggleZoomPerformance(this)">
+                            </div>
+
+                            <!-- НАВИГАЦИОННЫЕ СТРЕЛКИ -->
+                            <button class="gallery-nav-performance prev"
+                                style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); background: rgba(220,53,69,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">‹</button>
+
+                            <button class="gallery-nav-performance next"
+                                style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: rgba(220,53,69,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">›</button>
+
+                            <!-- СЧЕТЧИК ИЗОБРАЖЕНИЙ -->
+                            <div class="image-counter-performance"
+                                style="position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.8); color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px; z-index: 10;">
+                                <span id="currentImagePerformance">1</span> / <span id="totalImagesPerformance">3</span>
+                            </div>
+
+                            <!-- ИКОНКА УВЕЛИЧЕНИЯ -->
+                            <div class="zoom-hint-performance"
+                                style="position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.8); color: white; padding: 8px 12px; border-radius: 20px; font-size: 12px; z-index: 10; display: flex; align-items: center; gap: 5px;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M15.5,14L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5M9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5C7,5 5,7 5,9.5C7,12 9.5,14Z" />
+                                </svg>
+                                Увеличить
+                            </div>
+                        </div>
+
+                        <!-- ОПИСАНИЕ ИЗОБРАЖЕНИЯ -->
+                        <div class="image-description-performance"
+                            style="padding: 15px; background: rgba(220,53,69,0.1); color: #e0e0e0; text-align: center; font-size: 14px;">
+                            <span id="imageDescriptionPerformance">Настройки качества и производительности AeroAdmin</span>
+                        </div>
+
+                        <!-- МИНИАТЮРЫ -->
+                        <div class="thumbnails-performance"
+                            style="display: flex; justify-content: center; gap: 10px; padding: 15px; background: rgba(220,53,69,0.1); flex-wrap: wrap;">
+                            <img src="../izobr/AeroAdmin/settings.png" alt="Настройки изображения в AeroAdmin"
+                                class="thumbnail-performance active" onclick="goToImagePerformance(0)"
+                                style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid #dc3545; transition: all 0.3s ease;">
+                            <img src="../izobr/AeroAdmin/video-settings.png" alt="Настройка воспроизводимого видеоконтента"
+                                class="thumbnail-performance" onclick="goToImagePerformance(1)"
+                                style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                            <img src="../izobr/AeroAdmin/quality.png" alt="Качество в AeroAdmin"
+                                class="thumbnail-performance" onclick="goToImagePerformance(2)"
+                                style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                        </div>
                     </div>
 
                     <div style="color: #b0b0b0;">
-                        <strong>Результат:</strong> Иллюстрация алгоритмов адаптации графики AeroAdmin для обеспечения
-                        контроля даже при высокой нагрузке.
+                        <strong>Результат:</strong> Демонстрация качества динамического контента в AeroAdmin.
                     </div>
                 </div>
 
@@ -578,34 +688,83 @@
                     <h2 style="color: #6f42c1; margin-bottom: 20px;">
                         <span class="experiment-number"
                             style="background: #6f42c1; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8em; margin-right: 15px;">05</span>
-                        Система безопасности и контроля доступа
+                        Использование некоторых внутренних функций AeroAdmin
                     </h2>
 
                     <div style="color: #e0e0e0; line-height: 1.6; margin-bottom: 25px;">
-                        <p><strong>Цель:</strong> Продемонстрировать возможности обеспечения безопасности и настройки
-                            прав
-                            доступа в российском решении AeroAdmin.</p>
+                        <p><strong>Цель:</strong> Продемонстрировать возможности использования внутренних функций.</p>
 
                         <p><strong>Что показывается:</strong></p>
                         <ul style="margin-left: 20px;">
-                            <li>Настройка прав доступа для подключающихся пользователей</li>
-                            <li>Ограничения на управление клавиатурой и мышью</li>
-                            <li>Блокировка локального экрана во время сессии</li>
-                            <li>Настройки доступа к файловой системе</li>
-                            <li>Белые списки IP-адресов для подключения</li>
-                            <li>256-битное AES шифрование соединения</li>
-                            <li>Журнал подключений и аудит действий</li>
+                            <li>Возможность включения голосового чата </li>
+                            <li>Возможность изменения разрешения экрана</li>
+                            <li>Использование комбинации CTRL+ALT+DEL</li>
                         </ul>
                     </div>
+<!-- ГАЛЕРЕЯ ДЛЯ 5-ГО ЭКСПЕРИМЕНТА (ВНУТРЕННИЕ ФУНКЦИИ) -->
+                    <div class="image-gallery functions-gallery"
+                        style="margin: 20px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(111, 66, 193, 0.3); background: #1a1a1a;">
+                        <div class="gallery-container" style="position: relative; background: #1a1a1a;">
+                            <!-- ОСНОВНОЕ ИЗОБРАЖЕНИЕ -->
+                            <div class="image-wrapper"
+                                style="text-align: center; min-height: 400px; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; background: #1a1a1a;">
+                                <img id="mainImageFunctions" src="../izobr/AeroAdmin/voice-chat.png" alt="Голосовой чат AeroAdmin"
+                                    style="max-width: 100%; max-height: 350px; height: auto; border-radius: 8px; transition: all 0.3s ease; cursor: pointer;"
+                                    onclick="toggleZoomFunctions(this)">
+                            </div>
 
-                    <div class="screenshot-placeholder"
-                        style="background: #333; border: 2px dashed #666; height: 200px; display: flex; align-items: center; justify-content: center; color: #999; margin: 20px 0; border-radius: 8px;">
-                        [Скриншот настроек безопасности и контроля доступа в AeroAdmin]
+                            <!-- НАВИГАЦИОННЫЕ СТРЕЛКИ -->
+                            <button class="gallery-nav-functions prev"
+                                style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); background: rgba(111,66,193,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">‹</button>
+
+                            <button class="gallery-nav-functions next"
+                                style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: rgba(111,66,193,0.9); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 10; font-size: 18px;">›</button>
+
+                            <!-- СЧЕТЧИК ИЗОБРАЖЕНИЙ -->
+                            <div class="image-counter-functions"
+                                style="position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.8); color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px; z-index: 10;">
+                                <span id="currentImageFunctions">1</span> / <span id="totalImagesFunctions">4</span>
+                            </div>
+
+                            <!-- ИКОНКА УВЕЛИЧЕНИЯ -->
+                            <div class="zoom-hint-functions"
+                                style="position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.8); color: white; padding: 8px 12px; border-radius: 20px; font-size: 12px; z-index: 10; display: flex; align-items: center; gap: 5px;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M15.5,14L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5M9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5C7,5 5,7 5,9.5C7,12 9.5,14Z" />
+                                </svg>
+                                Увеличить
+                            </div>
+                        </div>
+
+                        <!-- ОПИСАНИЕ ИЗОБРАЖЕНИЯ -->
+                        <div class="image-description-functions"
+                            style="padding: 15px; background: rgba(111,66,193,0.1); color: #e0e0e0; text-align: center; font-size: 14px;">
+                            <span id="imageDescriptionFunctions">Настройка голосового чата в AeroAdmin</span>
+                        </div>
+
+                        <!-- МИНИАТЮРЫ -->
+                        <div class="thumbnails-functions"
+                            style="display: flex; justify-content: center; gap: 10px; padding: 15px; background: rgba(111,66,193,0.1); flex-wrap: wrap;">
+                            <img src="../izobr/AeroAdmin/voice-chat.png" alt="Голосовой чат"
+                                class="thumbnail-functions active" onclick="goToImageFunctions(0)"
+                                style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid #6f42c1; transition: all 0.3s ease;">
+                            <img src="../izobr/AeroAdmin/FullHD.png" alt="Изначальное разрешения экрана"
+                                class="thumbnail-functions" onclick="goToImageFunctions(1)"
+                                style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                            <img src="../izobr/AeroAdmin/720p.png" alt="Измененное разрешение"
+                                class="thumbnail-functions" onclick="goToImageFunctions(3)"
+                                style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                            <img src="../izobr/AeroAdmin/ctrlaltdel.png" alt="Комбинация CTRL+ALT+DEL"
+                                class="thumbnail-functions" onclick="goToImageFunctions(2)"
+                                style="width: 90px; height: 70px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.3s ease;">
+                            
+                        </div>
                     </div>
 
-                    <div style="color: #b0b0b0;">
-                        <strong>Результат:</strong> Визуальный обзор корпоративных возможностей защиты и контроля
-                        доступа.
+                    <!-- РЕЗУЛЬТАТ -->
+                    <div style="color: #b0b0b0; margin-top: 20px;">
+                        <strong>Результат:</strong> Демонстрация дополнительных возможностей и внутренних функций AeroAdmin для расширенного управления.
                     </div>
                 </div>
 
@@ -916,823 +1075,7 @@
     </script>
     <script type="module" src="../js/mobile-menu.js"></script>
     <script type="module" src="../js/main.js"></script>
-    <script>
-        // ГАЛЕРЕЯ ИЗОБРАЖЕНИЙ ДЛЯ AEROADMIN (1-й эксперимент)
-        let currentImageIndexAero = 0;
-        const imageDataAero = [
-            {
-                src: '../izobr/aeroadmin/download.png',
-                alt: 'Загрузка AeroAdmin',
-                description: 'Портативная версия AeroAdmin - первый запуск'
-            },
-            {
-                src: '../izobr/aeroadmin/main-window.png',
-                alt: 'Главное окно',
-                description: 'Основное окно программы'
-            },
-            {
-                src: '../izobr/aeroadmin/connection-id.png',
-                alt: 'ID подключения',
-                description: 'Автоматическое получение ID и пароля подключения'
-            },
-        ];
-
-        // ГАЛЕРЕЯ ИЗОБРАЖЕНИЙ ДЛЯ БЕЗОПАСНОСТИ (2-й эксперимент)
-        let currentImageIndexSecurity = 0;
-        const imageDataSecurity = [
-            {
-                src: '../izobr/aeroadmin/main-window.png',
-                alt: 'Настройка пароля безопасности',
-                description: 'Настройка временного пароля для защиты доступа'
-            },
-            {
-                src: '../izobr/aeroadmin/request-password.png',
-                alt: 'Запрос пароля',
-                description: 'Запрос пароля при попытке подключения'
-            },
-            {
-                src: '../izobr/aeroadmin/remote-connect.jpg',
-                alt: 'Успешное подключение',
-                description: 'Успешное подключение с правильным паролем'
-            },
-            {
-                src: '../izobr/aeroadmin/wrong-pass.png',
-                alt: 'Неправильный пароль',
-                description: 'Предупреждение о неправильном пароле'
-            },
-            {
-                src: '../izobr/aeroadmin/wrong-pass1.png',
-                alt: 'Несколько неудачных паролей',
-                description: 'Предупреждение о нескольких неудачных попытках входа'
-            }
-        ];
-
-        // ФУНКЦИИ ДЛЯ 1-Й ГАЛЕРЕИ (AEROADMIN)
-        function showImageAero(index) {
-            console.log('showImageAero вызвана с индексом:', index);
-
-            if (index < 0 || index >= imageDataAero.length) {
-                console.log('Некорректный индекс для AeroAdmin галереи:', index);
-                return;
-            }
-
-            const mainImage = document.getElementById('mainImageAero');
-            const thumbnails = document.querySelectorAll('.thumbnail-aero');
-            const currentCounter = document.getElementById('currentImageAero');
-            const description = document.getElementById('imageDescriptionAero');
-
-            if (!mainImage) {
-                console.log('mainImageAero не найден');
-                return;
-            }
-
-            const data = imageDataAero[index];
-
-            // Плавное обновление изображения
-            mainImage.style.opacity = '0.3';
-            setTimeout(() => {
-                mainImage.src = data.src;
-                mainImage.alt = data.alt;
-                mainImage.style.opacity = '1';
-                console.log('AeroAdmin галерея: изображение обновлено:', data.src);
-            }, 150);
-
-            // Обновление миниатюр
-            thumbnails.forEach((thumb, i) => {
-                if (i === index) {
-                    thumb.classList.add('active');
-                    thumb.style.border = '2px solid #ff6b35';
-                    thumb.style.opacity = '1';
-                } else {
-                    thumb.classList.remove('active');
-                    thumb.style.border = '2px solid transparent';
-                    thumb.style.opacity = '0.7';
-                }
-            });
-
-            // Обновление счетчика и описания
-            if (currentCounter) {
-                currentCounter.textContent = index + 1;
-            }
-            if (description) {
-                description.textContent = data.description;
-            }
-
-            currentImageIndexAero = index;
-        }
-
-        function changeImageAero(direction) {
-            console.log('changeImageAero вызвана с направлением:', direction);
-
-            let newIndex = currentImageIndexAero + direction;
-
-            if (newIndex >= imageDataAero.length) {
-                newIndex = 0;
-            } else if (newIndex < 0) {
-                newIndex = imageDataAero.length - 1;
-            }
-
-            console.log('AeroAdmin: переход от индекса', currentImageIndexAero, 'к индексу', newIndex);
-            showImageAero(newIndex);
-        }
-
-        function goToImageAero(index) {
-            console.log('goToImageAero вызвана с индексом:', index);
-            if (index >= 0 && index < imageDataAero.length) {
-                showImageAero(index);
-            }
-        }
-
-        function toggleZoomAero(img) {
-            if (img.classList.contains('zoomed')) {
-                img.classList.remove('zoomed');
-                img.style.transform = 'scale(1)';
-                img.style.cursor = 'zoom-in';
-            } else {
-                img.classList.add('zoomed');
-                img.style.transform = 'scale(1.8)';
-                img.style.transformOrigin = 'center';
-                img.style.cursor = 'zoom-out';
-            }
-        }
-
-        // ФУНКЦИИ ДЛЯ 2-Й ГАЛЕРЕИ (БЕЗОПАСНОСТЬ)
-        function showImageSecurity(index) {
-            console.log('showImageSecurity вызвана с индексом:', index);
-
-            if (index < 0 || index >= imageDataSecurity.length) {
-                console.log('Некорректный индекс для Security галереи:', index);
-                return;
-            }
-
-            const mainImage = document.getElementById('mainImageSecurity');
-            const thumbnails = document.querySelectorAll('.thumbnail-security');
-            const currentCounter = document.getElementById('currentImageSecurity');
-            const description = document.getElementById('imageDescriptionSecurity');
-
-            if (!mainImage) {
-                console.log('mainImageSecurity не найден');
-                return;
-            }
-
-            const data = imageDataSecurity[index];
-
-            // Плавное обновление изображения
-            mainImage.style.opacity = '0.3';
-            setTimeout(() => {
-                mainImage.src = data.src;
-                mainImage.alt = data.alt;
-                mainImage.style.opacity = '1';
-                console.log('Security галерея: изображение обновлено:', data.src);
-            }, 150);
-
-            // Обновление миниатюр
-            thumbnails.forEach((thumb, i) => {
-                if (i === index) {
-                    thumb.classList.add('active');
-                    thumb.style.border = '2px solid #4a9eff';
-                    thumb.style.opacity = '1';
-                } else {
-                    thumb.classList.remove('active');
-                    thumb.style.border = '2px solid transparent';
-                    thumb.style.opacity = '0.7';
-                }
-            });
-
-            // Обновление счетчика и описания
-            if (currentCounter) {
-                currentCounter.textContent = index + 1;
-            }
-            if (description) {
-                description.textContent = data.description;
-            }
-            currentImageIndexSecurity = index;
-        }
-
-        function changeImageSecurity(direction) {
-            console.log('changeImageSecurity вызвана с направлением:', direction);
-
-            let newIndex = currentImageIndexSecurity + direction;
-
-            if (newIndex >= imageDataSecurity.length) {
-                newIndex = 0;
-            } else if (newIndex < 0) {
-                newIndex = imageDataSecurity.length - 1;
-            }
-
-            console.log('Security: переход от индекса', currentImageIndexSecurity, 'к индексу', newIndex);
-            showImageSecurity(newIndex);
-        }
-
-        function goToImageSecurity(index) {
-            console.log('goToImageSecurity вызвана с индексом:', index);
-            if (index >= 0 && index < imageDataSecurity.length) {
-                showImageSecurity(index);
-            }
-        }
-
-        function toggleZoomSecurity(img) {
-            if (img.classList.contains('zoomed')) {
-                img.classList.remove('zoomed');
-                img.style.transform = 'scale(1)';
-                img.style.cursor = 'zoom-in';
-            } else {
-                img.classList.add('zoomed');
-                img.style.transform = 'scale(1.8)';
-                img.style.transformOrigin = 'center';
-                img.style.cursor = 'zoom-out';
-            }
-        }
-
-        // ИНИЦИАЛИЗАЦИЯ HOVER ЭФФЕКТОВ ДЛЯ AEROADMIN ГАЛЕРЕИ
-        function initHoverEffectsAero() {
-            console.log('Инициализация hover эффектов для AeroAdmin галереи');
-
-            // Эффекты для навигационных кнопок
-            document.querySelectorAll('.gallery-nav-aero').forEach(btn => {
-                btn.addEventListener('mouseenter', function () {
-                    this.style.background = '#ff6b35';
-                    this.style.transform = 'translateY(-50%) scale(1.1)';
-                });
-
-                btn.addEventListener('mouseleave', function () {
-                    this.style.background = 'rgba(255,107,53,0.9)';
-                    this.style.transform = 'translateY(-50%) scale(1)';
-                });
-
-                btn.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const isPrev = this.classList.contains('prev');
-                    console.log('Клик по кнопке AeroAdmin галереи:', isPrev ? 'НАЗАД' : 'ВПЕРЕД');
-                    changeImageAero(isPrev ? -1 : 1);
-                });
-            });
-
-            // Эффекты для миниатюр
-            document.querySelectorAll('.thumbnail-aero').forEach((thumb, index) => {
-                thumb.addEventListener('mouseenter', function () {
-                    if (!this.classList.contains('active')) {
-                        this.style.opacity = '1';
-                        this.style.transform = 'scale(1.05)';
-                    }
-                });
-
-                thumb.addEventListener('mouseleave', function () {
-                    if (!this.classList.contains('active')) {
-                        this.style.opacity = '0.7';
-                        this.style.transform = 'scale(1)';
-                    }
-                });
-
-                thumb.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    console.log('Клик по миниатюре AeroAdmin галереи:', index);
-                    goToImageAero(index);
-                });
-            });
-        }
-
-        // ИНИЦИАЛИЗАЦИЯ HOVER ЭФФЕКТОВ ДЛЯ SECURITY ГАЛЕРЕИ
-        function initHoverEffectsSecurity() {
-            console.log('Инициализация hover эффектов для Security галереи');
-
-            // Эффекты для навигационных кнопок
-            document.querySelectorAll('.gallery-nav-security').forEach(btn => {
-                btn.addEventListener('mouseenter', function () {
-                    this.style.background = '#4a9eff';
-                    this.style.transform = 'translateY(-50%) scale(1.1)';
-                });
-
-                btn.addEventListener('mouseleave', function () {
-                    this.style.background = 'rgba(74,158,255,0.9)';
-                    this.style.transform = 'translateY(-50%) scale(1)';
-                });
-
-                btn.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const isPrev = this.classList.contains('prev');
-                    console.log('Клик по кнопке Security галереи:', isPrev ? 'НАЗАД' : 'ВПЕРЕД');
-                    changeImageSecurity(isPrev ? -1 : 1);
-                });
-            });
-
-            // Эффекты для миниатюр
-            document.querySelectorAll('.thumbnail-security').forEach((thumb, index) => {
-                thumb.addEventListener('mouseenter', function () {
-                    if (!this.classList.contains('active')) {
-                        this.style.opacity = '1';
-                        this.style.transform = 'scale(1.05)';
-                    }
-                });
-
-                thumb.addEventListener('mouseleave', function () {
-                    if (!this.classList.contains('active')) {
-                        this.style.opacity = '0.7';
-                        this.style.transform = 'scale(1)';
-                    }
-                });
-
-                thumb.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    console.log('Клик по миниатюре Security галереи:', index);
-                    goToImageSecurity(index);
-                });
-            });
-        }
-
-        // ИНИЦИАЛИЗАЦИЯ AEROADMIN ГАЛЕРЕИ
-        function initGalleryAero() {
-            console.log('Инициализация AeroAdmin галереи');
-
-            const mainImage = document.getElementById('mainImageAero');
-            const thumbnails = document.querySelectorAll('.thumbnail-aero');
-
-            if (!mainImage) {
-                console.log('mainImageAero не найден при инициализации');
-                return false;
-            }
-
-            if (thumbnails.length === 0) {
-                console.log('Миниатюры AeroAdmin галереи не найдены');
-                return false;
-            }
-
-            console.log('AeroAdmin галерея: найдено миниатюр:', thumbnails.length);
-
-            // Инициализация hover эффектов
-            initHoverEffectsAero();
-
-            // Показываем первое изображение
-            showImageAero(0);
-
-            console.log('AeroAdmin галерея успешно инициализирована');
-            return true;
-        }
-
-        // ИНИЦИАЛИЗАЦИЯ SECURITY ГАЛЕРЕИ
-        function initGallerySecurity() {
-            console.log('Инициализация Security галереи');
-
-            const mainImage = document.getElementById('mainImageSecurity');
-            const thumbnails = document.querySelectorAll('.thumbnail-security');
-
-            if (!mainImage) {
-                console.log('mainImageSecurity не найден при инициализации');
-                return false;
-            }
-
-            if (thumbnails.length === 0) {
-                console.log('Миниатюры Security галереи не найдены');
-                return false;
-            }
-
-            console.log('Security галерея: найдено миниатюр:', thumbnails.length);
-
-            // Инициализация hover эффектов
-            initHoverEffectsSecurity();
-
-            // Показываем первое изображение
-            showImageSecurity(0);
-
-            console.log('Security галерея успешно инициализирована');
-            return true;
-        }
-
-        // ОБЩАЯ ИНИЦИАЛИЗАЦИЯ ГАЛЕРЕЙ
-        document.addEventListener('DOMContentLoaded', function () {
-            console.log('DOM загружен, инициализация галерей');
-
-            // Инициализация AeroAdmin галереи
-            setTimeout(() => {
-                const successAero = initGalleryAero();
-                if (!successAero) {
-                    console.log('Повторная попытка инициализации AeroAdmin галереи');
-                    setTimeout(() => initGalleryAero(), 1000);
-                }
-            }, 100);
-
-            // Инициализация Security галереи
-            setTimeout(() => {
-                const successSecurity = initGallerySecurity();
-                if (!successSecurity) {
-                    console.log('Повторная попытка инициализации Security галереи');
-                    setTimeout(() => initGallerySecurity(), 1000);
-                }
-            }, 200);
-        });
-
-        // ПОДДЕРЖКА КЛАВИАТУРЫ ДЛЯ ОБЕИХ ГАЛЕРЕЙ
-        document.addEventListener('keydown', (e) => {
-            console.log('Нажата клавиша:', e.key);
-
-            if (e.key === 'Escape') {
-                // Закрытие всех увеличенных изображений
-                const zoomedImages = document.querySelectorAll('.zoomed');
-                zoomedImages.forEach(img => {
-                    img.classList.remove('zoomed');
-                    img.style.transform = 'scale(1)';
-                    img.style.cursor = 'zoom-in';
-                });
-                console.log('Закрыты все увеличенные изображения');
-            }
-
-            // Определяем активную галерею по фокусу
-            const activeElement = document.activeElement;
-            const isAeroGallery = activeElement && (
-                activeElement.closest('.image-gallery:not(.security-gallery)') ||
-                activeElement.classList.contains('gallery-nav-aero') ||
-                activeElement.classList.contains('thumbnail-aero')
-            );
-
-            const isSecurityGallery = activeElement && (
-                activeElement.closest('.security-gallery') ||
-                activeElement.classList.contains('gallery-nav-security') ||
-                activeElement.classList.contains('thumbnail-security')
-            );
-
-            if (isAeroGallery) {
-                if (e.key === 'ArrowLeft') {
-                    console.log('Клавиша ВЛЕВО - AeroAdmin галерея (НАЗАД)');
-                    changeImageAero(-1);
-                } else if (e.key === 'ArrowRight') {
-                    console.log('Клавиша ВПРАВО - AeroAdmin галерея (ВПЕРЕД)');
-                    changeImageAero(1);
-                }
-            } else if (isSecurityGallery) {
-                if (e.key === 'ArrowLeft') {
-                    console.log('Клавиша ВЛЕВО - Security галерея (НАЗАД)');
-                    changeImageSecurity(-1);
-                } else if (e.key === 'ArrowRight') {
-                    console.log('Клавиша ВПРАВО - Security галерея (ВПЕРЕД)');
-                    changeImageSecurity(1);
-                }
-            }
-        });
-
-        // ЖЕСТЫ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ
-        let touchStartXAero = 0;
-        let touchEndXAero = 0;
-        let touchStartXSecurity = 0;
-        let touchEndXSecurity = 0;
-
-        function handleGestureAero() {
-            if (touchEndXAero < touchStartXAero - 50) {
-                console.log('Свайп ВЛЕВО - следующее изображение AeroAdmin');
-                changeImageAero(1);
-            }
-            if (touchEndXAero > touchStartXAero + 50) {
-                console.log('Свайп ВПРАВО - предыдущее изображение AeroAdmin');
-                changeImageAero(-1);
-            }
-        }
-
-        function handleGestureSecurity() {
-            if (touchEndXSecurity < touchStartXSecurity - 50) {
-                console.log('Свайп ВЛЕВО - следующее изображение Security');
-                changeImageSecurity(1);
-            }
-            if (touchEndXSecurity > touchStartXSecurity + 50) {
-                console.log('Свайп ВПРАВО - предыдущее изображение Security');
-                changeImageSecurity(-1);
-            }
-        }
-
-        // Добавляем поддержку жестов после инициализации
-        setTimeout(() => {
-            // Жесты для AeroAdmin галереи
-            const imageWrapperAero = document.querySelector('.image-gallery:not(.security-gallery) .image-wrapper');
-            if (imageWrapperAero) {
-                imageWrapperAero.addEventListener('touchstart', e => {
-                    touchStartXAero = e.changedTouches[0].screenX;
-                });
-
-                imageWrapperAero.addEventListener('touchend', e => {
-                    touchEndXAero = e.changedTouches[0].screenX;
-                    handleGestureAero();
-                });
-                console.log('Жесты для AeroAdmin галереи инициализированы');
-            }
-
-            // Жесты для Security галереи
-            const imageWrapperSecurity = document.querySelector('.security-gallery .image-wrapper');
-            if (imageWrapperSecurity) {
-                imageWrapperSecurity.addEventListener('touchstart', e => {
-                    touchStartXSecurity = e.changedTouches[0].screenX;
-                });
-
-                imageWrapperSecurity.addEventListener('touchend', e => {
-                    touchEndXSecurity = e.changedTouches[0].screenX;
-                    handleGestureSecurity();
-                });
-                console.log('Жесты для Security галереи инициализированы');
-            }
-        }, 500);
-
-        // ОПТИМИЗАЦИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ
-        function optimizeForMobile() {
-            if (window.innerWidth <= 768) {
-                // Увеличиваем размер кнопок навигации на мобильных
-                document.querySelectorAll('.gallery-nav-aero, .gallery-nav-security').forEach(btn => {
-                    btn.style.width = '60px';
-                    btn.style.height = '60px';
-                    btn.style.fontSize = '24px';
-                });
-
-                // Увеличиваем миниатюры
-                document.querySelectorAll('.thumbnail-aero, .thumbnail-security').forEach(thumb => {
-                    thumb.style.width = '80px';
-                    thumb.style.height = '60px';
-                });
-            }
-        }
-
-        // Запуск оптимизации при загрузке и изменении размера
-        window.addEventListener('load', optimizeForMobile);
-        window.addEventListener('resize', optimizeForMobile);
-
-        // ИНДИКАТОР ЗАГРУЗКИ ИЗОБРАЖЕНИЙ
-        function addImageLoadingIndicators() {
-            const mainImages = document.querySelectorAll('#mainImageAero, #mainImageSecurity');
-
-            mainImages.forEach(mainImage => {
-                if (mainImage) {
-                    mainImage.addEventListener('loadstart', function () {
-                        this.style.opacity = '0.5';
-                        console.log('Начало загрузки изображения:', this.id);
-                    });
-
-                    mainImage.addEventListener('load', function () {
-                        this.style.opacity = '1';
-                        console.log('Изображение загружено:', this.id);
-                    });
-
-                    mainImage.addEventListener('error', function () {
-                        this.style.opacity = '1';
-                        this.alt = 'Изображение не загружено';
-                        console.log('Ошибка загрузки изображения:', this.id);
-                    });
-                }
-            });
-        }
-
-        // Инициализация индикатора загрузки
-        setTimeout(addImageLoadingIndicators, 500);
-
-        // ПОДСКАЗКИ ДЛЯ ЭЛЕМЕНТОВ УПРАВЛЕНИЯ
-        function addTooltips() {
-            // AeroAdmin галерея
-            const prevBtnAero = document.querySelector('.gallery-nav-aero.prev');
-            const nextBtnAero = document.querySelector('.gallery-nav-aero.next');
-            const zoomHintAero = document.querySelector('.zoom-hint-aero');
-
-            if (prevBtnAero) prevBtnAero.title = 'Предыдущий скриншот AeroAdmin (←)';
-            if (nextBtnAero) nextBtnAero.title = 'Следующий скриншот AeroAdmin (→)';
-            if (zoomHintAero) zoomHintAero.title = 'Нажмите на изображение для увеличения';
-
-            // Security галерея
-            const prevBtnSecurity = document.querySelector('.gallery-nav-security.prev');
-            const nextBtnSecurity = document.querySelector('.gallery-nav-security.next');
-            const zoomHintSecurity = document.querySelector('.zoom-hint-security');
-
-            if (prevBtnSecurity) prevBtnSecurity.title = 'Предыдущий скриншот безопасности (←)';
-            if (nextBtnSecurity) nextBtnSecurity.title = 'Следующий скриншот безопасности (→)';
-            if (zoomHintSecurity) zoomHintSecurity.title = 'Нажмите на изображение для увеличения';
-        }
-
-        // Инициализация подсказок
-        setTimeout(addTooltips, 1000);
-
-        // АВТОМАТИЧЕСКОЕ ВОСПРОИЗВЕДЕНИЕ (ОПЦИОНАЛЬНО)
-        let autoplayIntervalAero;
-        let autoplayIntervalSecurity;
-
-        function startAutoplayAero() {
-            autoplayIntervalAero = setInterval(() => {
-                changeImageAero(1);
-            }, 6000);
-            console.log('Автовоспроизведение AeroAdmin запущено');
-        }
-
-        function startAutoplaySecurity() {
-            autoplayIntervalSecurity = setInterval(() => {
-                changeImageSecurity(1);
-            }, 7000);
-            console.log('Автовоспроизведение Security запущено');
-        }
-
-        function stopAutoplayAero() {
-            if (autoplayIntervalAero) {
-                clearInterval(autoplayIntervalAero);
-                autoplayIntervalAero = null;
-                console.log('Автовоспроизведение AeroAdmin остановлено');
-            }
-        }
-
-        function stopAutoplaySecurity() {
-            if (autoplayIntervalSecurity) {
-                clearInterval(autoplayIntervalSecurity);
-                autoplayIntervalSecurity = null;
-                console.log('Автовоспроизведение Security остановлено');
-            }
-        }
-
-        // Запуск автовоспроизведения через некоторое время после загрузки
-        setTimeout(() => {
-            if (document.getElementById('mainImageAero')) {
-                startAutoplayAero();
-            }
-            if (document.getElementById('mainImageSecurity')) {
-                startAutoplaySecurity();
-            }
-        }, 20000);
-
-        // Остановка автовоспроизведения при взаимодействии пользователя
-        document.addEventListener('DOMContentLoaded', function () {
-            setTimeout(() => {
-                document.querySelectorAll('.gallery-nav-aero, .thumbnail-aero').forEach(element => {
-                    element.addEventListener('click', stopAutoplayAero);
-                });
-
-                document.querySelectorAll('.gallery-nav-security, .thumbnail-security').forEach(element => {
-                    element.addEventListener('click', stopAutoplaySecurity);
-                });
-            }, 1000);
-        });
-
-        // ДОПОЛНИТЕЛЬНЫЕ ВИЗУАЛЬНЫЕ ЭФФЕКТЫ ДЛЯ AEROADMIN
-        function addAeroAdminEffects() {
-            // Специальные эффекты для placeholder'ов в стиле AeroAdmin
-            let aeroadminPulseInterval;
-
-            function startAeroAdminPulse() {
-                const placeholders = document.querySelectorAll('.screenshot-placeholder');
-                let currentIndex = 0;
-
-                aeroadminPulseInterval = setInterval(() => {
-                    // Убираем эффекты с предыдущих элементов
-                    placeholders.forEach(p => {
-                        p.style.boxShadow = 'none';
-                        p.style.borderColor = '#666';
-                    });
-
-                    // Добавляем AeroAdmin эффект к текущему элементу
-                    if (placeholders[currentIndex]) {
-                        placeholders[currentIndex].style.boxShadow = '0 0 25px rgba(255, 107, 53, 0.6)';
-                        placeholders[currentIndex].style.borderColor = '#ff6b35';
-                        placeholders[currentIndex].style.transition = 'all 0.4s ease';
-                    }
-
-                    currentIndex = (currentIndex + 1) % placeholders.length;
-                }, 2500);
-            }
-
-            // Запуск пульсации после загрузки
-            setTimeout(startAeroAdminPulse, 3500);
-
-            // Останавливаем пульсацию при взаимодействии
-            document.querySelectorAll('.screenshot-placeholder').forEach(placeholder => {
-                placeholder.addEventListener('mouseenter', () => {
-                    if (aeroadminPulseInterval) {
-                        clearInterval(aeroadminPulseInterval);
-                        document.querySelectorAll('.screenshot-placeholder').forEach(p => {
-                            p.style.boxShadow = 'none';
-                            p.style.borderColor = '#666';
-                        });
-                    }
-                });
-            });
-
-            // Эффект "волны" для карточек при загрузке
-            function createAeroAdminWaveEffect() {
-                const cards = document.querySelectorAll('.experiment-card');
-                cards.forEach((card, index) => {
-                    setTimeout(() => {
-                        card.style.boxShadow = '0 0 30px rgba(255, 107, 53, 0.3)';
-                        setTimeout(() => {
-                            card.style.boxShadow = '';
-                        }, 500);
-                    }, index * 300);
-                });
-            }
-
-            // Запуск волнового эффекта
-            setTimeout(createAeroAdminWaveEffect, 2000);
-
-            // Интерактивность для номеров экспериментов
-            document.querySelectorAll('.experiment-number').forEach(number => {
-                number.addEventListener('mouseenter', function () {
-                    this.style.transform = 'scale(1.1) rotate(-5deg)';
-                    this.style.boxShadow = '0 0 20px rgba(255, 107, 53, 0.8)';
-                    this.style.transition = 'all 0.3s ease';
-                });
-
-                number.addEventListener('mouseleave', function () {
-                    this.style.transform = 'scale(1) rotate(0deg)';
-                    this.style.boxShadow = '';
-                });
-            });
-        }
-
-        // СЧЕТЧИК ВРЕМЕНИ НА СТРАНИЦЕ
-        function addTimeCounter() {
-            let startTime = Date.now();
-
-            function updateTimeCounter() {
-                const timeSpent = Math.floor((Date.now() - startTime) / 1000);
-                const minutes = Math.floor(timeSpent / 60);
-                const seconds = timeSpent % 60;
-
-                let timeDisplay = document.getElementById('time-display');
-                if (!timeDisplay) {
-                    timeDisplay = document.createElement('div');
-                    timeDisplay.id = 'time-display';
-                    timeDisplay.style.cssText = `
-                        position: fixed;
-                        bottom: 20px;
-                        right: 20px;
-                        background: rgba(255, 107, 53, 0.8);
-                        color: white;
-                        padding: 10px 15px;
-                        border-radius: 20px;
-                        font-size: 0.9em;
-                        z-index: 999;
-                        backdrop-filter: blur(10px);
-                    `;
-                    document.body.appendChild(timeDisplay);
-                }
-
-                timeDisplay.textContent = `⏱️ ${minutes}:${seconds.toString().padStart(2, '0')}`;
-            }
-
-            // Обновляем счетчик каждую секунду
-            setInterval(updateTimeCounter, 1000);
-        }
-
-        // ЭФФЕКТ ПАРАЛЛАКСА ДЛЯ BACKGROUND
-        function addParallaxEffect() {
-            window.addEventListener('scroll', () => {
-                const scrolled = window.pageYOffset;
-                const parallax = document.querySelector('.slide-bg');
-                if (parallax) {
-                    const speed = scrolled * 0.5;
-                    parallax.style.transform = `translateY(${speed}px)`;
-                }
-            });
-        }
-
-        // ЭФФЕКТ ПЕЧАТАЮЩЕГОСЯ ТЕКСТА ДЛЯ ЗАКЛЮЧЕНИЯ
-        function addTypeWriterEffect() {
-            function typeWriterEffect(element, text, speed = 50) {
-                let i = 0;
-                element.innerHTML = '';
-                function type() {
-                    if (i < text.length) {
-                        element.innerHTML += text.charAt(i);
-                        i++;
-                        setTimeout(type, speed);
-                    }
-                }
-                type();
-            }
-
-            // Запуск эффекта печати для заключения при просмотре всех экспериментов
-            const conclusionObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && viewedExperiments.size >= 5) {
-                        const conclusion = entry.target.querySelector('p');
-                        if (conclusion && !conclusion.classList.contains('typed')) {
-                            conclusion.classList.add('typed');
-                            const originalText = conclusion.textContent;
-                            typeWriterEffect(conclusion, originalText, 30);
-                        }
-                    }
-                });
-            }, { threshold: 0.5 });
-
-            // Наблюдение за секцией заключения
-            const conclusionSection = document.querySelector('div[style*="background: rgba(255, 107, 53, 0.1)"]');
-            if (conclusionSection) {
-                conclusionObserver.observe(conclusionSection);
-            }
-        }
-
-        // ИНИЦИАЛИЗАЦИЯ ВСЕХ ДОПОЛНИТЕЛЬНЫХ ЭФФЕКТОВ
-        setTimeout(() => {
-            addAeroAdminEffects();
-            addTimeCounter();
-            addParallaxEffect();
-            addTypeWriterEffect();
-        }, 2000);
-
-        // ФИНАЛЬНАЯ КОНСОЛЬНАЯ ИНФОРМАЦИЯ
-        setTimeout(() => {
-            console.log('🚀 Все галереи AeroAdmin инициализированы!');
-            console.log('📸 AeroAdmin галерея: ' + imageDataAero.length + ' изображений');
-            console.log('🔒 Security галерея: ' + imageDataSecurity.length + ' изображений');
-            console.log('⚡ Интерактивные функции активированы');
-            console.log('🇷🇺 Демонстрация российского ПО готова к просмотру!');
-        }, 3000);
-    </script>
+    <script type="module" src="../js/aeroadminscript.js"></script>
 </body>
 
 </html>
